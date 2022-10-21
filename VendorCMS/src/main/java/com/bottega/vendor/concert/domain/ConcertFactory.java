@@ -5,7 +5,12 @@ import com.bottega.vendor.shared.error.ErrorResult;
 import io.vavr.control.Either;
 
 public class ConcertFactory {
-    public static Either<ErrorResult, Concert> createConcert(String title, String date, VendorId vendorId) {
-        return Either.right(new Concert(new ConcertId(), Title.from(title), ConcertDate.from(date), vendorId));
+
+    public Either<ErrorResult, Concert> createConcert(String title, String date, VendorId vendorId) {
+        return Either.right(new Concert(
+                new ConcertId(),
+                Title.from(title),
+                ConcertDate.from(date),
+                vendorId));
     }
 }

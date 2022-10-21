@@ -3,8 +3,6 @@ package com.bottega.vendor.concert.domain;
 import com.bottega.vendor.contract.VendorId;
 import com.bottega.vendor.infra.repo.BaseEntity;
 import com.bottega.vendor.shared.ddd.AggregateRoot;
-import com.bottega.vendor.shared.error.ErrorResult;
-import io.vavr.control.Either;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -33,11 +31,6 @@ public class Concert implements BaseEntity {
 
     @Embedded
     private VendorId vendorId;
-
-
-    static Either<ErrorResult, Concert> createConcert(String title, String date, VendorId vendorId){
-        return ConcertFactory.createConcert(title, date, vendorId);
-    }
 
 
     //applyDiscount

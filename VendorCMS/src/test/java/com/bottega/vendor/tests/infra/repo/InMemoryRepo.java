@@ -10,7 +10,7 @@ import java.util.Optional;
 
 public class InMemoryRepo<E extends BaseEntity, ID extends AggregateId> implements CrudRepository<E, ID> {
 
-    protected Map<AggregateId, BaseEntity> database = new HashMap<>();
+    protected Map<AggregateId, E> database = new HashMap<>();
 
     @Override
     public <S extends E> S save(S entity) {
@@ -26,7 +26,7 @@ public class InMemoryRepo<E extends BaseEntity, ID extends AggregateId> implemen
 
     @Override
     public Optional<E> findById(ID id) {
-        throw new RuntimeException("Not Implemented");
+        return Optional.ofNullable(database.get(id));
     }
 
     @Override
@@ -36,7 +36,7 @@ public class InMemoryRepo<E extends BaseEntity, ID extends AggregateId> implemen
 
     @Override
     public Iterable<E> findAll() {
-        throw new RuntimeException("Not Implemented");
+        return database.values();
     }
 
     @Override
