@@ -1,13 +1,13 @@
-package com.bottega.tickets;
+package com.bottega.vendor;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TicketsApplication {
+public class VendorCmsApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(TicketsApplication.class, args);
+        SpringApplication.run(VendorCmsApplication.class, args);
     }
 
 }
