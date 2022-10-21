@@ -1,8 +1,8 @@
 package com.bottega.vendor.concert.domain;
 
 import com.bottega.vendor.contract.VendorId;
-import com.bottega.vendor.infra.repo.BaseEntity;
 import com.bottega.vendor.shared.ddd.AggregateRoot;
+import com.bottega.vendor.shared.repo.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

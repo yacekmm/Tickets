@@ -11,6 +11,7 @@ plugins {
     id 'org.springframework.boot' version '2.7.5'
     id 'io.spring.dependency-management' version '1.0.15.RELEASE'
     id 'java'
+    id 'jvm-test-suite'
 }
 
 apply plugin: 'spring-cloud-contract'
@@ -53,14 +54,19 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     testAnnotationProcessor 'org.projectlombok:lombok'
 
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.springframework.cloud:spring-cloud-starter-contract-stub-runner'
-    testImplementation 'org.springframework.cloud:spring-cloud-starter-contract-verifier'
-    testImplementation 'org.springframework.kafka:spring-kafka-test'
-    testImplementation 'org.springframework.security:spring-security-test'
-    testImplementation 'org.testcontainers:junit-jupiter'
-    testImplementation 'org.testcontainers:kafka'
-    testImplementation 'org.testcontainers:postgresql'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.2'
+    testImplementation 'org.assertj:assertj-core:3.21.0'
+    testImplementation 'org.assertj:assertj-vavr:0.2.0'
+
+//    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+//    testImplementation 'org.springframework.cloud:spring-cloud-starter-contract-stub-runner'
+//    testImplementation 'org.springframework.cloud:spring-cloud-starter-contract-verifier'
+//    testImplementation 'org.springframework.kafka:spring-kafka-test'
+//    testImplementation 'org.springframework.security:spring-security-test'
+
+//    testImplementation 'org.testcontainers:junit-jupiter'
+//    testImplementation 'org.testcontainers:kafka'
+//    testImplementation 'org.testcontainers:postgresql'
 }
 
 dependencyManagement {
@@ -78,6 +84,41 @@ dependencyManagement {
 //    useJUnitPlatform()
 //}
 
-tasks.named('test') {
-    useJUnitPlatform()
+//tasks.named('test') {
+//    useJUnitPlatform()
+//}
+
+//https://docs.gradle.org/current/userguide/jvm_test_suite_plugin.html
+testing {
+    suites {
+        test {
+            useJUnitJupiter()
+        }
+
+        infraTest(JvmTestSuite) {
+            dependencies {
+                implementation project
+
+                implementation 'org.springframework.boot:spring-boot-starter-test'
+//                implementation 'org.springframework.cloud:spring-cloud-starter-contract-stub-runner'
+//                implementation 'org.springframework.cloud:spring-cloud-starter-contract-verifier'
+//                implementation 'org.springframework.kafka:spring-kafka-test'
+//                implementation 'org.springframework.security:spring-security-test'
+//
+//                implementation 'org.testcontainers:junit-jupiter'
+//                implementation 'org.testcontainers:kafka'
+//                implementation 'org.testcontainers:postgresql'
+            }
+//            sources {
+//                java {
+//                    srcDirs = ['src/infraTest/java']
+//                }
+//            }
+
+        }
+    }
+}
+
+tasks.named('check') {
+    dependsOn(testing.suites.integrationTest)
 }

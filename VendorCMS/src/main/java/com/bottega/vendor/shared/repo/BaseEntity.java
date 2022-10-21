@@ -1,4 +1,4 @@
-package com.bottega.vendor.infra.repo;
+package com.bottega.vendor.shared.repo;
 
 import com.bottega.vendor.shared.AggregateId;
 

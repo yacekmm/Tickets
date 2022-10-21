@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import static com.bottega.vendor.config.TestClockConfig.TEST_TIME_PLUS_30_DAYS;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.vavr.api.VavrAssertions.assertThat;
 
 class ConcertService_CompTest extends ConcertTestBase {
 
@@ -22,7 +23,7 @@ class ConcertService_CompTest extends ConcertTestBase {
         Either<ErrorResult, Concert> result = concertFixtures.concertService.createConcert("Woodstock", TEST_TIME_PLUS_30_DAYS.toString(), vendorId);
 
         //then
-        assertThat(result.isRight()).isTrue();
+        assertThat(result).isRight();
         assertThat(result.get().getId().getValue()).isNotBlank();
         assertThat(result.get().getTitle().getValue()).isEqualTo("Woodstock");
         assertThat(result.get().getDate().getDateTime()).isEqualTo(TEST_TIME_PLUS_30_DAYS);
