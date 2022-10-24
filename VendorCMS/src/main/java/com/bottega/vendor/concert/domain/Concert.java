@@ -32,10 +32,10 @@ public class Concert implements BaseEntity {
     private ConcertDate date;
 
     @Getter(NONE)
-    private String vendorId;
+    private String vendorIdZ;
 
-    public VendorId getVendorId() {
-        return new VendorId(vendorId);
+    public VendorId vendorId() {
+        return new VendorId(vendorIdZ);
     }
 
 

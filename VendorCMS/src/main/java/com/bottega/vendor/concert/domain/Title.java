@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @ValueObject
@@ -14,6 +15,7 @@ import javax.persistence.Embeddable;
 public class Title {
 
     @Getter
+    @Column(name = "title")
     private String value;
 
     public static Title from(String title) {
