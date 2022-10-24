@@ -10,7 +10,7 @@ public class ConcertFactory {
 
     public Either<ErrorResult, Concert> createConcert(String title, String date, VendorId vendorId) {
         return Either.right(new Concert(
-                ConcertId.generate(),
+                new ConcertId(),
                 Title.from(title),
                 ConcertDate.from(date),
                 vendorId.asString()));

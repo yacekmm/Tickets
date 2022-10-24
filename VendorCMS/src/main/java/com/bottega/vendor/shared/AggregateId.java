@@ -1,9 +1,33 @@
 package com.bottega.vendor.shared;
 
-import javax.persistence.Embeddable;
+import lombok.*;
+
+import javax.persistence.Column;
+import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
+import java.util.UUID;
 
-@Embeddable
-public interface AggregateId extends Serializable {
+import static lombok.AccessLevel.PROTECTED;
 
+@NoArgsConstructor
+@AllArgsConstructor(access = PROTECTED)
+@MappedSuperclass
+@EqualsAndHashCode
+@ToString
+public class AggregateId implements Serializable {
+
+    @Getter
+    @Column(insertable = false, updatable = false, name = "id")
+    protected String value;
+
+    public AggregateId(AggregateId aggId) {
+        this.value = aggId.value;
+    }
+    public static AggregateId generate() {
+        return new AggregateId(UUID.randomUUID().toString());
+    }
+
+    public String asString() {
+        return value;
+    }
 }

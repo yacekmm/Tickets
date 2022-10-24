@@ -1,5 +1,6 @@
 package com.bottega.vendor.concert.domain;
 
+import com.bottega.vendor.contract.VendorId;
 import com.bottega.vendor.shared.ddd.AggregateRoot;
 import com.bottega.vendor.shared.repo.BaseEntity;
 import lombok.AllArgsConstructor;
@@ -32,6 +33,10 @@ public class Concert implements BaseEntity {
 
     @Getter(NONE)
     private String vendorId;
+
+    public VendorId getVendorId() {
+        return new VendorId(vendorId);
+    }
 
 
     //applyDiscount
