@@ -17,7 +17,7 @@ class ConcertService_CompTest extends ConcertTestBase {
     void createConcert_createsConcert_onValidInput() {
 
         //given
-        VendorId vendorId = new VendorId();
+        VendorId vendorId = VendorId.generate();
 
         //when
         Either<ErrorResult, Concert> result = concertFixtures.concertService.createConcert("Woodstock", TEST_TIME_PLUS_30_DAYS.toString(), vendorId);
@@ -34,7 +34,7 @@ class ConcertService_CompTest extends ConcertTestBase {
     void createConcert_persistsConcert_onValidInput() {
 
         //when
-        Either<ErrorResult, Concert> result = concertFixtures.concertService.createConcert("Woodstock", TEST_TIME_PLUS_30_DAYS.toString(), new VendorId());
+        Either<ErrorResult, Concert> result = concertFixtures.concertService.createConcert("Woodstock", TEST_TIME_PLUS_30_DAYS.toString(), VendorId.generate());
 
         //then
         assertThat(concertFixtures.concertRepo.findById(result.get().getId())).hasValueSatisfying(

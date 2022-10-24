@@ -1,6 +1,5 @@
 package com.bottega.vendor.concert.domain;
 
-import com.bottega.vendor.contract.VendorId;
 import com.bottega.vendor.shared.ddd.AggregateRoot;
 import com.bottega.vendor.shared.repo.BaseEntity;
 import lombok.AllArgsConstructor;
@@ -11,6 +10,8 @@ import javax.persistence.Embedded;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+
+import static lombok.AccessLevel.NONE;
 
 @AggregateRoot
 @Entity
@@ -29,8 +30,8 @@ public class Concert implements BaseEntity {
     @Embedded
     private ConcertDate date;
 
-    @Embedded
-    private VendorId vendorId;
+    @Getter(NONE)
+    private String vendorId;
 
 
     //applyDiscount
