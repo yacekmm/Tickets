@@ -20,7 +20,6 @@ public class ConcertDate {
     private Instant dateTime;
 
     public static ConcertDate from(String date) {
-        return new ConcertDate(
-                Instant.parse(date));
+        return new ConcertDate(Instant.parse(date));
     }
 }

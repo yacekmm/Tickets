@@ -25,7 +25,7 @@ class ConcertService_CompTest extends ConcertTestBase {
         //then
         assertThat(result).isRight();
         assertThat(result.get().getId().getValue()).isNotBlank();
-        assertThat(result.get().getTitle().getValue()).isEqualTo("Woodstock");
+        assertThat(result.get().getTitle().getValue()).isEqualTo("XXXXXXXXWoodstock");
         assertThat(result.get().getDate().getDateTime()).isEqualTo(TEST_TIME_PLUS_30_DAYS);
         assertThat(result.get().getVendorId()).isEqualTo(vendorId);
     }
