@@ -6,8 +6,4 @@ public enum ConcertErrorCode implements ErrorCode {
 
     invalid_date;
 
-    @Override
-    public String asString() {
-        return this.toString();
-    }
 }

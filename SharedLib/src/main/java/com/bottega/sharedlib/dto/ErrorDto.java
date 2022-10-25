@@ -15,7 +15,7 @@ public record ErrorDto(
     public static ErrorDto from(ErrorResult errorResult){
         return new ErrorDto(
                 errorResult.getType().name(),
-                errorResult.getCode().asString(),
+                errorResult.getCode().toString(),
                 errorResult.getDescription()
         );
     }

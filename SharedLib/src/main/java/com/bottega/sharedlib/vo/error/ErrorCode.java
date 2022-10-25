@@ -2,5 +2,5 @@ package com.bottega.sharedlib.vo.error;
 
 public interface ErrorCode {
 
-    String asString();
+    String toString();
 }
