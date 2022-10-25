@@ -1,6 +1,6 @@
 package com.bottega.vendor.concert;
 
-import com.bottega.sharedlib.error.ErrorResult;
+import com.bottega.sharedlib.vo.error.ErrorResult;
 import com.bottega.vendor.concert.domain.Concert;
 import com.bottega.vendor.concert.tests.asserts.ConcertAssert;
 import com.bottega.vendor.tests.RepoEntries;

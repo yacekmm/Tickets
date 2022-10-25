@@ -1,4 +1,4 @@
-package com.bottega.sharedlib;
+package com.bottega.sharedlib.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;

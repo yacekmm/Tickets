@@ -23,7 +23,7 @@ public class CreateConcert_RestApiTest extends FrameworkTestBase {
         //then
         ConcertId concertId = ConcertAssert
                 .assertThatConcert(concertFixtures.concertRepo.findAll().iterator().next())
-        //TODO: concert Properties in DB: Dependency test
+//        //TODO: concert Properties in DB: Dependency test
                 .isPersistedIn(concertFixtures.concertRepo, RepoEntries.SINGULAR)
                 .hasIdAsUUID()
                 .hasTitle("concert-title")

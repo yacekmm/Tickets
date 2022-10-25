@@ -1,7 +1,7 @@
 package com.bottega.vendor.concert.domain;
 
-import com.bottega.sharedlib.BaseEntity;
 import com.bottega.sharedlib.ddd.AggregateRoot;
+import com.bottega.sharedlib.repo.BaseEntity;
 import com.bottega.vendor.contract.VendorId;
 import lombok.*;
 

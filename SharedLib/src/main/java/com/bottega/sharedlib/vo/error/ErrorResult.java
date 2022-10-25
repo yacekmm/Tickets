@@ -1,4 +1,4 @@
-package com.bottega.sharedlib.error;
+package com.bottega.sharedlib.vo.error;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -41,16 +41,8 @@ public class ErrorResult {
     }
 
 
-    //TODO: uncomment throwing exceptions for controller advice
-//    public void throwHttpException() {
-//        throw Match(errorResultType).of(
-//                Case($(BAD_REQUEST), new BadRequestException(errorMessage)),
-//                Case($(UNAUTHORIZED), new UnauthorizedWithBodyException(errorMessage.getError(), errorMessage.getErrorDescription())),
-//                Case($(FORBIDDEN), new ForbiddenException(errorMessage)),
-//                Case($(NOT_FOUND), new NotFoundException(errorMessage.getError(), errorMessage.getErrorDescription())),
-//                Case($(INTERNAL_ERROR), new InternalServerErrorException(errorMessage)),
-//                Case($(SERVICE_UNAVAILABLE), new ServiceUnavailableException(errorMessage)),
-//                Case($(), new InternalServerErrorException(server_error, "Unhandled error result: " + errorResultType))
-//        );
-//    }
+    //TODO: test
+    public ErrorException toException() {
+        return new ErrorException(this);
+    }
 }
