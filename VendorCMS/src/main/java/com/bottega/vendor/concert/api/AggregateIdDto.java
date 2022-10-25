@@ -1,6 +1,6 @@
 package com.bottega.vendor.concert.api;
 
-import com.bottega.vendor.shared.AggregateId;
+import com.bottega.sharedlib.repo.AggregateId;
 
 record AggregateIdDto(
         String id

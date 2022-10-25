@@ -1,1 +1,6 @@
 rootProject.name = 'Tickets'
+include ':SharedLib', ':VendorCMS', ':Pricing'
+
+project(":SharedLib").name = "SharedLib"
+project(":VendorCMS").name = "VendorCMS"
+project(":Pricing").name = "Pricing"

@@ -1,11 +1,11 @@
 package com.bottega.vendor.concert.application.api;
 
+import com.bottega.sharedlib.ddd.ApplicationService;
+import com.bottega.sharedlib.error.ErrorResult;
 import com.bottega.vendor.concert.domain.Concert;
 import com.bottega.vendor.concert.domain.ConcertFactory;
 import com.bottega.vendor.concert.infra.repo.ConcertRepo;
 import com.bottega.vendor.contract.VendorId;
-import com.bottega.vendor.shared.ddd.ApplicationService;
-import com.bottega.vendor.shared.error.ErrorResult;
 import io.vavr.control.Either;
 import lombok.AllArgsConstructor;
 

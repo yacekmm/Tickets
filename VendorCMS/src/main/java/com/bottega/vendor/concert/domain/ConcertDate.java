@@ -1,6 +1,6 @@
 package com.bottega.vendor.concert.domain;
 
-import com.bottega.vendor.shared.ddd.ValueObject;
+import com.bottega.sharedlib.ddd.ValueObject;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

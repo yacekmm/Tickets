@@ -2,45 +2,40 @@ package com.bottega.vendor.concert.api;
 
 import com.bottega.vendor.concert.domain.ConcertId;
 import com.bottega.vendor.concert.tests.asserts.ConcertAssert;
-import com.bottega.vendor.concert.tests.fixtures.FrameworkConcertFixtures;
 import com.bottega.vendor.tests.FrameworkTestBase;
-import io.restassured.response.Response;
+import com.bottega.vendor.tests.RepoEntries;
+import io.restassured.response.ValidatableResponse;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import static com.bottega.vendor.tests.config.TestClockConfig.TEST_TIME_PLUS_30_DAYS;
 import static org.apache.http.HttpStatus.SC_OK;
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.equalTo;
 
 public class CreateConcert_RestApiTest extends FrameworkTestBase {
 
-    @Autowired
-    FrameworkConcertFixtures concertFixtures;
 
     @Test
     public void createConcert_creates_onValidRequest() {
-        //given
-        String title = "concert-title";
-        String dateTime = TEST_TIME_PLUS_30_DAYS.toString();
-        String vendorId = "some-id";
 
         //when
-        Response response = concertFixtures.concertClient.createConcert(title, dateTime, vendorId);
+        ValidatableResponse response = concertFixtures.concertClient.createConcert("concert-title", TEST_TIME_PLUS_30_DAYS.toString(), "some-id");
 
         //then
         ConcertId concertId = ConcertAssert
                 .assertThatConcert(concertFixtures.concertRepo.findAll().iterator().next())
-                .isPersistedIn(concertFixtures.concertRepo, 1)
+        //TODO: concert Properties in DB: Dependency test
+                .isPersistedIn(concertFixtures.concertRepo, RepoEntries.SINGULAR)
                 .hasIdAsUUID()
-                .hasTitle(title)
+                .hasTitle("concert-title")
                 .hasDateTime(TEST_TIME_PLUS_30_DAYS)
-                .hasVendorId(vendorId)
+                .hasVendorId("some-id")
                 .extractId();
 
 
-        //API response is valid
-        assertThat(response.statusCode()).isEqualTo(SC_OK);
-        assertThat(response.jsonPath().getString("id")).isEqualTo(concertId.asString());
+        //TODO: API response is valid: API test
+        response
+                .statusCode(SC_OK)
+                .body("id", equalTo(concertId.asString()));
     }
 
 }

@@ -35,6 +35,8 @@ ext {
 }
 
 dependencies {
+    implementation project(':SharedLib')
+
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 //    implementation 'org.springframework.boot:spring-boot-starter-security'
 //    implementation 'org.springframework.boot:spring-boot-starter-web'
@@ -53,6 +55,7 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     testAnnotationProcessor 'org.projectlombok:lombok'
 
+    testImplementation project(':SharedLib')
     testImplementation 'org.junit.jupiter:junit-jupiter:5.8.2'
     testImplementation 'org.assertj:assertj-core:3.21.0'
     testImplementation 'org.assertj:assertj-vavr:0.2.0'
@@ -109,8 +112,4 @@ task apiTest(type: Test) {
     filter {
         include '**/**ApiTest.class'
     }
-}
-
-tasks.named('check') {
-    dependsOn(testing.suites.integrationTest)
 }

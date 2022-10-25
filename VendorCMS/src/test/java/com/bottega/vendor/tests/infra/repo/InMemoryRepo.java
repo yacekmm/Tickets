@@ -1,7 +1,7 @@
 package com.bottega.vendor.tests.infra.repo;
 
-import com.bottega.vendor.shared.AggregateId;
-import com.bottega.vendor.shared.repo.BaseEntity;
+import com.bottega.sharedlib.BaseEntity;
+import com.bottega.sharedlib.repo.AggregateId;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.HashMap;

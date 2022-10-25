@@ -1,4 +1,4 @@
-package com.bottega.vendor.shared;
+package com.bottega.sharedlib.repo;
 
 import lombok.*;
 

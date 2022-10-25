@@ -1,6 +1,6 @@
 package com.bottega.vendor.concert.domain;
 
-import com.bottega.vendor.shared.AggregateId;
+import com.bottega.sharedlib.repo.AggregateId;
 
 import javax.persistence.Embeddable;
 

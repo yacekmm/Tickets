@@ -3,6 +3,7 @@ package com.bottega.vendor.concert.tests.asserts;
 import com.bottega.vendor.concert.domain.Concert;
 import com.bottega.vendor.concert.domain.ConcertId;
 import com.bottega.vendor.concert.infra.repo.ConcertRepo;
+import com.bottega.vendor.tests.RepoEntries;
 import lombok.RequiredArgsConstructor;
 
 import java.time.Instant;
@@ -31,8 +32,8 @@ public class ConcertAssert {
         return this;
     }
 
-    public ConcertAssert isPersistedIn(ConcertRepo concertRepo, int expectedCountOfAllRepoRecords) {
-        assertThat(concertRepo.findAll()).hasSize(expectedCountOfAllRepoRecords);
+    public ConcertAssert isPersistedIn(ConcertRepo concertRepo, RepoEntries entries) {
+        assertThat(concertRepo.findAll()).hasSize(entries.allEntriesCount());
         assertThat(concertRepo.findById(concert.getId())).hasValue(concert);
         return this;
     }

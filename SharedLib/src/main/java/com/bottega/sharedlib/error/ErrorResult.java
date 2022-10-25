@@ -1,10 +1,9 @@
-package com.bottega.vendor.shared.error;
+package com.bottega.sharedlib.error;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
 
-import static com.bottega.vendor.shared.error.ErrorType.*;
 import static lombok.AccessLevel.PRIVATE;
 
 @Getter
@@ -18,27 +17,27 @@ public class ErrorResult {
     private final String description;
 
     public static ErrorResult badRequest(ErrorCode code, String description) {
-        return new ErrorResult(BAD_REQUEST, code, description);
+        return new ErrorResult(ErrorType.BAD_REQUEST, code, description);
     }
 
     public static ErrorResult unauthorized(ErrorCode code, String description) {
-        return new ErrorResult(UNAUTHORIZED, code, description);
+        return new ErrorResult(ErrorType.UNAUTHORIZED, code, description);
     }
 
     public static ErrorResult forbidden(ErrorCode code, String description) {
-        return new ErrorResult(FORBIDDEN, code, description);
+        return new ErrorResult(ErrorType.FORBIDDEN, code, description);
     }
 
     public static ErrorResult internalError(ErrorCode code, String description) {
-        return new ErrorResult(INTERNAL_ERROR, code, description);
+        return new ErrorResult(ErrorType.INTERNAL_ERROR, code, description);
     }
 
     public static ErrorResult serviceUnavailable(ErrorCode code, String description) {
-        return new ErrorResult(SERVICE_UNAVAILABLE, code, description);
+        return new ErrorResult(ErrorType.SERVICE_UNAVAILABLE, code, description);
     }
 
     private static ErrorResult notFound(ErrorCode code, String description) {
-        return new ErrorResult(NOT_FOUND, code, description);
+        return new ErrorResult(ErrorType.NOT_FOUND, code, description);
     }
 
 

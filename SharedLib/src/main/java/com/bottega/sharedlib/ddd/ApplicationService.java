@@ -1,4 +1,4 @@
-package com.bottega.vendor.shared.ddd;
+package com.bottega.sharedlib.ddd;
 
 import org.springframework.stereotype.Component;
 
@@ -7,8 +7,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+@Component
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-@Component
-public @interface DomainFactory {
+public @interface ApplicationService {
 }

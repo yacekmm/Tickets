@@ -1,8 +1,8 @@
 package com.bottega.vendor.concert.domain;
 
+import com.bottega.sharedlib.ddd.DomainFactory;
+import com.bottega.sharedlib.error.ErrorResult;
 import com.bottega.vendor.contract.VendorId;
-import com.bottega.vendor.shared.ddd.DomainFactory;
-import com.bottega.vendor.shared.error.ErrorResult;
 import io.vavr.control.Either;
 
 @DomainFactory

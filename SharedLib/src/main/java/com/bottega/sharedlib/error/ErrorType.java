@@ -1,4 +1,4 @@
-package com.bottega.vendor.shared.error;
+package com.bottega.sharedlib.error;
 
 public enum ErrorType {
     BAD_REQUEST,

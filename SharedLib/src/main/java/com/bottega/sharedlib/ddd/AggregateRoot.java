@@ -1,4 +1,4 @@
-package com.bottega.vendor.shared.ddd;
+package com.bottega.sharedlib.ddd;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
