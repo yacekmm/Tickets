@@ -4,7 +4,7 @@ import com.bottega.vendor.concert.application.api.ConcertService;
 import com.bottega.vendor.concert.infra.repo.ConcertRepo;
 import com.bottega.vendor.concert.infra.repo.InMemoryConcertRepo;
 
-public class ConcertFixtures {
+public class ManualConcertFixtures {
 
     //SUTs
     public ConcertService concertService;
@@ -12,8 +12,8 @@ public class ConcertFixtures {
     //infrastructure
     public ConcertRepo concertRepo;
 
-    public static ConcertFixtures init() {
-        ConcertFixtures concertFixtures = new ConcertFixtures();
+    public static ManualConcertFixtures init() {
+        ManualConcertFixtures concertFixtures = new ManualConcertFixtures();
         concertFixtures.concertRepo = new InMemoryConcertRepo();
 
         concertFixtures.concertService = new ConcertService(

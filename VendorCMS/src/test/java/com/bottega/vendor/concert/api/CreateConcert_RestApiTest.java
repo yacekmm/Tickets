@@ -1,24 +1,21 @@
 package com.bottega.vendor.concert.api;
 
-import com.bottega.vendor.concert.infra.repo.ConcertRepo;
-import io.restassured.RestAssured;
+import com.bottega.vendor.concert.domain.ConcertId;
+import com.bottega.vendor.concert.tests.asserts.ConcertAssert;
+import com.bottega.vendor.concert.tests.fixtures.FrameworkConcertFixtures;
+import com.bottega.vendor.tests.FrameworkTestBase;
 import io.restassured.response.Response;
-import org.apache.groovy.util.Maps;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 
-import static com.bottega.vendor.config.ApiVersions.V1;
-import static com.bottega.vendor.config.TestClockConfig.TEST_TIME_PLUS_30_DAYS;
-import static io.restassured.http.ContentType.JSON;
+import static com.bottega.vendor.tests.config.TestClockConfig.TEST_TIME_PLUS_30_DAYS;
+import static org.apache.http.HttpStatus.SC_OK;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.DEFINED_PORT;
 
-@SpringBootTest(webEnvironment = DEFINED_PORT, properties = "server.port=9090")
-public class CreateConcert_RestApiTest {
+public class CreateConcert_RestApiTest extends FrameworkTestBase {
 
     @Autowired
-    ConcertRepo concertRepo;
+    FrameworkConcertFixtures concertFixtures;
 
     @Test
     public void createConcert_creates_onValidRequest() {
@@ -28,22 +25,22 @@ public class CreateConcert_RestApiTest {
         String vendorId = "some-id";
 
         //when
-        RestAssured.port = 9090;
-        Response response = RestAssured
-                .given()
-                .basePath(V1)
-                .contentType(JSON)
-                .body(Maps.of(
-                        "title", title,
-                        "dateTime" , dateTime,
-                        "vendorId", vendorId
-                ))
-                .post("/concert")
-                ;
+        Response response = concertFixtures.concertClient.createConcert(title, dateTime, vendorId);
 
         //then
-        assertThat(response.statusCode()).isEqualTo(200);
-        assertThat(response.asString()).isEqualTo("ddd");
-        assertThat(concertRepo.findAll()).hasSize(1);
+        ConcertId concertId = ConcertAssert
+                .assertThatConcert(concertFixtures.concertRepo.findAll().iterator().next())
+                .isPersistedIn(concertFixtures.concertRepo, 1)
+                .hasIdAsUUID()
+                .hasTitle(title)
+                .hasDateTime(TEST_TIME_PLUS_30_DAYS)
+                .hasVendorId(vendorId)
+                .extractId();
+
+
+        //API response is valid
+        assertThat(response.statusCode()).isEqualTo(SC_OK);
+        assertThat(response.jsonPath().getString("id")).isEqualTo(concertId.asString());
     }
+
 }

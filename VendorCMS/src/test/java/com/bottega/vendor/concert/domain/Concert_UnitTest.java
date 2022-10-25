@@ -7,7 +7,7 @@ class Concert_UnitTest extends UnitTestBase {
 
     @BeforeEach
     void setUp() {
-        ConcertFixtures concertFixtures = ConcertFixtures.init();
+        ManualConcertFixtures concertFixtures = ManualConcertFixtures.init();
     }
 
 }

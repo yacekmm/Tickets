@@ -1,4 +1,4 @@
-package com.bottega.vendor.config;
+package com.bottega.vendor.tests.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

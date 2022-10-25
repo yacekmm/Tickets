@@ -17,7 +17,9 @@ public class ConcertService {
     private final ConcertFactory concertFactory;
     private final ConcertRepo concertRepo;
 
-    public Either<ErrorResult, Concert> createConcert(String title, String dateTime, VendorId vendorId) {
+    public Either<ErrorResult, Concert> createConcert(String title, String dateTime, String vendorIdString) {
+        //TODO: should be retrieved from Vendor module
+        VendorId vendorId = new VendorId(vendorIdString);
         return concertFactory.createConcert(title, dateTime, vendorId)
                         .peek(concertRepo::save);
     }

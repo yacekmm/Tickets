@@ -3,9 +3,7 @@ package com.bottega.vendor.concert.domain;
 import com.bottega.vendor.contract.VendorId;
 import com.bottega.vendor.shared.ddd.AggregateRoot;
 import com.bottega.vendor.shared.repo.BaseEntity;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.Embedded;
 import javax.persistence.EmbeddedId;
@@ -20,9 +18,12 @@ import static lombok.AccessLevel.NONE;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@ToString
 public class Concert implements BaseEntity {
 
     @EmbeddedId
+    @EqualsAndHashCode.Include
     private ConcertId id;
 
     @Embedded
@@ -32,10 +33,10 @@ public class Concert implements BaseEntity {
     private ConcertDate date;
 
     @Getter(NONE)
-    private String vendorIdZ;
+    private String vendorId;
 
     public VendorId vendorId() {
-        return new VendorId(vendorIdZ);
+        return new VendorId(vendorId);
     }
 
 
