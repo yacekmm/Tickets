@@ -1,5 +1,6 @@
 package com.bottega.vendor.concert.tests.clients;
 
+import com.bottega.vendor.concert.domain.ConcertId;
 import io.restassured.response.ValidatableResponse;
 import io.restassured.specification.RequestSpecification;
 import lombok.RequiredArgsConstructor;
@@ -23,4 +24,12 @@ public class ConcertApiClient {
                 .then();
     }
 
+    public ValidatableResponse discountConcert(ConcertId concertId, int percentage) {
+        return requestSpec
+                .body(Maps.of(
+                        "percentage", percentage
+                ))
+                .post("/concert/{concert-id}/discount", concertId.asString())
+                .then();
+    }
 }

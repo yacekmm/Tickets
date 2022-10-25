@@ -12,5 +12,9 @@ public class FrameworkConcertFixtures {
     public final ConcertRepo concertRepo;
 
     public final ConcertApiClient concertClient;
+    public final ConcertBuilder concertBuilder;
 
+    public void tearDown() {
+        concertRepo.deleteAll();
+    }
 }

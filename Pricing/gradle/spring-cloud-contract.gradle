@@ -1,0 +1,23 @@
+
+// https://cloud.spring.io/spring-cloud-contract/reference/html/gradle-project.html#gradle-configuration-options
+
+contracts {
+//    basePackageForTests = 'com.sfr.circlekid.contracts'
+//    packageWithBaseClasses = 'com.sfr.circlekid.base.contracts'
+    testMode = 'Explicit'
+//    failOnInProgress = false
+    testFramework = 'JUNIT'
+}
+
+def stubsVersion = rootProject.version + '-SNAPSHOT'
+
+publishing {
+    publications {
+        stubs(MavenPublication) {
+            artifact verifierStubsJar
+            version = stubsVersion
+        }
+    }
+}
+
+publishToMavenLocal.dependsOn('generateClientStubs')

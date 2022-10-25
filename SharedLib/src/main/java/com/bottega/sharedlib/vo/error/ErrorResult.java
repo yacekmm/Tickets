@@ -28,6 +28,10 @@ public class ErrorResult {
         return new ErrorResult(ErrorType.FORBIDDEN, code, description);
     }
 
+    public static ErrorResult notFound(ErrorCode code, String description) {
+        return new ErrorResult(ErrorType.NOT_FOUND, code, description);
+    }
+
     public static ErrorResult internalError(ErrorCode code, String description) {
         return new ErrorResult(ErrorType.INTERNAL_ERROR, code, description);
     }
@@ -35,11 +39,6 @@ public class ErrorResult {
     public static ErrorResult serviceUnavailable(ErrorCode code, String description) {
         return new ErrorResult(ErrorType.SERVICE_UNAVAILABLE, code, description);
     }
-
-    private static ErrorResult notFound(ErrorCode code, String description) {
-        return new ErrorResult(ErrorType.NOT_FOUND, code, description);
-    }
-
 
     //TODO: test
     public ErrorException toException() {

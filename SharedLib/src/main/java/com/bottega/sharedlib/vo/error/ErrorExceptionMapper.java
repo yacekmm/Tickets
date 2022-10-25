@@ -1,10 +1,11 @@
 package com.bottega.sharedlib.vo.error;
 
 import com.bottega.sharedlib.dto.ErrorDto;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+
+import static org.springframework.http.MediaType.APPLICATION_JSON;
 
 @ControllerAdvice
 public class ErrorExceptionMapper {
@@ -17,7 +18,7 @@ public class ErrorExceptionMapper {
 
         return ResponseEntity
                 .status(error.getType().getHttpStatus())
-                .contentType(MediaType.APPLICATION_JSON)
+                .contentType(APPLICATION_JSON)
                 .body(ErrorDto.from(error));
     }
 

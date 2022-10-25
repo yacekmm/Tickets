@@ -4,7 +4,7 @@ import com.bottega.vendor.concert.domain.ManualConcertFixtures;
 import com.bottega.vendor.tests.UnitTestBase;
 import org.junit.jupiter.api.BeforeEach;
 
-public class ConcertTestBase extends UnitTestBase {
+public class ConcertUnitTestBase extends UnitTestBase {
 
     public ManualConcertFixtures concertFixtures;
 

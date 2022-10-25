@@ -11,4 +11,7 @@ public class ConcertId extends AggregateId {
         super(AggregateId.generate());
     }
 
+    public ConcertId(String concertId) {
+        super(concertId);
+    }
 }
