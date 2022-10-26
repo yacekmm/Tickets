@@ -9,9 +9,11 @@ import static org.apache.http.HttpStatus.SC_OK;
 
 public class ApplyPercentageFactor_RestApiTest extends FrameworkTestBase {
 
+    //TODO/JM: implement publishing an event
 
     @Test
     public void applyFactor_applies_onValidRequest() {
+        //given
         ItemPrice itemPrice = priceFixtures.priceBuilder.priceForItem(100_00, "item-id").inDb();
 
         //when

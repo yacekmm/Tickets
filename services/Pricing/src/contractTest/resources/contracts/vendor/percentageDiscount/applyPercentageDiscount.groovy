@@ -14,7 +14,10 @@ Contract.make {
 
         method POST()
 
-        url regex('/api/v1/item/' + uuid() + '/price-factor/percentage')
+        url $(
+                consumer(regex('/api/v1/item/' + uuid() + '/price-factor/percentage')),
+                producer('/api/v1/item/00000000-0000-0000-0000-000000000000/price-factor/percentage')
+        )
 
         headers {
             contentType applicationJson()

@@ -7,7 +7,9 @@ import com.bottega.sharedlib.vo.Money;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
+import static javax.persistence.FetchType.EAGER;
 import static lombok.AccessLevel.NONE;
 
 @AggregateRoot
@@ -15,9 +17,9 @@ import static lombok.AccessLevel.NONE;
 @Table(name = "prices")
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
+@Getter
 public class ItemPrice implements BaseEntity {
 
     @EmbeddedId
@@ -31,6 +33,12 @@ public class ItemPrice implements BaseEntity {
 
     @Column(name = "item_id")
     private String itemId;
+
+    @OneToMany(fetch = EAGER)
+//    @JoinTable(
+//            name = "price_factors",
+//            joinColumns = @JoinColumn(name = "price_id", referencedColumnName = "id"))
+    private List<PriceFactor> priceFactors;
 
     public ItemPrice applyPercentageFactor(int percentage) {
         this.price = MoneyDbEntity.from(getPrice().percentage(100 - percentage));
