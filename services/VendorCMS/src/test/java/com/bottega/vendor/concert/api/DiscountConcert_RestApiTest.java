@@ -8,12 +8,12 @@ import org.springframework.cloud.contract.stubrunner.spring.AutoConfigureStubRun
 
 import static com.bottega.vendor.tests.config.CdcStubs.CDC_STUB_ID_PRICING;
 import static org.apache.http.HttpStatus.SC_OK;
+import static org.hamcrest.Matchers.equalTo;
 import static org.springframework.cloud.contract.stubrunner.spring.StubRunnerProperties.StubsMode.LOCAL;
 
 @AutoConfigureStubRunner(
         ids = CDC_STUB_ID_PRICING,
-        stubsMode = LOCAL
-)
+        stubsMode = LOCAL)
 public class DiscountConcert_RestApiTest extends FrameworkTestBase {
 
 
@@ -25,7 +25,9 @@ public class DiscountConcert_RestApiTest extends FrameworkTestBase {
         ValidatableResponse response = concertFixtures.concertClient.discountConcert(concert.getId(), 10);
 
         //then
-        response.statusCode(SC_OK);
+        response
+                .statusCode(SC_OK)
+                .body("price", equalTo(90_00));
     }
 
 }

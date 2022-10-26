@@ -34,6 +34,7 @@ Contract.make {
         }
         body([
                 price  : 90_00,
+                basePrice: 100_00,
                 factors: [
                         [
                                 "name"  : "PERCENTAGE",

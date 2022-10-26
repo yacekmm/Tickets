@@ -1,10 +1,8 @@
 package com.bottega.vendor.concert.api;
 
 import com.bottega.sharedlib.vo.error.ErrorResult;
-import com.bottega.vendor.concert.Price;
 import com.bottega.vendor.concert.application.api.ConcertService;
 import lombok.AllArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import static com.bottega.vendor.concert.api.AggregateIdDto.fromAggregateId;
@@ -27,12 +25,13 @@ public class ConcertRestController {
     }
 
     @PostMapping(path = V1 + "/concert/{concertId}/discount")
-    public ResponseEntity<Price> discountConcert(
+    @ResponseBody
+    public DiscountedPriceResponseDto discountConcert(
             @PathVariable("concertId") String concertId,
             @RequestBody DiscountConcertRequestDto requestDto) {
 
         return concertService.discountConcert(concertId, requestDto.percentage())
-                .map(ResponseEntity::ok)
+                .map(price -> new DiscountedPriceResponseDto(price.price().toInt()))
                 .getOrElseThrow(ErrorResult::toException);
     }
 }
