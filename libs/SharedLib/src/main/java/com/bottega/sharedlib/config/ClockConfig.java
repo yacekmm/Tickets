@@ -1,4 +1,4 @@
-package com.bottega.vendor.config;
+package com.bottega.sharedlib.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

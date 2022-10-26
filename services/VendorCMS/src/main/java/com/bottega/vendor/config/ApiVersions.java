@@ -1,7 +1,0 @@
-package com.bottega.vendor.config;
-
-public class ApiVersions {
-
-    public static final String V1 = "api/v1";
-
-}

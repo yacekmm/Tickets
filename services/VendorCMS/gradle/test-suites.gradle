@@ -24,5 +24,6 @@ task apiTest(type: Test) {
     filter {
         include '**/**ApiTest.class'
     }
-    finalizedBy contractTest
 }
+
+apiTest.finalizedBy contractTest

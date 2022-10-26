@@ -7,7 +7,7 @@ import com.bottega.vendor.tests.RepoEntries;
 import io.restassured.response.ValidatableResponse;
 import org.junit.jupiter.api.Test;
 
-import static com.bottega.vendor.tests.config.TestClockConfig.TEST_TIME_PLUS_30_DAYS;
+import static com.bottega.sharedlib.config.TestClockConfig.TEST_TIME_PLUS_30_DAYS;
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.hamcrest.Matchers.equalTo;
 

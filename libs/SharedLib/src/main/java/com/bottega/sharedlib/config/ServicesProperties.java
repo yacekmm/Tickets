@@ -1,4 +1,4 @@
-package com.bottega.vendor.config;
+package com.bottega.sharedlib.config;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -13,9 +13,11 @@ public class ServicesProperties {
 
     private int requestTimeoutInSeconds;
 
+    private ServiceConfig vendor;
     private ServiceConfig pricing;
 
     public record ServiceConfig(
-            String url
+            String url,
+            int port
     ){ }
 }

@@ -1,6 +1,6 @@
 package com.bottega.vendor.infra.client;
 
-import com.bottega.vendor.config.ServicesProperties;
+import com.bottega.sharedlib.config.ServicesProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

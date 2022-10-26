@@ -1,4 +1,4 @@
-package contracts.vendorCMS
+package contracts.vendor.percentageDiscount
 
 import org.springframework.cloud.contract.spec.Contract
 
@@ -14,7 +14,7 @@ Contract.make {
 
         method POST()
 
-        url regex('http://localhost:9091/api/v1/item/' + uuid() + '/price-factor/percentage')
+        url regex('/api/v1/item/' + uuid() + '/price-factor/percentage')
 
         headers {
             contentType applicationJson()

@@ -7,7 +7,7 @@ import com.bottega.vendor.tests.RepoEntries;
 import io.vavr.control.Either;
 import org.junit.jupiter.api.Test;
 
-import static com.bottega.vendor.tests.config.TestClockConfig.TEST_TIME_PLUS_30_DAYS;
+import static com.bottega.sharedlib.config.TestClockConfig.TEST_TIME_PLUS_30_DAYS;
 import static org.assertj.vavr.api.VavrAssertions.assertThat;
 
 class CreateConcert_CompTest extends ConcertLogicTestBase {

@@ -94,32 +94,4 @@ dependencyManagement {
     }
 }
 
-tasks.withType(Test) {
-    useJUnitPlatform()
-}
-
-task unitTest(type: Test) {
-    filter {
-        include '**/**UnitTest.class'
-    }
-}
-
-task compTest(type: Test) {
-    filter {
-        include '**/**CompTest.class'
-    }
-}
-
-task depTest(type: Test) {
-    filter {
-        include '**/**DepTest.class'
-    }
-    dependsOn ':Pricing:publishToMavenLocal'
-}
-
-task apiTest(type: Test) {
-    filter {
-        include '**/**ApiTest.class'
-    }
-    dependsOn ':Pricing:publishToMavenLocal'
-}
+apply from: file('gradle/test-suites.gradle')

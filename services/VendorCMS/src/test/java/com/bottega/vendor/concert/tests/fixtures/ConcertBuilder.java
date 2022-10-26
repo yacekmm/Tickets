@@ -8,7 +8,7 @@ import com.bottega.vendor.concert.infra.repo.ConcertRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import static com.bottega.vendor.tests.config.TestClockConfig.TEST_TIME_PLUS_30_DAYS;
+import static com.bottega.sharedlib.config.TestClockConfig.TEST_TIME_PLUS_30_DAYS;
 
 @Component
 @RequiredArgsConstructor

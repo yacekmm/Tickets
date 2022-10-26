@@ -1,4 +1,4 @@
-package com.bottega.vendor.tests.config;
+package com.bottega.sharedlib.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,7 +18,6 @@ public class TestClockConfig {
 
     @Primary
     @Bean
-//    @Profile(ConfigProfiles.TESTS)
     public Clock testClock() {
         return Clock.fixed(TEST_TIME, UTC);
     }

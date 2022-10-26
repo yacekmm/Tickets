@@ -3,8 +3,7 @@
 
 contracts {
     basePackageForTests = 'com.bottega.pricing'
-    baseClassForTests = 'com.bottega.pricing.tests.FrameworkTestBase'
-//    packageWithBaseClasses = 'com.sfr.circlekid.pricing.base'
+    packageWithBaseClasses = 'com.bottega.pricing.tests'
     testMode = 'Explicit'
 //    failOnInProgress = false
     testFramework = 'JUNIT5'

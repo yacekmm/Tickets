@@ -6,8 +6,8 @@ import com.bottega.vendor.concert.application.api.ConcertService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import static com.bottega.sharedlib.config.ApiVersions.V1;
 import static com.bottega.sharedlib.dto.AggregateIdDto.fromAggregateId;
-import static com.bottega.vendor.config.ApiVersions.V1;
 
 @RestController
 @AllArgsConstructor
