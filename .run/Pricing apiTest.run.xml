@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="VendorCMS dependencyTest" type="JUnit" factoryName="JUnit">
-    <module name="Tickets.services.VendorCMS.test" />
+  <configuration default="false" name="Pricing apiTest" type="JUnit" factoryName="JUnit">
+    <module name="Tickets.services.Pricing.test" />
     <extension name="coverage">
       <pattern>
         <option name="PATTERN" value="com.bottega.vendor.concert.domain.*" />
@@ -13,7 +13,7 @@
     <option name="TEST_OBJECT" value="pattern" />
     <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
     <patterns>
-      <pattern testClass=".*DepTest" />
+      <pattern testClass=".*ApiTest" />
     </patterns>
     <method v="2">
       <option name="Make" enabled="true" />
