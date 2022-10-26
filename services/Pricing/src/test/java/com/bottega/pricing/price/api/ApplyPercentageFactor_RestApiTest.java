@@ -17,6 +17,7 @@ public class ApplyPercentageFactor_RestApiTest extends FrameworkTestBase {
         //when
         ValidatableResponse response = factorFixtures.factorClient.applyPercentageFactor("item-id", 10);
 
+        //TODO: assert that returned price with value and factors
         //then
 //        PriceAssert
 //                .assertThatPrice(concertFixtures.concertRepo.findAll().iterator().next())
