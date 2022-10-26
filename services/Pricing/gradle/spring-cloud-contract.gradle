@@ -3,11 +3,11 @@
 
 contracts {
     basePackageForTests = 'com.bottega.pricing'
-    baseClassForTests = 'com.bottega.pricing.tests.CdcFrameworkTestBase'
+    baseClassForTests = 'com.bottega.pricing.tests.FrameworkTestBase'
 //    packageWithBaseClasses = 'com.sfr.circlekid.pricing.base'
     testMode = 'Explicit'
 //    failOnInProgress = false
-    testFramework = 'JUNIT'
+    testFramework = 'JUNIT5'
 }
 
 def stubsVersion = rootProject.version + '-SNAPSHOT'
@@ -22,3 +22,12 @@ publishing {
 }
 
 publishToMavenLocal.dependsOn('generateClientStubs')
+
+//sourceSets {
+//    contractTest {
+//        java {
+//            compileClasspath += test.output + test.allSource
+//            runtimeClasspath += test.output + test.allSource
+//        }
+//    }
+//}

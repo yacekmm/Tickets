@@ -1,11 +1,3 @@
-//tasks.named('contracts') {
-//    testFramework = org.springframework.cloud.contract.verifier.config.TestFramework.JUNIT5
-//}
-
-tasks.named('contractTest') {
-    useJUnitPlatform()
-}
-
 tasks.withType(Test) {
     useJUnitPlatform()
 }
@@ -26,12 +18,10 @@ task depTest(type: Test) {
     filter {
         include '**/**DepTest.class'
     }
-    dependsOn ':Pricing:publishToMavenLocal'
 }
 
 task apiTest(type: Test) {
     filter {
         include '**/**ApiTest.class'
     }
-    dependsOn ':Pricing:publishToMavenLocal'
 }
