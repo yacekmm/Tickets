@@ -9,8 +9,11 @@ Contract.make {
         """
 
     request {
+
         method POST()
-        url "/api/v1/item/concert-id/price-factor/percentage"
+
+        url regex('/api/v1/item/' + uuid() + '/price-factor/percentage')
+
         headers {
             contentType applicationJson()
 //            header 'Authorization': value(
@@ -18,6 +21,7 @@ Contract.make {
 //                    producer(execute('authToken()'))
 //            )
         }
+
         body(
                 percentage: 10
         )
@@ -25,9 +29,19 @@ Contract.make {
 
     response {
         status 200
+        headers {
+            contentType applicationJson()
+        }
         body([
-                price: "90.00",
+                price  : 90_00,
                 factors: [
+                        [
+                                "name"  : "PERCENTAGE",
+                                "params": [
+                                        "value": "10",
+                                        "type" : "MINUS"
+                                ]
+                        ]
 
                 ]
         ])

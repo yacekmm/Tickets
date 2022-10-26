@@ -12,7 +12,7 @@ public class PriceAssert {
 
     private final Price price;
 
-    public PriceAssert is(Money priceValue) {
+    public PriceAssert equalTo(Money priceValue) {
         assertThat(price.price()).isEqualTo(priceValue);
         return this;
     }

@@ -13,7 +13,7 @@ import static com.bottega.sharedlib.vo.error.ErrorType.NOT_FOUND;
 import static com.bottega.vendor.concert.application.api.dto.ConcertErrorCode.concert_not_found;
 import static org.assertj.vavr.api.VavrAssertions.assertThat;
 
-class DiscountConcert_CompTest extends ConcertUnitTestBase {
+class DiscountConcert_CompTest extends ConcertLogicTestBase {
 
 
     @Test
@@ -27,8 +27,8 @@ class DiscountConcert_CompTest extends ConcertUnitTestBase {
         //then
         assertThat(result).hasRightValueSatisfying(price ->
                 PriceAssert.assertThatPrice(price)
-                        .is(new Money(90_00))
-                        .hasFactors(new PriceFactor("PERCENTAGE", Maps.of("value", "10"))));
+                        .equalTo(new Money(100_00))
+                        .hasFactors(new PriceFactor("PERCENTAGE", 10, Maps.of("type", "MINUS"))));
     }
 
     @Test

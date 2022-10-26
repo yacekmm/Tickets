@@ -4,6 +4,7 @@ import com.bottega.vendor.concert.application.api.ConcertService;
 import com.bottega.vendor.concert.infra.repo.ConcertRepo;
 import com.bottega.vendor.concert.infra.repo.InMemoryConcertRepo;
 import com.bottega.vendor.concert.tests.fixtures.ConcertBuilder;
+import com.bottega.vendor.infra.client.pricing.FakeConcertClient;
 
 public class ManualConcertFixtures {
 
@@ -33,7 +34,8 @@ public class ManualConcertFixtures {
     private static void initSut(ManualConcertFixtures concertFixtures) {
         concertFixtures.concertService = new ConcertService(
                 new ConcertFactory(),
-                concertFixtures.concertRepo
+                concertFixtures.concertRepo,
+                new FakeConcertClient()
         );
     }
 

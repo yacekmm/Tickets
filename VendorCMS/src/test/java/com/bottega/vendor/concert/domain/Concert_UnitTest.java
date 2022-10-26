@@ -1,9 +1,9 @@
 package com.bottega.vendor.concert.domain;
 
-import com.bottega.vendor.tests.UnitTestBase;
+import com.bottega.vendor.tests.LogicTestBase;
 import org.junit.jupiter.api.BeforeEach;
 
-class Concert_UnitTest extends UnitTestBase {
+class Concert_UnitTest extends LogicTestBase {
 
     @BeforeEach
     void setUp() {

@@ -10,13 +10,11 @@ import org.junit.jupiter.api.Test;
 import static com.bottega.vendor.tests.config.TestClockConfig.TEST_TIME_PLUS_30_DAYS;
 import static org.assertj.vavr.api.VavrAssertions.assertThat;
 
-class CreateConcert_CompTest extends ConcertUnitTestBase {
+class CreateConcert_CompTest extends ConcertLogicTestBase {
 
 
     @Test
     void createConcert_createsConcert_onValidInput() {
-
-        Concert concert = concertFixtures.concertBuilder.inDb();
 
         //when
         Either<ErrorResult, Concert> result = concertFixtures.concertService.createConcert("Woodstock", TEST_TIME_PLUS_30_DAYS.toString(), "vendorId");
