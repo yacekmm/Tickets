@@ -1,5 +1,6 @@
 package com.bottega.pricing.factor.api;
 
+import com.bottega.pricing.price.domain.ItemPrice;
 import com.bottega.pricing.tests.FrameworkTestBase;
 import io.restassured.response.ValidatableResponse;
 import org.junit.jupiter.api.Test;
@@ -11,6 +12,7 @@ public class ApplyFactor_RestApiTest extends FrameworkTestBase {
 
     @Test
     public void applyFactor_applies_onValidRequest() {
+        ItemPrice itemPrice = priceFixtures.priceBuilder.priceForItem(100_00, "item-id").inDb();
 
         //when
         ValidatableResponse response = factorFixtures.factorClient.applyPercentageFactor("item-id", 10);

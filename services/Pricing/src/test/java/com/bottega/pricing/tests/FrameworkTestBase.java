@@ -1,6 +1,7 @@
 package com.bottega.pricing.tests;
 
 import com.bottega.pricing.factor.tests.FrameworkFactorFixtures;
+import com.bottega.pricing.price.tests.FrameworkPriceFixtures;
 import org.junit.jupiter.api.AfterEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,6 +15,10 @@ public class FrameworkTestBase {
 
     @Autowired
     protected FrameworkFactorFixtures factorFixtures;
+
+    @Autowired
+    protected FrameworkPriceFixtures priceFixtures;
+
 
     @AfterEach
     void tearDown() {

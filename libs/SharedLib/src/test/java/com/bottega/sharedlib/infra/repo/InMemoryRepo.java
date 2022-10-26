@@ -1,4 +1,4 @@
-package com.bottega.vendor.tests.infra.repo;
+package com.bottega.sharedlib.infra.repo;
 
 import com.bottega.sharedlib.repo.AggregateId;
 import com.bottega.sharedlib.repo.BaseEntity;
