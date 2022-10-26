@@ -8,11 +8,13 @@ Contract.make {
         Request to apply discounting percentage factor to a concert price
         """
 
+    name "vendor discount request"
+
     request {
 
         method POST()
 
-        url regex('/api/v1/item/' + uuid() + '/price-factor/percentage')
+        url regex('http://localhost:9091/api/v1/item/' + uuid() + '/price-factor/percentage')
 
         headers {
             contentType applicationJson()

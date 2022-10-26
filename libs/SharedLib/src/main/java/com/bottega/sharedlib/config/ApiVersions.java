@@ -1,4 +1,4 @@
-package com.bottega.vendor.config;
+package com.bottega.sharedlib.config;
 
 public class ApiVersions {
 

@@ -1,11 +1,12 @@
 package com.bottega.vendor.concert.api;
 
+import com.bottega.sharedlib.dto.AggregateIdDto;
 import com.bottega.sharedlib.vo.error.ErrorResult;
 import com.bottega.vendor.concert.application.api.ConcertService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import static com.bottega.vendor.concert.api.AggregateIdDto.fromAggregateId;
+import static com.bottega.sharedlib.dto.AggregateIdDto.fromAggregateId;
 import static com.bottega.vendor.config.ApiVersions.V1;
 
 @RestController

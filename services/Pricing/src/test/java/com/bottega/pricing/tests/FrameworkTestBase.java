@@ -1,6 +1,6 @@
-package com.bottega.vendor.tests;
+package com.bottega.pricing.tests;
 
-import com.bottega.vendor.concert.tests.fixtures.FrameworkConcertFixtures;
+import com.bottega.pricing.factor.tests.FrameworkFactorFixtures;
 import org.junit.jupiter.api.AfterEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,10 +13,11 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 public class FrameworkTestBase {
 
     @Autowired
-    protected FrameworkConcertFixtures concertFixtures;
+    protected FrameworkFactorFixtures factorFixtures;
 
     @AfterEach
     void tearDown() {
-        concertFixtures.tearDown();
+        factorFixtures.tearDown();
     }
+
 }

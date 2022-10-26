@@ -1,1 +1,3 @@
 server.port: 8081
+
+spring.datasource.url: jdbc:h2:mem:pricing;MODE=PostgreSQL

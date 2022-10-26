@@ -2,8 +2,9 @@
 // https://cloud.spring.io/spring-cloud-contract/reference/html/gradle-project.html#gradle-configuration-options
 
 contracts {
-//    basePackageForTests = 'com.sfr.circlekid.contracts'
-//    packageWithBaseClasses = 'com.sfr.circlekid.base.contracts'
+    basePackageForTests = 'com.bottega.pricing'
+    baseClassForTests = 'com.bottega.pricing.tests.CdcFrameworkTestBase'
+//    packageWithBaseClasses = 'com.sfr.circlekid.pricing.base'
     testMode = 'Explicit'
 //    failOnInProgress = false
     testFramework = 'JUNIT'

@@ -1,12 +1,16 @@
 services:
   request-timeout-in-seconds: 3
+  vendor:
+    url: http://localhost:8080/
   pricing:
-    url: http://localhost/
+    url: http://localhost:8081/
 
 ---
 
 spring.config.activate.on-profile: test
 
 services:
+  vendor:
+    url: http://localhost:8180/
   pricing:
     url: http://localhost:8181/

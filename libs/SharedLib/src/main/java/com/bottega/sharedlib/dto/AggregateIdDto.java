@@ -1,8 +1,8 @@
-package com.bottega.vendor.concert.api;
+package com.bottega.sharedlib.dto;
 
 import com.bottega.sharedlib.repo.AggregateId;
 
-record AggregateIdDto(
+public record AggregateIdDto(
         String id) {
 
     public static AggregateIdDto fromAggregateId(AggregateId id){

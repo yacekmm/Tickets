@@ -1,17 +1,5 @@
-spring.profiles.include: services
+spring.profiles.include: serviceLocator
 
 server.port: 8080
 
 spring.datasource.url: jdbc:h2:mem:vendor;MODE=PostgreSQL
-
-
-spring:
-  jackson:
-    visibility:
-      field: any
-
-  jpa:
-    hibernate:
-      ddl-auto: create
-    database-platform: org.hibernate.dialect.PostgreSQL10Dialect
-    open-in-view: false

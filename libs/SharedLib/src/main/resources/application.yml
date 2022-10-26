@@ -1,0 +1,13 @@
+spring.profiles.include:
+  serviceLocator
+
+spring:
+  jackson:
+    visibility:
+      field: any
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    database-platform: org.hibernate.dialect.PostgreSQL10Dialect
+    open-in-view: false
