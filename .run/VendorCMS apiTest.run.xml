@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="VendorCMS apiTest" type="JUnit" factoryName="JUnit">
-    <module name="Tickets.VendorCMS.test" />
+    <module name="Tickets.services.VendorCMS.test" />
     <extension name="coverage">
       <pattern>
         <option name="PATTERN" value="com.bottega.vendor.concert.domain.*" />

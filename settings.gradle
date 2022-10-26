@@ -1,6 +1,6 @@
 rootProject.name = 'Tickets'
-include ':SharedLib', ':VendorCMS', ':Pricing'
+include ':libs:SharedLib', ':services:VendorCMS', ':services:Pricing'
 
-project(":SharedLib").name = "SharedLib"
-project(":VendorCMS").name = "VendorCMS"
-project(":Pricing").name = "Pricing"
+project(":libs:SharedLib").name = "SharedLib"
+project(":services:VendorCMS").name = "VendorCMS"
+project(":services:Pricing").name = "Pricing"
