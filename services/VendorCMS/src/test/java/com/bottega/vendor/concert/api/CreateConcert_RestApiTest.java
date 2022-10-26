@@ -1,9 +1,9 @@
 package com.bottega.vendor.concert.api;
 
+import com.bottega.sharedlib.tests.RepoEntries;
 import com.bottega.vendor.concert.domain.ConcertId;
 import com.bottega.vendor.concert.tests.asserts.ConcertAssert;
 import com.bottega.vendor.tests.FrameworkTestBase;
-import com.bottega.vendor.tests.RepoEntries;
 import io.restassured.response.ValidatableResponse;
 import org.junit.jupiter.api.Test;
 

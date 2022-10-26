@@ -1,12 +1,14 @@
-package com.bottega.pricing.factor.api;
+package com.bottega.pricing.price.api;
 
-import com.bottega.pricing.factor.application.api.FactorService;
+import com.bottega.pricing.price.domain.ItemPrice;
+import com.bottega.sharedlib.vo.error.ErrorResult;
 import lombok.AllArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 import static com.bottega.sharedlib.config.ApiVersions.V1;
 
@@ -14,17 +16,15 @@ import static com.bottega.sharedlib.config.ApiVersions.V1;
 @AllArgsConstructor
 public class FactorRestController {
 
-    private final FactorService factorService;
+    private final PriceService priceService;
 
     @PostMapping(path = V1 + "/item/{itemId}/price-factor/percentage")
     @ResponseBody
-    public ResponseEntity<Void> applyPercentageFactor(
+    public List<ItemPrice> applyPercentageFactor(
             @PathVariable("itemId") String itemId) {
 
-        return ResponseEntity.noContent().build();
-//        return factorService.createConcert(requestDto.title(), requestDto.dateTime(), requestDto.vendorId())
-//                .map(concert -> fromAggregateId(concert.getId()))
-//                .getOrElseThrow(ErrorResult::toException);
+        return priceService.applyPercentageFactor(itemId, 10)
+                .getOrElseThrow(ErrorResult::toException);
     }
 
 }

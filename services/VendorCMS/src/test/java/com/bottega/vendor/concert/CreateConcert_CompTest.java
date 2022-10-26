@@ -1,9 +1,9 @@
 package com.bottega.vendor.concert;
 
+import com.bottega.sharedlib.tests.RepoEntries;
 import com.bottega.sharedlib.vo.error.ErrorResult;
 import com.bottega.vendor.concert.domain.Concert;
 import com.bottega.vendor.concert.tests.asserts.ConcertAssert;
-import com.bottega.vendor.tests.RepoEntries;
 import io.vavr.control.Either;
 import org.junit.jupiter.api.Test;
 

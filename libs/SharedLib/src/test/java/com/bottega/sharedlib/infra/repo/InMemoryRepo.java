@@ -21,7 +21,8 @@ public class InMemoryRepo<E extends BaseEntity, ID extends AggregateId> implemen
 
     @Override
     public <S extends E> Iterable<S> saveAll(Iterable<S> entities) {
-        throw new RuntimeException("Not Implemented");
+        entities.forEach(this::save);
+        return entities;
     }
 
     @Override

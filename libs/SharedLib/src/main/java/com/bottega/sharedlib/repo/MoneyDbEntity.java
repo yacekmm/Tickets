@@ -19,7 +19,7 @@ public class MoneyDbEntity {
         return new MoneyDbEntity(money.toInt());
     }
 
-    public static Money toMoney(MoneyDbEntity money){
-        return new Money(money.money);
+    public Money toMoney(){
+        return new Money(this.money);
     }
 }

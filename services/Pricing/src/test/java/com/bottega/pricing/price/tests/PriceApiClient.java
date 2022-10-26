@@ -1,4 +1,4 @@
-package com.bottega.pricing.factor.tests;
+package com.bottega.pricing.price.tests;
 
 import io.restassured.response.ValidatableResponse;
 import io.restassured.specification.RequestSpecification;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class FactorApiClient {
+public class PriceApiClient {
 
     private final RequestSpecification requestSpec;
 

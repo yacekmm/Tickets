@@ -1,4 +1,4 @@
-package com.bottega.pricing.factor.api;
+package com.bottega.pricing.price.api;
 
 import com.bottega.pricing.price.domain.ItemPrice;
 import com.bottega.pricing.tests.FrameworkTestBase;
@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.apache.http.HttpStatus.SC_OK;
 
-public class ApplyFactor_RestApiTest extends FrameworkTestBase {
+public class ApplyPercentageFactor_RestApiTest extends FrameworkTestBase {
 
 
     @Test

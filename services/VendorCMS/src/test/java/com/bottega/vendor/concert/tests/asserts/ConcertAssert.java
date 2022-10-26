@@ -1,9 +1,9 @@
 package com.bottega.vendor.concert.tests.asserts;
 
+import com.bottega.sharedlib.tests.RepoEntries;
 import com.bottega.vendor.concert.domain.Concert;
 import com.bottega.vendor.concert.domain.ConcertId;
 import com.bottega.vendor.concert.infra.repo.ConcertRepo;
-import com.bottega.vendor.tests.RepoEntries;
 import lombok.RequiredArgsConstructor;
 
 import java.time.Instant;

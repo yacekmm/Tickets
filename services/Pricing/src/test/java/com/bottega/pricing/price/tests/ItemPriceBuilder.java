@@ -13,8 +13,8 @@ import org.springframework.stereotype.Component;
 public class ItemPriceBuilder {
 
     public final ItemPriceRepo itemPriceRepo;
-    private Money price;
-    private String itemId;
+    private Money price = new Money(200_00);
+    private String itemId = "mock-item-id";
 
 
     public ItemPrice build(){
