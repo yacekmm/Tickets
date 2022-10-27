@@ -1,7 +1,7 @@
 package com.bottega.vendor.concert.api.app;
 
+import com.bottega.sharedlib.fixtures.ErrorAssert;
 import com.bottega.sharedlib.vo.Money;
-import com.bottega.sharedlib.vo.error.ErrorAssert;
 import com.bottega.sharedlib.vo.error.ErrorResult;
 import com.bottega.vendor.concert.Price;
 import com.bottega.vendor.concert.PriceFactor;

@@ -4,7 +4,8 @@ import com.bottega.pricing.price.domain.ItemPrice;
 import com.bottega.pricing.price.fixtures.PriceAssert;
 import com.bottega.pricing.price.fixtures.PriceFactorAssert;
 import com.bottega.pricing.price.fixtures.PriceLogicTestBase;
-import com.bottega.sharedlib.vo.error.ErrorAssert;
+import com.bottega.sharedlib.fixtures.ErrorAssert;
+import com.bottega.sharedlib.fixtures.EventAssert;
 import com.bottega.sharedlib.vo.error.ErrorResult;
 import io.vavr.control.Either;
 import org.junit.jupiter.api.Test;
@@ -12,7 +13,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static com.bottega.pricing.price.api.app.FactorErrorCode.item_not_found;
-import static com.bottega.sharedlib.tests.RepoEntries.SINGULAR;
+import static com.bottega.sharedlib.fixtures.RepoEntries.SINGULAR;
 import static com.bottega.sharedlib.vo.error.ErrorType.NOT_FOUND;
 import static org.assertj.vavr.api.VavrAssertions.assertThat;
 
@@ -53,5 +54,18 @@ class ApplyPercentageFactor_CompTest extends PriceLogicTestBase {
                                 .hasCode(item_not_found)
                                 .hasDescription("No price entries found for requested item. itemId: not-existing-id")
                 );
+    }
+
+    @Test
+    void applyPercentageFactor_publishesPriceChangeEvent_onPriceChange() {
+        ItemPrice price = priceFixtures.priceBuilder.priceForItem(100_00, "item-id").inDb();
+
+        //when
+        Either<ErrorResult, List<ItemPrice>> result = priceFixtures.priceService.applyPercentageFactor("item-id", 10);
+
+        //then
+        assertThat(result).isRight();
+        EventAssert.assertThatEventV1(sharedFixtures.eventPublisher.singleEvent())
+                .isPriceChangeWithValue(90_00);
     }
 }

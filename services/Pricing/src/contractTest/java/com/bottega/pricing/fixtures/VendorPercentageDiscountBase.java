@@ -1,7 +1,7 @@
 package com.bottega.pricing.fixtures;
 
 import com.bottega.pricing.price.domain.ItemPrice;
-import com.bottega.sharedlib.tests.UUIDs;
+import com.bottega.sharedlib.fixtures.UUIDs;
 import org.junit.jupiter.api.BeforeEach;
 
 public class VendorPercentageDiscountBase extends CdcFrameworkTestBase {

@@ -1,4 +1,4 @@
-package com.bottega.sharedlib.tests;
+package com.bottega.sharedlib.fixtures;
 
 public record RepoEntries(
         int allEntriesCount) {

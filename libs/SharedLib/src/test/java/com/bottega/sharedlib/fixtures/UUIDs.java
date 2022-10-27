@@ -1,4 +1,4 @@
-package com.bottega.sharedlib.tests;
+package com.bottega.sharedlib.fixtures;
 
 import org.apache.commons.lang3.StringUtils;
 

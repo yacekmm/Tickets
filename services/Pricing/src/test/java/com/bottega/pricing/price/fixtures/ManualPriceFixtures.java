@@ -1,5 +1,6 @@
 package com.bottega.pricing.price.fixtures;
 
+import com.bottega.pricing.fixtures.SharedFixtures;
 import com.bottega.pricing.price.api.app.PriceService;
 import com.bottega.pricing.price.infra.repo.ItemPriceRepo;
 
@@ -15,10 +16,13 @@ public class ManualPriceFixtures {
     //builders
     public ItemPriceBuilder priceBuilder;
 
+    //fixtures
+    public SharedFixtures sharedFixtures;
 
-    public static ManualPriceFixtures init() {
+    public static ManualPriceFixtures init(SharedFixtures sharedFixtures) {
         ManualPriceFixtures factorFixtures = new ManualPriceFixtures();
 
+        factorFixtures.sharedFixtures = sharedFixtures;
         initRepos(factorFixtures);
         initSut(factorFixtures);
         initBuilders(factorFixtures);
@@ -31,7 +35,7 @@ public class ManualPriceFixtures {
     }
 
     private static void initSut(ManualPriceFixtures factorFixtures) {
-        factorFixtures.priceService = new PriceService(factorFixtures.priceRepo);
+        factorFixtures.priceService = new PriceService(factorFixtures.priceRepo, factorFixtures.sharedFixtures.eventPublisher);
     }
 
     private static void initBuilders(ManualPriceFixtures priceFixtures) {

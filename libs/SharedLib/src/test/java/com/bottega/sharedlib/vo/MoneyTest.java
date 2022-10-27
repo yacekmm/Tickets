@@ -1,6 +1,5 @@
-package com.bottega.sharedlib;
+package com.bottega.sharedlib.vo;
 
-import com.bottega.sharedlib.vo.Money;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

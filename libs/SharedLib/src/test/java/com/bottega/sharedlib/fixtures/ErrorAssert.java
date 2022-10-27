@@ -1,5 +1,8 @@
-package com.bottega.sharedlib.vo.error;
+package com.bottega.sharedlib.fixtures;
 
+import com.bottega.sharedlib.vo.error.ErrorCode;
+import com.bottega.sharedlib.vo.error.ErrorResult;
+import com.bottega.sharedlib.vo.error.ErrorType;
 import lombok.RequiredArgsConstructor;
 
 import static org.assertj.core.api.Assertions.assertThat;

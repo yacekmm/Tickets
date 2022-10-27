@@ -1,6 +1,6 @@
 package com.bottega.vendor.concert.fixtures.asserts;
 
-import com.bottega.sharedlib.tests.RepoEntries;
+import com.bottega.sharedlib.fixtures.RepoEntries;
 import com.bottega.vendor.concert.domain.Concert;
 import com.bottega.vendor.concert.domain.ConcertId;
 import com.bottega.vendor.concert.infra.repo.ConcertRepo;

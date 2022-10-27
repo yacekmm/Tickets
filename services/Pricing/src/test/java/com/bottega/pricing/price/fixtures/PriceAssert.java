@@ -4,7 +4,7 @@ import com.bottega.pricing.price.domain.ItemPrice;
 import com.bottega.pricing.price.domain.PriceFactor;
 import com.bottega.pricing.price.domain.PriceId;
 import com.bottega.pricing.price.infra.repo.ItemPriceRepo;
-import com.bottega.sharedlib.tests.RepoEntries;
+import com.bottega.sharedlib.fixtures.RepoEntries;
 import com.bottega.sharedlib.vo.Money;
 import lombok.RequiredArgsConstructor;
 
