@@ -1,8 +1,9 @@
 package com.bottega.pricing.price.infra.repo;
 
 import com.bottega.pricing.price.api.app.FactorErrorCode;
+import com.bottega.sharedlib.event.Event;
+import com.bottega.sharedlib.event.EventPublisher;
 import com.bottega.sharedlib.vo.error.ErrorResult;
-import com.bottega.sharedlib.vo.event.Event;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.vavr.control.Either;
 import io.vavr.control.Try;

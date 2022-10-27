@@ -6,8 +6,8 @@ import org.junit.jupiter.api.BeforeEach;
 class Concert_UnitTest extends LogicTestBase {
 
     @BeforeEach
-    void setUp() {
-        ManualConcertFixtures concertFixtures = ManualConcertFixtures.init();
+    protected void setUp() {
+        ManualConcertFixtures concertFixtures = ManualConcertFixtures.init(sharedFixtures);
     }
 
 

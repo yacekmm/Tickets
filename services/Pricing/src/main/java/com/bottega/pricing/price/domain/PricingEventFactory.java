@@ -1,11 +1,11 @@
 package com.bottega.pricing.price.domain;
 
-import com.bottega.sharedlib.vo.event.Event;
-import com.bottega.sharedlib.vo.event.payload.PriceChangeEventPayload;
+import com.bottega.sharedlib.event.Event;
+import com.bottega.sharedlib.event.payload.PriceChangeEventPayload;
 
-import static com.bottega.sharedlib.vo.event.EventType.PRICE_CHANGE;
+import static com.bottega.sharedlib.event.EventType.PRICE_CHANGE;
 
-public class EventFactory {
+public class PricingEventFactory {
     public static Event priceChange(ItemPrice itemPrice) {
         return Event.builder()
                 .type(PRICE_CHANGE)

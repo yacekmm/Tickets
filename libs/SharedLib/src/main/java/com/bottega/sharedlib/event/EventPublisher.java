@@ -1,7 +1,6 @@
-package com.bottega.pricing.price.infra.repo;
+package com.bottega.sharedlib.event;
 
 import com.bottega.sharedlib.vo.error.ErrorResult;
-import com.bottega.sharedlib.vo.event.Event;
 import io.vavr.control.Either;
 
 public interface EventPublisher {

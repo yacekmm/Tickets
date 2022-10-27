@@ -7,7 +7,7 @@ public class LogicTestBase {
     public SharedFixtures sharedFixtures;
 
     @BeforeEach
-    void setUp() {
+    protected void setUp() {
         sharedFixtures = SharedFixtures.init();
     }
 }

@@ -1,6 +1,6 @@
-package com.bottega.sharedlib.vo.event.payload;
+package com.bottega.sharedlib.event.payload;
 
-import com.bottega.sharedlib.vo.event.EventPayload;
+import com.bottega.sharedlib.event.EventPayload;
 
 public record PriceChangeEventPayload(
         String priceId,

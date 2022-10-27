@@ -1,4 +1,4 @@
-package com.bottega.sharedlib.vo.event;
+package com.bottega.sharedlib.event;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -6,7 +6,7 @@ import lombok.ToString;
 
 import java.util.UUID;
 
-import static com.bottega.sharedlib.vo.event.EventVersion.v1;
+import static com.bottega.sharedlib.event.EventVersion.v1;
 
 @Builder
 @Getter

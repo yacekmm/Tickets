@@ -1,12 +1,13 @@
 package com.bottega.sharedlib.fixtures;
 
-import com.bottega.sharedlib.vo.event.Event;
-import com.bottega.sharedlib.vo.event.payload.PriceChangeEventPayload;
+import com.bottega.sharedlib.event.Event;
+import com.bottega.sharedlib.event.payload.ConcertCreatedEventPayload;
+import com.bottega.sharedlib.event.payload.PriceChangeEventPayload;
 import lombok.RequiredArgsConstructor;
-import org.assertj.core.api.InstanceOfAssertFactories;
 
-import static com.bottega.sharedlib.vo.event.EventType.PRICE_CHANGE;
-import static com.bottega.sharedlib.vo.event.EventVersion.v1;
+import static com.bottega.sharedlib.event.EventType.CONCERT_CREATED;
+import static com.bottega.sharedlib.event.EventType.PRICE_CHANGE;
+import static com.bottega.sharedlib.event.EventVersion.v1;
 import static lombok.AccessLevel.PRIVATE;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -15,18 +16,35 @@ public class EventAssert {
 
     private final Event event;
 
-    public static EventAssert assertThatEventV1(Event event){
+    public static EventAssert assertThatEventV1(Event event) {
         assertThat(event.getVersion()).isEqualTo(v1);
         return new EventAssert(event);
     }
 
-    public void isPriceChangeWithValue(int expectedPrice, String expectedPriceId, String expectedItemId) {
+    public void isPriceChange(int expectedPrice, String expectedPriceId, String expectedItemId) {
         assertThat(event.getType()).isEqualTo(PRICE_CHANGE);
         assertThat(event.getPayload())
-                .asInstanceOf(InstanceOfAssertFactories.type(PriceChangeEventPayload.class))
-                .matches(payload -> payload.price() == expectedPrice)
-                .matches(payload -> payload.priceId().equals(expectedPriceId))
-                .matches(payload -> payload.itemId().equals(expectedItemId));
+                .isInstanceOfSatisfying(PriceChangeEventPayload.class, payload -> {
+                    assertThat(payload.price()).isEqualTo(expectedPrice);
+                    assertThat(payload.priceId()).isEqualTo(expectedPriceId);
+                    assertThat(payload.itemId()).isEqualTo(expectedItemId);
+                });
+
+    }
+
+    public void isConcertCreated(String expectedConcertId, String expectedTitle, String expectedDateTime, String[] expectedTags, int expectedMargin) {
+        assertThat(event.getType()).isEqualTo(CONCERT_CREATED);
+        assertThat(event.getPayload())
+                .isInstanceOfSatisfying(ConcertCreatedEventPayload.class,
+                        payload -> {
+                            assertThat(payload.concertId()).isEqualTo(expectedConcertId);
+                            assertThat(payload.concertId()).isEqualTo(expectedConcertId);
+                            assertThat(payload.dateTime()).isEqualTo(expectedDateTime);
+                            assertThat(payload.title()).isEqualTo(expectedTitle);
+                            assertThat(payload.title()).isEqualTo(expectedTitle);
+                            assertThat(payload.tags()).containsExactlyInAnyOrder(expectedTags);
+                            assertThat(payload.profitMarginPercentage()).isEqualTo(expectedMargin);
+                        });
 
     }
 }

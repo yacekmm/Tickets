@@ -5,6 +5,7 @@ import com.bottega.vendor.concert.fixtures.InMemoryConcertRepo;
 import com.bottega.vendor.concert.fixtures.fixtures.ConcertBuilder;
 import com.bottega.vendor.concert.infra.repo.ConcertRepo;
 import com.bottega.vendor.fixtures.FakeConcertClient;
+import com.bottega.vendor.fixtures.SharedFixtures;
 
 public class ManualConcertFixtures {
 
@@ -17,11 +18,11 @@ public class ManualConcertFixtures {
     //builders
     public ConcertBuilder concertBuilder;
 
-    public static ManualConcertFixtures init() {
+    public static ManualConcertFixtures init(SharedFixtures sharedFixtures) {
         ManualConcertFixtures concertFixtures = new ManualConcertFixtures();
 
         initInfrastructure(concertFixtures);
-        initSut(concertFixtures);
+        initSut(concertFixtures, sharedFixtures);
         initBuilders(concertFixtures);
 
         return concertFixtures;
@@ -31,11 +32,12 @@ public class ManualConcertFixtures {
         concertFixtures.concertRepo = new InMemoryConcertRepo();
     }
 
-    private static void initSut(ManualConcertFixtures concertFixtures) {
+    private static void initSut(ManualConcertFixtures concertFixtures, SharedFixtures sharedFixtures) {
         concertFixtures.concertService = new ConcertService(
                 new ConcertFactory(),
                 concertFixtures.concertRepo,
-                new FakeConcertClient()
+                new FakeConcertClient(),
+                sharedFixtures.fakeEventPublisher()
         );
     }
 

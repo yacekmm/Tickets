@@ -1,6 +1,7 @@
 package com.bottega.vendor.concert.api.app;
 
 import com.bottega.sharedlib.ddd.ApplicationService;
+import com.bottega.sharedlib.event.EventPublisher;
 import com.bottega.sharedlib.vo.error.ErrorResult;
 import com.bottega.vendor.agreements.VendorId;
 import com.bottega.vendor.concert.Price;
@@ -16,6 +17,7 @@ import java.util.List;
 
 import static com.bottega.sharedlib.vo.error.ErrorResult.notFound;
 import static com.bottega.vendor.concert.api.app.dto.ConcertErrorCode.concert_not_found;
+import static com.bottega.vendor.concert.domain.VendorEventFactory.concertCreated;
 import static io.vavr.control.Option.ofOptional;
 
 //TODO: create a library with DDD annotations, reused in all services
@@ -26,12 +28,15 @@ public class ConcertService {
     private final ConcertFactory concertFactory;
     private final ConcertRepo concertRepo;
     private final PricingClient pricingClient;
+    private final EventPublisher eventPublisher;
 
     public Either<ErrorResult, Concert> createConcert(String title, String dateTime, String vendorIdString) {
         //TODO: should be retrieved from Vendor module
         VendorId vendorId = new VendorId(vendorIdString);
         return concertFactory.createConcert(title, dateTime, vendorId)
-                        .peek(concertRepo::save);
+                .peek(concertRepo::save)
+                //TODO: Outbox?
+                .peek(concert -> eventPublisher.publish(concertCreated(concert)));
     }
 
     public Either<ErrorResult, List<Price>> discountConcert(String concertId, int percentage) {

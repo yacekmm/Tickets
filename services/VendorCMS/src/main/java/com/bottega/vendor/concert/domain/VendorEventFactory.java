@@ -1,0 +1,20 @@
+package com.bottega.vendor.concert.domain;
+
+import com.bottega.sharedlib.event.Event;
+import com.bottega.sharedlib.event.payload.ConcertCreatedEventPayload;
+
+import static com.bottega.sharedlib.event.EventType.CONCERT_CREATED;
+
+public class VendorEventFactory {
+    public static Event concertCreated(Concert concert) {
+        return Event.builder()
+                .type(CONCERT_CREATED)
+                .payload(new ConcertCreatedEventPayload(
+                        concert.getId().asString(),
+                        concert.getTitle().getValue(),
+                        concert.getDate().getDateTime().toString(),
+                        new String[]{},
+                        0))
+                .build();
+    }
+}

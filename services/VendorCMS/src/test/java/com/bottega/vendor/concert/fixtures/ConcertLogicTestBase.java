@@ -9,8 +9,8 @@ public class ConcertLogicTestBase extends LogicTestBase {
     public ManualConcertFixtures concertFixtures;
 
     @BeforeEach
-    void setUp() {
-
-        this.concertFixtures = ManualConcertFixtures.init();
+    protected void setUp() {
+        super.setUp();
+        this.concertFixtures = ManualConcertFixtures.init(sharedFixtures);
     }
 }
