@@ -5,6 +5,8 @@ import com.bottega.vendor.concert.Price;
 import com.bottega.vendor.concert.domain.ConcertId;
 import io.vavr.control.Either;
 
+import java.util.List;
+
 public interface PricingClient {
-    Either<ErrorResult, Price> applyPercentageDiscount(ConcertId itemId, int percentage);
+    Either<ErrorResult, List<Price>> applyPercentageDiscount(ConcertId itemId, int percentage);
 }

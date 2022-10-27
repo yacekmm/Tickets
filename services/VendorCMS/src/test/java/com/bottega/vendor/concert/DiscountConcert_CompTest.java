@@ -7,7 +7,10 @@ import com.bottega.vendor.concert.domain.Concert;
 import com.bottega.vendor.concert.tests.asserts.PriceAssert;
 import io.vavr.control.Either;
 import org.apache.groovy.util.Maps;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
 
 import static com.bottega.sharedlib.vo.error.ErrorType.NOT_FOUND;
 import static com.bottega.vendor.concert.application.api.dto.ConcertErrorCode.concert_not_found;
@@ -22,20 +25,22 @@ class DiscountConcert_CompTest extends ConcertLogicTestBase {
         Concert concert = concertFixtures.concertBuilder.inDb();
 
         //when
-        Either<ErrorResult, Price> result = concertFixtures.concertService.discountConcert(concert.getId().asString(), 10);
+        Either<ErrorResult, List<Price>> result = concertFixtures.concertService.discountConcert(concert.getId().asString(), 10);
 
         //then
-        assertThat(result).hasRightValueSatisfying(price ->
-                PriceAssert.assertThatPrice(price)
-                        .equalTo(new Money(100_00))
-                        .hasFactors(new PriceFactor("PERCENTAGE", 10, Maps.of("type", "MINUS"))));
+        assertThat(result).hasRightValueSatisfying(prices -> {
+            Assertions.assertThat(prices).hasSize(1);
+            PriceAssert.assertThatPrice(prices.get(0))
+                    .equalTo(new Money(100_00))
+                    .hasFactors(new PriceFactor("PERCENTAGE", 10, Maps.of("type", "MINUS")));
+        });
     }
 
     @Test
     void discountConcert_returnsError_onInvalidConcertId() {
 
         //when
-        Either<ErrorResult, Price> result = concertFixtures.concertService.discountConcert("not-existing", 10);
+        Either<ErrorResult, List<Price>> result = concertFixtures.concertService.discountConcert("not-existing", 10);
 
         //then
         assertThat(result).hasLeftValueSatisfying(error ->

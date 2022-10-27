@@ -21,6 +21,7 @@ Contract.make {
 
         headers {
             contentType applicationJson()
+            accept applicationJson()
 //            header 'Authorization': value(
 //                    consumer(anyAlphaNumeric()),
 //                    producer(execute('authToken()'))
@@ -37,19 +38,16 @@ Contract.make {
         headers {
             contentType applicationJson()
         }
-        body([
-                price  : 90_00,
-                basePrice: 100_00,
-                factors: [
-                        [
-                                "name"  : "PERCENTAGE",
-                                "params": [
-                                        "value": "10",
-                                        "type" : "MINUS"
+        body(
+                [[
+                      priceId: regex(uuid()),
+                      price  : 90_00,
+                      factors: [[
+                                        type : "PERCENTAGE",
+                                        value: 10
                                 ]
-                        ]
-
-                ]
-        ])
+                      ]
+              ]]
+        )
     }
 }

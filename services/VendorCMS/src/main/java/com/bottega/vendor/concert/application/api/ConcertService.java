@@ -12,6 +12,8 @@ import com.bottega.vendor.infra.client.pricing.PricingClient;
 import io.vavr.control.Either;
 import lombok.AllArgsConstructor;
 
+import java.util.List;
+
 import static com.bottega.sharedlib.vo.error.ErrorResult.notFound;
 import static com.bottega.vendor.concert.application.api.dto.ConcertErrorCode.concert_not_found;
 import static io.vavr.control.Option.ofOptional;
@@ -32,7 +34,7 @@ public class ConcertService {
                         .peek(concertRepo::save);
     }
 
-    public Either<ErrorResult, Price> discountConcert(String concertId, int percentage) {
+    public Either<ErrorResult, List<Price>> discountConcert(String concertId, int percentage) {
         return ofOptional(concertRepo.findById(new ConcertId(concertId)))
                 .toEither(notFound(concert_not_found, "Concert with given ID does not exist. ID: " + concertId))
                 .flatMap(concert -> pricingClient.applyPercentageDiscount(concert.getId(), percentage));

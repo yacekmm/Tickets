@@ -6,6 +6,8 @@ import com.bottega.vendor.concert.application.api.ConcertService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 import static com.bottega.sharedlib.config.ApiVersions.V1;
 import static com.bottega.sharedlib.dto.AggregateIdDto.fromAggregateId;
 
@@ -27,12 +29,12 @@ public class ConcertRestController {
 
     @PostMapping(path = V1 + "/concert/{concertId}/discount")
     @ResponseBody
-    public DiscountedPriceResponseDto discountConcert(
+    public List<DiscountedPriceResponseDto> discountConcert(
             @PathVariable("concertId") String concertId,
             @RequestBody DiscountConcertRequestDto requestDto) {
 
         return concertService.discountConcert(concertId, requestDto.percentage())
-                .map(price -> new DiscountedPriceResponseDto(price.price().toInt()))
+                .map(prices -> prices.stream().map(price -> new DiscountedPriceResponseDto(price.price().toInt())).toList())
                 .getOrElseThrow(ErrorResult::toException);
     }
 }

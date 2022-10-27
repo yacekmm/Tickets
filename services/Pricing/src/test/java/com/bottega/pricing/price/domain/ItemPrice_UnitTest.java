@@ -12,7 +12,7 @@ class ItemPrice_UnitTest extends PriceLogicTestBase {
         ItemPrice itemPrice = priceFixtures.priceBuilder.build();
 
         //when
-        ItemPrice result = itemPrice.applyPercentageFactor(10);
+        ItemPrice result = itemPrice.applyFactor(PriceFactorFactory.percentageFactor(10, itemPrice));
 
         //then
         PriceAssert.assertThatPrice(result)

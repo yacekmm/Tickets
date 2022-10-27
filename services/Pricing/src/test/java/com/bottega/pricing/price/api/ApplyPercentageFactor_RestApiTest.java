@@ -37,13 +37,13 @@ public class ApplyPercentageFactor_RestApiTest extends FrameworkTestBase {
 //        //TODO: API response is valid: API test
         response
                 .statusCode(SC_OK)
-                .body("$", hasSize(1))
-                .body("[0].priceId", equalTo(itemPrice.getId().asString()))
-                .body("[0].itemId", equalTo(itemPrice.getItemId()))
-                .body("[0].price", equalTo(90_00))
-                .body("[0].factors", hasSize(1))
-                .body("[0].factors[0].type", equalTo("PERCENTAGE"))
-                .body("[0].factors[0].value", equalTo(10));
+                .body("prices", hasSize(1))
+                .body("prices[0].priceId", equalTo(itemPrice.getId().asString()))
+                .body("prices[0].itemId", equalTo(itemPrice.getItemId()))
+                .body("prices[0].price", equalTo(90_00))
+                .body("prices[0].factors", hasSize(1))
+                .body("prices[0].factors[0].type", equalTo("PERCENTAGE"))
+                .body("prices[0].factors[0].value", equalTo(10));
     }
 
 }

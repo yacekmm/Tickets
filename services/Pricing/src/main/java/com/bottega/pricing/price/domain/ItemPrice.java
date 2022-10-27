@@ -38,9 +38,9 @@ public class ItemPrice implements BaseEntity {
     @OneToMany(fetch = LAZY, cascade = ALL)
     private List<PriceFactor> priceFactors;
 
-    public ItemPrice applyPercentageFactor(int percentage) {
-        this.price = MoneyDbEntity.from(getPrice().percentage(100 - percentage));
-        this.priceFactors.add(PriceFactorFactory.percentageFactor(percentage, this));
+    public ItemPrice applyFactor(PriceFactor e) {
+        this.price = MoneyDbEntity.from(getPrice().percentage(100 - e.getFactorXXX().getValue()));
+        this.priceFactors.add(e);
         return this;
     }
 

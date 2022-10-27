@@ -9,6 +9,7 @@ import org.springframework.cloud.contract.stubrunner.spring.AutoConfigureStubRun
 import static com.bottega.vendor.tests.config.CdcStubs.CDC_STUB_ID_PRICING;
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.cloud.contract.stubrunner.spring.StubRunnerProperties.StubsMode.LOCAL;
 
 @AutoConfigureStubRunner(
@@ -27,7 +28,8 @@ public class DiscountConcert_RestApiTest extends FrameworkTestBase {
         //then
         response
                 .statusCode(SC_OK)
-                .body("price", equalTo(90_00));
+                .body("$", hasSize(1))
+                .body("[0].price", equalTo(90_00));
     }
 
 }

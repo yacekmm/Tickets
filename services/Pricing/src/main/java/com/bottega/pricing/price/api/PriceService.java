@@ -1,6 +1,7 @@
 package com.bottega.pricing.price.api;
 
 import com.bottega.pricing.price.domain.ItemPrice;
+import com.bottega.pricing.price.domain.PriceFactorFactory;
 import com.bottega.pricing.price.infra.repo.ItemPriceRepo;
 import com.bottega.sharedlib.ddd.ApplicationService;
 import com.bottega.sharedlib.vo.error.ErrorResult;
@@ -22,7 +23,7 @@ public class PriceService {
     public Either<ErrorResult, List<ItemPrice>> applyPercentageFactor(String itemId, int percentage) {
 
         List<ItemPrice> updatedPrices = priceRepo.findByItemId(itemId).stream()
-                .map(itemPrice -> itemPrice.applyPercentageFactor(percentage))
+                .map(itemPrice -> itemPrice.applyFactor(PriceFactorFactory.percentageFactor(percentage, itemPrice)))
                 .toList();
         priceRepo.saveAll(updatedPrices);
 

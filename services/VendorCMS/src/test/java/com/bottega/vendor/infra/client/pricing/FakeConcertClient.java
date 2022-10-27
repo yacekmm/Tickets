@@ -8,15 +8,18 @@ import com.bottega.vendor.concert.domain.ConcertId;
 import io.vavr.control.Either;
 import org.apache.groovy.util.Maps;
 
+import java.util.List;
+
 public class FakeConcertClient implements PricingClient {
     @Override
-    public Either<ErrorResult, Price> applyPercentageDiscount(ConcertId itemId, int percentage) {
+    public Either<ErrorResult, List<Price>> applyPercentageDiscount(ConcertId itemId, int percentage) {
         return Either.right(
-                new Price(
+                List.of(new Price(
                         new Money(100_00),
                         new PriceFactor(
                                 "PERCENTAGE",
                                 percentage,
-                                Maps.of("type", "MINUS"))));
+                                Maps.of("type", "MINUS"))))
+        );
     }
 }

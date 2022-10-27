@@ -20,7 +20,8 @@ publishing {
     }
 }
 
-publishToMavenLocal.dependsOn('generateClientStubs')
+publishToMavenLocal.dependsOn generateClientStubs
+publishStubsToScm.dependsOn publishToMavenLocal
 
 //sourceSets {
 //    contractTest {
