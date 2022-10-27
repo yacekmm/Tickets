@@ -1,6 +1,5 @@
 package com.bottega.pricing.price.api;
 
-import com.bottega.pricing.price.domain.ItemPrice;
 import com.bottega.sharedlib.vo.error.ErrorResult;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,10 +21,11 @@ public class FactorRestController {
     @PostMapping(path = V1 + "/item/{itemId}/price-factor/percentage")
     @ResponseBody
     @Transactional
-    public List<ItemPrice> applyPercentageFactor(
+    public List<PriceWithFactorsDto> applyPercentageFactor(
             @PathVariable("itemId") String itemId) {
 
         return priceService.applyPercentageFactor(itemId, 10)
+                .map(itemPrices -> itemPrices.stream().map(PriceWithFactorsDto::from).toList())
                 .getOrElseThrow(ErrorResult::toException);
     }
 

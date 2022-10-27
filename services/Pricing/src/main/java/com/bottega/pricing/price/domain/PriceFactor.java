@@ -3,28 +3,30 @@ package com.bottega.pricing.price.domain;
 
 import com.bottega.sharedlib.ddd.DomainEntity;
 import com.bottega.sharedlib.repo.BaseEntity;
+import com.vladmihalcea.hibernate.type.json.JsonStringType;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
+import org.hibernate.annotations.TypeDefs;
 
 import javax.persistence.*;
-
-import static javax.persistence.EnumType.STRING;
 
 @DomainEntity
 @Entity
 @Table(name = "price_factors")
+@TypeDefs({@TypeDef(name = "jsonb", typeClass = JsonStringType.class)})
 @Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class PriceFactor implements BaseEntity {
 
     @EmbeddedId
     private FactorId id;
 
-    @Column(name = "price_id")
-    private String priceId;
-
-    @Column(name = "type", nullable = false)
-    @Enumerated(STRING)
-    private FactorType type;
+    @ManyToOne
+    private ItemPrice price;
 
     @Column(name = "XXX")
     @Type(type = "jsonb")

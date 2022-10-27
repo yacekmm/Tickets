@@ -1,6 +1,7 @@
 package com.bottega.pricing.price.api;
 
 import com.bottega.pricing.price.domain.ItemPrice;
+import com.bottega.pricing.price.tests.PriceFactorAssert;
 import com.bottega.pricing.tests.PriceAssert;
 import com.bottega.pricing.tests.PriceLogicTestBase;
 import com.bottega.sharedlib.vo.error.ErrorAssert;
@@ -19,19 +20,24 @@ class ApplyPercentageFactor_CompTest extends PriceLogicTestBase {
 
     @Test
     void applyPercentageFactor_returnsSingleDiscountedPrice_onValidRequest() {
-        priceFixtures.priceBuilder.priceForItem(100_00, "item-id").inDb();
+        ItemPrice price = priceFixtures.priceBuilder.priceForItem(100_00, "item-id").inDb();
 
         //when
         Either<ErrorResult, List<ItemPrice>> result = priceFixtures.priceService.applyPercentageFactor("item-id", 10);
 
         //then
-        assertThat(result)
-                .hasRightValueSatisfying(itemPrices ->
-                                PriceAssert.assertThatPrice(itemPrices.get(0))
-//                                .hasFactors()
-                                        .isPersistedIn(priceFixtures.priceRepo, SINGULAR)
-                                        .hasPrice(90_00)
-                );
+        assertThat(result).hasRightValueSatisfying(itemPrices ->
+                PriceAssert.assertThatPrice(itemPrices.get(0))
+                        .isPersistedIn(priceFixtures.priceRepo, SINGULAR)
+                        .hasPrice(90_00)
+                        .hasId(price.getId())
+                        .hasItemId(price.getItemId())
+                        .hasFactors(1, factors ->
+                                factors.forEach(factor ->
+                                        PriceFactorAssert.assertThatFactor(factor)
+                                                .isPercentageFactor(10, price)
+                                ))
+        );
     }
 
     @Test

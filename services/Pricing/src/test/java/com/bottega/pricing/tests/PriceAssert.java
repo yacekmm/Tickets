@@ -1,11 +1,15 @@
 package com.bottega.pricing.tests;
 
 import com.bottega.pricing.price.domain.ItemPrice;
+import com.bottega.pricing.price.domain.PriceFactor;
 import com.bottega.pricing.price.domain.PriceId;
 import com.bottega.pricing.price.infra.repo.ItemPriceRepo;
 import com.bottega.sharedlib.tests.RepoEntries;
 import com.bottega.sharedlib.vo.Money;
 import lombok.RequiredArgsConstructor;
+
+import java.util.List;
+import java.util.function.Consumer;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -32,6 +36,12 @@ public class PriceAssert {
 
     public PriceAssert hasItemId(String expectedItemId) {
         assertThat(price.getItemId()).isEqualTo(expectedItemId);
+        return this;
+    }
+
+    public PriceAssert hasFactors(int count, Consumer<List<PriceFactor>> factorsConsumer) {
+        assertThat(price.getPriceFactors()).hasSize(count);
+        factorsConsumer.accept(price.getPriceFactors());
         return this;
     }
 }

@@ -9,7 +9,8 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.List;
 
-import static javax.persistence.FetchType.EAGER;
+import static javax.persistence.CascadeType.ALL;
+import static javax.persistence.FetchType.LAZY;
 import static lombok.AccessLevel.NONE;
 
 @AggregateRoot
@@ -34,14 +35,12 @@ public class ItemPrice implements BaseEntity {
     @Column(name = "item_id")
     private String itemId;
 
-    @OneToMany(fetch = EAGER)
-//    @JoinTable(
-//            name = "price_factors",
-//            joinColumns = @JoinColumn(name = "price_id", referencedColumnName = "id"))
+    @OneToMany(fetch = LAZY, cascade = ALL)
     private List<PriceFactor> priceFactors;
 
     public ItemPrice applyPercentageFactor(int percentage) {
         this.price = MoneyDbEntity.from(getPrice().percentage(100 - percentage));
+        this.priceFactors.add(PriceFactorFactory.percentageFactor(percentage, this));
         return this;
     }
 
