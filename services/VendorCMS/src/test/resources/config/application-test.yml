@@ -1,1 +1,11 @@
-server.port: 9090
+server.port: 9092
+
+spring:
+  kafka:
+    bootstrap-servers: localhost:19092
+    consumer:
+      auto-offset-reset: earliest
+      group-id: bottega
+
+test:
+  topic: vendor.createConcert

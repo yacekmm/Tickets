@@ -1,6 +1,6 @@
 package com.bottega.pricing.fixtures;
 
-import com.bottega.pricing.price.infra.repo.EventPublisher;
+import com.bottega.sharedlib.event.EventPublisher;
 import io.vavr.control.Try;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
