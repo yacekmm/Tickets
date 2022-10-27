@@ -1,10 +1,10 @@
 package com.bottega.pricing.price.domain;
 
+import com.bottega.pricing.fixtures.LogicTestBase;
 import com.bottega.pricing.price.fixtures.PriceAssert;
-import com.bottega.pricing.price.fixtures.PriceLogicTestBase;
 import org.junit.jupiter.api.Test;
 
-class ItemPrice_UnitTest extends PriceLogicTestBase {
+class ItemPrice_UnitTest extends LogicTestBase {
 
     @Test
     void applyPercentageFactor_discountsPrice_onValidRequest() {

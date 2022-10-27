@@ -1,9 +1,9 @@
 package com.bottega.pricing.price.api.app;
 
+import com.bottega.pricing.fixtures.LogicTestBase;
 import com.bottega.pricing.price.domain.ItemPrice;
 import com.bottega.pricing.price.fixtures.PriceAssert;
 import com.bottega.pricing.price.fixtures.PriceFactorAssert;
-import com.bottega.pricing.price.fixtures.PriceLogicTestBase;
 import com.bottega.sharedlib.fixtures.ErrorAssert;
 import com.bottega.sharedlib.fixtures.EventAssert;
 import com.bottega.sharedlib.vo.error.ErrorResult;
@@ -17,7 +17,7 @@ import static com.bottega.sharedlib.fixtures.RepoEntries.SINGULAR;
 import static com.bottega.sharedlib.vo.error.ErrorType.NOT_FOUND;
 import static org.assertj.vavr.api.VavrAssertions.assertThat;
 
-class ApplyPercentageFactor_CompTest extends PriceLogicTestBase {
+class ApplyPercentageFactor_CompTest extends LogicTestBase {
 
     @Test
     void applyPercentageFactor_returnsSingleDiscountedPrice_onValidRequest() {

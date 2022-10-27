@@ -8,7 +8,7 @@ import org.springframework.cloud.contract.stubrunner.spring.AutoConfigureStubRun
 import org.springframework.kafka.test.context.EmbeddedKafka;
 import org.springframework.test.context.ActiveProfiles;
 
-import static com.bottega.vendor.config.CdcStubs.CDC_STUB_ID_PRICING;
+import static com.bottega.sharedlib.config.CdcStubs.CDC_STUB_ID_PRICING;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.DEFINED_PORT;
 import static org.springframework.cloud.contract.stubrunner.spring.StubRunnerProperties.StubsMode.LOCAL;
 

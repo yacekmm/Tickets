@@ -6,6 +6,7 @@ import com.bottega.pricing.price.domain.PricingEventFactory;
 import com.bottega.pricing.price.infra.repo.ItemPriceRepo;
 import com.bottega.sharedlib.ddd.ApplicationService;
 import com.bottega.sharedlib.event.EventPublisher;
+import com.bottega.sharedlib.vo.Money;
 import com.bottega.sharedlib.vo.error.ErrorResult;
 import io.vavr.control.Either;
 import lombok.AllArgsConstructor;
@@ -36,5 +37,11 @@ public class PriceService {
         return of(updatedPrices)
                 .filter(itemPrices -> !itemPrices.isEmpty())
                 .toEither(notFound(item_not_found, "No price entries found for requested item. itemId: " + itemId));
+    }
+
+    public ItemPrice addPrice(String itemId, Money price) {
+    //TODO test
+        throw new RuntimeException("not implemented yet");
+//        return ItemPrice.create(itemId, price);
     }
 }

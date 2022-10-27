@@ -7,8 +7,10 @@ import com.bottega.sharedlib.vo.Money;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
+import static com.bottega.sharedlib.repo.MoneyDbEntity.from;
 import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.FetchType.LAZY;
 import static lombok.AccessLevel.NONE;
@@ -38,8 +40,12 @@ public class ItemPrice implements BaseEntity {
     @OneToMany(fetch = LAZY, cascade = ALL)
     private List<PriceFactor> priceFactors;
 
+    public static ItemPrice create(String itemId, Money price) {
+        return new ItemPrice(new PriceId(), from(price), itemId, new ArrayList<>());
+    }
+
     public ItemPrice applyFactor(PriceFactor factor) {
-        this.price = MoneyDbEntity.from(factor.applyToPrice(price.toMoney()));
+        this.price = from(factor.applyToPrice(price.toMoney()));
         this.priceFactors.add(factor);
         return this;
     }
