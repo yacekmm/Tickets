@@ -21,29 +21,16 @@ public class ApplyPercentageFactor_RestApiTest extends FrameworkTestBase {
         //when
         ValidatableResponse response = factorFixtures.factorClient.applyPercentageFactor("item-id", 10);
 
-        //TODO: assert that returned price with value and factors
         //then
-//        PriceAssert
-//                .assertThatPrice(concertFixtures.concertRepo.findAll().iterator().next())
-////        //TODO: concert Properties in DB: Dependency test
-//                .isPersistedIn(concertFixtures.concertRepo, RepoEntries.SINGULAR)
-//                .hasIdAsUUID()
-//                .hasTitle("concert-title")
-//                .hasDateTime(TEST_TIME_PLUS_30_DAYS)
-//                .hasVendorId("some-id")
-//                .extractId();
-//
-//
-//        //TODO: API response is valid: API test
         response
                 .statusCode(SC_OK)
-                .body("prices", hasSize(1))
-                .body("prices[0].priceId", equalTo(itemPrice.getId().asString()))
-                .body("prices[0].itemId", equalTo(itemPrice.getItemId()))
-                .body("prices[0].price", equalTo(90_00))
-                .body("prices[0].factors", hasSize(1))
-                .body("prices[0].factors[0].type", equalTo("PERCENTAGE"))
-                .body("prices[0].factors[0].value", equalTo(10));
+                .body("$", hasSize(1))
+                .body("[0].priceId", equalTo(itemPrice.getId().asString()))
+                .body("[0].itemId", equalTo(itemPrice.getItemId()))
+                .body("[0].price", equalTo(90_00))
+                .body("[0].factors", hasSize(1))
+                .body("[0].factors[0].type", equalTo("PERCENTAGE"))
+                .body("[0].factors[0].value", equalTo(10));
     }
 
 }
