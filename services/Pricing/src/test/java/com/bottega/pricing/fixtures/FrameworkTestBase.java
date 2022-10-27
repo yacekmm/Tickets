@@ -12,20 +12,20 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 
 @SpringBootTest(webEnvironment = DEFINED_PORT)
 @ActiveProfiles({"test"})
-@EmbeddedKafka(partitions = 1, topics = { "pricing.priceChange" }, brokerProperties = { "listeners=PLAINTEXT://localhost:9092", "port=9092" })
+@EmbeddedKafka(partitions = 1, topics = { "pricing.priceChange" }, brokerProperties = { "listeners=PLAINTEXT://localhost:19091", "port=19091" })
 @AutoConfigureMessageVerifier
 public class FrameworkTestBase {
 
     @Autowired
-    protected FrameworkPriceFixtures factorFixtures;
-
-    @Autowired
     protected FrameworkPriceFixtures priceFixtures;
+    @Autowired
+    protected SharedFixtures sharedFixtures;
 
 
     @AfterEach
     void tearDown() {
-        factorFixtures.tearDown();
+        priceFixtures.tearDown();
+        sharedFixtures.tearDown();
     }
 
 }

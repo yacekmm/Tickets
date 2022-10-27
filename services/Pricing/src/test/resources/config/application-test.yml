@@ -2,6 +2,7 @@ server.port: 9091
 
 spring:
   kafka:
+    bootstrap-servers: localhost:19091
     consumer:
       auto-offset-reset: earliest
       group-id: bottega

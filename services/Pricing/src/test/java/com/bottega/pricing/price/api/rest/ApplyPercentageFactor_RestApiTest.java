@@ -19,7 +19,7 @@ public class ApplyPercentageFactor_RestApiTest extends FrameworkTestBase {
         ItemPrice itemPrice = priceFixtures.priceBuilder.priceForItem(100_00, "item-id").inDb();
 
         //when
-        ValidatableResponse response = factorFixtures.factorClient.applyPercentageFactor("item-id", 10);
+        ValidatableResponse response = priceFixtures.factorClient.applyPercentageFactor("item-id", 10);
 
         //then
         response
