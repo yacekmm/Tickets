@@ -3,6 +3,7 @@ package com.bottega.pricing.price.domain;
 
 import com.bottega.sharedlib.ddd.DomainEntity;
 import com.bottega.sharedlib.repo.BaseEntity;
+import com.bottega.sharedlib.vo.Money;
 import com.vladmihalcea.hibernate.type.json.JsonStringType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,8 +29,11 @@ public class PriceFactor implements BaseEntity {
     @ManyToOne
     private ItemPrice price;
 
-    @Column(name = "XXX")
+    @Column(name = "policy")
     @Type(type = "jsonb")
-    private FactorXXX factorXXX;
+    FactorPolicy factorPolicy;
 
+    public Money applyToPrice(Money price) {
+        return factorPolicy.applyToPrice(price);
+    }
 }

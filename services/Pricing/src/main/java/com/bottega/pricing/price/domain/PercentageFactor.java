@@ -1,5 +1,6 @@
 package com.bottega.pricing.price.domain;
 
+import com.bottega.sharedlib.vo.Money;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,7 +11,7 @@ import static lombok.AccessLevel.PRIVATE;
 @Getter
 @AllArgsConstructor(access = PRIVATE)
 @NoArgsConstructor
-public class PercentageFactor implements FactorXXX {
+public class PercentageFactor implements FactorPolicy {
 
     private FactorType type;
     private int value;
@@ -18,4 +19,10 @@ public class PercentageFactor implements FactorXXX {
     public static PercentageFactor init(int percentage) {
         return new PercentageFactor(PERCENTAGE, percentage);
     }
+
+    @Override
+    public Money applyToPrice(Money price) {
+        return price.percentage(100 - value);
+    }
+
 }

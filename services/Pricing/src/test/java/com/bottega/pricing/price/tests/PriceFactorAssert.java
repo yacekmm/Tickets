@@ -14,8 +14,8 @@ public class PriceFactorAssert {
 
     public PriceFactorAssert isPercentageFactor(int value, ItemPrice price) {
         assertThat(factor.getPrice()).isEqualTo(price);
-        assertThat(factor.getFactorXXX().getType()).isEqualTo(PERCENTAGE);
-        assertThat(factor.getFactorXXX().getValue()).isEqualTo(value);
+        assertThat(factor.getFactorPolicy().getType()).isEqualTo(PERCENTAGE);
+        assertThat(factor.getFactorPolicy().getValue()).isEqualTo(value);
         return this;
     }
 }

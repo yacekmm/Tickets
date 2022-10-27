@@ -34,8 +34,8 @@ public class PriceWithFactorsDto {
 
         public static PriceFactorDto from(PriceFactor factor) {
             return new PriceFactorDto(
-                    factor.getFactorXXX().getType().name(),
-                    factor.getFactorXXX().getValue()
+                    factor.getFactorPolicy().getType().name(),
+                    factor.getFactorPolicy().getValue()
             );
         }
     }
