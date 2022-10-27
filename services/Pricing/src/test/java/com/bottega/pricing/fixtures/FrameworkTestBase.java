@@ -12,7 +12,7 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 
 @SpringBootTest(webEnvironment = DEFINED_PORT)
 @ActiveProfiles({"test"})
-@EmbeddedKafka(partitions = 1, topics = { "pricing.priceChange" }, brokerProperties = { "listeners=PLAINTEXT://localhost:19091", "port=19091" })
+@EmbeddedKafka(partitions = 1, topics = { "pricing.price" }, brokerProperties = { "listeners=PLAINTEXT://localhost:19091", "port=19091" })
 @AutoConfigureMessageVerifier
 public class FrameworkTestBase {
 

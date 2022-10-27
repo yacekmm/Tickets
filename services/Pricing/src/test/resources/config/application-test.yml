@@ -8,4 +8,4 @@ spring:
       group-id: bottega
 
 test:
-  topic: pricing.priceChange
+  topic: pricing.price

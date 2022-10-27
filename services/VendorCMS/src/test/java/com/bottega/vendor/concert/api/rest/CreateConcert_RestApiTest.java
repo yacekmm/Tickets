@@ -5,7 +5,6 @@ import com.bottega.vendor.concert.domain.ConcertId;
 import com.bottega.vendor.concert.fixtures.asserts.ConcertAssert;
 import com.bottega.vendor.fixtures.FrameworkTestBase;
 import io.restassured.response.ValidatableResponse;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static com.bottega.sharedlib.config.TestClockConfig.TEST_TIME_PLUS_30_DAYS;
@@ -37,8 +36,6 @@ public class CreateConcert_RestApiTest extends FrameworkTestBase {
         response
                 .statusCode(SC_OK)
                 .body("id", equalTo(concertId.asString()));
-
-        Assertions.fail("Create CDC for publishing create concert event");
     }
 
 

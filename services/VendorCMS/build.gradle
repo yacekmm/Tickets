@@ -38,7 +38,7 @@ repositories {
     mavenLocal()
 }
 
-//apply from: file('gradle/spring-cloud-contract.gradle')
+apply from: file('gradle/spring-cloud-contract.gradle')
 
 
 dependencies {

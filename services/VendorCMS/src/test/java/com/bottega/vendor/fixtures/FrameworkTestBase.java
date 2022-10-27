@@ -17,7 +17,7 @@ import static org.springframework.cloud.contract.stubrunner.spring.StubRunnerPro
 @AutoConfigureStubRunner(
         ids = CDC_STUB_ID_PRICING,
         stubsMode = LOCAL)
-@EmbeddedKafka(partitions = 1, topics = { "vendor.createConcert" }, brokerProperties = { "listeners=PLAINTEXT://localhost:19092", "port=19092" })
+@EmbeddedKafka(partitions = 1, topics = { "vendor.concert" }, brokerProperties = { "listeners=PLAINTEXT://localhost:19092", "port=19092" })
 public class FrameworkTestBase {
 
     @Autowired

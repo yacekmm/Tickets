@@ -6,8 +6,8 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public enum EventType {
-    PRICE_CHANGE("pricing.priceChange"),
-    CONCERT_CREATED("vendor.concertCreated");
+    PRICE_CHANGE("pricing.price"),
+    CONCERT_CREATED("vendor.concert");
 
     private String kafkaTopic;
 

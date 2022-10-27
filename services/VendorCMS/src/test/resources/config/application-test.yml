@@ -8,4 +8,4 @@ spring:
       group-id: bottega
 
 test:
-  topic: vendor.createConcert
+  topic: vendor.concert

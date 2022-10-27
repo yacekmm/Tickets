@@ -8,7 +8,7 @@ Contract.make {
 		triggeredBy('applyPercentageDiscount(10)')
 	}
 	outputMessage {
-		sentTo("pricing.priceChange")
+		sentTo("pricing.price")
 		body([
 		        id: regex(uuid()),
 				version: 'v1',
