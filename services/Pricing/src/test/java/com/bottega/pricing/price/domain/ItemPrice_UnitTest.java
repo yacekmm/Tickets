@@ -1,7 +1,7 @@
 package com.bottega.pricing.price.domain;
 
-import com.bottega.pricing.tests.PriceAssert;
-import com.bottega.pricing.tests.PriceLogicTestBase;
+import com.bottega.pricing.price.fixtures.PriceAssert;
+import com.bottega.pricing.price.fixtures.PriceLogicTestBase;
 import org.junit.jupiter.api.Test;
 
 class ItemPrice_UnitTest extends PriceLogicTestBase {

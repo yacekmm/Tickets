@@ -13,7 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static com.bottega.sharedlib.vo.error.ErrorResult.serviceUnavailable;
-import static com.bottega.vendor.concert.application.api.dto.ConcertErrorCode.http_error;
+import static com.bottega.vendor.concert.api.app.dto.ConcertErrorCode.http_error;
 import static io.vavr.control.Option.ofOptional;
 
 @ApiClient

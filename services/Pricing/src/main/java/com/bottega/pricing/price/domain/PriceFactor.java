@@ -33,6 +33,7 @@ public class PriceFactor implements BaseEntity {
     @Type(type = "jsonb")
     FactorPolicy factorPolicy;
 
+    //TODO/JM: unit test
     public Money applyToPrice(Money price) {
         return factorPolicy.applyToPrice(price);
     }

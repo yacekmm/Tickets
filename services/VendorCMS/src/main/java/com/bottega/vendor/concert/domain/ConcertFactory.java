@@ -2,7 +2,7 @@ package com.bottega.vendor.concert.domain;
 
 import com.bottega.sharedlib.ddd.DomainFactory;
 import com.bottega.sharedlib.vo.error.ErrorResult;
-import com.bottega.vendor.contract.VendorId;
+import com.bottega.vendor.agreements.VendorId;
 import io.vavr.control.Either;
 
 @DomainFactory

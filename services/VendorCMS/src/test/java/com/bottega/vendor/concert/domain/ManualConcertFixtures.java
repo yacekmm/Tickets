@@ -1,10 +1,10 @@
 package com.bottega.vendor.concert.domain;
 
-import com.bottega.vendor.concert.application.api.ConcertService;
+import com.bottega.vendor.concert.api.app.ConcertService;
+import com.bottega.vendor.concert.fixtures.InMemoryConcertRepo;
+import com.bottega.vendor.concert.fixtures.fixtures.ConcertBuilder;
 import com.bottega.vendor.concert.infra.repo.ConcertRepo;
-import com.bottega.vendor.concert.infra.repo.InMemoryConcertRepo;
-import com.bottega.vendor.concert.tests.fixtures.ConcertBuilder;
-import com.bottega.vendor.infra.client.pricing.FakeConcertClient;
+import com.bottega.vendor.fixtures.FakeConcertClient;
 
 public class ManualConcertFixtures {
 
