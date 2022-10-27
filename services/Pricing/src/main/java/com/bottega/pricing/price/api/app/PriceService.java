@@ -1,12 +1,12 @@
 package com.bottega.pricing.price.api.app;
 
+import com.bottega.pricing.price.domain.EventFactory;
 import com.bottega.pricing.price.domain.ItemPrice;
 import com.bottega.pricing.price.domain.PriceFactorFactory;
 import com.bottega.pricing.price.infra.repo.EventPublisher;
 import com.bottega.pricing.price.infra.repo.ItemPriceRepo;
 import com.bottega.sharedlib.ddd.ApplicationService;
 import com.bottega.sharedlib.vo.error.ErrorResult;
-import com.bottega.sharedlib.vo.event.EventFactory;
 import io.vavr.control.Either;
 import lombok.AllArgsConstructor;
 
@@ -29,7 +29,7 @@ public class PriceService {
         List<ItemPrice> updatedPrices = priceRepo.findByItemId(itemId).stream()
                 .map(itemPrice -> itemPrice.applyFactor(PriceFactorFactory.percentageFactor(percentage, itemPrice)))
                 //TODO: outbox?
-                .peek(itemPrice -> eventPublisher.publish(EventFactory.priceChange(itemPrice.getPrice())))
+                .peek(itemPrice -> eventPublisher.publish(EventFactory.priceChange(itemPrice)))
                 .toList();
         priceRepo.saveAll(updatedPrices);
 

@@ -17,7 +17,6 @@
     </patterns>
     <method v="2">
       <option name="Make" enabled="true" />
-      <option name="RunConfigurationTask" enabled="true" run_configuration_name="Pricing contractTest" run_configuration_type="JUnit" />
     </method>
   </configuration>
 </component>

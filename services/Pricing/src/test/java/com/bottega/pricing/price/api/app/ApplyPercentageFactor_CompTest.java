@@ -66,6 +66,6 @@ class ApplyPercentageFactor_CompTest extends PriceLogicTestBase {
         //then
         assertThat(result).isRight();
         EventAssert.assertThatEventV1(sharedFixtures.eventPublisher.singleEvent())
-                .isPriceChangeWithValue(90_00);
+                .isPriceChangeWithValue(90_00, price.getId().asString(), price.getItemId());
     }
 }

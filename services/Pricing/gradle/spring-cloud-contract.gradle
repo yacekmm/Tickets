@@ -3,7 +3,7 @@
 
 contracts {
     basePackageForTests = 'com.bottega.pricing'
-    packageWithBaseClasses = 'com.bottega.pricing.tests'
+    packageWithBaseClasses = 'com.bottega.pricing.fixtures'
     testMode = 'Explicit'
 //    failOnInProgress = false
     testFramework = 'JUNIT5'

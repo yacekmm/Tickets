@@ -1,9 +1,9 @@
 package com.bottega.pricing.price.infra.repo;
 
+import com.bottega.sharedlib.vo.error.ErrorResult;
 import com.bottega.sharedlib.vo.event.Event;
-import org.springframework.stereotype.Component;
+import io.vavr.control.Either;
 
-@Component
 public interface EventPublisher {
-    void publish(Event event);
+    Either<ErrorResult, String> publish(Event event);
 }

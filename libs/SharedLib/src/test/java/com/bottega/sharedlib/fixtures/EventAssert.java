@@ -20,11 +20,13 @@ public class EventAssert {
         return new EventAssert(event);
     }
 
-    public void isPriceChangeWithValue(int expectedPrice) {
+    public void isPriceChangeWithValue(int expectedPrice, String expectedPriceId, String expectedItemId) {
         assertThat(event.getType()).isEqualTo(PRICE_CHANGE);
         assertThat(event.getPayload())
                 .asInstanceOf(InstanceOfAssertFactories.type(PriceChangeEventPayload.class))
-                .matches(payload -> payload.price() == expectedPrice);
+                .matches(payload -> payload.price() == expectedPrice)
+                .matches(payload -> payload.priceId().equals(expectedPriceId))
+                .matches(payload -> payload.itemId().equals(expectedItemId));
 
     }
 }

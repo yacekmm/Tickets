@@ -1,1 +1,12 @@
 server.port: 9091
+
+spring:
+  kafka:
+    consumer:
+      auto-offset-reset: earliest
+      group-id: bottega
+      # key deser is only required because we are using string keys instead of spring-kafka default int keys
+#      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
+test:
+  topic: pricing.priceChange
