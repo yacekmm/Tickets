@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 import static com.bottega.sharedlib.config.ApiVersions.V1;
 
@@ -20,11 +21,11 @@ public class FactorRestController {
     @PostMapping(path = V1 + "/item/{itemId}/price-factor/percentage")
     @ResponseBody
     @Transactional
-    public PricesWithFactorsDto applyPercentageFactor(
+    public List<PriceWithFactorsDto> applyPercentageFactor(
             @PathVariable("itemId") String itemId) {
 
         return priceService.applyPercentageFactor(itemId, 10)
-                .map(PricesWithFactorsDto::from)
+                .map(itemPrices -> itemPrices.stream().map(PriceWithFactorsDto::from).toList())
                 .getOrElseThrow(ErrorResult::toException);
     }
 
