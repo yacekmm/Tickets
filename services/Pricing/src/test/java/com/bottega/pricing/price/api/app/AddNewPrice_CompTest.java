@@ -29,4 +29,5 @@ class AddNewPrice_CompTest extends LogicTestBase {
         );
     }
 
+
 }

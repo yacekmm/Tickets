@@ -11,15 +11,13 @@ import static org.hamcrest.Matchers.hasSize;
 
 public class ApplyPercentageFactor_RestApiTest extends FrameworkTestBase {
 
-    //TODO/JM: implement publishing an event
-
     @Test
     public void applyFactor_applies_onValidRequest() {
         //given
         ItemPrice itemPrice = priceFixtures.priceBuilder.priceForItem(100_00, "item-id").inDb();
 
         //when
-        ValidatableResponse response = priceFixtures.factorClient.applyPercentageFactor("item-id", 10);
+        ValidatableResponse response = priceFixtures.priceApiClient.applyPercentageFactor("item-id", 10);
 
         //then
         response

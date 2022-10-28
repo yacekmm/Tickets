@@ -21,7 +21,7 @@ public class EventAssert {
         return new EventAssert(event);
     }
 
-    public void isPriceChange(int expectedPrice, String expectedPriceId, String expectedItemId) {
+    public EventAssert isPriceChange(int expectedPrice, String expectedPriceId, String expectedItemId) {
         assertThat(event.getType()).isEqualTo(PRICE_CHANGE);
         assertThat(event.getPayload())
                 .isInstanceOfSatisfying(PriceChangeEventPayload.class, payload -> {
@@ -29,10 +29,10 @@ public class EventAssert {
                     assertThat(payload.priceId()).isEqualTo(expectedPriceId);
                     assertThat(payload.itemId()).isEqualTo(expectedItemId);
                 });
-
+        return this;
     }
 
-    public void isConcertCreated(String expectedConcertId, String expectedTitle, String expectedDateTime, String[] expectedTags, int expectedMargin) {
+    public EventAssert isConcertCreated(String expectedConcertId, String expectedTitle, String expectedDateTime, String[] expectedTags, int expectedMargin) {
         assertThat(event.getType()).isEqualTo(CONCERT_CREATED);
         assertThat(event.getPayload())
                 .isInstanceOfSatisfying(ConcertCreatedEventPayload.class,
@@ -45,6 +45,6 @@ public class EventAssert {
                             assertThat(payload.tags()).containsExactlyInAnyOrder(expectedTags);
                             assertThat(payload.profitMarginPercentage()).isEqualTo(expectedMargin);
                         });
-
+        return this;
     }
 }

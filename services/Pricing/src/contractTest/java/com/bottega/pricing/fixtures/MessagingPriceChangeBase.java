@@ -4,6 +4,8 @@ import com.bottega.pricing.price.domain.ItemPrice;
 import com.bottega.sharedlib.fixtures.UUIDs;
 import org.junit.jupiter.api.BeforeEach;
 
+import java.util.HashSet;
+
 public class MessagingPriceChangeBase extends CdcFrameworkTestBase {
 
     protected ItemPrice price;
@@ -14,6 +16,10 @@ public class MessagingPriceChangeBase extends CdcFrameworkTestBase {
     }
 
     protected void applyPercentageDiscount(int percentage) {
-        priceFixtures.factorClient.applyPercentageFactor(price.getItemId(), percentage);
+        priceFixtures.priceApiClient.applyPercentageFactor(price.getItemId(), percentage);
+    }
+    
+    protected void settleInitialPrice(){
+        initPriceFixtures.initPriceService.settleInitialPrice(price.getItemId(), 5, new HashSet<>());
     }
 }

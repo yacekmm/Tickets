@@ -1,6 +1,5 @@
 package com.bottega.pricing.fixtures;
 
-import com.bottega.pricing.price.fixtures.FrameworkPriceFixtures;
 import org.junit.jupiter.api.AfterEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -23,9 +22,11 @@ import static org.springframework.cloud.contract.stubrunner.spring.StubRunnerPro
 public class FrameworkTestBase {
 
     @Autowired
-    protected FrameworkPriceFixtures priceFixtures;
-    @Autowired
     protected SharedFixtures sharedFixtures;
+    @Autowired
+    protected PriceFixtures priceFixtures;
+    @Autowired
+    protected InitPriceFixtures initPriceFixtures;
 
 
     @AfterEach
