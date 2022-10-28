@@ -44,4 +44,9 @@ public class PriceAssert {
         factorsConsumer.accept(price.getPriceFactors());
         return this;
     }
+
+    public PriceAssert hasNoFactors() {
+        assertThat(price.getPriceFactors()).isEmpty();
+        return this;
+    }
 }

@@ -39,9 +39,8 @@ public class PriceService {
                 .toEither(notFound(item_not_found, "No price entries found for requested item. itemId: " + itemId));
     }
 
-    public ItemPrice addPrice(String itemId, Money price) {
-    //TODO test
-        throw new RuntimeException("not implemented yet");
-//        return ItemPrice.create(itemId, price);
+    public Either<ErrorResult, ItemPrice> addNewPrice(String itemId, Money price) {
+        return Either.right(
+                priceRepo.save(ItemPrice.create(itemId, price)));
     }
 }

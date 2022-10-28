@@ -3,6 +3,8 @@ package com.bottega.pricing.initialPrice;
 import com.bottega.pricing.price.api.app.PriceService;
 import com.bottega.pricing.price.domain.ItemPrice;
 import com.bottega.sharedlib.vo.Money;
+import com.bottega.sharedlib.vo.error.ErrorResult;
+import io.vavr.control.Either;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -15,9 +17,9 @@ public class InitialPriceService {
     private final InitPriceCalculator calculator;
     private final PriceService priceService;
 
-    public ItemPrice settleInitialPrice(String itemId, int margin, Set<String> tags) {
+    public Either<ErrorResult, ItemPrice> settleInitialPrice(String itemId, int margin, Set<String> tags) {
         Money price = calculator.calcInitialPrice(margin, tags);
-        return priceService.addPrice(itemId, price);
+        return priceService.addNewPrice(itemId, price);
     }
 
 }
