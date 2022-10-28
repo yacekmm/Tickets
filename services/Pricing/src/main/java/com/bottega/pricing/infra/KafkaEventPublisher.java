@@ -1,4 +1,4 @@
-package com.bottega.pricing.price.infra.repo;
+package com.bottega.pricing.infra;
 
 import com.bottega.sharedlib.event.Event;
 import com.bottega.sharedlib.event.EventPublisher;

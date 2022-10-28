@@ -58,7 +58,6 @@ dependencies {
 //    implementation 'org.springframework.boot:spring-boot-starter-quartz'
 //    implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-web-services'
-//    implementation 'org.liquibase:liquibase-core'
     implementation 'org.springframework.cloud:spring-cloud-starter-sleuth'
     implementation 'org.springframework.kafka:spring-kafka'
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
@@ -89,6 +88,7 @@ dependencies {
     testImplementation 'org.testcontainers:junit-jupiter'
     testImplementation 'org.testcontainers:kafka'
     testImplementation 'org.testcontainers:postgresql'
+    testImplementation 'org.awaitility:awaitility:4.2.0'
 }
 
 dependencyManagement {

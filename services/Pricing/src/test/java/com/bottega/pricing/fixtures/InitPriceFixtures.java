@@ -21,6 +21,9 @@ public class InitPriceFixtures {
     //mocks
     public PriceService priceService;
 
+    @Autowired
+    public InitPriceChangeEventApiClient initPriceEventClient;
+
     public static InitPriceFixtures init(SharedFixtures sharedFixtures) {
         InitPriceFixtures initPriceFixtures = new InitPriceFixtures();
 
