@@ -15,7 +15,7 @@ export const declaredMenuItems = [
       {
         'name': 'Create',
         'icon': 'add',
-        'link': '/concert/add',
+        'link': '/concert/create',
         'isOpened': true,
       }
     ]

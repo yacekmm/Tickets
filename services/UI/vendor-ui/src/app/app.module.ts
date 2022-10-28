@@ -9,17 +9,15 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MainSidemenuItemComponent} from './main-sidemenu-item/main-sidemenu-item.component';
 import {MatIconModule} from '@angular/material/icon';
 import {MatListModule} from '@angular/material/list';
-import {ConcertsComponent} from './concerts/concerts.component';
-import {AddComponent} from './concerts/add/add.component';
-import {ListComponent} from './concerts/list/list.component';
+import {CreateConcertComponent} from './concerts/create-concert/create-concert.component';
+import {ListConcertComponent} from './concerts/list-concert/list-concert.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainSidemenuItemComponent,
-    ConcertsComponent,
-    AddComponent,
-    ListComponent,
+    CreateConcertComponent,
+    ListConcertComponent,
   ],
   imports: [
     BrowserModule,
