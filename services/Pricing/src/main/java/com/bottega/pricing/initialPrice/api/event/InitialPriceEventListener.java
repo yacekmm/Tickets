@@ -3,8 +3,8 @@ package com.bottega.pricing.initialPrice.api.event;
 import com.bottega.pricing.initialPrice.InitialPriceService;
 import com.bottega.sharedlib.event.Event;
 import com.bottega.sharedlib.event.payload.ConcertCreatedEventPayload;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.vavr.control.Try;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
@@ -29,13 +29,16 @@ public class InitialPriceEventListener {
     @KafkaListener(id = "concert-listener", topics = "vendor.concert")
     public void listen(Message<String> message) {
 
-        try {
-            Event event = objectMapper.readValue(message.getPayload(), Event.class);
-            if (event.getPayload() instanceof ConcertCreatedEventPayload payload) {
-                initialPriceService.settleInitialPrice(payload.concertId(), payload.profitMarginPercentage(), Arrays.stream(payload.tags()).collect(toSet()));
-            }
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
+        Try.of(() -> objectMapper.readValue(message.getPayload(), Event.class))
+                .onFailure(throwable -> log.info("Error Parsing kafka message: {}", message))
+                .peek(this::broker);
+    }
+
+    public void broker(Event event) {
+        if (event.getPayload() instanceof ConcertCreatedEventPayload payload) {
+            initialPriceService.settleInitialPrice(payload.concertId(), payload.profitMarginPercentage(), Arrays.stream(payload.tags()).collect(toSet()));
+        } else {
+            log.info("Ignoring event: unsupported payload type: {}", event.getPayload());
         }
     }
 }
