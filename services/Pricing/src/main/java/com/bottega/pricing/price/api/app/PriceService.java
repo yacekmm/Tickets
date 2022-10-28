@@ -14,6 +14,7 @@ import lombok.AllArgsConstructor;
 import java.util.List;
 
 import static com.bottega.pricing.price.api.app.FactorErrorCode.item_not_found;
+import static com.bottega.pricing.price.domain.PricingEventFactory.priceChange;
 import static com.bottega.sharedlib.vo.error.ErrorResult.notFound;
 import static io.vavr.control.Option.of;
 
@@ -40,7 +41,8 @@ public class PriceService {
     }
 
     public Either<ErrorResult, ItemPrice> addNewPrice(String itemId, Money price) {
-        return Either.right(
-                priceRepo.save(ItemPrice.create(itemId, price)));
+        ItemPrice itemPrice = priceRepo.save(ItemPrice.create(itemId, price));
+        eventPublisher.publish(priceChange(itemPrice));
+        return Either.right(itemPrice);
     }
 }

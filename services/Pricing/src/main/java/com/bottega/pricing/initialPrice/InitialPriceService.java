@@ -11,8 +11,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.Set;
 
-import static com.bottega.pricing.price.domain.PricingEventFactory.priceChange;
-
 @Component
 @AllArgsConstructor
 public class InitialPriceService {
@@ -23,8 +21,7 @@ public class InitialPriceService {
 
     public Either<ErrorResult, ItemPrice> settleInitialPrice(String itemId, int margin, Set<String> tags) {
         Money price = calculator.calcInitialPrice(margin, tags);
-        return priceService.addNewPrice(itemId, price)
-                .peek(itemPrice -> eventPublisher.publish(priceChange(itemPrice)));
+        return priceService.addNewPrice(itemId, price);
     }
 
 }
