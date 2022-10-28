@@ -20,6 +20,7 @@ public class ConcertDate {
     private Instant dateTime;
 
     public static ConcertDate from(String date) {
+        //TODO/JM: handle dateString exception
         return new ConcertDate(Instant.parse(date));
     }
 }
