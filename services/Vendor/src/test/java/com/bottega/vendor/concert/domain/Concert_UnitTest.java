@@ -7,7 +7,7 @@ class Concert_UnitTest extends LogicTestBase {
 
     @BeforeEach
     protected void setUp() {
-        ManualConcertFixtures concertFixtures = ManualConcertFixtures.init(sharedFixtures);
+        ConcertFixtures concertFixtures = ConcertFixtures.init(sharedFixtures);
     }
 
 

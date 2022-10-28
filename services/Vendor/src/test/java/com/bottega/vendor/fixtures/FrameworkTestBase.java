@@ -1,6 +1,6 @@
 package com.bottega.vendor.fixtures;
 
-import com.bottega.vendor.concert.fixtures.fixtures.FrameworkConcertFixtures;
+import com.bottega.vendor.concert.domain.ConcertFixtures;
 import org.junit.jupiter.api.AfterEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,7 +21,7 @@ import static org.springframework.cloud.contract.stubrunner.spring.StubRunnerPro
 public class FrameworkTestBase {
 
     @Autowired
-    protected FrameworkConcertFixtures concertFixtures;
+    protected ConcertFixtures concertFixtures;
 
     @AfterEach
     void tearDown() {
