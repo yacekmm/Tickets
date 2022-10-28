@@ -1,14 +1,20 @@
 package com.bottega.pricing.initialPrice.api.event;
 
 import com.bottega.pricing.initialPrice.InitialPriceService;
+import com.bottega.sharedlib.event.Event;
+import com.bottega.sharedlib.event.payload.ConcertCreatedEventPayload;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.kafka.clients.admin.NewTopic;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.annotation.KafkaListener;
-import org.springframework.kafka.config.TopicBuilder;
+import org.springframework.messaging.Message;
 import org.springframework.stereotype.Component;
+
+import java.util.Arrays;
+
+import static java.util.stream.Collectors.toSet;
 
 @Component
 @AllArgsConstructor
@@ -17,25 +23,19 @@ import org.springframework.stereotype.Component;
 public class InitialPriceEventListener {
 
     private final InitialPriceService initialPriceService;
+    private final ObjectMapper objectMapper;
 
-    @Bean
-    public NewTopic topic() {
-        return TopicBuilder.name("vendor.concert")
-                .partitions(10)
-                .replicas(1)
-                .build();
-    }
 
-    //TODO: rename group to tickets
-    @KafkaListener(id="my-id", topics = "vendor.concert")
-    public void listen(String message) {
-//        Event event = message.getPayload();
-        log.info("ddddddd Received: " + message);
-//        initialPriceService.
-//        if (event.getFoo().startsWith("fail")) {
-//            throw new RuntimeException("failed");
-//        }
-//        this.storedFoo = event;
-//        this.storedFooMessage = message;
+    @KafkaListener(id = "concert-listener", topics = "vendor.concert")
+    public void listen(Message<String> message) {
+
+        try {
+            Event event = objectMapper.readValue(message.getPayload(), Event.class);
+            if (event.getPayload() instanceof ConcertCreatedEventPayload payload) {
+                initialPriceService.settleInitialPrice(payload.concertId(), payload.profitMarginPercentage(), Arrays.stream(payload.tags()).collect(toSet()));
+            }
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

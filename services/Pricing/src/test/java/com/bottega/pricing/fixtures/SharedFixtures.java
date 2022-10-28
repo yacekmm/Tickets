@@ -2,22 +2,25 @@ package com.bottega.pricing.fixtures;
 
 import com.bottega.sharedlib.event.EventPublisher;
 import io.vavr.control.Try;
-import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.test.EmbeddedKafkaBroker;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.support.TransactionTemplate;
 
 @Component
-@RequiredArgsConstructor
 public class SharedFixtures {
 
     //infra
     public EventPublisher eventPublisher;
 
-    private final EmbeddedKafkaBroker kafkaBroker;
+    @Autowired
+    private EmbeddedKafkaBroker kafkaBroker;
+    @Autowired
+    private TransactionTemplate transactionTemplate;
 
     public static SharedFixtures init() {
-        SharedFixtures fixtures = new SharedFixtures(null);
+        SharedFixtures fixtures = new SharedFixtures();
 
         initInfra(fixtures);
 
@@ -36,5 +39,12 @@ public class SharedFixtures {
     public void tearDown() {
         kafkaBroker.doWithAdmin(adminClient -> Try.of(() ->
                         adminClient.deleteTopics(kafkaBroker.getTopics()).all().get()));
+    }
+
+    public void inTransaction(Runnable runnable) {
+        transactionTemplate.execute((status) -> {
+            runnable.run();
+            return null;
+        });
     }
 }

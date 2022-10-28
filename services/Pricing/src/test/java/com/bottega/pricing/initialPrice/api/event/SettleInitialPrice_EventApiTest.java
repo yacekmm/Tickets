@@ -11,20 +11,20 @@ import static org.testcontainers.shaded.org.awaitility.Awaitility.await;
 class SettleInitialPrice_EventApiTest extends FrameworkTestBase {
 
     @Test
-    public void settleInitialPrice_createsNewPrice(){
-        //given
-
+    public void settleInitialPrice_createsNewPrice() {
 
         //when
         ConcertCreatedEventPayload payload = initPriceFixtures.initPriceEventClient.publishConcertCreatedEvent();
 
         //then
         await().until(() -> !priceFixtures.priceRepo.findByItemId(payload.concertId()).isEmpty());
-        PriceAssert.assertThatPrice(priceFixtures.priceRepo.findByItemId(payload.concertId()).get(0))
-                .isPersistedIn(priceFixtures.priceRepo, SINGULAR)
-                .hasItemId(payload.concertId())
-                .hasPrice(105_00)
-                .hasNoFactors();
+        sharedFixtures.inTransaction(() ->
+                PriceAssert.assertThatPrice(priceFixtures.priceRepo.findByItemId(payload.concertId()).get(0))
+                        .isPersistedIn(priceFixtures.priceRepo, SINGULAR)
+                        .hasItemId(payload.concertId())
+                        .hasPrice(105_00)
+                        .hasNoFactors()
+        );
     }
 
 }

@@ -15,6 +15,5 @@ spring:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
 
-
-#test:
-#  topic: vendor.concert
+test:
+  topic: pricing.price

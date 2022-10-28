@@ -1,8 +1,6 @@
 package com.bottega.sharedlib.event;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.UUID;
 
@@ -11,12 +9,14 @@ import static com.bottega.sharedlib.event.EventVersion.v1;
 @Builder
 @Getter
 @ToString
+@AllArgsConstructor
+@NoArgsConstructor
 public class Event {
 
     @Builder.Default
-    private final UUID id = UUID.randomUUID();
+    private UUID id = UUID.randomUUID();
     @Builder.Default
-    private final EventVersion version = v1;
-    private final EventType type;
-    private final EventPayload payload;
+    private EventVersion version = v1;
+    private EventType type;
+    private EventPayload payload;
 }
