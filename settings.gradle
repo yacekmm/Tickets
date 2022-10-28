@@ -4,3 +4,6 @@ include ':libs:SharedLib', ':services:Vendor', ':services:Pricing'
 project(":libs:SharedLib").name = "SharedLib"
 project(":services:Vendor").name = "Vendor"
 project(":services:Pricing").name = "Pricing"
+include 'SystemTests:TicketsTests'
+findProject(':SystemTests:TicketsTests')?.name = 'TicketsTests'
+
