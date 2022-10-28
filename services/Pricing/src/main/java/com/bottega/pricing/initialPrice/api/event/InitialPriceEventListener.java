@@ -30,7 +30,7 @@ public class InitialPriceEventListener {
     public void listen(Message<String> message) {
 
         Try.of(() -> objectMapper.readValue(message.getPayload(), Event.class))
-                .onFailure(throwable -> log.info("Error Parsing kafka message: {}", message))
+                .onFailure(throwable -> log.info("Error Parsing kafka message: {}, ex: {}", message, throwable))
                 .peek(this::broker);
     }
 

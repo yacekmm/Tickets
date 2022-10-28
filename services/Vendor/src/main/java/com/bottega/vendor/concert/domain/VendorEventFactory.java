@@ -6,7 +6,7 @@ import com.bottega.sharedlib.event.payload.ConcertCreatedEventPayload;
 import static com.bottega.sharedlib.event.EventType.CONCERT_CREATED;
 
 public class VendorEventFactory {
-    public static Event concertCreated(Concert concert) {
+    public static Event concertCreated(Concert concert, int profitMarginPercentage) {
         return Event.builder()
                 .type(CONCERT_CREATED)
                 .payload(new ConcertCreatedEventPayload(
@@ -14,7 +14,7 @@ public class VendorEventFactory {
                         concert.getTitle().getValue(),
                         concert.getDate().getDateTime().toString(),
                         new String[]{},
-                        0))
+                        profitMarginPercentage))
                 .build();
     }
 }

@@ -1,0 +1,34 @@
+package com.bottega.pricing.initialPrice.api.event;
+
+import com.bottega.pricing.fixtures.FrameworkTestBase;
+import com.bottega.pricing.price.fixtures.PriceAssert;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.contract.stubrunner.StubTrigger;
+
+import static com.bottega.sharedlib.fixtures.RepoEntries.SINGULAR;
+import static org.testcontainers.shaded.org.awaitility.Awaitility.await;
+
+class SettleInitialPrice_EventContractApiTest extends FrameworkTestBase {
+
+    @Autowired
+    StubTrigger trigger;
+
+    @Test
+    public void settleInitialPrice_createsPrice_OnContractTest() {
+
+        //when
+        trigger.trigger("triggerConcertCreatedEvent");
+
+        //then
+        await().until(() -> priceFixtures.priceRepo.findAll().iterator().hasNext());
+        sharedFixtures.inTransaction(() ->
+                PriceAssert.assertThatPrice(priceFixtures.priceRepo.findAll().iterator().next())
+                        .isPersistedIn(priceFixtures.priceRepo, SINGULAR)
+                        .hasPrice(105_00)
+                        .hasNoFactors()
+        );
+    }
+
+
+}

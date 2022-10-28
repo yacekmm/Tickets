@@ -45,7 +45,7 @@ class CreateConcert_CompTest extends ConcertLogicTestBase {
                                 c.getTitle().getValue(),
                                 c.getDate().getDateTime().toString(),
                                 new String[]{},
-                                0)
+                                5)
         );
     }
 
