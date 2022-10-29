@@ -1,1 +1,1 @@
-server.port: 9091
+server.port: ${services.pricing.port}

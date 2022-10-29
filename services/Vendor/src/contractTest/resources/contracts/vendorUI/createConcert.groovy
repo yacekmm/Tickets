@@ -5,7 +5,7 @@ import org.springframework.cloud.contract.spec.Contract
 Contract.make {
 
     description """
-        Request to create new concert rom vendor-ui
+        Request to create new concert from vendor-ui
         """
 
     request {
@@ -17,17 +17,13 @@ Contract.make {
         headers {
             contentType applicationJson()
             accept applicationJson()
-//            header 'Authorization': value(
-//                    consumer(anyAlphaNumeric()),
-//                    producer(execute('authToken()'))
-//            )
         }
 
-//        body(
-//                title: 'some title',
-//                dateTime: anyDateTime(),
-//                vendorId: anyNonBlankString()
-//        )
+        body(
+                title: 'some title',
+                dateTime: '2042-03-07T07:20:00Z',
+                vendorId: anyNonBlankString()
+        )
     }
 
     response {
@@ -35,10 +31,8 @@ Contract.make {
         headers {
             contentType applicationJson()
         }
-//        body(
-
-//                        concertId: regex(uuid())
-
-//        )
+        body(
+                id: regex(uuid())
+        )
     }
 }

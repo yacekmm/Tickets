@@ -1,4 +1,4 @@
-server.port: 8081
+server.port: ${services.pricing.port}
 
 spring.datasource.url: jdbc:h2:mem:pricing;MODE=PostgreSQL
 

@@ -1,5 +1,5 @@
 spring.profiles.include: serviceLocator
 
-server.port: 8080
+server.port: ${services.vendor.port}
 
 spring.datasource.url: jdbc:h2:mem:vendor;MODE=PostgreSQL

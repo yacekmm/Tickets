@@ -1,4 +1,4 @@
-server.port: 9092
+server.port: ${services.vendor.port}
 
 spring:
   kafka:
