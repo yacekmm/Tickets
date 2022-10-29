@@ -1,6 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {CreateConcertResultDto} from '../http-client/create-concert-result-dto.model';
 import {ConcertHttpClientService} from '../http-client/concert-http-client.service';
+import {SnackBarService} from '../../shared/snack-bar.service';
 
 @Component({
   selector: 'app-create-concert',
@@ -13,9 +14,10 @@ export class CreateConcertComponent implements OnInit {
   errorMessage: string = '';
   requestInProgress: boolean = false;
 
-  @Output() appCreated = new EventEmitter<CreateConcertResultDto>();
+  @Output() concertCreated = new EventEmitter<CreateConcertResultDto>();
 
-  constructor(private concertHttpClient: ConcertHttpClientService) {
+  constructor(private concertHttpClient: ConcertHttpClientService,
+              private snackBar: SnackBarService) {
   }
 
   ngOnInit() {
@@ -36,7 +38,8 @@ export class CreateConcertComponent implements OnInit {
         next: (createConcertResultDto: CreateConcertResultDto) => {
           this.initForm();
           this.requestInProgress = false;
-          this.appCreated.emit(createConcertResultDto);
+          this.concertCreated.emit(createConcertResultDto);
+          this.snackBar.open('Concert created with id: ' + createConcertResultDto.id)
         },
         error: err => {
           this.errorMessage = 'Error creating concert: ' + JSON.stringify(err.error);

@@ -20,8 +20,14 @@ Contract.make {
         }
 
         body(
-                title: 'some title',
-                dateTime: '2042-03-07T07:20:00Z',
+                title: $(
+                        producer('some title'),
+                        consumer(anyNonBlankString())
+                ),
+                dateTime: $(
+                        producer('2042-03-07T07:20:00Z'),
+                        consumer(anyNonBlankString())
+                ),
                 vendorId: anyNonBlankString()
         )
     }
@@ -32,7 +38,10 @@ Contract.make {
             contentType applicationJson()
         }
         body(
-                id: regex(uuid())
+                id: $(
+                        producer(regex(uuid())),
+                        consumer(anyUuid())
+                )
         )
     }
 }
