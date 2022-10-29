@@ -3,3 +3,14 @@ spring.profiles.include: serviceLocator
 server.port: ${services.vendor.port}
 
 spring.datasource.url: jdbc:h2:mem:vendor;MODE=PostgreSQL
+
+spring:
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      auto-offset-reset: earliest
+#      group-id: bottega
+    producer:
+      bootstrap-servers: localhost:9092
+#      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+#      value-serializer: org.apache.kafka.common.serialization.StringSerializer
