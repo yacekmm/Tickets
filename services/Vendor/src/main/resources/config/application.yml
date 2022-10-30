@@ -9,8 +9,8 @@ spring:
     bootstrap-servers: localhost:9092
     consumer:
       auto-offset-reset: earliest
-#      group-id: bottega
-    producer:
-      bootstrap-servers: localhost:9092
+      group-id: vendor
+#    producer:
+#      bootstrap-servers: 127.0.0.1:9092
 #      key-serializer: org.apache.kafka.common.serialization.StringSerializer
 #      value-serializer: org.apache.kafka.common.serialization.StringSerializer
