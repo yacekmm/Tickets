@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'idea'
 }
 
 group = 'com.bottega'
@@ -8,4 +9,9 @@ sourceCompatibility = '17'
 
 repositories {
     mavenCentral()
+}
+
+dependencies {
+    testImplementation 'com.paulhammant:ngwebdriver:1.2'
+    testImplementation 'org.seleniumhq.selenium:selenium-java:4.5.3'
 }
