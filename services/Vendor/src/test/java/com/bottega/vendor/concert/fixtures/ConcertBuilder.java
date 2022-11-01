@@ -1,4 +1,4 @@
-package com.bottega.vendor.concert.fixtures.fixtures;
+package com.bottega.vendor.concert.fixtures;
 
 import com.bottega.vendor.concert.domain.Concert;
 import com.bottega.vendor.concert.domain.ConcertDate;
@@ -8,6 +8,8 @@ import com.bottega.vendor.concert.infra.repo.ConcertRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.time.Clock;
+
 import static com.bottega.sharedlib.config.TestClockConfig.TEST_TIME_PLUS_30_DAYS;
 
 @Component
@@ -15,9 +17,10 @@ import static com.bottega.sharedlib.config.TestClockConfig.TEST_TIME_PLUS_30_DAY
 public class ConcertBuilder {
 
     private final ConcertRepo concertRepo;
+    private final Clock clock;
 
     public Concert build(){
-        return new Concert(new ConcertId(), Title.from("mock-title"), ConcertDate.from(TEST_TIME_PLUS_30_DAYS.toString()), "mock-vendor-id");
+        return new Concert(new ConcertId(), Title.from("mock-title"), ConcertDate.from(TEST_TIME_PLUS_30_DAYS.toString(), clock).get(), "mock-vendor-id");
     }
 
     public Concert inDb() {

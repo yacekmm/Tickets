@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import java.time.Instant;
 import java.util.UUID;
 
+import static java.time.ZoneOffset.UTC;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatNoException;
 
@@ -22,8 +23,8 @@ public class ConcertAssert {
         return this;
     }
 
-    public ConcertAssert hasDateTime(Instant expectedDateTime) {
-        assertThat(concert.getDate().getDate()).isEqualTo(expectedDateTime);
+    public ConcertAssert hasDate(Instant expectedDate) {
+        assertThat(concert.getDate().getUtcDate()).isEqualTo(expectedDate.atZone(UTC).toLocalDate());
         return this;
     }
 

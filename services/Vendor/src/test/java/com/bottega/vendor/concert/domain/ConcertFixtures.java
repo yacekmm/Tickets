@@ -1,9 +1,9 @@
 package com.bottega.vendor.concert.domain;
 
 import com.bottega.vendor.concert.api.app.ConcertService;
+import com.bottega.vendor.concert.fixtures.ConcertBuilder;
 import com.bottega.vendor.concert.fixtures.InMemoryConcertRepo;
 import com.bottega.vendor.concert.fixtures.clients.ConcertApiClient;
-import com.bottega.vendor.concert.fixtures.fixtures.ConcertBuilder;
 import com.bottega.vendor.concert.infra.repo.ConcertRepo;
 import com.bottega.vendor.fixtures.FakePricingClient;
 import com.bottega.vendor.fixtures.SharedFixtures;
@@ -34,7 +34,7 @@ public class ConcertFixtures {
 
         initInfrastructure(concertFixtures);
         initSut(concertFixtures, sharedFixtures);
-        initBuilders(concertFixtures);
+        initBuilders(concertFixtures, sharedFixtures);
 
         return concertFixtures;
     }
@@ -45,15 +45,15 @@ public class ConcertFixtures {
 
     private static void initSut(ConcertFixtures concertFixtures, SharedFixtures sharedFixtures) {
         concertFixtures.concertService = new ConcertService(
-                new ConcertFactory(),
+                new ConcertFactory(sharedFixtures.clock),
                 concertFixtures.concertRepo,
                 new FakePricingClient(),
                 sharedFixtures.fakeEventPublisher()
         );
     }
 
-    private static void initBuilders(ConcertFixtures concertFixtures) {
-        concertFixtures.concertBuilder = new ConcertBuilder(concertFixtures.concertRepo);
+    private static void initBuilders(ConcertFixtures concertFixtures, SharedFixtures sharedFixtures) {
+        concertFixtures.concertBuilder = new ConcertBuilder(concertFixtures.concertRepo, sharedFixtures.clock);
     }
 
 

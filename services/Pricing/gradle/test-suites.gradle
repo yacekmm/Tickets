@@ -2,6 +2,12 @@ tasks.withType(Test) {
     useJUnitPlatform()
 }
 
+task microTest(type: Test) {
+    filter {
+        include '**/**MicroTest.class'
+    }
+}
+
 task unitTest(type: Test) {
     filter {
         include '**/**UnitTest.class'

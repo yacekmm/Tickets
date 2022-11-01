@@ -26,7 +26,7 @@ class CreateConcert_CompTest extends ConcertLogicTestBase {
         ConcertAssert.assertThatConcert(result.get())
                 .hasIdAsUUID()
                 .hasTitle("Woodstock")
-                .hasDateTime(TEST_TIME_PLUS_30_DAYS)
+                .hasDate(TEST_TIME_PLUS_30_DAYS)
                 .hasVendorId("vendorId")
                 .isPersistedIn(concertFixtures.concertRepo, RepoEntries.SINGULAR);
     }
@@ -43,7 +43,7 @@ class CreateConcert_CompTest extends ConcertLogicTestBase {
                         .isConcertCreated(
                                 c.getId().asString(),
                                 c.getTitle().getValue(),
-                                c.getDate().getDate().toString(),
+                                c.getDate().getUtcDate().toString(),
                                 new String[]{},
                                 5)
         );

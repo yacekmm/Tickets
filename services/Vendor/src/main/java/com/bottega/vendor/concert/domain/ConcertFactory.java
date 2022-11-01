@@ -4,15 +4,23 @@ import com.bottega.sharedlib.ddd.DomainFactory;
 import com.bottega.sharedlib.vo.error.ErrorResult;
 import com.bottega.vendor.agreements.VendorId;
 import io.vavr.control.Either;
+import lombok.AllArgsConstructor;
+
+import java.time.Clock;
 
 @DomainFactory
+@AllArgsConstructor
 public class ConcertFactory {
 
+    private final Clock clock;
+
     public Either<ErrorResult, Concert> createConcert(String title, String date, VendorId vendorId) {
-        return Either.right(new Concert(
-                new ConcertId(),
-                Title.from(title),
-                ConcertDate.from(date),
-                vendorId.asString()));
+        return ConcertDate.from(date, clock)
+                .toEither()
+                .map(concertDate -> new Concert(
+                        new ConcertId(),
+                        Title.from(title),
+                        concertDate,
+                        vendorId.asString()));
     }
 }

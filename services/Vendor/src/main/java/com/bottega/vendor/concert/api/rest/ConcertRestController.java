@@ -22,7 +22,7 @@ public class ConcertRestController {
     public AggregateIdDto createConcert(
             @RequestBody CreateConcertRequestDto requestDto) {
 
-        return concertService.createConcert(requestDto.title(), requestDto.dateTime(), requestDto.vendorId())
+        return concertService.createConcert(requestDto.title(), requestDto.date(), requestDto.vendorId())
                 .map(concert -> fromAggregateId(concert.getId()))
                 .getOrElseThrow(ErrorResult::toException);
     }

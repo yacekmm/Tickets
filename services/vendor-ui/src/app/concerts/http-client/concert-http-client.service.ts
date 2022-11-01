@@ -13,10 +13,10 @@ export class ConcertHttpClientService {
 
   }
 
-  createConcert(title: string, dateTime: string, vendorId: string): Observable<CreateConcertResultDto> {
+  createConcert(title: string, date: string, vendorId: string): Observable<CreateConcertResultDto> {
     const body = {
       title: title,
-      dateTime: dateTime,
+      date: date,
       vendorId: vendorId
     };
 

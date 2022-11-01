@@ -39,7 +39,7 @@ public class EventAssert {
                         payload -> {
                             assertThat(payload.concertId()).isEqualTo(expectedConcertId);
                             assertThat(payload.concertId()).isEqualTo(expectedConcertId);
-                            assertThat(payload.dateTime()).isEqualTo(expectedDateTime);
+                            assertThat(payload.date()).isEqualTo(expectedDateTime);
                             assertThat(payload.title()).isEqualTo(expectedTitle);
                             assertThat(payload.title()).isEqualTo(expectedTitle);
                             assertThat(payload.tags()).containsExactlyInAnyOrder(expectedTags);

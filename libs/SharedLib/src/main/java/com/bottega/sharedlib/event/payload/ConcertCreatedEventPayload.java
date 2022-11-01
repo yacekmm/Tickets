@@ -5,7 +5,7 @@ import com.bottega.sharedlib.event.EventPayload;
 public record ConcertCreatedEventPayload (
         String concertId,
         String title,
-        String dateTime,
+        String date,
         String[] tags,
         int profitMarginPercentage
 ) implements EventPayload {

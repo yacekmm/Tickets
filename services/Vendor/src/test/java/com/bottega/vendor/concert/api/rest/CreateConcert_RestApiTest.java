@@ -27,7 +27,7 @@ public class CreateConcert_RestApiTest extends FrameworkTestBase {
                 .isPersistedIn(concertFixtures.concertRepo, RepoEntries.SINGULAR)
                 .hasIdAsUUID()
                 .hasTitle("concert-title")
-                .hasDateTime(TEST_TIME_PLUS_30_DAYS)
+                .hasDate(TEST_TIME_PLUS_30_DAYS)
                 .hasVendorId("some-id")
                 .extractId();
 

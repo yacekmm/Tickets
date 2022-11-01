@@ -5,7 +5,7 @@ import org.springframework.cloud.contract.spec.Contract
 Contract.make {
 	label("triggerConcertCreatedEvent")
 	input {
-		triggeredBy('createConcert("mock-title", TEST_TIME_PLUS_30_DAYS, "mock-vendor-id")')
+		triggeredBy('createConcert("mock-title", "2042-03-07", "mock-vendor-id")')
 	}
 	outputMessage {
 		sentTo("vendor.concert")
@@ -17,7 +17,7 @@ Contract.make {
 						serialization_type: 'CONCERT_CREATED',
 				        concertId: regex(uuid()),
 						title: 'mock-title',
-						dateTime: '2022-03-07T07:20:00Z',
+						date: '2042-03-07',
 						tags: [],
 						profitMarginPercentage: 5
 				]
