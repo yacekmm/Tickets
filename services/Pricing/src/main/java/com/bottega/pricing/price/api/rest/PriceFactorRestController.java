@@ -15,7 +15,7 @@ import static com.bottega.sharedlib.config.ApiVersions.V1;
 
 @RestController
 @AllArgsConstructor
-public class FactorRestController {
+public class PriceFactorRestController {
 
     private final PriceService priceService;
 

@@ -45,7 +45,7 @@ public class ItemPrice implements BaseEntity {
     }
 
     public ItemPrice applyFactor(PriceFactor factor) {
-        this.price = from(factor.applyToPrice(price.toMoney()));
+        this.price = from(factor.applyToPrice(getPrice()));
         this.priceFactors.add(factor);
         return this;
     }

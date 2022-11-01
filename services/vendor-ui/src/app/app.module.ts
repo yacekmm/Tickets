@@ -10,7 +10,7 @@ import {MainSidemenuItemComponent} from './main-sidemenu-item/main-sidemenu-item
 import {MatIconModule} from '@angular/material/icon';
 import {MatListModule} from '@angular/material/list';
 import {CreateConcertComponent} from './concerts/create-concert/create-concert.component';
-import {ListConcertComponent} from './concerts/list-concert/list-concert.component';
+import {ListConcertsComponent} from './concerts/list-concerts/list-concerts.component';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {FlexLayoutModule} from '@angular/flex-layout';
@@ -27,7 +27,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     AppComponent,
     MainSidemenuItemComponent,
     CreateConcertComponent,
-    ListConcertComponent,
+    ListConcertsComponent,
   ],
   imports: [
     BrowserModule,

@@ -16,8 +16,8 @@ import java.time.Instant;
 public class ConcertDate {
 
     @Getter
-    @Column(name = "dateTime")
-    private Instant dateTime;
+    @Column(name = "date")
+    private Instant date;
 
     public static ConcertDate from(String date) {
         //TODO/JM: handle dateString exception

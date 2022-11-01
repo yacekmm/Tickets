@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static com.bottega.sharedlib.vo.error.ErrorType.NOT_FOUND;
-import static com.bottega.vendor.concert.api.app.dto.ConcertErrorCode.concert_not_found;
+import static com.bottega.vendor.concert.api.app.ConcertErrorCode.concert_not_found;
 import static org.assertj.vavr.api.VavrAssertions.assertThat;
 
 class DiscountConcert_CompTest extends ConcertLogicTestBase {

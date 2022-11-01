@@ -1,4 +1,4 @@
-package com.bottega.vendor.concert.api.app.dto;
+package com.bottega.vendor.concert.api.app;
 
 import com.bottega.sharedlib.vo.error.ErrorCode;
 

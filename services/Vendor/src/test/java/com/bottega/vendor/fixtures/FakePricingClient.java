@@ -11,7 +11,8 @@ import org.apache.groovy.util.Maps;
 
 import java.util.List;
 
-public class FakeConcertClient implements PricingClient {
+public class FakePricingClient implements PricingClient {
+
     @Override
     public Either<ErrorResult, List<Price>> applyPercentageDiscount(ConcertId itemId, int percentage) {
         return Either.right(

@@ -9,7 +9,7 @@ import static lombok.AccessLevel.PRIVATE;
 @Getter
 @ToString
 @AllArgsConstructor(access = PRIVATE)
-//TODO: copy tests from ck
+//TODO: copy tests from kid
 public class ErrorResult {
 
     private final ErrorType type;

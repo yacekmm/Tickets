@@ -23,7 +23,7 @@ public class ConcertAssert {
     }
 
     public ConcertAssert hasDateTime(Instant expectedDateTime) {
-        assertThat(concert.getDate().getDateTime()).isEqualTo(expectedDateTime);
+        assertThat(concert.getDate().getDate()).isEqualTo(expectedDateTime);
         return this;
     }
 

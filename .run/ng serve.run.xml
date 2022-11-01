@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="ng serve" type="js.build_tools.npm">
-    <package-json value="$PROJECT_DIR$/services/UI/vendor-ui/package.json" />
+    <package-json value="$PROJECT_DIR$/services/vendor-ui/package.json" />
     <command value="run" />
     <scripts>
       <script value="ng" />

@@ -1,13 +1,13 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {CreateConcertComponent} from './concerts/create-concert/create-concert.component';
-import {ListConcertComponent} from './concerts/list-concert/list-concert.component';
+import {ListConcertsComponent} from './concerts/list-concerts/list-concerts.component';
 
 const routes: Routes = [
   {
     path: 'concert', children: [
       {path: 'create', component: CreateConcertComponent },
-      {path: 'list', component: ListConcertComponent }
+      {path: 'list', component: ListConcertsComponent }
     ]
   }
 ];

@@ -16,7 +16,7 @@ import lombok.AllArgsConstructor;
 import java.util.List;
 
 import static com.bottega.sharedlib.vo.error.ErrorResult.notFound;
-import static com.bottega.vendor.concert.api.app.dto.ConcertErrorCode.concert_not_found;
+import static com.bottega.vendor.concert.api.app.ConcertErrorCode.concert_not_found;
 import static com.bottega.vendor.concert.domain.VendorEventFactory.concertCreated;
 import static io.vavr.control.Option.ofOptional;
 
@@ -34,7 +34,7 @@ public class ConcertService {
         //TODO: should be retrieved from Vendor module
         VendorId vendorId = new VendorId(vendorIdString);
         return concertFactory.createConcert(title, dateTime, vendorId)
-                .peek(concertRepo::save)
+                .map(concertRepo::save)
                 //TODO: Outbox?
                 .peek(concert -> eventPublisher.publish(concertCreated(concert, 5)));
     }

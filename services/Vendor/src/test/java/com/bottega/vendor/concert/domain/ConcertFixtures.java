@@ -5,7 +5,7 @@ import com.bottega.vendor.concert.fixtures.InMemoryConcertRepo;
 import com.bottega.vendor.concert.fixtures.clients.ConcertApiClient;
 import com.bottega.vendor.concert.fixtures.fixtures.ConcertBuilder;
 import com.bottega.vendor.concert.infra.repo.ConcertRepo;
-import com.bottega.vendor.fixtures.FakeConcertClient;
+import com.bottega.vendor.fixtures.FakePricingClient;
 import com.bottega.vendor.fixtures.SharedFixtures;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -47,7 +47,7 @@ public class ConcertFixtures {
         concertFixtures.concertService = new ConcertService(
                 new ConcertFactory(),
                 concertFixtures.concertRepo,
-                new FakeConcertClient(),
+                new FakePricingClient(),
                 sharedFixtures.fakeEventPublisher()
         );
     }

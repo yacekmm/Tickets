@@ -12,7 +12,7 @@ public class VendorEventFactory {
                 .payload(new ConcertCreatedEventPayload(
                         concert.getId().asString(),
                         concert.getTitle().getValue(),
-                        concert.getDate().getDateTime().toString(),
+                        concert.getDate().getDate().toString(),
                         new String[]{},
                         profitMarginPercentage))
                 .build();

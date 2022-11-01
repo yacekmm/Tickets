@@ -43,7 +43,7 @@ class CreateConcert_CompTest extends ConcertLogicTestBase {
                         .isConcertCreated(
                                 c.getId().asString(),
                                 c.getTitle().getValue(),
-                                c.getDate().getDateTime().toString(),
+                                c.getDate().getDate().toString(),
                                 new String[]{},
                                 5)
         );
