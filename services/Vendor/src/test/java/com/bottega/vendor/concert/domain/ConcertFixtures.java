@@ -3,7 +3,7 @@ package com.bottega.vendor.concert.domain;
 import com.bottega.vendor.concert.api.app.ConcertService;
 import com.bottega.vendor.concert.fixtures.*;
 import com.bottega.vendor.concert.fixtures.clients.ConcertApiClient;
-import com.bottega.vendor.concert.infra.repo.ConcertRepo;
+import com.bottega.vendor.concert.infra.repo.*;
 import com.bottega.vendor.fixtures.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -18,6 +18,10 @@ public class ConcertFixtures {
     //infrastructure
     @Autowired
     public ConcertRepo concertRepo;
+    @Autowired
+    public CategoryRepo categoryRepo;
+    @Autowired
+    public TagRepo tagRepo;
 
     //builders
     @Autowired
@@ -67,6 +71,8 @@ public class ConcertFixtures {
 
     public void tearDown() {
         concertRepo.deleteAll();
+//        categoryRepo.deleteAll();
+//        tagRepo.deleteAll();
     }
 
 

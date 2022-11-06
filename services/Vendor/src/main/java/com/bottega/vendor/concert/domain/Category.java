@@ -25,7 +25,7 @@ public class Category {
     @Getter
     private String value;
 
-    @OneToMany(mappedBy = "id")
+    @OneToMany(mappedBy = "category")
     private List<Concert> concerts;
 
     public static Category from(String value) {

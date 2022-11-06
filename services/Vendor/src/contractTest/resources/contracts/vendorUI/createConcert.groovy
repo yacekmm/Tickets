@@ -24,7 +24,7 @@ Contract.make {
                         producer('some title'),
                         consumer(anyNonBlankString())
                 ),
-                dateTime: $(
+                date: $(
                         producer('2042-03-07T07:20:00Z'),
                         consumer(anyNonBlankString())
                 ),

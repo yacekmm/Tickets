@@ -8,7 +8,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.Set;
 
-import static javax.persistence.CascadeType.PERSIST;
+import static javax.persistence.CascadeType.*;
 import static javax.persistence.FetchType.LAZY;
 import static lombok.AccessLevel.*;
 
@@ -44,8 +44,8 @@ public class Concert implements BaseEntity {
     )
     private Set<Tag> tags;
 
-    @ManyToOne(fetch = LAZY, cascade = PERSIST)
-    @JoinColumn(name = "category_id")
+    @ManyToOne(fetch = LAZY, cascade = ALL)
+    @JoinColumn(name = "concerts")
     private Category category;
 
 
