@@ -1,6 +1,7 @@
 package com.bottega.vendor.concert.domain;
 
 import com.bottega.sharedlib.ddd.DomainEntity;
+import com.bottega.sharedlib.repo.BaseEntity;
 import lombok.*;
 
 import javax.persistence.*;
@@ -14,9 +15,10 @@ import static lombok.AccessLevel.PRIVATE;
 @NoArgsConstructor
 @AllArgsConstructor(access = PRIVATE)
 @ToString
-public class Tag {
+public class Tag implements BaseEntity {
 
     @EmbeddedId
+    @Getter
     private TagId id;
 
     @EqualsAndHashCode.Include

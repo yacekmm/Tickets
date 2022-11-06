@@ -49,6 +49,8 @@ public class ConcertFixtures {
 
     private static void initInfrastructure(ConcertFixtures concertFixtures) {
         concertFixtures.concertRepo = new InMemoryConcertRepo();
+        concertFixtures.categoryRepo = new InMemoryCategoryRepo();
+        concertFixtures.tagRepo = new InMemoryTagRepo();
     }
 
     private static void initSut(ConcertFixtures concertFixtures, SharedFixtures sharedFixtures) {
@@ -71,8 +73,8 @@ public class ConcertFixtures {
 
     public void tearDown() {
         concertRepo.deleteAll();
-//        categoryRepo.deleteAll();
-//        tagRepo.deleteAll();
+        categoryRepo.deleteAll();
+        tagRepo.deleteAll();
     }
 
 

@@ -1,6 +1,7 @@
 package com.bottega.vendor.concert.domain;
 
 import com.bottega.sharedlib.ddd.DomainEntity;
+import com.bottega.sharedlib.repo.BaseEntity;
 import lombok.*;
 
 import javax.persistence.*;
@@ -15,10 +16,11 @@ import static lombok.AccessLevel.PRIVATE;
 @NoArgsConstructor
 @AllArgsConstructor(access = PRIVATE)
 @ToString
-public class Category {
+public class Category implements BaseEntity {
 
     @EmbeddedId
     @EqualsAndHashCode.Include
+    @Getter
     private CategoryId id;
 
     @Column(name = "category_name")
