@@ -20,7 +20,7 @@ public class Tag {
     private TagId id;
 
     @EqualsAndHashCode.Include
-    @Column(name = "value")
+    @Column(name = "tag_name")
     @Getter
     private String value;
 

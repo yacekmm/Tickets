@@ -8,6 +8,8 @@ import io.restassured.response.ValidatableResponse;
 import org.junit.jupiter.api.Test;
 
 import static com.bottega.sharedlib.config.TestClockConfig.TEST_TIME_PLUS_30_DAYS;
+import static java.time.LocalDate.ofInstant;
+import static java.time.ZoneOffset.UTC;
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.hamcrest.Matchers.equalTo;
 
@@ -18,9 +20,13 @@ public class CreateConcert_RestApiTest extends FrameworkTestBase {
     public void createConcert_creates_onValidRequest() {
 
         //when
-        ValidatableResponse response = concertFixtures.concertClient.createConcert("concert-title", TEST_TIME_PLUS_30_DAYS.toString(), "some-id");
+        ValidatableResponse response = concertFixtures.concertClient.createConcert("concert-title", ofInstant(TEST_TIME_PLUS_30_DAYS, UTC).toString(), "some-id");
 
         //then
+        //TODO: API response is valid: API test
+        response
+                .statusCode(SC_OK);
+
         ConcertId concertId = ConcertAssert
                 .assertThatConcert(concertFixtures.concertRepo.findAll().iterator().next())
 //        //TODO: concert Properties in DB: Dependency test
@@ -31,12 +37,12 @@ public class CreateConcert_RestApiTest extends FrameworkTestBase {
                 .hasVendorId("some-id")
                 .extractId();
 
-
-        //TODO: API response is valid: API test
         response
                 .statusCode(SC_OK)
                 .body("id", equalTo(concertId.asString()));
     }
+
+    //TODO: test on 4xx
 
 
 

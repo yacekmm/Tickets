@@ -21,6 +21,6 @@ public class CategoryService {
                 .filter(entry -> containsAnyIgnoreCase(title.getValue(), entry.getValue()))
                 .findFirst()
                 .map(entry -> Category.from(entry.getKey()))
-                .orElse(Category.OTHER);
+                .orElse(Category.from("other"));
     }
 }

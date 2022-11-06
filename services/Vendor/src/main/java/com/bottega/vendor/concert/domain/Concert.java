@@ -8,7 +8,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.Set;
 
-import static javax.persistence.CascadeType.ALL;
+import static javax.persistence.CascadeType.PERSIST;
 import static javax.persistence.FetchType.LAZY;
 import static lombok.AccessLevel.*;
 
@@ -36,10 +36,16 @@ public class Concert implements BaseEntity {
     @Getter(NONE)
     private String vendorId;
 
-    @ManyToMany(mappedBy = "tags", fetch = LAZY, cascade = ALL)
+    @ManyToMany(fetch = LAZY, cascade = PERSIST)
+    @JoinTable(
+            name = "concert_tags",
+            joinColumns = { @JoinColumn(name = "concert_id") },
+            inverseJoinColumns = { @JoinColumn(name = "tag_id") }
+    )
     private Set<Tag> tags;
 
-    @ManyToOne(fetch = LAZY, cascade = ALL)
+    @ManyToOne(fetch = LAZY, cascade = PERSIST)
+    @JoinColumn(name = "category_id")
     private Category category;
 
 

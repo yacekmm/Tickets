@@ -24,6 +24,6 @@ public class ConcertFactory {
                         concertDate,
                         vendorId.asString(),
                         new HashSet<>(),
-                        Category.EMPTY));
+                        null));
     }
 }

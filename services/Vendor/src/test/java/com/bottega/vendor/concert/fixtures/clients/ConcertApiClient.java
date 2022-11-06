@@ -13,11 +13,11 @@ public class ConcertApiClient {
 
     private final RequestSpecification requestSpec;
 
-    public ValidatableResponse createConcert(String title, String dateTime, String vendorId) {
+    public ValidatableResponse createConcert(String title, String date, String vendorId) {
         return requestSpec
                 .body(Maps.of(
                         "title", title,
-                        "dateTime", dateTime,
+                        "date", date,
                         "vendorId", vendorId
                 ))
                 .post("/concert")

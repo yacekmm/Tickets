@@ -61,7 +61,7 @@ public class ConcertFixtures {
     }
 
     private static void initBuilders(ConcertFixtures concertFixtures, SharedFixtures sharedFixtures) {
-        concertFixtures.concertBuilder = ConcertBuilder.init(concertFixtures.concertRepo, sharedFixtures.clock);
+        concertFixtures.concertBuilder = new ConcertBuilder(concertFixtures.concertRepo, sharedFixtures.clock);
     }
 
 
