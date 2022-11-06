@@ -21,10 +21,9 @@ import static java.time.temporal.ChronoUnit.DAYS;
 @EqualsAndHashCode
 public class ConcertDate {
 
+    private static final int MIN_DATE_THRESHOLD_DAYS = 7;
     @Column(name = "date")
     private Instant date;
-
-    private static final int MIN_DATE_THRESHOLD_DAYS = 7;
 
     public static Validation<ErrorResult, ConcertDate> from(String date, Clock clock) {
         return Try.of(() -> Instant.parse(date))
@@ -39,4 +38,5 @@ public class ConcertDate {
     public LocalDate getUtcDate() {
         return LocalDate.ofInstant(date, UTC);
     }
+
 }

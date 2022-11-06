@@ -32,8 +32,7 @@ export class CreateConcertComponent implements OnInit {
 
   createConcert() {
     this.requestInProgress = true;
-    //TODO: determine vendor Id
-    this.concertHttpClient.createConcert(this.modelCreateConcert.title, this.modelCreateConcert.date, 'vendor-id')
+    this.concertHttpClient.createConcert(this.modelCreateConcert.title, this.modelCreateConcert.date)
       .subscribe({
         next: (createConcertResultDto: CreateConcertResultDto) => {
           this.initForm();

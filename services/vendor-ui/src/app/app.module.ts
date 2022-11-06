@@ -21,6 +21,8 @@ import {MatInputModule} from '@angular/material/input';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatTableModule} from "@angular/material/table";
+import {MomentModule} from "ngx-moment";
 
 @NgModule({
   declarations: [
@@ -46,7 +48,9 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     HttpClientModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatTableModule,
+    MomentModule
   ],
   providers: [],
   bootstrap: [AppComponent]
