@@ -1,12 +1,10 @@
 package com.bottega.vendor.concert.domain;
 
 import com.bottega.vendor.concert.api.app.ConcertService;
-import com.bottega.vendor.concert.fixtures.ConcertBuilder;
-import com.bottega.vendor.concert.fixtures.InMemoryConcertRepo;
+import com.bottega.vendor.concert.fixtures.*;
 import com.bottega.vendor.concert.fixtures.clients.ConcertApiClient;
 import com.bottega.vendor.concert.infra.repo.ConcertRepo;
-import com.bottega.vendor.fixtures.FakePricingClient;
-import com.bottega.vendor.fixtures.SharedFixtures;
+import com.bottega.vendor.fixtures.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -29,6 +27,10 @@ public class ConcertFixtures {
     @Autowired
     public ConcertApiClient concertClient;
 
+    //services
+    @Autowired
+    public TagService tagService;
+
     public static ConcertFixtures init(SharedFixtures sharedFixtures) {
         ConcertFixtures concertFixtures = new ConcertFixtures();
 
@@ -44,16 +46,18 @@ public class ConcertFixtures {
     }
 
     private static void initSut(ConcertFixtures concertFixtures, SharedFixtures sharedFixtures) {
+        concertFixtures.tagService = new TagService();
         concertFixtures.concertService = new ConcertService(
                 new ConcertFactory(sharedFixtures.clock),
                 concertFixtures.concertRepo,
                 new FakePricingClient(),
-                sharedFixtures.fakeEventPublisher()
+                sharedFixtures.fakeEventPublisher(),
+                concertFixtures.tagService
         );
     }
 
     private static void initBuilders(ConcertFixtures concertFixtures, SharedFixtures sharedFixtures) {
-        concertFixtures.concertBuilder = new ConcertBuilder(concertFixtures.concertRepo, sharedFixtures.clock);
+        concertFixtures.concertBuilder = ConcertBuilder.init(concertFixtures.concertRepo, sharedFixtures.clock);
     }
 
 

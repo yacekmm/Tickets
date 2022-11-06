@@ -7,6 +7,7 @@ import io.vavr.control.Either;
 import lombok.AllArgsConstructor;
 
 import java.time.Clock;
+import java.util.HashSet;
 
 @DomainFactory
 @AllArgsConstructor
@@ -21,6 +22,7 @@ public class ConcertFactory {
                         new ConcertId(),
                         Title.from(title),
                         concertDate,
-                        vendorId.asString()));
+                        vendorId.asString(),
+                        new HashSet<>()));
     }
 }

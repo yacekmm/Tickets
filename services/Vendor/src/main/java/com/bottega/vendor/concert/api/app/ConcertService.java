@@ -5,9 +5,7 @@ import com.bottega.sharedlib.event.EventPublisher;
 import com.bottega.sharedlib.vo.error.ErrorResult;
 import com.bottega.vendor.agreements.VendorId;
 import com.bottega.vendor.concert.Price;
-import com.bottega.vendor.concert.domain.Concert;
-import com.bottega.vendor.concert.domain.ConcertFactory;
-import com.bottega.vendor.concert.domain.ConcertId;
+import com.bottega.vendor.concert.domain.*;
 import com.bottega.vendor.concert.infra.repo.ConcertRepo;
 import com.bottega.vendor.infra.client.pricing.PricingClient;
 import io.vavr.control.Either;
@@ -20,7 +18,6 @@ import static com.bottega.vendor.concert.api.app.ConcertErrorCode.concert_not_fo
 import static com.bottega.vendor.concert.domain.VendorEventFactory.concertCreated;
 import static io.vavr.control.Option.ofOptional;
 
-//TODO: create a library with DDD annotations, reused in all services
 @ApplicationService
 @AllArgsConstructor
 public class ConcertService {
@@ -29,11 +26,13 @@ public class ConcertService {
     private final ConcertRepo concertRepo;
     private final PricingClient pricingClient;
     private final EventPublisher eventPublisher;
+    private final TagService tagService;
 
     public Either<ErrorResult, Concert> createConcert(String title, String dateTime, String vendorIdString) {
         //TODO: should be retrieved from Vendor module
         VendorId vendorId = new VendorId(vendorIdString);
         return concertFactory.createConcert(title, dateTime, vendorId)
+                .peek(concert -> concert.initNewConcert(tagService))
                 .map(concertRepo::save)
                 //TODO: Outbox?
                 .peek(concert -> eventPublisher.publish(concertCreated(concert, 5)));

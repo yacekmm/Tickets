@@ -1,17 +1,15 @@
 package com.bottega.vendor.concert.fixtures.asserts;
 
 import com.bottega.sharedlib.fixtures.RepoEntries;
-import com.bottega.vendor.concert.domain.Concert;
-import com.bottega.vendor.concert.domain.ConcertId;
+import com.bottega.vendor.concert.domain.*;
 import com.bottega.vendor.concert.infra.repo.ConcertRepo;
 import lombok.RequiredArgsConstructor;
 
 import java.time.Instant;
-import java.util.UUID;
+import java.util.*;
 
 import static java.time.ZoneOffset.UTC;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatNoException;
+import static org.assertj.core.api.Assertions.*;
 
 @RequiredArgsConstructor(staticName = "assertThatConcert")
 public class ConcertAssert {
@@ -46,5 +44,10 @@ public class ConcertAssert {
 
     public ConcertId extractId() {
         return concert.getId();
+    }
+
+    public ConcertAssert hasTags(Set<Tag> expectedTags) {
+        assertThat(concert.getTags()).containsExactlyElementsOf(expectedTags);
+        return this;
     }
 }

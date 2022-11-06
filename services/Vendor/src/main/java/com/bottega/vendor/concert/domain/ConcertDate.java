@@ -2,19 +2,13 @@ package com.bottega.vendor.concert.domain;
 
 import com.bottega.sharedlib.ddd.ValueObject;
 import com.bottega.sharedlib.vo.error.ErrorResult;
-import io.vavr.control.Try;
-import io.vavr.control.Validation;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import io.vavr.control.*;
+import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import java.time.Clock;
-import java.time.Instant;
-import java.time.LocalDate;
+import javax.persistence.*;
+import java.time.*;
 
+import static com.bottega.sharedlib.vo.error.ErrorResult.badRequest;
 import static com.bottega.vendor.concert.api.app.ConcertErrorCode.invalid_date;
 import static java.time.ZoneOffset.UTC;
 import static java.time.temporal.ChronoUnit.DAYS;
@@ -36,9 +30,9 @@ public class ConcertDate {
         return Try.of(() -> Instant.parse(date))
                 .orElse(Try.ofSupplier(() -> LocalDate.parse(date).atStartOfDay().toInstant(UTC)))
                 .toValidation()
-                .mapError(throwable -> ErrorResult.badRequest(invalid_date, "Unsupported date format: " + throwable.getMessage()))
+                .mapError(throwable -> badRequest(invalid_date, "Unsupported date format: " + throwable.getMessage()))
                 .filter(parsed -> parsed.isAfter(clock.instant().plus(MIN_DATE_THRESHOLD_DAYS, DAYS)))
-                .getOrElse(Validation.invalid(ErrorResult.badRequest(invalid_date, "Too early")))
+                .getOrElse(Validation.invalid(badRequest(invalid_date, "Too early")))
                 .map(ConcertDate::new);
     }
 
