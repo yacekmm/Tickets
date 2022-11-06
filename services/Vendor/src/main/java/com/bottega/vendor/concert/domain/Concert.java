@@ -39,14 +39,18 @@ public class Concert implements BaseEntity {
     @ManyToMany(mappedBy = "tags", fetch = LAZY, cascade = ALL)
     private Set<Tag> tags;
 
+    @ManyToOne(fetch = LAZY, cascade = ALL)
+    private Category category;
+
 
     public VendorId vendorId() {
         return new VendorId(vendorId);
     }
 
 
-    public void initNewConcert(TagService tagService) {
+    public void initNewConcert(TagService tagService, CategoryService categoryService) {
         tags = tagService.tag(title);
+        category = categoryService.categorize(title);
     }
 
 }

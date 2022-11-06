@@ -27,12 +27,13 @@ public class ConcertService {
     private final PricingClient pricingClient;
     private final EventPublisher eventPublisher;
     private final TagService tagService;
+    private final CategoryService categoryService;
 
     public Either<ErrorResult, Concert> createConcert(String title, String dateTime, String vendorIdString) {
         //TODO: should be retrieved from Vendor module
         VendorId vendorId = new VendorId(vendorIdString);
         return concertFactory.createConcert(title, dateTime, vendorId)
-                .peek(concert -> concert.initNewConcert(tagService))
+                .peek(concert -> concert.initNewConcert(tagService, categoryService))
                 .map(concertRepo::save)
                 //TODO: Outbox?
                 .peek(concert -> eventPublisher.publish(concertCreated(concert, 5)));

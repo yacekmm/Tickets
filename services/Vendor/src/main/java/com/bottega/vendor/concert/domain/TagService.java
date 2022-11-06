@@ -1,14 +1,15 @@
 package com.bottega.vendor.concert.domain;
 
 import com.bottega.sharedlib.ddd.DomainService;
-import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
+
+import static org.apache.commons.lang3.StringUtils.containsAnyIgnoreCase;
 
 @DomainService
 public class TagService {
 
-    private static Map<String, String[]> defaultTags = new HashMap<>();
+    private static final Map<String, String[]> defaultTags = new HashMap<>();
 
     static {
         defaultTags.put("rock", new String[]{"Rock", "Scorpions"});
@@ -19,7 +20,7 @@ public class TagService {
     public Set<Tag> tag(Title title) {
         Set<Tag> tags = new HashSet<>();
         defaultTags.forEach((tag, requiredSubstrings) -> {
-            if (StringUtils.containsAnyIgnoreCase(title.getValue(), requiredSubstrings)) {
+            if (containsAnyIgnoreCase(title.getValue(), requiredSubstrings)) {
                 tags.add(Tag.from(tag));
             }
         });

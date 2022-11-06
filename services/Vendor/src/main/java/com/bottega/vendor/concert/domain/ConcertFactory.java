@@ -23,6 +23,7 @@ public class ConcertFactory {
                         Title.from(title),
                         concertDate,
                         vendorId.asString(),
-                        new HashSet<>()));
+                        new HashSet<>(),
+                        Category.EMPTY));
     }
 }

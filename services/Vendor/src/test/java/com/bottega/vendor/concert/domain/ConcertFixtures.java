@@ -30,6 +30,8 @@ public class ConcertFixtures {
     //services
     @Autowired
     public TagService tagService;
+    @Autowired
+    public CategoryService categoryService;
 
     public static ConcertFixtures init(SharedFixtures sharedFixtures) {
         ConcertFixtures concertFixtures = new ConcertFixtures();
@@ -47,12 +49,14 @@ public class ConcertFixtures {
 
     private static void initSut(ConcertFixtures concertFixtures, SharedFixtures sharedFixtures) {
         concertFixtures.tagService = new TagService();
+        concertFixtures.categoryService = new CategoryService();
         concertFixtures.concertService = new ConcertService(
                 new ConcertFactory(sharedFixtures.clock),
                 concertFixtures.concertRepo,
                 new FakePricingClient(),
                 sharedFixtures.fakeEventPublisher(),
-                concertFixtures.tagService
+                concertFixtures.tagService,
+                concertFixtures.categoryService
         );
     }
 

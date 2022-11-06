@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 import static java.util.stream.Collectors.toSet;
 import static org.assertj.core.api.Assertions.assertThat;
 
-class Concert_UnitTest extends ConcertLogicTestBase {
+class InitConcert_UnitTest extends ConcertLogicTestBase {
 
 
     private static Stream<Arguments> provideStringsForTags() {
@@ -30,9 +30,35 @@ class Concert_UnitTest extends ConcertLogicTestBase {
         Concert newConcert = concertFixtures.concertBuilder.withTitle(title).build();
 
         //when
-        newConcert.initNewConcert(concertFixtures.tagService);
+        newConcert.initNewConcert(concertFixtures.tagService, concertFixtures.categoryService);
 
         //then
         assertThat(newConcert.getTags().stream().map(Tag::getValue).collect(toSet())).containsExactlyInAnyOrderElementsOf(expectedTags);
     }
+
+
+    private static Stream<Arguments> provideStringsForCategories() {
+        return Stream.of(
+                Arguments.of("no category", "other"),
+                Arguments.of("Rock concert", "rock"),
+                Arguments.of("Scorpions in Warsaw!", "rock"),
+                Arguments.of("Scorpions on Mystic Festival", "rock"),
+                Arguments.of("Rihanna", "superstar")
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideStringsForCategories")
+    void initConcert_assignsCategory(String title, String expectedCategory) {
+        //given
+        Concert newConcert = concertFixtures.concertBuilder.withTitle(title).build();
+
+        //when
+        newConcert.initNewConcert(concertFixtures.tagService, concertFixtures.categoryService);
+
+        //then
+        assertThat(newConcert.getCategory().getValue()).isEqualTo(expectedCategory);
+    }
+
+
 }

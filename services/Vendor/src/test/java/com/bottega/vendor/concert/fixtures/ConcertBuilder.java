@@ -25,7 +25,8 @@ public class ConcertBuilder {
                 .title(Title.from("mock-title"))
                 .date(ConcertDate.from(TEST_TIME_PLUS_30_DAYS.toString(), clock).get())
                 .vendorId("mock-vendor-id")
-                .tags(new HashSet<>());
+                .tags(new HashSet<>())
+                .category(Category.EMPTY);
         return new ConcertBuilder(concertRepo, clock, builder);
     }
 
