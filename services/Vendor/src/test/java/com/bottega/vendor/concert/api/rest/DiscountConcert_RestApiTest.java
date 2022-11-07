@@ -6,15 +6,14 @@ import io.restassured.response.ValidatableResponse;
 import org.junit.jupiter.api.Test;
 
 import static org.apache.http.HttpStatus.SC_OK;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.*;
 
 public class DiscountConcert_RestApiTest extends FrameworkTestBase {
 
 
     @Test
     public void discountConcert_discounts_onValidRequest() {
-        Concert concert = concertFixtures.concertBuilder.inDb();
+        Concert concert = builders.aConcert().inDb();
 
         //when
         ValidatableResponse response = concertFixtures.concertClient.discountConcert(concert.getId(), 10);

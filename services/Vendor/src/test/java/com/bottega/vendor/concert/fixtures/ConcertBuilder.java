@@ -19,10 +19,8 @@ public class ConcertBuilder {
     public ConcertBuilder(ConcertRepo concertRepo, Clock clock) {
         this.concertRepo = concertRepo;
         this.clock = clock;
-        //TODO: replace it
         this.builder = Concert.builder()
-                .title(Title.from("mock-title"))
-                .date(ConcertDate.from(TEST_TIME_PLUS_30_DAYS.toString(), clock).get())
+                .id(new ConcertId())
                 .tags(new HashSet<>())
                 .category(null);
 
@@ -32,7 +30,7 @@ public class ConcertBuilder {
     }
 
     public Concert build() {
-        return builder.id(new ConcertId()).build();
+        return builder.build();
     }
 
     public Concert inDb() {

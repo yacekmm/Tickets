@@ -25,10 +25,6 @@ public class ConcertFixtures {
     @Autowired
     public TagRepo tagRepo;
 
-    //builders
-    @Autowired
-    public ConcertBuilder concertBuilder;
-
     //clients
     @Autowired
     public ConcertApiClient concertClient;
@@ -50,7 +46,6 @@ public class ConcertFixtures {
         initMocks(concertFixtures);
         initServices(concertFixtures);
         initSut(concertFixtures, sharedFixtures);
-        initBuilders(concertFixtures, sharedFixtures);
 
         return concertFixtures;
     }
@@ -81,11 +76,6 @@ public class ConcertFixtures {
                 concertFixtures.vendorService
         );
     }
-
-    private static void initBuilders(ConcertFixtures concertFixtures, SharedFixtures sharedFixtures) {
-        concertFixtures.concertBuilder = new ConcertBuilder(concertFixtures.concertRepo, sharedFixtures.clock);
-    }
-
 
     public void tearDown() {
         concertRepo.deleteAll();

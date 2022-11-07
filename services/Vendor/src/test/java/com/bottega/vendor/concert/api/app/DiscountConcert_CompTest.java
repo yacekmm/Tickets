@@ -3,8 +3,7 @@ package com.bottega.vendor.concert.api.app;
 import com.bottega.sharedlib.fixtures.ErrorAssert;
 import com.bottega.sharedlib.vo.Money;
 import com.bottega.sharedlib.vo.error.ErrorResult;
-import com.bottega.vendor.concert.Price;
-import com.bottega.vendor.concert.PriceFactor;
+import com.bottega.vendor.concert.*;
 import com.bottega.vendor.concert.domain.Concert;
 import com.bottega.vendor.concert.fixtures.ConcertLogicTestBase;
 import com.bottega.vendor.concert.fixtures.asserts.PriceAssert;
@@ -25,7 +24,7 @@ class DiscountConcert_CompTest extends ConcertLogicTestBase {
     @Test
     void discountConcert_discountsConcert_onValidInput() {
         //given
-        Concert concert = concertFixtures.concertBuilder.inDb();
+        Concert concert = builders.aConcert().inDb();
 
         //when
         Either<ErrorResult, List<Price>> result = concertFixtures.concertService.discountConcert(concert.getId().asString(), 10);

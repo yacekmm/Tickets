@@ -27,7 +27,7 @@ class InitConcert_UnitTest extends ConcertLogicTestBase {
     @MethodSource("provideStringsForTags")
     void initConcert_addsTags(String title, Set<String> expectedTags) {
         //given
-        Concert newConcert = concertFixtures.concertBuilder.withTitle(title).build();
+        Concert newConcert = builders.aConcert().withTitle(title).build();
 
         //when
         newConcert.initNewConcert(concertFixtures.tagService, concertFixtures.categoryService);
@@ -51,7 +51,7 @@ class InitConcert_UnitTest extends ConcertLogicTestBase {
     @MethodSource("provideStringsForCategories")
     void initConcert_assignsCategory(String title, String expectedCategory) {
         //given
-        Concert newConcert = concertFixtures.concertBuilder.withTitle(title).build();
+        Concert newConcert = builders.aConcert().withTitle(title).build();
 
         //when
         newConcert.initNewConcert(concertFixtures.tagService, concertFixtures.categoryService);

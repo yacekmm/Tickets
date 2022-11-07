@@ -31,7 +31,6 @@ public class ConcertService {
     private final VendorService vendorService;
 
     public Either<ErrorResult, Concert> createConcert(String title, String dateTime, String vendorIdString) {
-        //TODO: should be retrieved from Vendor module
         VendorAgreement vendorAgreement = vendorService.getVendorAgreement(vendorIdString);
         return concertFactory.createConcert(title, dateTime, vendorAgreement.vendorId())
                 .peek(concert -> concert.initNewConcert(tagService, categoryService))

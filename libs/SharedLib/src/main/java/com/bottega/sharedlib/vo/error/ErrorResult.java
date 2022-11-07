@@ -1,15 +1,13 @@
 package com.bottega.sharedlib.vo.error;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 
 import static lombok.AccessLevel.PRIVATE;
 
 @Getter
 @ToString
 @AllArgsConstructor(access = PRIVATE)
-//TODO: copy tests from kid
+//TODO: test it
 public class ErrorResult {
 
     private final ErrorType type;

@@ -21,7 +21,7 @@ class CreateConcert_CompTest extends ConcertLogicTestBase {
     @Test
     void createConcert_createsConcert_onValidInput() {
         //given
-        VendorAgreement vendorAgreement = vendorFixtures.vendorAgreementBuilder.forVendor("vendorId").build();
+        VendorAgreement vendorAgreement = builders.aVendorAgreement().forVendor("vendorId").build();
         given(concertFixtures.vendorService.getVendorAgreement("vendorId")).willReturn(vendorAgreement);
 
         //when
@@ -41,7 +41,7 @@ class CreateConcert_CompTest extends ConcertLogicTestBase {
     @Test
     void createConcert_publishesEvent_onValidInput() {
         //given
-        VendorAgreement vendorAgreement = vendorFixtures.vendorAgreementBuilder.forVendor("vendorId").build();
+        VendorAgreement vendorAgreement = builders.aVendorAgreement().forVendor("vendorId").build();
         given(concertFixtures.vendorService.getVendorAgreement("vendorId")).willReturn(vendorAgreement);
 
         //when

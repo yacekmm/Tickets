@@ -1,10 +1,9 @@
 package com.bottega.vendor.agreements.fixtures;
 
-import lombok.*;
+import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
-@AllArgsConstructor //for Spring to Autowire
 @NoArgsConstructor
 public class VendorFixtures {
 
@@ -15,7 +14,7 @@ public class VendorFixtures {
 
 
     //builders
-    public VendorAgreementBuilder vendorAgreementBuilder;
+
 
     //clients
 
@@ -27,15 +26,7 @@ public class VendorFixtures {
 
 
     public static VendorFixtures init() {
-        VendorFixtures vendorFixtures = new VendorFixtures();
-
-        initBuilders(vendorFixtures);
-
-        return vendorFixtures;
-    }
-
-    private static void initBuilders(VendorFixtures concertFixtures) {
-        concertFixtures.vendorAgreementBuilder = new VendorAgreementBuilder();
+        return new VendorFixtures();
     }
 
 
