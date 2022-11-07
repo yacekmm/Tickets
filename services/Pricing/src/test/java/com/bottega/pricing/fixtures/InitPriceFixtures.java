@@ -1,7 +1,6 @@
 package com.bottega.pricing.fixtures;
 
-import com.bottega.pricing.initialPrice.InitPriceCalculator;
-import com.bottega.pricing.initialPrice.InitialPriceService;
+import com.bottega.pricing.initialPrice.*;
 import com.bottega.pricing.price.api.app.PriceService;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,16 +18,17 @@ public class InitPriceFixtures {
     public InitialPriceService initPriceService;
 
     //mocks
+    @Autowired
     public PriceService priceService;
 
     @Autowired
-    public InitPriceChangeEventApiClient initPriceEventClient;
+    public InitPriceChangeEventPublisher initPriceChangeEventPublisher;
 
-    public static InitPriceFixtures init(SharedFixtures sharedFixtures) {
+    public static InitPriceFixtures init() {
         InitPriceFixtures initPriceFixtures = new InitPriceFixtures();
 
         initMocks(initPriceFixtures);
-        initSut(initPriceFixtures, sharedFixtures);
+        initSut(initPriceFixtures);
 
         return initPriceFixtures;
     }
@@ -37,11 +37,10 @@ public class InitPriceFixtures {
         factorFixtures.priceService = mock(PriceService.class);
     }
 
-    private static void initSut(InitPriceFixtures initPriceFixtures, SharedFixtures sharedFixtures) {
+    private static void initSut(InitPriceFixtures initPriceFixtures) {
         initPriceFixtures.initPriceService = new InitialPriceService(
                 new InitPriceCalculator(),
-                initPriceFixtures.priceService,
-                sharedFixtures.eventPublisher
+                initPriceFixtures.priceService
         );
     }
 

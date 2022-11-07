@@ -1,10 +1,12 @@
 package com.bottega.vendor.concert.domain;
 
+import com.bottega.vendor.agreements.VendorService;
 import com.bottega.vendor.concert.api.app.ConcertService;
 import com.bottega.vendor.concert.fixtures.*;
 import com.bottega.vendor.concert.fixtures.clients.ConcertApiClient;
 import com.bottega.vendor.concert.infra.repo.*;
 import com.bottega.vendor.fixtures.*;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -36,11 +38,17 @@ public class ConcertFixtures {
     public TagService tagService;
     @Autowired
     public CategoryService categoryService;
+    
+    //mocks
+    @Autowired
+    public VendorService vendorService;
 
     public static ConcertFixtures init(SharedFixtures sharedFixtures) {
         ConcertFixtures concertFixtures = new ConcertFixtures();
 
         initInfrastructure(concertFixtures);
+        initMocks(concertFixtures);
+        initServices(concertFixtures);
         initSut(concertFixtures, sharedFixtures);
         initBuilders(concertFixtures, sharedFixtures);
 
@@ -53,16 +61,24 @@ public class ConcertFixtures {
         concertFixtures.tagRepo = new InMemoryTagRepo();
     }
 
-    private static void initSut(ConcertFixtures concertFixtures, SharedFixtures sharedFixtures) {
+    private static void initMocks(ConcertFixtures concertFixtures) {
+        concertFixtures.vendorService = Mockito.mock(VendorService.class);
+    }
+
+    private static void initServices(ConcertFixtures concertFixtures) {
         concertFixtures.tagService = new TagService();
         concertFixtures.categoryService = new CategoryService();
+    }
+
+    private static void initSut(ConcertFixtures concertFixtures, SharedFixtures sharedFixtures) {
         concertFixtures.concertService = new ConcertService(
                 new ConcertFactory(sharedFixtures.clock),
                 concertFixtures.concertRepo,
                 new FakePricingClient(),
                 sharedFixtures.fakeEventPublisher(),
                 concertFixtures.tagService,
-                concertFixtures.categoryService
+                concertFixtures.categoryService,
+                concertFixtures.vendorService
         );
     }
 

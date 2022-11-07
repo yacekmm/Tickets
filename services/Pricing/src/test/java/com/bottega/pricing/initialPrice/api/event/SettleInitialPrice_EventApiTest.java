@@ -14,7 +14,7 @@ class SettleInitialPrice_EventApiTest extends FrameworkTestBase {
     public void settleInitialPrice_createsNewPrice() {
 
         //when
-        ConcertCreatedEventPayload payload = initPriceFixtures.initPriceEventClient.publishConcertCreatedEvent();
+        ConcertCreatedEventPayload payload = initPriceFixtures.initPriceChangeEventPublisher.publishConcertCreatedEvent();
 
         //then
         await().until(() -> !priceFixtures.priceRepo.findByItemId(payload.concertId()).isEmpty());

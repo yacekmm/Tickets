@@ -3,7 +3,7 @@ package com.bottega.vendor.concert.api.app;
 import com.bottega.sharedlib.ddd.ApplicationService;
 import com.bottega.sharedlib.event.EventPublisher;
 import com.bottega.sharedlib.vo.error.ErrorResult;
-import com.bottega.vendor.agreements.VendorId;
+import com.bottega.vendor.agreements.*;
 import com.bottega.vendor.concert.Price;
 import com.bottega.vendor.concert.domain.*;
 import com.bottega.vendor.concert.infra.repo.ConcertRepo;
@@ -28,15 +28,16 @@ public class ConcertService {
     private final EventPublisher eventPublisher;
     private final TagService tagService;
     private final CategoryService categoryService;
+    private final VendorService vendorService;
 
     public Either<ErrorResult, Concert> createConcert(String title, String dateTime, String vendorIdString) {
         //TODO: should be retrieved from Vendor module
-        VendorId vendorId = new VendorId(vendorIdString);
-        return concertFactory.createConcert(title, dateTime, vendorId)
+        VendorAgreement vendorAgreement = vendorService.getVendorAgreement(vendorIdString);
+        return concertFactory.createConcert(title, dateTime, vendorAgreement.vendorId())
                 .peek(concert -> concert.initNewConcert(tagService, categoryService))
                 .map(concertRepo::save)
                 //TODO: Outbox, post-transaction?
-                .peek(concert -> eventPublisher.publish(concertCreated(concert, 5)));
+                .peek(concert -> eventPublisher.publish(concertCreated(concert, vendorAgreement.profitMarginPercentage())));
     }
 
     public Either<ErrorResult, List<Price>> discountConcert(String concertId, int percentage) {

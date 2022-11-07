@@ -1,7 +1,6 @@
 package com.bottega.pricing.fixtures;
 
-import com.bottega.sharedlib.event.Event;
-import com.bottega.sharedlib.event.EventPublisher;
+import com.bottega.sharedlib.event.*;
 import com.bottega.sharedlib.event.payload.ConcertCreatedEventPayload;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -13,7 +12,7 @@ import static com.bottega.sharedlib.event.EventType.CONCERT_CREATED;
 
 @Component
 @AllArgsConstructor
-public class InitPriceChangeEventApiClient {
+public class InitPriceChangeEventPublisher {
 
     private final EventPublisher eventPublisher;
 

@@ -13,6 +13,6 @@ public class LogicTestBase {
 
         this.sharedFixtures = SharedFixtures.init();
         this.priceFixtures = PriceFixtures.init(sharedFixtures);
-        this.initPriceFixtures = InitPriceFixtures.init(sharedFixtures);
+        this.initPriceFixtures = InitPriceFixtures.init();
     }
 }

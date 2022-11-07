@@ -2,6 +2,7 @@ package com.bottega.vendor.concert.api.app;
 
 import com.bottega.sharedlib.fixtures.*;
 import com.bottega.sharedlib.vo.error.ErrorResult;
+import com.bottega.vendor.agreements.VendorAgreement;
 import com.bottega.vendor.concert.domain.Concert;
 import com.bottega.vendor.concert.fixtures.ConcertLogicTestBase;
 import com.bottega.vendor.concert.fixtures.asserts.ConcertAssert;
@@ -12,15 +13,19 @@ import java.util.Set;
 
 import static com.bottega.sharedlib.config.TestClockConfig.TEST_TIME_PLUS_30_DAYS;
 import static org.assertj.vavr.api.VavrAssertions.assertThat;
+import static org.mockito.BDDMockito.given;
 
 class CreateConcert_CompTest extends ConcertLogicTestBase {
 
 
     @Test
     void createConcert_createsConcert_onValidInput() {
+        //given
+        VendorAgreement vendorAgreement = vendorFixtures.vendorAgreementBuilder.forVendor("vendorId").build();
+        given(concertFixtures.vendorService.getVendorAgreement("vendorId")).willReturn(vendorAgreement);
 
         //when
-        Either<ErrorResult, Concert> result = concertFixtures.concertService.createConcert("Woodstock", TEST_TIME_PLUS_30_DAYS.toString(), "vendorId");
+        Either<ErrorResult, Concert> result = concertFixtures.concertService.createConcert("Woodstock", TEST_TIME_PLUS_30_DAYS.toString(), vendorAgreement.vendorId().asString());
 
         //then
         assertThat(result).isRight();
@@ -28,16 +33,19 @@ class CreateConcert_CompTest extends ConcertLogicTestBase {
                 .hasIdAsUUID()
                 .hasTitle("Woodstock")
                 .hasDate(TEST_TIME_PLUS_30_DAYS)
-                .hasVendorId("vendorId")
+                .hasVendorId(vendorAgreement.vendorId())
                 .hasTags(Set.of())
                 .isPersistedIn(concertFixtures.concertRepo, RepoEntries.SINGULAR);
     }
 
     @Test
     void createConcert_publishesEvent_onValidInput() {
+        //given
+        VendorAgreement vendorAgreement = vendorFixtures.vendorAgreementBuilder.forVendor("vendorId").build();
+        given(concertFixtures.vendorService.getVendorAgreement("vendorId")).willReturn(vendorAgreement);
 
         //when
-        Either<ErrorResult, Concert> result = concertFixtures.concertService.createConcert("Woodstock", TEST_TIME_PLUS_30_DAYS.toString(), "vendorId");
+        Either<ErrorResult, Concert> result = concertFixtures.concertService.createConcert("Woodstock", TEST_TIME_PLUS_30_DAYS.toString(), vendorAgreement.vendorId().asString());
 
         //then
         assertThat(result).hasRightValueSatisfying(c ->
@@ -47,7 +55,7 @@ class CreateConcert_CompTest extends ConcertLogicTestBase {
                                 c.getTitle().getValue(),
                                 c.getDate().getUtcDate().toString(),
                                 new String[]{},
-                                5)
+                                vendorAgreement.profitMarginPercentage())
         );
     }
 

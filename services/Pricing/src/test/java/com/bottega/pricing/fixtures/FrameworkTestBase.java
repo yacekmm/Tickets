@@ -4,7 +4,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.cloud.contract.stubrunner.spring.AutoConfigureStubRunner;
-import org.springframework.cloud.contract.verifier.messaging.boot.AutoConfigureMessageVerifier;
 import org.springframework.kafka.test.context.EmbeddedKafka;
 import org.springframework.test.context.ActiveProfiles;
 
@@ -16,7 +15,7 @@ import static org.springframework.cloud.contract.stubrunner.spring.StubRunnerPro
 @ActiveProfiles({"test"})
 @AutoConfigureStubRunner(ids = CDC_STUB_ID_VENDOR, stubsMode = LOCAL)
 @EmbeddedKafka(partitions = 1, topics = { "pricing.price" }, brokerProperties = { "listeners=PLAINTEXT://localhost:19091", "port=19091" })
-@AutoConfigureMessageVerifier
+//@AutoConfigureMessageVerifier
 public class FrameworkTestBase {
 
     @Autowired
