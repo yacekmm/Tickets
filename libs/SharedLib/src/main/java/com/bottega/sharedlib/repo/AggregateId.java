@@ -2,8 +2,7 @@ package com.bottega.sharedlib.repo;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.UUID;
 
@@ -23,6 +22,7 @@ public class AggregateId implements Serializable {
     public AggregateId(AggregateId aggId) {
         this.value = aggId.value;
     }
+
     public static AggregateId generate() {
         return new AggregateId(UUID.randomUUID().toString());
     }

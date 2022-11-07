@@ -11,7 +11,7 @@ import static com.bottega.sharedlib.config.ApiVersions.V1;
 @AllArgsConstructor
 public class ConcertReadRestController {
 
-    private final ConcertFinder concertFinder;
+    private final ConcertFinderRepo concertFinderRepo;
 
     //TODO: Api Test
     @GetMapping(path = V1 + "/concert/vendor/{vendorId}")
@@ -19,7 +19,7 @@ public class ConcertReadRestController {
     public List<ConcertDto> createConcert(
             @PathVariable("vendorId") String vendorId) {
 
-        return concertFinder.findByVendorIdOrderByDateAsc(vendorId).stream()
+        return concertFinderRepo.findByVendorIdOrderByDateAsc(vendorId).stream()
                 .map(ConcertDto::from)
                 .toList();
     }
