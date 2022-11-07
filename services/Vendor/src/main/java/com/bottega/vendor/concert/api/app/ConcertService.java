@@ -35,7 +35,7 @@ public class ConcertService {
         return concertFactory.createConcert(title, dateTime, vendorId)
                 .peek(concert -> concert.initNewConcert(tagService, categoryService))
                 .map(concertRepo::save)
-                //TODO: Outbox?
+                //TODO: Outbox, post-transaction?
                 .peek(concert -> eventPublisher.publish(concertCreated(concert, 5)));
     }
 

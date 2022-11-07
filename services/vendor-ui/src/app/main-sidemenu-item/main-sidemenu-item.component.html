@@ -26,6 +26,7 @@
 
 
   <mat-list-item
+    id="{{menuItem.getId()}}"
     *ngIf="menuItem.getLink()"
     (click)="menuItem.toggleOpen()"
     [routerLink]="[ menuItem.getLink() ]"

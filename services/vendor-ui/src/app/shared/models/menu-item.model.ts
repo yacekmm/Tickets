@@ -5,6 +5,7 @@ export class MenuItemModel implements MenuItemInterface {
   public name: string = "";
   public icon: string = "";
   public link: string = "";
+  public id: string = "";
   public isOpened: boolean = true;
   public sub: Array<MenuItemInterface> = [];
 
@@ -25,6 +26,10 @@ export class MenuItemModel implements MenuItemInterface {
 
   public getLink(): string {
     return this.link;
+  }
+
+  public getId(): string {
+    return this.id;
   }
 
   public isItemOpened(): boolean {

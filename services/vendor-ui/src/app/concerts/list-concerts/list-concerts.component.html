@@ -18,22 +18,23 @@
 
 
     <mat-table
+      id="concerts-list"
       *ngIf="concerts.length > 0"
       [dataSource]="concerts">
 
       <ng-container matColumnDef="title">
         <mat-header-cell *matHeaderCellDef>Title</mat-header-cell>
-        <mat-cell *matCellDef="let concerts">{{concerts.title}}</mat-cell>
+        <mat-cell class="concert-title" *matCellDef="let concerts">{{concerts.title}}</mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="date">
         <mat-header-cell *matHeaderCellDef>Date</mat-header-cell>
-        <mat-cell *matCellDef="let concerts">{{concerts.date| amLocal | amDateFormat: 'YYYY-MM-DD'}}</mat-cell>
+        <mat-cell class="concert-date" *matCellDef="let concerts">{{concerts.date | amDateFormat: 'YYYY-MM-DD'}}</mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="id">
         <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
-        <mat-cell *matCellDef="let concerts"><span>{{concerts.id}}</span></mat-cell>
+        <mat-cell class="concert-id" *matCellDef="let concerts"><span>{{concerts.id}}</span></mat-cell>
       </ng-container>
 
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

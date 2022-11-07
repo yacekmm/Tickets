@@ -2,6 +2,7 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {CreateConcertResultDto} from '../http-client/create-concert-result-dto.model';
 import {ConcertHttpClientService} from '../http-client/concert-http-client.service';
 import {SnackBarService} from '../../shared/snack-bar.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-create-concert',
@@ -31,8 +32,9 @@ export class CreateConcertComponent implements OnInit {
   }
 
   createConcert() {
+    let selectedMoment: moment.Moment = moment(this.modelCreateConcert.date);
     this.requestInProgress = true;
-    this.concertHttpClient.createConcert(this.modelCreateConcert.title, this.modelCreateConcert.date)
+    this.concertHttpClient.createConcert(this.modelCreateConcert.title, selectedMoment.format("YYYY-MM-DD"))
       .subscribe({
         next: (createConcertResultDto: CreateConcertResultDto) => {
           this.initForm();
