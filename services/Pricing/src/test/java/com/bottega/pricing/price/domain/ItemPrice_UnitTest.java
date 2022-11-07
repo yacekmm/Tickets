@@ -9,7 +9,7 @@ class ItemPrice_UnitTest extends LogicTestBase {
     @Test
     void applyPercentageFactor_discountsPrice_onValidRequest() {
         //given
-        ItemPrice itemPrice = priceFixtures.priceBuilder.build();
+        ItemPrice itemPrice = builders.aPrice().build();
 
         //when
         ItemPrice result = itemPrice.applyFactor(PriceFactorFactory.percentageFactor(10, itemPrice));

@@ -6,15 +6,14 @@ import io.restassured.response.ValidatableResponse;
 import org.junit.jupiter.api.Test;
 
 import static org.apache.http.HttpStatus.SC_OK;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.*;
 
 public class ApplyPercentageFactor_RestApiTest extends FrameworkTestBase {
 
     @Test
     public void applyFactor_applies_onValidRequest() {
         //given
-        ItemPrice itemPrice = priceFixtures.priceBuilder.priceForItem(100_00, "item-id").inDb();
+        ItemPrice itemPrice = builders.aPrice().priceForItem(100_00, "item-id").inDb();
 
         //when
         ValidatableResponse response = priceFixtures.priceApiClient.applyPercentageFactor("item-id", 10);

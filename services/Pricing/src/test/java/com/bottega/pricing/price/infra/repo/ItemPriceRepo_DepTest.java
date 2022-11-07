@@ -18,10 +18,10 @@ public class ItemPriceRepo_DepTest extends FrameworkTestBase {
     }
 
     @Test
-    public void applyFactor_applies_onValidRequest() {
+    public void inMemoryPriceRepo_isValid() {
         //given
-        ItemPrice itemPrice = priceFixtures.priceBuilder.priceForItem(100_00, "item-id").build();
-        ItemPrice otherPrice = priceFixtures.priceBuilder.priceForItem(100_00, "otherId").build();
+        ItemPrice itemPrice = builders.aPrice().priceForItem(100_00, "item-id").build();
+        ItemPrice otherPrice = builders.aPrice().priceForItem(100_00, "otherId").build();
 
         //when
         inMemoryRepo.saveAll(of(itemPrice, otherPrice));

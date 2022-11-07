@@ -2,10 +2,8 @@ package com.bottega.pricing.price.api.app;
 
 import com.bottega.pricing.fixtures.LogicTestBase;
 import com.bottega.pricing.price.domain.ItemPrice;
-import com.bottega.pricing.price.fixtures.PriceAssert;
-import com.bottega.pricing.price.fixtures.PriceFactorAssert;
-import com.bottega.sharedlib.fixtures.ErrorAssert;
-import com.bottega.sharedlib.fixtures.EventAssert;
+import com.bottega.pricing.price.fixtures.*;
+import com.bottega.sharedlib.fixtures.*;
 import com.bottega.sharedlib.vo.error.ErrorResult;
 import io.vavr.control.Either;
 import org.junit.jupiter.api.Test;
@@ -21,7 +19,7 @@ class ApplyPercentageFactor_CompTest extends LogicTestBase {
 
     @Test
     void applyPercentageFactor_returnsSingleDiscountedPrice_onValidRequest() {
-        ItemPrice price = priceFixtures.priceBuilder.priceForItem(100_00, "item-id").inDb();
+        ItemPrice price = builders.aPrice().priceForItem(100_00, "item-id").inDb();
 
         //when
         Either<ErrorResult, List<ItemPrice>> result = priceFixtures.priceService.applyPercentageFactor("item-id", 10);
@@ -58,7 +56,7 @@ class ApplyPercentageFactor_CompTest extends LogicTestBase {
 
     @Test
     void applyPercentageFactor_publishesPriceChangeEvent_onPriceChange() {
-        ItemPrice price = priceFixtures.priceBuilder.priceForItem(100_00, "item-id").inDb();
+        ItemPrice price = builders.aPrice().priceForItem(100_00, "item-id").inDb();
 
         //when
         Either<ErrorResult, List<ItemPrice>> result = priceFixtures.priceService.applyPercentageFactor("item-id", 10);

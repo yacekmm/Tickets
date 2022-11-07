@@ -24,6 +24,8 @@ public class FrameworkTestBase {
     protected PriceFixtures priceFixtures;
     @Autowired
     protected InitPriceFixtures initPriceFixtures;
+    @Autowired
+    protected TestBuilders builders;
 
 
     @AfterEach

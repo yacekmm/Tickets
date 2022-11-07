@@ -1,9 +1,7 @@
 package com.bottega.pricing.fixtures;
 
 import com.bottega.pricing.price.api.app.PriceService;
-import com.bottega.pricing.price.fixtures.InMemoryPriceRepo;
-import com.bottega.pricing.price.fixtures.ItemPriceBuilder;
-import com.bottega.pricing.price.fixtures.PriceApiClient;
+import com.bottega.pricing.price.fixtures.*;
 import com.bottega.pricing.price.infra.repo.ItemPriceRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -20,10 +18,6 @@ public class PriceFixtures {
     @Autowired
     public ItemPriceRepo priceRepo;
 
-    //builders
-    @Autowired
-    public ItemPriceBuilder priceBuilder;
-
     //API clients
     @Autowired
     public PriceApiClient priceApiClient;
@@ -33,7 +27,6 @@ public class PriceFixtures {
 
         initRepos(priceFixtures);
         initSut(priceFixtures, sharedFixtures);
-        initBuilders(priceFixtures);
 
         return priceFixtures;
     }
@@ -44,10 +37,6 @@ public class PriceFixtures {
 
     private static void initSut(PriceFixtures factorFixtures, SharedFixtures sharedFixtures) {
         factorFixtures.priceService = new PriceService(factorFixtures.priceRepo, sharedFixtures.eventPublisher);
-    }
-
-    private static void initBuilders(PriceFixtures priceFixtures) {
-        priceFixtures.priceBuilder = new ItemPriceBuilder(priceFixtures.priceRepo);
     }
 
     public void tearDown() {
