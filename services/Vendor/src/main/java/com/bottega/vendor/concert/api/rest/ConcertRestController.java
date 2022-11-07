@@ -34,7 +34,9 @@ public class ConcertRestController {
             @RequestBody DiscountConcertRequestDto requestDto) {
 
         return concertService.discountConcert(concertId, requestDto.percentage())
-                .map(prices -> prices.stream().map(price -> new DiscountedPriceResponseDto(price.price().toInt())).toList())
+                .map(prices -> prices.stream()
+                        .map(DiscountedPriceResponseDto::fromPrice)
+                        .toList())
                 .getOrElseThrow(ErrorResult::toException);
     }
 }

@@ -1,11 +1,9 @@
 package com.bottega.vendor.infra.client.pricing;
 
 import com.bottega.sharedlib.vo.Money;
-import com.bottega.vendor.concert.Price;
-import com.bottega.vendor.concert.PriceFactor;
+import com.bottega.vendor.concert.*;
 
-import java.util.Arrays;
-import java.util.Map;
+import java.util.*;
 
 public record PriceResponseDto(
         int price,
@@ -16,8 +14,7 @@ public record PriceResponseDto(
                 new Money(price),
                 Arrays.stream(factors)
                         .map(PriceFactorResponseDto::toPriceFactor)
-                        .toList()
-                        .toArray(PriceFactor[]::new));
+                        .toList());
     }
 
     record PriceFactorResponseDto(

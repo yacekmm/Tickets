@@ -8,7 +8,6 @@ import com.bottega.vendor.concert.domain.Concert;
 import com.bottega.vendor.concert.fixtures.ConcertLogicTestBase;
 import com.bottega.vendor.concert.fixtures.asserts.PriceAssert;
 import io.vavr.control.Either;
-import org.apache.groovy.util.Maps;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -33,8 +32,8 @@ class DiscountConcert_CompTest extends ConcertLogicTestBase {
         assertThat(result).hasRightValueSatisfying(prices -> {
             Assertions.assertThat(prices).hasSize(1);
             PriceAssert.assertThatPrice(prices.get(0))
-                    .equalTo(new Money(100_00))
-                    .hasFactors(new PriceFactor("PERCENTAGE", 10, Maps.of("type", "MINUS")));
+                    .equalTo(new Money(90_00))
+                    .hasFactors(new PriceFactor(null, 10, null));
         });
     }
 

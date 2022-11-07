@@ -9,8 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import static com.bottega.sharedlib.vo.error.ErrorResult.serviceUnavailable;
 import static com.bottega.vendor.concert.api.app.ConcertErrorCode.http_error;
@@ -19,7 +18,7 @@ import static io.vavr.control.Option.ofOptional;
 @ApiClient
 @AllArgsConstructor
 @Slf4j
-public class PricingHttpClient implements PricingClient {
+public class HttpPricingClient implements PricingClient {
 
     private final WebClient pricingWebClient;
 
