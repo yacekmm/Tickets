@@ -12,35 +12,50 @@ tasks.withType(Test) {
 
 task microTest(type: Test) {
     filter {
+        include '**/**microTest.class'
         include '**/**MicroTest.class'
+
+        include '**/**microSpec.class'
         include '**/**MicroSpec.class'
     }
 }
 
 task unitTest(type: Test) {
     filter {
+        include '**/**unitTest.class'
         include '**/**UnitTest.class'
+
+        include '**/**unitSpec.class'
         include '**/**UnitSpec.class'
     }
 }
 
 task compTest(type: Test) {
     filter {
+        include '**/**compTest.class'
         include '**/**CompTest.class'
+
+        include '**/**compSpec.class'
         include '**/**CompSpec.class'
     }
 }
 
 task depTest(type: Test) {
     filter {
+        include '**/**depTest.class'
         include '**/**DepTest.class'
+
+        include '**/**depSpec.class'
         include '**/**DepSpec.class'
     }
 }
 
 task apiTest(type: Test) {
     filter {
+        include '**/**apiTest.class'
         include '**/**ApiTest.class'
+
+        include '**/**apiSpec.class'
         include '**/**ApiSpec.class'
     }
 }
