@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static com.bottega.vendor.concert.domain.Title.from;
 import static org.apache.commons.lang3.StringUtils.repeat;
 
-class Title_MicroTest extends ConcertLogicTestBase {
+class Title_JunitMicroTest extends ConcertLogicTestBase {
 
     @Test
     public void fromString_OK_onValidString(){
@@ -17,7 +17,7 @@ class Title_MicroTest extends ConcertLogicTestBase {
     @Test
     public void fromString_trimsTrailingAndLeadingWhitespaces(){
         //given
-        String expectedValue = repeat("a", 20);
+        String expectedValue = repeat("a", 10);
 
         //expect
         TitleAssert.assertThatTitle(from("     " + expectedValue + "    ")).hasValue(expectedValue);
@@ -26,7 +26,7 @@ class Title_MicroTest extends ConcertLogicTestBase {
     @Test
     public void fromString_honorsLengthLimits(){
         //expect
-        TitleAssert.assertThatTitle(from(repeat("a", 20))).isValid();
+        TitleAssert.assertThatTitle(from(repeat("a", 10))).isValid();
         TitleAssert.assertThatTitle(from(repeat("a", 160))).isValid();
 
         TitleAssert.assertThatTitle(from(repeat("a", 9))).hasInvalidLengthError();
