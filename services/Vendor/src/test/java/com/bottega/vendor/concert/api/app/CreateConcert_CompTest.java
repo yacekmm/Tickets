@@ -25,13 +25,13 @@ class CreateConcert_CompTest extends ConcertLogicTestBase {
         given(concertFixtures.vendorService.getVendorAgreement("vendorId")).willReturn(vendorAgreement);
 
         //when
-        Either<ErrorResult, Concert> result = concertFixtures.concertService.createConcert("Woodstock", TEST_TIME_PLUS_30_DAYS.toString(), vendorAgreement.vendorId().asString());
+        Either<ErrorResult, Concert> result = concertFixtures.concertService.createConcert("Woodstock 2000", TEST_TIME_PLUS_30_DAYS.toString(), vendorAgreement.vendorId().asString());
 
         //then
         assertThat(result).isRight();
         ConcertAssert.assertThatConcert(result.get())
                 .hasIdAsUUID()
-                .hasTitle("Woodstock")
+                .hasTitle("Woodstock 2000")
                 .hasDate(TEST_TIME_PLUS_30_DAYS)
                 .hasVendorId(vendorAgreement.vendorId())
                 .hasTags(Set.of())
@@ -45,7 +45,7 @@ class CreateConcert_CompTest extends ConcertLogicTestBase {
         given(concertFixtures.vendorService.getVendorAgreement("vendorId")).willReturn(vendorAgreement);
 
         //when
-        Either<ErrorResult, Concert> result = concertFixtures.concertService.createConcert("Woodstock", TEST_TIME_PLUS_30_DAYS.toString(), vendorAgreement.vendorId().asString());
+        Either<ErrorResult, Concert> result = concertFixtures.concertService.createConcert("Woodstock 2000", TEST_TIME_PLUS_30_DAYS.toString(), vendorAgreement.vendorId().asString());
 
         //then
         assertThat(result).hasRightValueSatisfying(c ->

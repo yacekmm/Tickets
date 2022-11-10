@@ -24,7 +24,7 @@ public class ConcertBuilder {
                 .tags(new HashSet<>())
                 .category(null);
 
-        this.withTitle("mock-title")
+        this.withTitle("mock title of a concert")
                 .withDate(TEST_TIME_PLUS_30_DAYS)
                 .vendorId("mock-vendor-id");
     }
@@ -38,7 +38,7 @@ public class ConcertBuilder {
     }
 
     public ConcertBuilder withTitle(String title) {
-        builder.title(Title.from(title));
+        builder.title(Title.from(title).get());
         return this;
     }
 

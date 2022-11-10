@@ -19,7 +19,7 @@ class InitConcert_UnitTest extends ConcertLogicTestBase {
                 Arguments.of("Rock concert", Set.of("rock")),
                 Arguments.of("Scorpions in Warsaw!", Set.of("rock")),
                 Arguments.of("Scorpions on Mystic Festival", Set.of("rock", "festival")),
-                Arguments.of("Rihanna", Set.of("pop"))
+                Arguments.of("Rihanna the best of", Set.of("pop"))
         );
     }
 
@@ -43,7 +43,7 @@ class InitConcert_UnitTest extends ConcertLogicTestBase {
                 Arguments.of("Rock concert", "rock"),
                 Arguments.of("Scorpions in Warsaw!", "rock"),
                 Arguments.of("Scorpions on Mystic Festival", "rock"),
-                Arguments.of("Rihanna", "superstar")
+                Arguments.of("Rihanna the best of", "superstar")
         );
     }
 
