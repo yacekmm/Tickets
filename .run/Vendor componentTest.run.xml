@@ -13,7 +13,7 @@
     <option name="TEST_OBJECT" value="pattern" />
     <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
     <patterns>
-      <pattern testClass=".*CompTest" />
+      <pattern testClass=".*Comp(Test|Spec)" />
     </patterns>
     <method v="2">
       <option name="Make" enabled="true" />

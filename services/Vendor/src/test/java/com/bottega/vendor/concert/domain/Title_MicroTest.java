@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static com.bottega.vendor.concert.domain.Title.from;
 import static org.apache.commons.lang3.StringUtils.repeat;
 
-class Title_JunitMicroTest extends ConcertLogicTestBase {
+class Title_MicroTest extends ConcertLogicTestBase {
 
     @Test
     public void fromString_OK_onValidString(){
