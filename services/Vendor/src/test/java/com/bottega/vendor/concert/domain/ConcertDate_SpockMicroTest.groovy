@@ -3,9 +3,8 @@ package com.bottega.vendor.concert.domain
 import com.bottega.vendor.fixtures.SpecificationBase
 
 import static com.bottega.sharedlib.config.TestClockConfig.TEST_TIME
-import static com.bottega.sharedlib.vo.error.ErrorType.BAD_REQUEST
-import static com.bottega.vendor.concert.api.app.ConcertErrorCode.invalid_date
 import static com.bottega.vendor.concert.domain.ConcertDate.from
+import static com.bottega.vendor.concert.fixtures.ConcertDateAssertSpock.assertThatConcertDate
 import static java.time.LocalDate.of
 import static java.time.temporal.ChronoUnit.DAYS
 
@@ -14,7 +13,8 @@ class ConcertDate_SpockMicroTest extends SpecificationBase {
     def "fromString - OK - on valid input"() {
 
         expect:
-        from(dateString, sharedFixtures.clock).get().utcDate == expectedDate
+        assertThatConcertDate(from(dateString, sharedFixtures.clock))
+                .isEqualTo(expectedDate)
 
         where:
         dateString                         | expectedDate
@@ -30,11 +30,9 @@ class ConcertDate_SpockMicroTest extends SpecificationBase {
     def "fromString - returns error - on invalid input"() {
 
         expect:
-        with(from(dateString, sharedFixtures.clock).getError()) {
-            type == BAD_REQUEST
-            code == invalid_date
-            description == expectedDesc
-        }
+        assertThatConcertDate(from(dateString, sharedFixtures.clock))
+                .hasInvalidDateError(expectedDesc)
+
 
         where:
         dateString                           | expectedDesc

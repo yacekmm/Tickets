@@ -3,16 +3,16 @@ package com.bottega.vendor.concert.domain
 
 import com.bottega.vendor.fixtures.SpecificationBase
 
-import static com.bottega.sharedlib.vo.error.ErrorType.BAD_REQUEST
-import static com.bottega.vendor.concert.api.app.ConcertErrorCode.invalid_title
 import static com.bottega.vendor.concert.domain.Title.from
+import static com.bottega.vendor.concert.fixtures.TitleAssertSpock.assertThatTitle
 
 class Title_SpockMicroTest extends SpecificationBase {
 
     def "fromString - OK - on valid input"() {
 
         expect:
-        from(titleString).get().value == expectedTitle
+        assertThatTitle(from(titleString))
+                .isEqualTo(expectedTitle)
 
         where:
         titleString                  | expectedTitle
@@ -28,11 +28,8 @@ class Title_SpockMicroTest extends SpecificationBase {
     def "fromString - returns error - on invalid length"() {
 
         expect:
-        with(from(titleString).getError()) {
-            type == BAD_REQUEST
-            code == invalid_title
-            description == "Title length must be between 10 and 160 chars"
-        }
+        assertThatTitle(from(titleString))
+                .hasInvalidLengthError()
 
         where:
         titleString << [
@@ -45,11 +42,8 @@ class Title_SpockMicroTest extends SpecificationBase {
     def "fromString - returns error - on banned words in title"() {
 
         expect:
-        with(from(titleString).getError()) {
-            type == BAD_REQUEST
-            code == invalid_title
-            description == "Title must not contain banned word: " + expectedBannedWord
-        }
+        assertThatTitle(from(titleString))
+                .hasBannedWordError(expectedBannedWord)
 
         where:
         titleString                | expectedBannedWord
