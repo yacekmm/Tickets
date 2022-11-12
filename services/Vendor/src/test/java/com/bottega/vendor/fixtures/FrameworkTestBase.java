@@ -22,6 +22,9 @@ public class FrameworkTestBase {
     protected ConcertFixtures concertFixtures;
 
     @Autowired
+    protected ConcertReadFixtures concertReadFixtures;
+
+    @Autowired
     SharedFixtures sharedFixtures;
 
     @Autowired
@@ -30,6 +33,7 @@ public class FrameworkTestBase {
     @AfterEach
     void tearDown() {
         concertFixtures.tearDown();
+        concertReadFixtures.tearDown();
         sharedFixtures.tearDown();
     }
 }

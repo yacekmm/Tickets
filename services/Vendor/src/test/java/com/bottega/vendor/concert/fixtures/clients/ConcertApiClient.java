@@ -32,4 +32,10 @@ public class ConcertApiClient {
                 .post("/concert/{concert-id}/discount", concertId.asString())
                 .then();
     }
+
+    public ValidatableResponse findConcertsForVendor(String vendorId) {
+        return requestSpec
+                .get("/concert/vendor/{vendorId}", vendorId)
+                .then();
+    }
 }
