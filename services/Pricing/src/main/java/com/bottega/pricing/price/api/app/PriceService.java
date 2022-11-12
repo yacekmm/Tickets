@@ -1,8 +1,6 @@
 package com.bottega.pricing.price.api.app;
 
 import com.bottega.pricing.price.domain.ItemPrice;
-import com.bottega.pricing.price.domain.PriceFactorFactory;
-import com.bottega.pricing.price.domain.PricingEventFactory;
 import com.bottega.pricing.price.infra.repo.ItemPriceRepo;
 import com.bottega.sharedlib.ddd.ApplicationService;
 import com.bottega.sharedlib.event.EventPublisher;
@@ -14,9 +12,10 @@ import lombok.AllArgsConstructor;
 import java.util.List;
 
 import static com.bottega.pricing.price.api.app.FactorErrorCode.item_not_found;
+import static com.bottega.pricing.price.domain.PriceFactorFactory.percentageFactor;
 import static com.bottega.pricing.price.domain.PricingEventFactory.priceChange;
 import static com.bottega.sharedlib.vo.error.ErrorResult.notFound;
-import static io.vavr.control.Option.of;
+import static io.vavr.control.Either.left;
 
 @ApplicationService
 @AllArgsConstructor
@@ -28,16 +27,19 @@ public class PriceService {
 
     public Either<ErrorResult, List<ItemPrice>> applyPercentageFactor(String itemId, int percentage) {
 
-        List<ItemPrice> updatedPrices = priceRepo.findByItemId(itemId).stream()
-                .map(itemPrice -> itemPrice.applyFactor(PriceFactorFactory.percentageFactor(percentage, itemPrice)))
-                //TODO: outbox?
-                .peek(itemPrice -> eventPublisher.publish(PricingEventFactory.priceChange(itemPrice)))
-                .toList();
-        priceRepo.saveAll(updatedPrices);
 
-        return of(updatedPrices)
-                .filter(itemPrices -> !itemPrices.isEmpty())
-                .toEither(notFound(item_not_found, "No price entries found for requested item. itemId: " + itemId));
+        List<ItemPrice> updatedPrices = priceRepo.findByItemId(itemId).stream()
+                .map(itemPrice -> itemPrice.applyFactor(percentageFactor(percentage, itemPrice)))
+                .peek(priceRepo::save)
+                //TODO: outbox?
+                .peek(itemPrice -> eventPublisher.publish(priceChange(itemPrice)))
+                .toList();
+
+        if (updatedPrices.isEmpty()) {
+            return left(notFound(item_not_found, "No price entries found for requested item. itemId: " + itemId));
+        } else {
+            return Either.right(updatedPrices);
+        }
     }
 
     public Either<ErrorResult, ItemPrice> addNewPrice(String itemId, Money price) {
