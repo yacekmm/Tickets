@@ -19,6 +19,7 @@ public class ConcertFactory {
 
     private final Clock clock;
 
+    //TODO: unit test
     public Either<ErrorResult, Concert> createConcert(String stringTitle, String date, VendorId vendorId) {
         return ConcertDate.from(date, clock)
                 .combine(Title.from(stringTitle))

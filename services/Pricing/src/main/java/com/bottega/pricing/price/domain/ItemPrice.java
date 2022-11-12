@@ -1,14 +1,12 @@
 package com.bottega.pricing.price.domain;
 
 import com.bottega.sharedlib.ddd.AggregateRoot;
-import com.bottega.sharedlib.repo.BaseEntity;
-import com.bottega.sharedlib.repo.MoneyDbEntity;
+import com.bottega.sharedlib.repo.*;
 import com.bottega.sharedlib.vo.Money;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import static com.bottega.sharedlib.repo.MoneyDbEntity.from;
 import static javax.persistence.CascadeType.ALL;
@@ -44,6 +42,7 @@ public class ItemPrice implements BaseEntity {
         return new ItemPrice(new PriceId(), from(price), itemId, new ArrayList<>());
     }
 
+    //TODO/JM: unit test
     public ItemPrice applyFactor(PriceFactor factor) {
         this.price = from(factor.applyToPrice(getPrice()));
         this.priceFactors.add(factor);

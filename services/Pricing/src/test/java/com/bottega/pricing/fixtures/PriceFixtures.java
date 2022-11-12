@@ -3,12 +3,14 @@ package com.bottega.pricing.fixtures;
 import com.bottega.pricing.price.api.app.PriceService;
 import com.bottega.pricing.price.fixtures.*;
 import com.bottega.pricing.price.infra.repo.ItemPriceRepo;
+import com.bottega.pricing.priceRead.api.app.PriceUpdateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import static org.mockito.Mockito.mock;
+
 @Component
 public class PriceFixtures {
-
 
     //SUTs
     @Autowired
@@ -22,21 +24,34 @@ public class PriceFixtures {
     @Autowired
     public PriceApiClient priceApiClient;
 
+    //mocks
+    @Autowired
+    public PriceUpdateService priceUpdateService;
+
     public static PriceFixtures init(SharedFixtures sharedFixtures) {
         PriceFixtures priceFixtures = new PriceFixtures();
 
+        initMocks(priceFixtures);
         initRepos(priceFixtures);
         initSut(priceFixtures, sharedFixtures);
 
         return priceFixtures;
     }
 
+    private static void initMocks(PriceFixtures priceFixtures) {
+        priceFixtures.priceUpdateService = mock(PriceUpdateService.class);
+    }
+
     private static void initRepos(PriceFixtures priceFixtures) {
         priceFixtures.priceRepo = new InMemoryPriceRepo();
     }
 
-    private static void initSut(PriceFixtures factorFixtures, SharedFixtures sharedFixtures) {
-        factorFixtures.priceService = new PriceService(factorFixtures.priceRepo, sharedFixtures.eventPublisher);
+    private static void initSut(PriceFixtures priceFixtures, SharedFixtures sharedFixtures) {
+        priceFixtures.priceService = new PriceService(
+                priceFixtures.priceRepo,
+                sharedFixtures.eventPublisher,
+                priceFixtures.priceUpdateService
+                );
     }
 
     public void tearDown() {

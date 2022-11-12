@@ -14,6 +14,7 @@ import static com.bottega.pricing.price.api.app.FactorErrorCode.item_not_found;
 import static com.bottega.sharedlib.fixtures.RepoEntries.SINGULAR;
 import static com.bottega.sharedlib.vo.error.ErrorType.NOT_FOUND;
 import static org.assertj.vavr.api.VavrAssertions.assertThat;
+import static org.mockito.BDDMockito.then;
 
 class ApplyPercentageFactor_CompTest extends LogicTestBase {
 
@@ -40,6 +41,31 @@ class ApplyPercentageFactor_CompTest extends LogicTestBase {
     }
 
     @Test
+    void applyPercentageFactor_publishesPriceChangeEvent_onPriceChange() {
+        ItemPrice price = builders.aPrice().priceForItem(100_00, "item-id").inDb();
+
+        //when
+        Either<ErrorResult, List<ItemPrice>> result = priceFixtures.priceService.applyPercentageFactor("item-id", 10);
+
+        //then
+        assertThat(result).isRight();
+        EventAssert.assertThatEventV1(sharedFixtures.fakeEventPublisher().singleEvent())
+                .isPriceChange(90_00, price.getId().asString(), price.getItemId());
+    }
+
+    @Test
+    void applyPercentageFactor_updatesReadModel_onPriceChange() {
+        ItemPrice price = builders.aPrice().priceForItem(100_00, "item-id").inDb();
+
+        //when
+        Either<ErrorResult, List<ItemPrice>> result = priceFixtures.priceService.applyPercentageFactor("item-id", 10);
+
+        //then
+        assertThat(result).isRight();
+        then(priceFixtures.priceUpdateService).should().updateReadModel(price);
+    }
+
+    @Test
     void applyPercentageFactor_returnsError_onNoPriceFound() {
         //when
         Either<ErrorResult, List<ItemPrice>> result = priceFixtures.priceService.applyPercentageFactor("not-existing-id", 10);
@@ -52,18 +78,5 @@ class ApplyPercentageFactor_CompTest extends LogicTestBase {
                                 .hasCode(item_not_found)
                                 .hasDescription("No price entries found for requested item. itemId: not-existing-id")
                 );
-    }
-
-    @Test
-    void applyPercentageFactor_publishesPriceChangeEvent_onPriceChange() {
-        ItemPrice price = builders.aPrice().priceForItem(100_00, "item-id").inDb();
-
-        //when
-        Either<ErrorResult, List<ItemPrice>> result = priceFixtures.priceService.applyPercentageFactor("item-id", 10);
-
-        //then
-        assertThat(result).isRight();
-        EventAssert.assertThatEventV1(sharedFixtures.fakeEventPublisher().singleEvent())
-                .isPriceChange(90_00, price.getId().asString(), price.getItemId());
     }
 }

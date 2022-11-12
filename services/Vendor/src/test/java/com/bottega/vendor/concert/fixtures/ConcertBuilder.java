@@ -26,7 +26,7 @@ public class ConcertBuilder {
 
         this.withTitle("mock title of a concert")
                 .withDate(TEST_TIME_PLUS_30_DAYS)
-                .vendorId("mock-vendor-id");
+                .withVendorId("mock-vendor-id");
     }
 
     public Concert build() {
@@ -47,7 +47,7 @@ public class ConcertBuilder {
         return this;
     }
 
-    public ConcertBuilder vendorId(String vendorId) {
+    public ConcertBuilder withVendorId(String vendorId) {
         builder.vendorId(vendorId);
         return this;
     }

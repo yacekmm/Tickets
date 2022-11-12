@@ -13,6 +13,7 @@ import java.util.Set;
 
 import static com.bottega.sharedlib.config.TestClockConfig.TEST_TIME_PLUS_30_DAYS;
 import static org.assertj.vavr.api.VavrAssertions.assertThat;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
 
 class CreateConcert_CompTest extends ConcertLogicTestBase {
@@ -39,21 +40,37 @@ class CreateConcert_CompTest extends ConcertLogicTestBase {
     }
 
     @Test
-    void createConcert_publishesEvent_onValidInput() {
+    void createConcert_persistsConcert_onValidInput() {
         //given
-        VendorAgreement vendorAgreement = builders.aVendorAgreement().forVendor("vendorId").build();
-        given(concertFixtures.vendorService.getVendorAgreement("vendorId")).willReturn(vendorAgreement);
+        VendorAgreement vendorAgreement = builders.aVendorAgreement().build();
+        given(concertFixtures.vendorService.getVendorAgreement(anyString())).willReturn(vendorAgreement);
 
         //when
         Either<ErrorResult, Concert> result = concertFixtures.concertService.createConcert("Woodstock 2000", TEST_TIME_PLUS_30_DAYS.toString(), vendorAgreement.vendorId().asString());
 
         //then
-        assertThat(result).hasRightValueSatisfying(c ->
+        assertThat(result).isRight();
+        ConcertAssert.assertThatConcert(result.get())
+                .isPersistedIn(concertFixtures.concertRepo, RepoEntries.SINGULAR);
+    }
+
+    //TODO: napisz te testy w Spock
+    @Test
+    void createConcert_publishesEvent_onValidInput() {
+        //given
+        VendorAgreement vendorAgreement = builders.aVendorAgreement().build();
+        given(concertFixtures.vendorService.getVendorAgreement(anyString())).willReturn(vendorAgreement);
+
+        //when
+        Either<ErrorResult, Concert> result = concertFixtures.concertService.createConcert("Woodstock 2000", TEST_TIME_PLUS_30_DAYS.toString(), vendorAgreement.vendorId().asString());
+
+        //then
+        assertThat(result).hasRightValueSatisfying(concert ->
                 EventAssert.assertThatEventV1(sharedFixtures.fakeEventPublisher().singleEvent())
                         .isConcertCreated(
-                                c.getId().asString(),
-                                c.getTitle().getValue(),
-                                c.getDate().getUtcDate().toString(),
+                                concert.getId().asString(),
+                                concert.getTitle().getValue(),
+                                concert.getDate().getUtcDate().toString(),
                                 new String[]{},
                                 vendorAgreement.profitMarginPercentage())
         );
