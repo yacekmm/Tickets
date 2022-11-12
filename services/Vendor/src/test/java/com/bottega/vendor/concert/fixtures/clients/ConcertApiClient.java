@@ -35,7 +35,7 @@ public class ConcertApiClient {
 
     public ValidatableResponse findConcertsForVendor(String vendorId) {
         return requestSpec
-                .get("/concert/vendor/{vendorId}", vendorId)
+                .get("/concert/vendor/{vendor-id}", vendorId)
                 .then();
     }
 }
