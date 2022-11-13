@@ -8,17 +8,17 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class PriceApiClient {
+public class PricingHttpClient {
 
     private final RequestSpecification requestSpec;
 
     public ValidatableResponse applyPercentageFactor(String itemId, int percentage) {
         return requestSpec
                 .body(Maps.of(
-                        "percentage", percentage,
-                        "type", "MINUS"
+                        "percentage", percentage
                 ))
-                .post("/item/{itemId}/price-factor/percentage", itemId)
+                .pathParam("item-id", itemId)
+                .post("/item/{item-id}/price-factor/percentage")
                 .then();
     }
 }

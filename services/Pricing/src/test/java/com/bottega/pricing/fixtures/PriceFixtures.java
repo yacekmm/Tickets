@@ -22,7 +22,7 @@ public class PriceFixtures {
 
     //API clients
     @Autowired
-    public PriceApiClient priceApiClient;
+    public PricingHttpClient pricingHttpClient;
 
     //mocks
     @Autowired

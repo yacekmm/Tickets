@@ -3,10 +3,7 @@ package com.bottega.pricing.price.api.rest;
 import com.bottega.pricing.price.api.app.PriceService;
 import com.bottega.sharedlib.vo.error.ErrorResult;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -15,7 +12,7 @@ import static com.bottega.sharedlib.config.ApiVersions.V1;
 
 @RestController
 @AllArgsConstructor
-public class PriceFactorRestController {
+public class PriceRestController {
 
     private final PriceService priceService;
 
@@ -23,9 +20,10 @@ public class PriceFactorRestController {
     @ResponseBody
     @Transactional
     public List<PriceWithFactorsDto> applyPercentageFactor(
-            @PathVariable("itemId") String itemId) {
+            @PathVariable("itemId") String itemId,
+            @RequestBody PercentageFactorRequestDto factorRequestDto) {
 
-        return priceService.applyPercentageFactor(itemId, 10)
+        return priceService.applyPercentageFactor(itemId, factorRequestDto.percentage())
                 .map(itemPrices -> itemPrices.stream().map(PriceWithFactorsDto::from).toList())
                 .getOrElseThrow(ErrorResult::toException);
     }

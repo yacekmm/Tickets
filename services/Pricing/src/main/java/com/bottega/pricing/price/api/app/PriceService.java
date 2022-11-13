@@ -13,10 +13,10 @@ import lombok.AllArgsConstructor;
 import javax.transaction.Transactional;
 import java.util.List;
 
-import static com.bottega.pricing.price.api.app.FactorErrorCode.item_not_found;
 import static com.bottega.pricing.price.domain.PriceFactorFactory.percentageFactor;
 import static com.bottega.pricing.price.domain.PricingEventFactory.priceChange;
 import static com.bottega.sharedlib.vo.error.ErrorResult.notFound;
+import static com.bottega.sharedlib.vo.error.GenericErrorCode.not_found;
 import static io.vavr.control.Either.left;
 
 @ApplicationService
@@ -38,7 +38,7 @@ public class PriceService {
                 .toList();
 
         if (updatedPrices.isEmpty()) {
-            return left(notFound(item_not_found, "No price entries found for requested item. itemId: " + itemId));
+            return left(notFound(not_found, "No price entries found for requested item. itemId: " + itemId));
         } else {
             return Either.right(updatedPrices);
         }

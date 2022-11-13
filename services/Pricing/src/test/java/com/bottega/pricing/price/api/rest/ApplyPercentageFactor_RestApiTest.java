@@ -1,33 +1,35 @@
 package com.bottega.pricing.price.api.rest;
 
-import com.bottega.pricing.fixtures.FrameworkTestBase;
+import com.bottega.pricing.fixtures.*;
 import com.bottega.pricing.price.domain.ItemPrice;
+import com.bottega.sharedlib.fixtures.ErrorJsonAssert;
 import io.restassured.response.ValidatableResponse;
 import org.junit.jupiter.api.Test;
-
-import static org.apache.http.HttpStatus.SC_OK;
-import static org.hamcrest.Matchers.*;
 
 public class ApplyPercentageFactor_RestApiTest extends FrameworkTestBase {
 
     @Test
-    public void applyFactor_applies_onValidRequest() {
+    public void applyFactor_OK_onValidRequest() {
         //given
         ItemPrice itemPrice = builders.aPrice().priceForItem(100_00, "item-id").inDb();
 
         //when
-        ValidatableResponse response = priceFixtures.priceApiClient.applyPercentageFactor("item-id", 10);
+        ValidatableResponse response = priceFixtures.pricingHttpClient.applyPercentageFactor("item-id", 20);
 
         //then
-        response
-                .statusCode(SC_OK)
-                .body("$", hasSize(1))
-                .body("[0].priceId", equalTo(itemPrice.getId().asString()))
-                .body("[0].itemId", equalTo(itemPrice.getItemId()))
-                .body("[0].price", equalTo(90_00))
-                .body("[0].factors", hasSize(1))
-                .body("[0].factors[0].type", equalTo("PERCENTAGE"))
-                .body("[0].factors[0].value", equalTo(10));
+        PriceJsonAssert.assertThatPrice(response)
+                .hasSinglePrice(itemPrice, 80_00)
+                .hasSinglePercentageFactor(20);
+    }
+
+    @Test
+    public void applyFactor_returns404_onItemNotFound() {
+        //when
+        ValidatableResponse response = priceFixtures.pricingHttpClient.applyPercentageFactor("non-existing-item-id", 10);
+
+        //then
+        ErrorJsonAssert.assertThatError(response)
+                .isNotFound("No price entries found for requested item. itemId: non-existing-item-id");
     }
 
 }

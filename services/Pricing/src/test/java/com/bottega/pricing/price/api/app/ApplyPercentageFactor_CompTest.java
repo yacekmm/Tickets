@@ -10,9 +10,9 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static com.bottega.pricing.price.api.app.FactorErrorCode.item_not_found;
 import static com.bottega.sharedlib.fixtures.RepoEntries.SINGULAR;
 import static com.bottega.sharedlib.vo.error.ErrorType.NOT_FOUND;
+import static com.bottega.sharedlib.vo.error.GenericErrorCode.not_found;
 import static org.assertj.vavr.api.VavrAssertions.assertThat;
 import static org.mockito.BDDMockito.then;
 
@@ -75,7 +75,7 @@ class ApplyPercentageFactor_CompTest extends LogicTestBase {
                 .hasLeftValueSatisfying(err ->
                         ErrorAssert.assertThatError(err)
                                 .hasType(NOT_FOUND)
-                                .hasCode(item_not_found)
+                                .hasCode(not_found)
                                 .hasDescription("No price entries found for requested item. itemId: not-existing-id")
                 );
     }

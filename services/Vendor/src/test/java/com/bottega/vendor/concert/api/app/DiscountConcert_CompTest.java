@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static com.bottega.sharedlib.vo.error.ErrorType.NOT_FOUND;
-import static com.bottega.vendor.concert.api.app.ConcertErrorCode.concert_not_found;
+import static com.bottega.sharedlib.vo.error.GenericErrorCode.not_found;
 import static org.assertj.vavr.api.VavrAssertions.assertThat;
 
 class DiscountConcert_CompTest extends ConcertLogicTestBase {
@@ -47,7 +47,7 @@ class DiscountConcert_CompTest extends ConcertLogicTestBase {
         assertThat(result).hasLeftValueSatisfying(error ->
                 ErrorAssert.assertThatError(error)
                         .hasType(NOT_FOUND)
-                        .hasCode(concert_not_found)
+                        .hasCode(not_found)
                         .hasDescription("Concert with given ID does not exist. ID: not-existing"));
     }
 

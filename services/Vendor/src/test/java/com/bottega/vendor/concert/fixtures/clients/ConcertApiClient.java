@@ -29,13 +29,15 @@ public class ConcertApiClient {
                 .body(Maps.of(
                         "percentage", percentage
                 ))
-                .post("/concert/{concert-id}/discount", concertId.asString())
+                .pathParam("concert-id", concertId.asString())
+                .post("/concert/{concert-id}/discount")
                 .then();
     }
 
     public ValidatableResponse findConcertsForVendor(String vendorId) {
         return requestSpec
-                .get("/concert/vendor/" + vendorId)
+                .pathParam("vendor-id", vendorId)
+                .get("/concert/vendor/{vendor-id}")
                 .then();
     }
 }

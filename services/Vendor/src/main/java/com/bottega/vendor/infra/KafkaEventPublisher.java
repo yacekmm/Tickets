@@ -1,17 +1,15 @@
 package com.bottega.vendor.infra;
 
-import com.bottega.sharedlib.event.Event;
-import com.bottega.sharedlib.event.EventPublisher;
+import com.bottega.sharedlib.event.*;
 import com.bottega.sharedlib.vo.error.ErrorResult;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.vavr.control.Either;
-import io.vavr.control.Try;
+import io.vavr.control.*;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
-import static com.bottega.sharedlib.vo.error.SharedErrorCode.illegal_argument;
+import static com.bottega.sharedlib.vo.error.GenericErrorCode.illegal_argument;
 
 @AllArgsConstructor
 @Slf4j
