@@ -20,7 +20,7 @@ public class CreateConcert_RestApiTest extends FrameworkTestBase {
     public void createConcert_creates_onValidRequest() {
 
         //when
-        ValidatableResponse response = concertFixtures.concertClient.createConcert("concert-title", ofInstant(TEST_TIME_PLUS_30_DAYS, UTC).toString(), "some-id");
+        ValidatableResponse response = concertFixtures.concertHttpClient.createConcert("concert-title", ofInstant(TEST_TIME_PLUS_30_DAYS, UTC).toString(), "some-id");
 
         //then
         //TODO: API response is valid: API test

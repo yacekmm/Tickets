@@ -1,6 +1,7 @@
 package com.bottega.vendor.fixtures;
 
 import com.bottega.vendor.concert.domain.ConcertFixtures;
+import io.restassured.RestAssured;
 import org.junit.jupiter.api.AfterEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -35,5 +36,6 @@ public class FrameworkTestBase {
         concertFixtures.tearDown();
         concertReadFixtures.tearDown();
         sharedFixtures.tearDown();
+        RestAssured.reset();
     }
 }

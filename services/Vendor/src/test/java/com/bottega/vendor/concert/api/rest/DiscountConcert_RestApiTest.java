@@ -16,7 +16,7 @@ public class DiscountConcert_RestApiTest extends FrameworkTestBase {
         Concert concert = builders.aConcert().inDb();
 
         //when
-        ValidatableResponse response = concertFixtures.concertClient.discountConcert(concert.getId(), 10);
+        ValidatableResponse response = concertFixtures.concertHttpClient.discountConcert(concert.getId(), 10);
 
         //then
         response

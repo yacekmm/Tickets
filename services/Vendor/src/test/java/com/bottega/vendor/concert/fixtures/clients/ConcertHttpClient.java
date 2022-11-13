@@ -1,20 +1,20 @@
 package com.bottega.vendor.concert.fixtures.clients;
 
 import com.bottega.vendor.concert.domain.ConcertId;
+import com.bottega.vendor.fixtures.TestBuilders;
 import io.restassured.response.ValidatableResponse;
-import io.restassured.specification.RequestSpecification;
 import lombok.RequiredArgsConstructor;
 import org.apache.groovy.util.Maps;
 import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class ConcertApiClient {
+public class ConcertHttpClient {
 
-    private final RequestSpecification requestSpec;
+    private final TestBuilders builders;
 
     public ValidatableResponse createConcert(String title, String date, String vendorId) {
-        return requestSpec
+        return builders.aRequestSpec()
                 .body(Maps.of(
                         "title", title,
                         "date", date,
@@ -25,7 +25,7 @@ public class ConcertApiClient {
     }
 
     public ValidatableResponse discountConcert(ConcertId concertId, int percentage) {
-        return requestSpec
+        return builders.aRequestSpec()
                 .body(Maps.of(
                         "percentage", percentage
                 ))
@@ -35,7 +35,7 @@ public class ConcertApiClient {
     }
 
     public ValidatableResponse findConcertsForVendor(String vendorId) {
-        return requestSpec
+        return builders.aRequestSpec()
                 .pathParam("vendor-id", vendorId)
                 .get("/concert/vendor/{vendor-id}")
                 .then();

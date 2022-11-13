@@ -1,7 +1,7 @@
 package com.bottega.pricing.price.fixtures;
 
+import com.bottega.pricing.fixtures.TestBuilders;
 import io.restassured.response.ValidatableResponse;
-import io.restassured.specification.RequestSpecification;
 import lombok.RequiredArgsConstructor;
 import org.apache.groovy.util.Maps;
 import org.springframework.stereotype.Component;
@@ -10,10 +10,10 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class PricingHttpClient {
 
-    private final RequestSpecification requestSpec;
+    private final TestBuilders builders;
 
     public ValidatableResponse applyPercentageFactor(String itemId, int percentage) {
-        return requestSpec
+        return builders.aRequestSpec()
                 .body(Maps.of(
                         "percentage", percentage
                 ))

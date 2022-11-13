@@ -19,7 +19,7 @@ public class FindConcert_RestApiTest extends FrameworkTestBase {
         builders.aConcert().withVendorId("other").inDb();
 
         //when
-        ValidatableResponse response = concertFixtures.concertClient.findConcertsForVendor("vendor");
+        ValidatableResponse response = concertFixtures.concertHttpClient.findConcertsForVendor("vendor");
 
         //then
         response

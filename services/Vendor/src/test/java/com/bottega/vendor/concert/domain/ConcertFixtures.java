@@ -3,7 +3,7 @@ package com.bottega.vendor.concert.domain;
 import com.bottega.vendor.agreements.VendorService;
 import com.bottega.vendor.concert.api.app.ConcertService;
 import com.bottega.vendor.concert.fixtures.*;
-import com.bottega.vendor.concert.fixtures.clients.ConcertApiClient;
+import com.bottega.vendor.concert.fixtures.clients.ConcertHttpClient;
 import com.bottega.vendor.concert.infra.repo.*;
 import com.bottega.vendor.fixtures.*;
 import org.mockito.Mockito;
@@ -27,7 +27,7 @@ public class ConcertFixtures {
 
     //clients
     @Autowired
-    public ConcertApiClient concertClient;
+    public ConcertHttpClient concertHttpClient;
 
     //services
     @Autowired
