@@ -27,7 +27,7 @@ public class PriceJsonAssert {
                 .statusCode(SC_OK)
                 .body("[0].factors", hasSize(1))
                 .body("[0].factors[0].type", equalTo("PERCENTAGE"))
-                .body("[0].factors[0].value", equalTo(20));
+                .body("[0].factors[0].value", equalTo(value));
         return this;
     }
 }
