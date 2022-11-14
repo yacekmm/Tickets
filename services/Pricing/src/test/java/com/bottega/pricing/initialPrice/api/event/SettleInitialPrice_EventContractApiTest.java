@@ -1,7 +1,9 @@
 package com.bottega.pricing.initialPrice.api.event;
 
 import com.bottega.pricing.fixtures.FrameworkTestBase;
+import com.bottega.pricing.price.domain.ItemPrice;
 import com.bottega.pricing.price.fixtures.PriceAssert;
+import com.bottega.sharedlib.fixtures.EventAssert;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.contract.stubrunner.StubTrigger;
@@ -21,12 +23,20 @@ class SettleInitialPrice_EventContractApiTest extends FrameworkTestBase {
         trigger.trigger("triggerConcertCreatedEvent");
 
         //then
-        await().until(() -> priceFixtures.priceRepo.findAll().iterator().hasNext());
-        sharedFixtures.inTransaction(() ->
-                PriceAssert.assertThatPrice(priceFixtures.priceRepo.findAll().iterator().next())
-                        .isPersistedIn(priceFixtures.priceRepo, SINGULAR)
-                        .hasPrice(105_00)
-                        .hasNoFactors()
+        await().until(() -> priceFixtures.itemPriceRepo.findAll().iterator().hasNext());
+
+        sharedFixtures.inTransaction(() -> {
+
+                    ItemPrice actualPrice = priceFixtures.itemPriceRepo.findAll().iterator().next();
+
+                    PriceAssert.assertThatPrice(actualPrice)
+                            .isPersistedIn(priceFixtures.itemPriceRepo, SINGULAR)
+                            .hasPrice(105_00)
+                            .hasNoFactors();
+
+                    EventAssert.assertThatEventV1(sharedFixtures.testEventListener.singleEvent())
+                            .isPriceChange(actualPrice.getPrice().toInt(), actualPrice.getId().asString(), actualPrice.getItemId());
+                }
         );
     }
 

@@ -6,6 +6,7 @@ import com.bottega.vendor.concert.fixtures.*;
 import com.bottega.vendor.concert.fixtures.clients.ConcertHttpClient;
 import com.bottega.vendor.concert.infra.repo.*;
 import com.bottega.vendor.fixtures.*;
+import com.bottega.vendor.infra.client.pricing.PricingClient;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -28,6 +29,8 @@ public class ConcertFixtures {
     //clients
     @Autowired
     public ConcertHttpClient concertHttpClient;
+    @Autowired
+    public PricingClient pricingClient;
 
     //services
     @Autowired

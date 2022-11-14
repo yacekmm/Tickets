@@ -18,7 +18,7 @@ public class PriceFixtures {
 
     //repos
     @Autowired
-    public ItemPriceRepo priceRepo;
+    public ItemPriceRepo itemPriceRepo;
 
     //API clients
     @Autowired
@@ -43,19 +43,19 @@ public class PriceFixtures {
     }
 
     private static void initRepos(PriceFixtures priceFixtures) {
-        priceFixtures.priceRepo = new InMemoryPriceRepo();
+        priceFixtures.itemPriceRepo = new InMemoryItemPriceRepo();
     }
 
     private static void initSut(PriceFixtures priceFixtures, SharedFixtures sharedFixtures) {
         priceFixtures.priceService = new PriceService(
-                priceFixtures.priceRepo,
+                priceFixtures.itemPriceRepo,
                 sharedFixtures.eventPublisher,
                 priceFixtures.priceUpdateService
                 );
     }
 
     public void tearDown() {
-        priceRepo.deleteAll();
+        itemPriceRepo.deleteAll();
     }
 
 }

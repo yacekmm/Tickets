@@ -7,10 +7,6 @@
             </encoder>
     </appender>
 
-    <logger name="org.apache.kafka.clients.admin.*" level="OFF"/>
-    <logger name="Environment" level="OFF"/>
-    <logger name="AbstractConfig" level="OFF"/>
-
     <root>
         <level value="INFO"/>
         <appender-ref ref="consoleLog"/>

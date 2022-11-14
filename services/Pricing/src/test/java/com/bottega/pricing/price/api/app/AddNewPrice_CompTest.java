@@ -23,7 +23,7 @@ class AddNewPrice_CompTest extends LogicTestBase {
         //then
         assertThat(result).hasRightValueSatisfying(itemPrice ->
                 PriceAssert.assertThatPrice(itemPrice)
-                        .isPersistedIn(priceFixtures.priceRepo, SINGULAR)
+                        .isPersistedIn(priceFixtures.itemPriceRepo, SINGULAR)
                         .hasPrice(10_00)
                         .hasItemId("item-id")
                         .hasNoFactors()

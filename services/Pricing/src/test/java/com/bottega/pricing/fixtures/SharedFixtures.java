@@ -1,5 +1,6 @@
 package com.bottega.pricing.fixtures;
 
+import com.bottega.pricing.infra.TestKafkaEventListener;
 import com.bottega.sharedlib.event.EventPublisher;
 import io.vavr.control.Try;
 import lombok.SneakyThrows;
@@ -16,6 +17,8 @@ public class SharedFixtures {
 
     @Autowired
     private EmbeddedKafkaBroker kafkaBroker;
+    @Autowired
+    public TestKafkaEventListener testEventListener;
     @Autowired
     private TransactionTemplate transactionTemplate;
 

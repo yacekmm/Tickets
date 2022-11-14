@@ -28,7 +28,7 @@ class ApplyPercentageFactor_CompTest extends LogicTestBase {
         //then
         assertThat(result).hasRightValueSatisfying(itemPrices ->
                 PriceAssert.assertThatPrice(itemPrices.get(0))
-                        .isPersistedIn(priceFixtures.priceRepo, SINGULAR)
+                        .isPersistedIn(priceFixtures.itemPriceRepo, SINGULAR)
                         .hasPrice(90_00)
                         .hasId(price.getId())
                         .hasItemId(price.getItemId())

@@ -7,7 +7,6 @@ import com.bottega.vendor.fixtures.*;
 import io.vavr.control.Either;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.*;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
@@ -15,14 +14,13 @@ import static org.assertj.vavr.api.VavrAssertions.assertThat;
 
 public class DiscountConcertClient_DepTest extends FrameworkTestBase {
 
-    @Autowired
-    HttpPricingClient httpPricingClient;
-
     FakePricingClient fakePricingClient;
+    PricingClient realPricingClient;
 
     @BeforeEach
     void setUp() {
         fakePricingClient = new FakePricingClient();
+        realPricingClient = concertFixtures.pricingClient;
     }
 
     @Test
@@ -31,15 +29,13 @@ public class DiscountConcertClient_DepTest extends FrameworkTestBase {
         ConcertId concertId = new ConcertId();
 
         //when
-        Either<ErrorResult, List<Price>> httpResult = httpPricingClient.applyPercentageDiscount(concertId, 10);
+        Either<ErrorResult, List<Price>> realResult = realPricingClient.applyPercentageDiscount(concertId, 10);
         Either<ErrorResult, List<Price>> fakeResult = fakePricingClient.applyPercentageDiscount(concertId, 10);
 
         //then
-        assertThat(httpResult).isRight();
-        assertThat(fakeResult).isRight();
-        assertThat(fakeResult).hasRightValueSatisfying(prices -> {
-            Assertions.assertThat(prices).containsExactlyInAnyOrder(httpResult.get().toArray(new Price[]{}));
-        });
+        assertThat(fakeResult).hasRightValueSatisfying(prices ->
+                Assertions.assertThat(prices).containsExactlyInAnyOrderElementsOf(realResult.get())
+        );
 
     }
 

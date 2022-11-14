@@ -34,7 +34,7 @@ public class ConcertFactory {
                         invalid_request,
                         errorResults.toJavaStream()
                                 .map(errorResult -> errorResult.getCode().toString())
-                                .collect(joining())))
+                                .collect(joining(","))))
                 .toEither();
     }
 }

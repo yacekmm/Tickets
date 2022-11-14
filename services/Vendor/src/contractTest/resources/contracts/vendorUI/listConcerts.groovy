@@ -5,7 +5,7 @@ import org.springframework.cloud.contract.spec.Contract
 Contract.make {
 
     description """
-        Request to create new concert from vendor-ui
+        Request to list concerts from vendor-ui
         """
 
     request {

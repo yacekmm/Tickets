@@ -17,10 +17,10 @@ class SettleInitialPrice_EventApiTest extends FrameworkTestBase {
         ConcertCreatedEventPayload payload = initPriceFixtures.initPriceChangeEventPublisher.publishConcertCreatedEvent();
 
         //then
-        await().until(() -> !priceFixtures.priceRepo.findByItemId(payload.concertId()).isEmpty());
+        await().until(() -> !priceFixtures.itemPriceRepo.findByItemId(payload.concertId()).isEmpty());
         sharedFixtures.inTransaction(() ->
-                PriceAssert.assertThatPrice(priceFixtures.priceRepo.findByItemId(payload.concertId()).get(0))
-                        .isPersistedIn(priceFixtures.priceRepo, SINGULAR)
+                PriceAssert.assertThatPrice(priceFixtures.itemPriceRepo.findByItemId(payload.concertId()).get(0))
+                        .isPersistedIn(priceFixtures.itemPriceRepo, SINGULAR)
                         .hasItemId(payload.concertId())
                         .hasPrice(105_00)
                         .hasNoFactors()

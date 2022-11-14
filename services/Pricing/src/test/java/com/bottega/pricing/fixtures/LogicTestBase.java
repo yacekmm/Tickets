@@ -15,6 +15,6 @@ public class LogicTestBase {
         this.sharedFixtures = SharedFixtures.init();
         this.priceFixtures = PriceFixtures.init(sharedFixtures);
         this.initPriceFixtures = InitPriceFixtures.init();
-        this.builders = new TestBuilders(priceFixtures.priceRepo);
+        this.builders = new TestBuilders(priceFixtures.itemPriceRepo);
     }
 }

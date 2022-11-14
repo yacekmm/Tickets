@@ -7,7 +7,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.vavr.control.Try;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.messaging.Message;
 import org.springframework.stereotype.Component;
@@ -19,7 +18,6 @@ import static java.util.stream.Collectors.toSet;
 @Component
 @AllArgsConstructor
 @Slf4j
-@Configuration
 public class InitialPriceEventListener {
 
     private final InitialPriceService initialPriceService;

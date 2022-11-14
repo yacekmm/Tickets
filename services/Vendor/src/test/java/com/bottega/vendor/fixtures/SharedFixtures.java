@@ -3,9 +3,9 @@ package com.bottega.vendor.fixtures;
 import com.bottega.sharedlib.config.TestClockConfig;
 import com.bottega.sharedlib.event.EventPublisher;
 import com.bottega.sharedlib.infra.repo.FakeEventPublisher;
+import com.bottega.vendor.infra.TestKafkaEventListener;
 import io.vavr.control.Try;
-import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
+import lombok.*;
 import org.springframework.kafka.test.EmbeddedKafkaBroker;
 import org.springframework.stereotype.Component;
 
@@ -16,13 +16,15 @@ import java.time.Clock;
 public class SharedFixtures {
 
     public final Clock clock;
-    private final EventPublisher eventPublisher;
+    public final EventPublisher eventPublisher;
+    public final TestKafkaEventListener testKafkaListener;
     private final EmbeddedKafkaBroker kafkaBroker;
 
     public static SharedFixtures init() {
         return new SharedFixtures(
                 new TestClockConfig().testClock(),
                 new FakeEventPublisher(),
+                null,
                 null);
     }
 
@@ -34,5 +36,6 @@ public class SharedFixtures {
     public void tearDown() {
         kafkaBroker.doWithAdmin(adminClient -> Try.of(() ->
                 adminClient.deleteTopics(kafkaBroker.getTopics()).all().get()));
+        testKafkaListener.tearDown();
     }
 }

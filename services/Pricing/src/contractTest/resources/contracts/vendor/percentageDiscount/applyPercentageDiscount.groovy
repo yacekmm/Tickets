@@ -22,10 +22,6 @@ Contract.make {
         headers {
             contentType applicationJson()
             accept applicationJson()
-//            header 'Authorization': value(
-//                    consumer(anyAlphaNumeric()),
-//                    producer(execute('authToken()'))
-//            )
         }
 
         body(

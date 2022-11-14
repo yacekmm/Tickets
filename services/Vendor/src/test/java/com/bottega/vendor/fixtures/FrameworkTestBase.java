@@ -25,6 +25,7 @@ public class FrameworkTestBase {
     protected ConcertReadFixtures concertReadFixtures;
 
     @Autowired
+    protected
     SharedFixtures sharedFixtures;
 
     @Autowired
