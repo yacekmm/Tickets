@@ -1,55 +1,51 @@
-import {by, element} from 'protractor';
+import {browser, By, element} from 'protractor';
+import {BrowserTools} from "../shared/browser-tools";
 
 export class ConcertOperations {
+  private browserTools: BrowserTools;
 
-  createApp(name: string, email: string, applicationType: string) {
-    element(by.id('input-app-name')).sendKeys(name);
-    element(by.id('input-owner')).sendKeys(email);
-
-    if (applicationType === "CONFIDENTIAL") {
-      element(by.css('#application-type-confidential .mat-radio-container')).click();
-    } else {
-      element(by.css('#application-type-public .mat-radio-container')).click();
-    }
-
-    return element(by.id('create-app-submit')).click();
+  constructor(browserTools: BrowserTools) {
+    this.browserTools = browserTools;
   }
 
-  displaysSuccessMessage() {
-    return element(by.id('create-app-success')).isDisplayed();
+
+  assertPageIsOpened() {
+    browser.driver.getTitle().then(pageTitle => expect(pageTitle).toEqual('Vendor UI'));
+    return this;
   }
 
-  displaysAppId() {
-    return element(by.id('created-app-id')).getText()
-      .then((text: string) => {
-        return expect(text.length).toEqual(36);
-      });
+  createConcert() {
+    element(By.id("input-concert-title")).sendKeys("concert Title");
+    element(By.id("create-concert-submit")).click();
+    return this;
   }
 
-  displaysAppSecret() {
-    return element(by.id('created-app-secret')).getText()
-      .then((text: string) => {
-        return expect(text.length).toEqual(32);
-      });
+  openAddConcert() {
+    element(By.id("menu-concerts-add")).click()
+    return this;
   }
 
-  isAppSecretDisplayed() {
-    return element(by.id('created-app-secret')).isPresent();
+  assertCreateConcertSuccess() {
+    let successConfirmation = element(By.className("mat-simple-snackbar"));
+    this.browserTools.waitForElementToDisplay(successConfirmation)
+      .then(unused =>
+        expect(successConfirmation.isDisplayed()).toBeTruthy()
+      );
+    return this;
   }
 
-  displaysCreateNextAppButton() {
-    return element(by.id('create-next')).isDisplayed();
+  openListConcerts() {
+    element(By.id("menu-concerts-list")).click();
+    return this;
   }
 
-  showAppsListButtonIsDisplayed() {
-    return this.getShowAppsButton().isDisplayed();
-  }
-
-  showAppsListButtonClick() {
-    return this.getShowAppsButton().click();
-  }
-
-  private getShowAppsButton() {
-    return element(by.id('show-apps'));
+  assertConcertsListed(expectedTitles: string[]) {
+    element.all(By.className('mat-row'))
+      .all(By.className('concert-title'))
+      .getText()
+      .then(value =>
+        expect(value).toEqual(expectedTitles)
+      );
+    return this;
   }
 }
