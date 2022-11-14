@@ -1,7 +1,7 @@
 package com.bottega.tickets.concert;
 
 import org.junit.jupiter.api.*;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
 
 import java.time.*;
 
@@ -14,13 +14,12 @@ public class CreateConcert_SystemTest {
 
     @BeforeEach
     void setUp() {
-        seleniumFixtures = new SeleniumFixtures();
-        seleniumFixtures.driver.get("http://localhost:4200");
+        seleniumFixtures = SeleniumFixtures.init("http://localhost:4200");
     }
 
     @AfterEach
     void tearDown() {
-        seleniumFixtures.driver.close();
+        seleniumFixtures.tearDown();
     }
 
     @Test
@@ -37,8 +36,7 @@ public class CreateConcert_SystemTest {
                 .orElseThrow()
                 .click();
         seleniumFixtures.driver.findElement(By.id("create-concert-submit")).click();
-        WebElement createSuccessConfirmation = seleniumFixtures.driver.findElement((By.className("mat-simple-snackbar")));
-        await().untilAsserted(() -> assertThat(createSuccessConfirmation.isDisplayed()).isTrue());
+        await().untilAsserted(() -> assertThat(seleniumFixtures.driver.findElement((By.className("mat-simple-snackbar"))).isDisplayed()).isTrue());
 
         seleniumFixtures.driver.findElement(By.id("menu-concerts-list")).click();
         String date = seleniumFixtures.driver.findElement(By.id("concerts-list"))
