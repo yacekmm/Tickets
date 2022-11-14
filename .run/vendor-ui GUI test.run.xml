@@ -6,6 +6,8 @@
     <protractor-options value="" />
     <envs />
     <scope-kind value="ALL" />
-    <method v="2" />
+    <method v="2">
+      <option name="RunConfigurationTask" enabled="true" run_configuration_name="vendor-ui update webdriver" run_configuration_type="NodeJSConfigurationType" />
+    </method>
   </configuration>
 </component>

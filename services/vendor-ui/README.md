@@ -1,3 +1,9 @@
+# Install protractor
+
+https://www.browserstack.com/guide/how-to-perform-end-to-end-testing-in-angular
+
+npm install -g protractor
+
 # VendorUi
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.1.

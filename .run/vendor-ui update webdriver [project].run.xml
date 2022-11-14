@@ -1,0 +1,5 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="vendor-ui update webdriver [project]" type="NodeJSConfigurationType" node-parameters="node_modules/protractor/bin/webdriver-manager update " working-dir="$PROJECT_DIR$/services/vendor-ui">
+    <method v="2" />
+  </configuration>
+</component>
