@@ -1,5 +1,6 @@
 package com.bottega.tickets.concert;
 
+import com.bottega.tickets.concert.fixtures.ConcertOperations;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 
@@ -26,6 +27,7 @@ public class CreateConcert_SystemTest {
     void createsConcert() {
         String concertTitle = "GUI test concert " + LocalDateTime.now();
 
+        ConcertOperations.init(seleniumFixtures);
         seleniumFixtures.driver.findElement(By.id("menu-concerts-add")).click();
         seleniumFixtures.driver.findElement(By.id("input-concert-title")).sendKeys(concertTitle);
         seleniumFixtures.driver.findElement(By.className("mat-calendar-next-button")).click();

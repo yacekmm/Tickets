@@ -1,18 +1,14 @@
 package com.bottega.tickets.concert;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import lombok.AllArgsConstructor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-
+@AllArgsConstructor
 public class SeleniumFixtures {
 
     WebDriver driver;
-
-    public SeleniumFixtures(WebDriver driver) {
-        WebDriverManager.chromedriver().setup();
-        this.driver = driver;
-    }
 
     public static SeleniumFixtures init(String url) {
         WebDriverManager.chromedriver().setup();
