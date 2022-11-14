@@ -1,10 +1,12 @@
 package com.bottega.tickets.concert;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.*;
-import org.openqa.selenium.By;
+import org.openqa.selenium.*;
 
 import java.time.*;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.awaitility.Awaitility.await;
 
 public class CreateConcert_SystemTest {
 
@@ -35,6 +37,8 @@ public class CreateConcert_SystemTest {
                 .orElseThrow()
                 .click();
         seleniumFixtures.driver.findElement(By.id("create-concert-submit")).click();
+        WebElement createSuccessConfirmation = seleniumFixtures.driver.findElement((By.className("mat-simple-snackbar")));
+        await().untilAsserted(() -> assertThat(createSuccessConfirmation.isDisplayed()).isTrue());
 
         seleniumFixtures.driver.findElement(By.id("menu-concerts-list")).click();
         String date = seleniumFixtures.driver.findElement(By.id("concerts-list"))
@@ -47,7 +51,7 @@ public class CreateConcert_SystemTest {
 
         LocalDate parsedDate = LocalDate.parse(date);
         LocalDate expectedDate = LocalDate.now().plusMonths(2).withDayOfMonth(10);
-        Assertions.assertThat(parsedDate).isEqualTo(expectedDate);
+        assertThat(parsedDate).isEqualTo(expectedDate);
     }
 
 }
