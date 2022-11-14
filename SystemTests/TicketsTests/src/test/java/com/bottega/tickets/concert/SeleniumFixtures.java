@@ -8,7 +8,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 @AllArgsConstructor
 public class SeleniumFixtures {
 
-    WebDriver driver;
+    public WebDriver driver;
 
     public static SeleniumFixtures init(String url) {
         WebDriverManager.chromedriver().setup();
