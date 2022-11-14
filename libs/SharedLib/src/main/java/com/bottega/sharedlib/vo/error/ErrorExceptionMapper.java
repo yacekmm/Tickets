@@ -11,7 +11,6 @@ import static org.springframework.http.MediaType.APPLICATION_JSON;
 @Slf4j
 public class ErrorExceptionMapper {
 
-    //TODO: test it
     @ExceptionHandler(ErrorException.class)
     public ResponseEntity<ErrorDto> convertToResponse(ErrorException exception) {
 

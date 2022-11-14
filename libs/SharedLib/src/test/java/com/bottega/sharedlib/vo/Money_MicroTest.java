@@ -4,10 +4,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class MoneyTest {
+class Money_MicroTest {
 
     @Test
-    void canCreateMoneyFromInteger() {
+    void createMoney_OK_fromInteger() {
         //expect
         assertEquals("100.00", new Money(10000).toString());
         assertEquals("0.00", new Money(0).toString());
@@ -15,7 +15,7 @@ class MoneyTest {
     }
 
     @Test
-    void shouldProjectMoneyToInteger() {
+    void toInt_projectsMoneyToInteger() {
         //expect
         assertEquals(10, new Money(10).toInt());
         assertEquals(0, new Money(0).toInt());
@@ -23,7 +23,7 @@ class MoneyTest {
     }
 
     @Test
-    void canAddMoney() {
+    void add_OK() {
         //expect
         assertEquals(new Money(1000), new Money(500).add(new Money(500)));
         assertEquals(new Money(1042), new Money(1020).add(new Money(22)));
@@ -32,7 +32,7 @@ class MoneyTest {
     }
 
     @Test
-    void canSubtractMoney() {
+    void subtract_OK() {
         //expect
         assertEquals(Money.ZERO, new Money(50).subtract(new Money(50)));
         assertEquals(new Money(998), new Money(1020).subtract(new Money(22)));
@@ -40,7 +40,7 @@ class MoneyTest {
     }
 
     @Test
-    void canCalculatePercentage() {
+    void calculatePercentage_OK() {
         //expect
         assertEquals("30.00", new Money(10000).percentage(30).toString());
         assertEquals("26.40", new Money(8800).percentage(30).toString());

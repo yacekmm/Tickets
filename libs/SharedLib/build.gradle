@@ -39,3 +39,11 @@ dependencies {
 tasks.named('test') {
     useJUnitPlatform()
 }
+
+sourceSets {
+    test {
+        groovy {
+            srcDirs = ['src/test/java']
+        }
+    }
+}
