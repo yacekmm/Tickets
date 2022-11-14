@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="ng serve" type="js.build_tools.npm">
+  <configuration default="false" name="vendor-ui run" type="js.build_tools.npm">
     <package-json value="$PROJECT_DIR$/services/vendor-ui/package.json" />
     <command value="run" />
     <scripts>
