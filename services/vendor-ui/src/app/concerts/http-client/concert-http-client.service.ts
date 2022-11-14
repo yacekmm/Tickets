@@ -10,7 +10,6 @@ import {ConcertDto} from "./concert-dto.model";
 })
 export class ConcertHttpClientService {
 
-  //TODO: determine vendor Id
   VENDOR_ID = 'vendor-id';
 
   constructor(private httpClient: HttpClient) {

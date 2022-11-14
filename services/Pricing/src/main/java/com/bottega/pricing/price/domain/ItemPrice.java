@@ -42,7 +42,6 @@ public class ItemPrice implements BaseEntity {
         return new ItemPrice(new PriceId(), from(price), itemId, new ArrayList<>());
     }
 
-    //TODO/JM: unit test
     public ItemPrice applyFactor(PriceFactor factor) {
         this.price = from(factor.applyToPrice(getPrice()));
         this.priceFactors.add(factor);

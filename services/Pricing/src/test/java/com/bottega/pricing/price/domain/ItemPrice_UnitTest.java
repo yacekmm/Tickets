@@ -21,6 +21,6 @@ class ItemPrice_UnitTest extends LogicTestBase {
                 .hasItemId(itemPrice.getItemId());
     }
 
-    //TODO: validate percentage input param <0, >100, ...
-    //TODO: assert that price has list of applied factors
+    //validate percentage input param <0, >100, ...
+    //assert that price has list of applied factors
 }

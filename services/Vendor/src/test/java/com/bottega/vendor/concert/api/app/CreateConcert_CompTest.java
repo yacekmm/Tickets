@@ -54,7 +54,6 @@ class CreateConcert_CompTest extends ConcertLogicTestBase {
                 .isPersistedIn(concertFixtures.concertRepo, RepoEntries.SINGULAR);
     }
 
-    //TODO: napisz te testy w Spock
     @Test
     void createConcert_publishesEvent_onValidInput() {
         //given
