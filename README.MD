@@ -1,18 +1,79 @@
+# Importing to IDE
+
+You should import the `Tickets/build.gradle` as a root project to your IDE.
+
 # Run Configurations
 
 Both Gradle and IntelliJ run configurations are available.
 
-Those are fine-grained configurations executing tests on desired level (Micro, Unit, Component, Api, Contract, Gui, System)
+Those are fine-grained configurations starting apps and executing tests on desired level (Micro, Unit, Component,
+Dependency, Api, Contract, GUI, System)
+
+## Starting off the whole Tickets system
+
+Tickets System consists of several services you need to run to see it working. See running instructions below:
+
+| Service    | IntelliJ Idea task | Manual command                                                          |
+|------------|--------------------|-------------------------------------------------------------------------|
+| Kafka      | `kafka run`        | run `docker-compose.yml` using `docker compose up` under `infra/kafka/` |
+| Vendor GUI | `vendor-ui run`    | `ng serve` from `vendor-ui/`                                            |
+| Vendor     | `Vendor run`       | `./gradlew bootRun` from `Vendor/`                                      |
+| Pricing    | `Pricing run`      | `./gradlew bootRun` from `Pricing/`                                     |
+
+## Opening the GUI
+
+Open `http://localhost:4200` in your browser and enjoy!
 
 ## Gradle
 
-# TODOOOOOOOOOO 
-See gradle tasks by executing `./gradlew `
+Execute gradle tasks by executing `./gradlew <task-name>`, where task names are defined
+in `services/<service>/gradle/test-suites.gradle`. To run all tests at once use task `test`
 
-To run all tests at once use task `test`
+Tasks available for Tests are as follows
+
+### `Vendor`, `Pricing` and `SharedLib`
+
+- `microTest`: runs suites suffixed with `MicroTest` and `MicroSpec`
+- `unitTest`: runs suites suffixed with `UnitTest` and `UnitSpec`
+- `compTest`: runs suites suffixed with `CompTest` and `CompSpec`
+- `depTest`: runs suites suffixed with `DepTest` and `DepSpec`
+- `apiTest`: runs suites suffixed with `CompTest` and `CompSpec`
+
+Note: `SharedLib` as an utils library contains only `microTest`,
+
+#### Prerequisites
+
+Installed:
+
+- gradle
+- JDK 17+
+- IDE (recommended IntelliJ Idea)
+- git
+- docker
+- docker-compose
+
+### `vendor-ui`
+
+As an Angular project the task config is different here.
+
+- `ng serve`: runs app on under `localhost:4200`
+- `protractor conf.js` executes isolated GUI tests on `vendor-ui`. Note: execute from `services/vendor-ui/src/e2e`
+
+#### Prerequisites
+
+Installed:
+
+- node.js `sudo apt install nodejs`
+- Angular `npm install -g @angular/cli`
+- Protractor `npm install -g protractor`
+- Chrome Browser
+
+Before start, install node dependencies by running `npm install` from `services/vendor-ui`
 
 ## IntelliJ Idea
 
+All the configurations listed above are also exported to this repo as an IntelliJ Idea configurations. They reside
+in `.run` directory and should be automatically imported once `Tickets` Project is imported.
 
 # Tests
 
@@ -40,34 +101,12 @@ Important paths in project are:
 
 ```
 Tickets
-└── infra/kafka/docker-compose.yml      // Use to start Apache Kafka in docker on your machine
-└── libs/SharedLib                      // Java library embedded in services
-└── services                            // Microservices building up Tickets system
+└── infra/kafka/docker-compose.yml              // Use to start Apache Kafka in docker on your machine
+└── libs/SharedLib                              // Java library embedded in services
+└── services                                    // Microservices building up Tickets system
 │   └── Pricing
 │   └── Vendor
+|       └── api-stubs/run-contract-stubs.sh     // execute to run Vendor API Stubs based on Contract Tests to test vendor-ui
 │   └── vendor-ui
-└── SystemTests/TicketsTests            // separate project holding E2E System Tests for Tickets
+└── SystemTests/TicketsTests                    // separate project holding E2E System Tests for Tickets
 ```
-
-# Reference Documentation
-
-For further reference, please consider the following sections:
-
-* [Official Gradle documentation](https://docs.gradle.org)
-* [Spring Boot Gradle Plugin Reference Guide](https://docs.spring.io/spring-boot/docs/2.7.5/gradle-plugin/reference/html/)
-* [Testcontainers](https://www.testcontainers.org/)
-* [Sleuth](https://docs.spring.io/spring-cloud-sleuth/docs/current/reference/htmlsingle/spring-cloud-sleuth.html)
-* [Spring Boot Actuator](https://docs.spring.io/spring-boot/docs/2.7.5/reference/htmlsingle/#actuator)
-* [Okta Spring Boot documentation](https://github.com/okta/okta-spring-boot#readme)
-* [Spring Data JPA](https://docs.spring.io/spring-boot/docs/2.7.5/reference/htmlsingle/#data.sql.jpa-and-spring-data)
-* [Spring Web](https://docs.spring.io/spring-boot/docs/2.7.5/reference/htmlsingle/#web)
-
-### Guides
-
-The following guides illustrate how to use some features concretely:
-
-* [Building a RESTful Web Service with Spring Boot Actuator](https://spring.io/guides/gs/actuator-service/)
-* [Custom Login Page Example](https://github.com/okta/samples-java-spring/tree/master/custom-login)
-* [Accessing Data with JPA](https://spring.io/guides/gs/accessing-data-jpa/)
-* [Building a RESTful Web Service](https://spring.io/guides/gs/rest-service/)
-* [Building REST services with Spring](https://spring.io/guides/tutorials/rest/)
