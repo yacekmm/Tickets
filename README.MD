@@ -2,7 +2,7 @@
 
 You should import the `Tickets/build.gradle` as a root project to your IDE.
 
-# Run Configurations
+# Running
 
 Both Gradle and IntelliJ run configurations are available.
 
@@ -24,6 +24,8 @@ Tickets System consists of several services you need to run to see it working. S
 
 Open `http://localhost:4200` in your browser and enjoy!
 
+# Run and test configurations
+
 ## Gradle
 
 Execute gradle tasks by executing `./gradlew <task-name>`, where task names are defined
@@ -33,6 +35,7 @@ Tasks available for Tests are as follows
 
 ### `Vendor`, `Pricing` and `SharedLib`
 
+- `bootRun`: starts the service
 - `microTest`: runs suites suffixed with `MicroTest` and `MicroSpec`
 - `unitTest`: runs suites suffixed with `UnitTest` and `UnitSpec`
 - `compTest`: runs suites suffixed with `CompTest` and `CompSpec`
