@@ -26,4 +26,21 @@ class ConcertDate_MicroSpec extends SpecificationBase {
         //closest acceptable date after minDate threshold
         TEST_TIME.plus(8, DAYS).toString() | of(2022, 2, 13)
     }
+
+    def "fromString - returns error - on invalid input"() {
+
+        expect:
+        assertThatConcertDate(from(dateString, sharedFixtures.clock))
+                .hasInvalidDateError(expectedDesc)
+
+
+        where:
+        dateString                           | expectedDesc
+        "invalid"                            | "Unsupported date format: Text 'invalid' could not be parsed at index 0"
+
+        //date has to be in future + threshold in days
+        TEST_TIME.minus(1, DAYS).toString()  | "Too early"
+        TEST_TIME.minus(30, DAYS).toString() | "Too early"
+        TEST_TIME.plus(7, DAYS).toString()   | "Too early"    // latest `too early` date
+    }
 }
