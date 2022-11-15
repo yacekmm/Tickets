@@ -32,9 +32,9 @@ public class PriceService {
 
         List<ItemPrice> updatedPrices = priceRepo.findByItemId(itemId).stream()
                 .map(itemPrice -> itemPrice.applyFactor(percentageFactor(percentage, itemPrice)))
-                .peek(priceRepo::save)
-                .peek(priceUpdateService::updateReadModel)
-                .peek(itemPrice -> eventPublisher.publish(priceChange(itemPrice)))
+                //TODO save in repo
+                //TODO update read model via priceUpdateService
+                //TODO publish price_changed event
                 .toList();
 
         if (updatedPrices.isEmpty()) {
