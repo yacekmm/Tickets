@@ -2,8 +2,6 @@ package com.bottega.vendor.concert.domain
 
 import com.bottega.vendor.fixtures.SpecificationBase
 
-import static java.util.stream.Collectors.toSet
-
 class InitConcert_UnitSpec extends SpecificationBase {
 
     def "initConcert - adds tags"() {
@@ -14,7 +12,7 @@ class InitConcert_UnitSpec extends SpecificationBase {
         newConcert.initNewConcert(concertFixtures.tagService, concertFixtures.categoryService)
 
         then:
-        with(newConcert.getTags().stream().map(Tag::getValue).collect(toSet())) {
+        with(newConcert.getTags().stream().map(Tag::getValue).toList()) {
             size() == expectedTags.size()
             containsAll(expectedTags)
         }
