@@ -26,13 +26,14 @@ public class ConcertService {
     private final ConcertRepo concertRepo;
     private final PricingClient pricingClient;
     private final EventPublisher eventPublisher;
+    private final TagService tagService;
     private final CategoryService categoryService;
     private final VendorService vendorService;
 
     public Either<ErrorResult, Concert> createConcert(String title, String dateTime, String vendorIdString) {
         VendorAgreement vendorAgreement = vendorService.getVendorAgreement(vendorIdString);
         return concertFactory.createConcert(title, dateTime, vendorAgreement.vendorId())
-                .peek(concert -> concert.initNewConcert(categoryService))
+                .peek(concert -> concert.initNewConcert(tagService, categoryService))
                 .map(concertRepo::save)
                 //TODO: Outbox, post-transaction?
                 .peek(concert -> eventPublisher.publish(concertCreated(concert, vendorAgreement.profitMarginPercentage())));
