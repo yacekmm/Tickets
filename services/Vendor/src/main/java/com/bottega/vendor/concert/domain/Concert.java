@@ -53,4 +53,7 @@ public class Concert implements BaseEntity {
         return new VendorId(vendorId);
     }
 
+    public void initNewConcert() {
+        //TODO
+    }
 }
