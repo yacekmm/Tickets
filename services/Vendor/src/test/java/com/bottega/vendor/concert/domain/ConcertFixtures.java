@@ -35,6 +35,8 @@ public class ConcertFixtures {
     //services
     @Autowired
     public TagService tagService;
+    @Autowired
+    public CategoryService categoryService;
 
     //mocks
     @Autowired
@@ -62,6 +64,7 @@ public class ConcertFixtures {
     }
 
     private static void initServices(ConcertFixtures concertFixtures) {
+        concertFixtures.categoryService = new CategoryService();
     }
 
     private static void initSut(ConcertFixtures concertFixtures, SharedFixtures sharedFixtures) {
@@ -70,6 +73,7 @@ public class ConcertFixtures {
                 concertFixtures.concertRepo,
                 new FakePricingClient(),
                 sharedFixtures.fakeEventPublisher(),
+                concertFixtures.categoryService,
                 concertFixtures.vendorService
         );
     }

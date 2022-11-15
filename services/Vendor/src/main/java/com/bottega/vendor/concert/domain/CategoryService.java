@@ -1,9 +1,10 @@
 package com.bottega.vendor.concert.domain;
 
 import com.bottega.sharedlib.ddd.DomainService;
-import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
+
+import static org.apache.commons.lang3.StringUtils.containsAnyIgnoreCase;
 
 @DomainService
 public class CategoryService {
@@ -15,9 +16,9 @@ public class CategoryService {
         defaultCategories.put("superstar", new String[]{"Rihanna"});
     }
 
-    Category categorize(Concert concert) {
+    Category categorize(Title title) {
         return defaultCategories.entrySet().stream()
-                .filter(entry -> StringUtils.containsAnyIgnoreCase(concert.getTitle().getValue(), entry.getValue()))
+                .filter(entry -> containsAnyIgnoreCase(title.getValue(), entry.getValue()))
                 .findFirst()
                 .map(entry -> Category.from(entry.getKey()))
                 .orElse(Category.from("other"));

@@ -16,7 +16,7 @@ class InitConcert_UnitTest extends ConcertLogicTestBase {
         return Stream.of(
                 Arguments.of("no category", "other"),
                 Arguments.of("Rock concert", "rock"),
-                Arguments.of("Scorpions in Warsaw", "rock"),
+                Arguments.of("Scorpions in Warsaw!", "rock"),
                 Arguments.of("Scorpions on Mystic Festival", "rock"),
                 Arguments.of("Rihanna the best of", "superstar")
         );
@@ -27,10 +27,9 @@ class InitConcert_UnitTest extends ConcertLogicTestBase {
     public void initConcert_assignsCategory(String title, String expectedCategory) {
         //given
         Concert newConcert = new Concert(new ConcertId(), Title.from(title).get(), ConcertDate.from(TestClockConfig.TEST_TIME_PLUS_30_DAYS.toString(), sharedFixtures.clock).get(), "vendor-id", new HashSet<>(), null);
-        CategoryService categoryService = new CategoryService();
 
         //when
-        newConcert.initNewConcert(categoryService);
+        newConcert.initNewConcert(concertFixtures.categoryService);
 
         //then
         assertThat(newConcert.getCategory().getValue()).isEqualTo(expectedCategory);
