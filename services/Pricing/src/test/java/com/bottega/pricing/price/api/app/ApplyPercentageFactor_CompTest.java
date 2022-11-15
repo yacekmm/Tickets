@@ -18,8 +18,7 @@ class ApplyPercentageFactor_CompTest extends LogicTestBase {
     @Test
     void applyPercentageFactor_returnsSingleDiscountedPrice_onValidRequest() {
         //given
-        ItemPrice price = builders.aPrice().priceForItem(100_00, "item-id").build();
-        priceFixtures.itemPriceRepo.save(price);
+        ItemPrice price = builders.aPrice().priceForItem(100_00, "item-id").inDb();
 
         //when
         Either<ErrorResult, List<ItemPrice>> result = priceFixtures.priceService.applyPercentageFactor("item-id", 10);
@@ -28,12 +27,14 @@ class ApplyPercentageFactor_CompTest extends LogicTestBase {
         assertThat(result).hasRightValueSatisfying(itemPrices ->
                 PriceAssert.assertThatPrice(itemPrices.get(0))
                         .isPersistedIn(priceFixtures.itemPriceRepo, SINGULAR)
-                        .hasItemId("item-id")
                         .hasPrice(90_00)
+                        .hasId(price.getId())
+                        .hasItemId(price.getItemId())
                         .hasFactors(1, factors ->
                                 factors.forEach(factor ->
                                         PriceFactorAssert.assertThatFactor(factor)
-                                                .isPercentageFactor(10, price)))
+                                                .isPercentageFactor(10, price)
+                                ))
         );
     }
 
