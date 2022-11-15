@@ -8,8 +8,8 @@ public class VendorUIBase extends CdcFrameworkTestBase {
 
     @BeforeEach
     public void setup(){
-        builders.aConcert().withTitle("Rihanna in Rome").withDate(TEST_TIME_PLUS_30_DAYS).withVendorId("vendor-id").inDb();
-        builders.aConcert().withTitle("Rock concert 2").withDate(TEST_TIME_PLUS_60_DAYS).withVendorId("vendor-id").inDb();
+        builders.dontLook().withTitle("Rihanna in Rome").withDate(TEST_TIME_PLUS_30_DAYS).withVendorId("vendor-id").inDb();
+        builders.dontLook().withTitle("Rock concert 2").withDate(TEST_TIME_PLUS_60_DAYS).withVendorId("vendor-id").inDb();
     }
 
 }

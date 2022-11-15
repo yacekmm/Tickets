@@ -13,7 +13,7 @@ class KafkaEventPublisher_DepTest extends FrameworkTestBase {
     @Test
     public void publishEvent_OK(){
         //given
-        Concert concert = builders.aConcert().build();
+        Concert concert = builders.dontLook().build();
         Event concertCreated = concertCreated(concert, 2);
 
         //when
