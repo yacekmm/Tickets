@@ -3,11 +3,8 @@ package com.bottega.vendor.concert.domain;
 import com.bottega.vendor.concert.fixtures.*;
 import org.junit.jupiter.api.Test;
 
-import static com.bottega.sharedlib.vo.error.ErrorResult.badRequest;
-import static com.bottega.vendor.concert.api.app.ConcertErrorCode.invalid_title;
 import static com.bottega.vendor.concert.domain.Title.from;
 import static org.apache.commons.lang3.StringUtils.repeat;
-import static org.assertj.vavr.api.VavrAssertions.assertThat;
 
 class Title_MicroTest extends ConcertLogicTestBase {
 
@@ -29,37 +26,27 @@ class Title_MicroTest extends ConcertLogicTestBase {
     @Test
     public void fromString_honorsLengthLimits(){
         //expect
-        assertThat(from(repeat("a", 10))).isValid();
-        assertThat(from(repeat("a", 160))).isValid();
-        assertThat(from(repeat("a", 160) + " ")).isValid();
+        TitleAssert.assertThatTitle(from(repeat("a", 10))).isValid();
+        TitleAssert.assertThatTitle(from(repeat("a", 160))).isValid();
 
-        assertInvalidLengthError(repeat("a", 9));
-        assertInvalidLengthError(repeat("a", 161));
-        assertInvalidLengthError(repeat("a", 9) + " ");
-        assertInvalidLengthError(null);
-    }
+        TitleAssert.assertThatTitle(from(repeat("a", 9))).hasInvalidLengthError();
+        TitleAssert.assertThatTitle(from(repeat("a", 161))).hasInvalidLengthError();
 
-    private void assertInvalidLengthError(String input) {
-        assertThat(from(input))
-                .isInvalid()
-                .containsInvalid(badRequest(invalid_title, "Title length must be between 10 and 160 chars"));
+        TitleAssert.assertThatTitle(from(repeat("a", 9) + " ")).hasInvalidLengthError();
+        TitleAssert.assertThatTitle(from(repeat("a", 160) + " ")).isValid();
+
+        TitleAssert.assertThatTitle(from(null)).hasInvalidLengthError();
     }
 
     @Test
     public void fromString_reportsFirstBannedWord_onBannedWordInTitle(){
         //expect
-        assertBannedWordsError("rage against the machine", "rage");
-        assertBannedWordsError("VIOLENCE", "violence");
-        assertBannedWordsError("   Snickers   ", "snickers");
+        TitleAssert.assertThatTitle(from("rage against the machine")).hasBannedWordsError("rage");
+        TitleAssert.assertThatTitle(from("VIOLENCE")).hasBannedWordsError("violence");
+        TitleAssert.assertThatTitle(from("   Snickers   ")).hasBannedWordsError("snickers");
 
-        assertBannedWordsError("rage against the machine", "rage");
-        assertBannedWordsError("machine against the rage", "rage");
-        assertBannedWordsError("machine rage machine", "rage");
-    }
-
-    private void assertBannedWordsError(String input, String bannedWord) {
-        assertThat(from(input))
-                .isInvalid()
-                .containsInvalid(badRequest(invalid_title, "Title must not contain banned word: " +  bannedWord));
+        TitleAssert.assertThatTitle(from("rage against the machine")).hasBannedWordsError("rage");
+        TitleAssert.assertThatTitle(from("machine against the rage")).hasBannedWordsError("rage");
+        TitleAssert.assertThatTitle(from("machine rage machine")).hasBannedWordsError("rage");
     }
 }
