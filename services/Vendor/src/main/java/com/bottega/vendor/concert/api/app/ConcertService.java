@@ -32,7 +32,8 @@ public class ConcertService {
     public Either<ErrorResult, Concert> createConcert(String title, String dateTime, String vendorIdString) {
         //TODO get vendorAgreement from VendorService
         return concertFactory.createConcert(title, dateTime, new VendorId(vendorIdString))
-                .peek(concert -> concert.initNewConcert(tagService, categoryService));
+                .peek(concert -> concert.initNewConcert(tagService, categoryService))
+                .peek(concertRepo::save);
                 //TODO: save in repo
                 //TODO: publish event
 //                .peek(concert -> eventPublisher.publish(concertCreated(concert, 10)));
