@@ -18,6 +18,12 @@ class ConcertDate_MicroTest extends ConcertLogicTestBase {
         assertThat(ConcertDate.from("2022-02-22", sharedFixtures.clock).get().getUtcDate()).isEqualTo(of(2022, 2, 22));
     }
 
+    @Test
+    public void fromString_OK_onDateTimeString(){
+        //expect
+        assertThat(ConcertDate.from("2022-02-22T22:11:00Z", sharedFixtures.clock).get().getUtcDate()).isEqualTo(of(2022, 2, 22));
+    }
+
 
     @Test
     public void fromString_returnsError_onInvalidString(){
