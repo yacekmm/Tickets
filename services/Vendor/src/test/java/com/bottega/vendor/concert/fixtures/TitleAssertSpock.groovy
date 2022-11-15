@@ -15,4 +15,10 @@ class TitleAssertSpock extends Specification {
         new TitleAssertSpock(actual)
     }
 
+    TitleAssertSpock isEqualTo(String expectedTitle) {
+        assert actualTitle.isValid()
+        assert actualTitle.get().value == expectedTitle
+        this
+    }
+
 }
