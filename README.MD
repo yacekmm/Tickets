@@ -6,7 +6,7 @@ You should import the `Tickets/build.gradle` as a root project to your IDE.
 
 Both Gradle and IntelliJ run configurations are available.
 
-Those are fine-grained configurations starting apps and executing tests on desired level (Micro, Unit, Component,
+Those are fine-grained configurations starting apps and executing tests on a desired level (Micro, Unit, Component,
 Dependency, Api, Contract, GUI, System)
 
 ## Starting off the whole Tickets system
@@ -33,7 +33,7 @@ in `services/<service>/gradle/test-suites.gradle`. To run all tests at once use 
 
 Tasks available for Tests are as follows
 
-### `Vendor`, `Pricing` and `SharedLib`
+### Running `Vendor`, `Pricing` and `SharedLib`
 
 - `bootRun`: starts the service
 - `microTest`: runs suites suffixed with `MicroTest` and `MicroSpec`
@@ -41,6 +41,7 @@ Tasks available for Tests are as follows
 - `compTest`: runs suites suffixed with `CompTest` and `CompSpec`
 - `depTest`: runs suites suffixed with `DepTest` and `DepSpec`
 - `apiTest`: runs suites suffixed with `CompTest` and `CompSpec`
+- `contractTest`: runs contract tests defined in `/src/contractTests/resources/contracts`
 
 Note: `SharedLib` as an utils library contains only `microTest`,
 
@@ -55,7 +56,7 @@ Installed:
 - docker
 - docker-compose
 
-### `vendor-ui`
+### Running `vendor-ui`
 
 As an Angular project the task config is different here.
 
@@ -72,6 +73,12 @@ Installed:
 - Chrome Browser
 
 Before start, install node dependencies by running `npm install` from `services/vendor-ui`
+
+### Running `TicketsTests`
+
+The project holds System Tests only, all under `src/test` with gradle task:
+
+- `test`: runs tests against the Tickets System
 
 ## IntelliJ Idea
 
