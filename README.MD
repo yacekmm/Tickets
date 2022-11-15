@@ -80,7 +80,7 @@ The project holds System Tests only, all under `src/test` with gradle task:
 
 - `test`: runs tests against the Tickets System
 
-## IntelliJ Idea
+## Run configs in IntelliJ Idea
 
 All the configurations listed above are also exported to this repo as an IntelliJ Idea configurations. They reside
 in `.run` directory and should be automatically imported once `Tickets` Project is imported.
