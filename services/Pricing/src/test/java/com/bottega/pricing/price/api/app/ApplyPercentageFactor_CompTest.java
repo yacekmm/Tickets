@@ -12,6 +12,7 @@ import java.util.List;
 
 import static com.bottega.sharedlib.fixtures.RepoEntries.SINGULAR;
 import static org.assertj.vavr.api.VavrAssertions.assertThat;
+import static org.mockito.BDDMockito.then;
 
 class ApplyPercentageFactor_CompTest extends LogicTestBase {
 
@@ -52,9 +53,13 @@ class ApplyPercentageFactor_CompTest extends LogicTestBase {
     @Test
     void applyPercentageFactor_updatesReadModel_onPriceChange() {
         //given
+        ItemPrice price = builders.aPrice().priceForItem(100_00, "item-id").inDb();
 
         //when
+        Either<ErrorResult, List<ItemPrice>> result = priceFixtures.priceService.applyPercentageFactor("item-id", 10);
 
         //then
+        assertThat(result).isRight();
+        then(priceFixtures.priceUpdateService).should().updateReadModel(price);
     }
 }

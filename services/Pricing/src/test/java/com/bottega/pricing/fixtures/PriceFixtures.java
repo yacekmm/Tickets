@@ -7,6 +7,8 @@ import com.bottega.pricing.priceRead.api.app.PriceUpdateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import static org.mockito.Mockito.mock;
+
 @Component
 public class PriceFixtures {
 
@@ -37,7 +39,7 @@ public class PriceFixtures {
     }
 
     private static void initMocks(PriceFixtures priceFixtures) {
-        priceFixtures.priceUpdateService = null;
+        priceFixtures.priceUpdateService = mock(PriceUpdateService.class);
     }
 
     private static void initRepos(PriceFixtures priceFixtures) {
