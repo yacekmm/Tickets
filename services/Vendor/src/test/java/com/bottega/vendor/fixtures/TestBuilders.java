@@ -2,7 +2,7 @@ package com.bottega.vendor.fixtures;
 
 import com.bottega.sharedlib.config.ApiVersions;
 import com.bottega.vendor.agreements.fixtures.VendorAgreementBuilder;
-import com.bottega.vendor.concert.fixtures.DontLook;
+import com.bottega.vendor.concert.fixtures.*;
 import com.bottega.vendor.concert.infra.repo.ConcertRepo;
 import com.bottega.vendor.concertRead.ConcertFinderRepo;
 import io.restassured.RestAssured;
@@ -43,5 +43,7 @@ public class TestBuilders {
                 .contentType(JSON);
     }
 
-    //TODO: add ConcertBuilder factory method here
+    public ConcertBuilder aConcert(){
+        return new ConcertBuilder(clock);
+    }
 }
