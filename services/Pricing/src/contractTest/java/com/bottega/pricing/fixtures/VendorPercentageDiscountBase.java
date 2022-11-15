@@ -10,7 +10,7 @@ public class VendorPercentageDiscountBase extends CdcFrameworkTestBase {
 
     @BeforeEach
     void setUp() {
-        price = builders.aPrice().priceForItem(100_00, UUIDs.zeros()).inDb();
+        price = builders.dontLook().priceForItem(100_00, UUIDs.zeros()).inDb();
     }
 
 }
