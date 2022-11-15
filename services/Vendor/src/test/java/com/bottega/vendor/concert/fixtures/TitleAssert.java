@@ -23,14 +23,6 @@ public class TitleAssert {
         return this;
     }
 
-//    public TitleAssert hasInvalidDateError(String description) {
-//        assertThat(concertDate).isInvalid();
-//        assertThat(concertDate.getError().getType()).isEqualTo(BAD_REQUEST);
-//        assertThat(concertDate.getError().getCode()).isEqualTo(invalid_date);
-//        assertThat(concertDate.getError().getDescription()).isEqualTo(description);
-//        return this;
-//    }
-
     public TitleAssert isValid() {
         assertThat(title).isValid();
         return this;
