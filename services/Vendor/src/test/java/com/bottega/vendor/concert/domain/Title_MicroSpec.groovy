@@ -1,5 +1,6 @@
 package com.bottega.vendor.concert.domain
 
+
 import com.bottega.vendor.fixtures.SpecificationBase
 
 import static com.bottega.vendor.concert.domain.Title.from

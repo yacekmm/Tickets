@@ -21,18 +21,17 @@ import static java.time.temporal.ChronoUnit.DAYS;
 @EqualsAndHashCode
 public class ConcertDate {
 
-
     private static final int MIN_DATE_THRESHOLD_DAYS = 7;
 
     @Column(name = "date")
     private Instant date;
 
     public static Validation<ErrorResult, ConcertDate> from(String date, Clock clock) {
-        return Try.of(() -> LocalDate.parse(date).atStartOfDay().toInstant(UTC))
-                .orElse(Try.of(() -> Instant.parse(date)))
+        return Try.of(() -> Instant.parse(date))
+                .orElse(Try.ofSupplier(() -> LocalDate.parse(date).atStartOfDay().toInstant(UTC)))
                 .toValidation()
-                .mapError(throwable -> badRequest(invalid_date, "Unsupported date format: %s", throwable.getMessage()))
-                .filter(instant -> instant.isAfter(clock.instant().plus(MIN_DATE_THRESHOLD_DAYS, DAYS)))
+                .mapError(throwable -> badRequest(invalid_date, "Unsupported date format: " + throwable.getMessage()))
+                .filter(parsed -> parsed.isAfter(clock.instant().plus(MIN_DATE_THRESHOLD_DAYS, DAYS)))
                 .getOrElse(Validation.invalid(badRequest(invalid_date, "Too early")))
                 .map(ConcertDate::new);
     }
