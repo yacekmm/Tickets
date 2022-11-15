@@ -30,8 +30,11 @@ public class ConcertService {
     private final VendorService vendorService;
 
     public Either<ErrorResult, Concert> createConcert(String title, String dateTime, String vendorIdString) {
-        //TODO get VendorAgreement from VendorService
-        return concertFactory.createConcert(title, dateTime, new VendorId(vendorIdString))
+        VendorAgreement vendorAgreement = vendorService.getVendorAgreement(vendorIdString);
+        if(vendorAgreement == null){
+            return Either.left(notFound(not_found, "Vendor contract not found for %s", vendorIdString));
+        }
+        return concertFactory.createConcert(title, dateTime, vendorAgreement.vendorId())
                 .peek(concert -> concert.initNewConcert(tagService, categoryService))
                 .peek(concertRepo::save);
                 //TODO: save in repo
