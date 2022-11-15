@@ -42,6 +42,7 @@ public class SharedFixtures {
     public void tearDown() {
         kafkaBroker.doWithAdmin(adminClient -> Try.of(() ->
                         adminClient.deleteTopics(kafkaBroker.getTopics()).all().get()));
+        testEventListener.tearDown();
     }
 
     public void inTransaction(Runnable runnable) {

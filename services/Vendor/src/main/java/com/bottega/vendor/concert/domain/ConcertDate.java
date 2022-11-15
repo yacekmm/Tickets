@@ -22,6 +22,7 @@ import static java.time.temporal.ChronoUnit.DAYS;
 public class ConcertDate {
 
     private static final int MIN_DATE_THRESHOLD_DAYS = 7;
+
     @Column(name = "date")
     private Instant date;
 

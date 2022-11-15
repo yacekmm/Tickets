@@ -5,27 +5,35 @@ import com.bottega.sharedlib.event.EventPublisher;
 import com.bottega.sharedlib.infra.repo.FakeEventPublisher;
 import com.bottega.vendor.infra.TestKafkaEventListener;
 import io.vavr.control.Try;
-import lombok.*;
+import lombok.SneakyThrows;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.test.EmbeddedKafkaBroker;
 import org.springframework.stereotype.Component;
 
 import java.time.Clock;
 
 @Component
-@RequiredArgsConstructor
 public class SharedFixtures {
 
-    public final Clock clock;
-    public final EventPublisher eventPublisher;
-    public final TestKafkaEventListener testKafkaListener;
-    private final EmbeddedKafkaBroker kafkaBroker;
+    @Autowired
+    public Clock clock;
+
+    @Autowired
+    public EventPublisher eventPublisher;
+
+    @Autowired
+    public TestKafkaEventListener testKafkaListener;
+
+    @Autowired
+    private EmbeddedKafkaBroker kafkaBroker;
 
     public static SharedFixtures init() {
-        return new SharedFixtures(
-                new TestClockConfig().testClock(),
-                new FakeEventPublisher(),
-                null,
-                null);
+        SharedFixtures fixtures = new SharedFixtures();
+
+        fixtures.clock = new TestClockConfig().testClock();
+        fixtures.eventPublisher = new FakeEventPublisher();
+
+        return fixtures;
     }
 
     public FakeEventPublisher fakeEventPublisher() {
