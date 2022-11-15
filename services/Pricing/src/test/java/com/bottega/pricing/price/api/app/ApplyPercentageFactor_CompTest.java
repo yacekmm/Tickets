@@ -48,4 +48,13 @@ class ApplyPercentageFactor_CompTest extends LogicTestBase {
                 ErrorAssert.assertThatError(errorResult)
                         .isNotFound("No price entries found for requested item. itemId: item-id"));
     }
+
+    @Test
+    void applyPercentageFactor_updatesReadModel_onPriceChange() {
+        //given
+
+        //when
+
+        //then
+    }
 }
