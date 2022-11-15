@@ -7,7 +7,6 @@ import com.bottega.vendor.concert.fixtures.clients.ConcertHttpClient;
 import com.bottega.vendor.concert.infra.repo.*;
 import com.bottega.vendor.fixtures.*;
 import com.bottega.vendor.infra.client.pricing.PricingClient;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -60,7 +59,7 @@ public class ConcertFixtures {
     }
 
     private static void initMocks(ConcertFixtures concertFixtures) {
-        concertFixtures.vendorService = Mockito.mock(VendorService.class);
+        concertFixtures.vendorService = null;
     }
 
     private static void initServices(ConcertFixtures concertFixtures) {
