@@ -1,0 +1,16 @@
+{
+    "/api": {
+        "target": "http://localhost:8080/",
+        "secure": false,
+        "pathRewrite": {
+            "^/api": "/api"
+        },
+        "logLevel": "debug",
+        "changeOrigin": true,
+        "headers": {
+            "X-Forwarded-Proto": "http",
+            "Host": "localhost",
+            "X-Forwarded-Port": 4200
+        }
+    }
+}

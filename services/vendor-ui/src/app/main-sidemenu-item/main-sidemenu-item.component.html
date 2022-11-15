@@ -1,0 +1,49 @@
+<mat-nav-list
+  *ngIf="menuItem"
+  [style.maxHeight]="getMaxHeight(menuItem)"
+  [ngClass]="{'primary-menu': !isSecondaryMenu, 'secondary-menu': isSecondaryMenu}">
+
+  <mat-list-item
+    *ngIf="!menuItem.getLink()"
+    (click)="menuItem.toggleOpen()"
+  >
+    <mat-icon matListIcon iconsmall>
+      {{ menuItem.getIcon() }}
+    </mat-icon>
+
+    <h3 matLine>
+      {{ menuItem.getName() }}
+    </h3>
+
+    <mat-icon
+      *ngIf="checkForChildMenu()"
+      class="sidenav-dropdown-indicator rotate"
+      [ngClass]="{ 'indicateOpen' : menuItem.isItemOpened() }"
+    >
+      expand_more
+    </mat-icon>
+  </mat-list-item>
+
+
+  <mat-list-item
+    id="{{menuItem.getId()}}"
+    *ngIf="menuItem.getLink()"
+    (click)="menuItem.toggleOpen()"
+    [routerLink]="[ menuItem.getLink() ]"
+  >
+    <mat-icon matListIcon iconsmall>
+      {{ menuItem.getIcon() }}
+    </mat-icon>
+
+    <h3 matLine>
+      {{ menuItem.getName() }}
+    </h3>
+  </mat-list-item>
+
+  <main-sidemenu-item
+    *ngFor="let submenuItem of menuItem.getSub()"
+    [menuItem]="createMenuItemModel(submenuItem)"
+    [isSecondaryMenu]="true"
+  ></main-sidemenu-item>
+
+</mat-nav-list>

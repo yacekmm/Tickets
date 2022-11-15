@@ -1,0 +1,22 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Pricing componentTest" type="JUnit" factoryName="JUnit">
+    <module name="Tickets.services.Pricing.test" />
+    <extension name="coverage">
+      <pattern>
+        <option name="PATTERN" value="com.bottega.vendor.concert.domain.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+    </extension>
+    <option name="PACKAGE_NAME" value="com.bottega.vendor.concert.domain" />
+    <option name="MAIN_CLASS_NAME" value="" />
+    <option name="METHOD_NAME" value="" />
+    <option name="TEST_OBJECT" value="pattern" />
+    <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+    <patterns>
+      <pattern testClass=".*Comp(Test|Spec)" />
+    </patterns>
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

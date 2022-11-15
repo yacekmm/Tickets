@@ -1,0 +1,24 @@
+
+// https://cloud.spring.io/spring-cloud-contract/reference/html/gradle-project.html#gradle-configuration-options
+
+contracts {
+    basePackageForTests = 'com.bottega.pricing'
+    packageWithBaseClasses = 'com.bottega.pricing.fixtures'
+    testMode = 'Explicit'
+//    failOnInProgress = false
+    testFramework = 'JUNIT5'
+}
+
+def stubsVersion = rootProject.version + '-SNAPSHOT'
+
+publishing {
+    publications {
+        stubs(MavenPublication) {
+            artifact verifierStubsJar
+            version = stubsVersion
+        }
+    }
+}
+
+publishToMavenLocal.dependsOn generateClientStubs
+publishStubsToScm.dependsOn publishToMavenLocal
