@@ -9,6 +9,7 @@ import static lombok.AccessLevel.PRIVATE;
 @Getter
 @ToString
 @AllArgsConstructor(access = PRIVATE)
+@EqualsAndHashCode
 public class ErrorResult {
 
     private final ErrorType type;
