@@ -4,10 +4,9 @@ import com.bottega.vendor.concert.fixtures.ConcertLogicTestBase;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.*;
 
-import java.util.*;
+import java.util.Set;
 import java.util.stream.Stream;
 
-import static com.bottega.sharedlib.config.TestClockConfig.TEST_TIME_PLUS_30_DAYS;
 import static java.util.stream.Collectors.toSet;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -28,7 +27,7 @@ class InitConcert_UnitTest extends ConcertLogicTestBase {
     @MethodSource("provideStringsForTags")
     void initConcert_addsTags(String title, Set<String> expectedTags) {
         //given
-        Concert newConcert = new Concert(new ConcertId(), Title.from(title).get(), ConcertDate.from(TEST_TIME_PLUS_30_DAYS.toString(), sharedFixtures.clock).get(), "vendor-id", new HashSet<>(), null);
+        Concert newConcert = builders.aConcert().withTitle(title).build();
 
         //when
         newConcert.initNewConcert(concertFixtures.tagService, concertFixtures.categoryService);
@@ -52,7 +51,7 @@ class InitConcert_UnitTest extends ConcertLogicTestBase {
     @MethodSource("provideStringsForCategories")
     void initConcert_assignsCategory(String title, String expectedCategory) {
         //given
-        Concert newConcert = new Concert(new ConcertId(), Title.from(title).get(), ConcertDate.from(TEST_TIME_PLUS_30_DAYS.toString(), sharedFixtures.clock).get(), "vendor-id", new HashSet<>(), null);
+        Concert newConcert = builders.aConcert().withTitle(title).build();
 
         //when
         newConcert.initNewConcert(concertFixtures.tagService, concertFixtures.categoryService);

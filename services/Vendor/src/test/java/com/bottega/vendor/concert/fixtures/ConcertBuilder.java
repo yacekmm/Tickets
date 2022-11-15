@@ -25,4 +25,12 @@ public class ConcertBuilder {
                 .category(null);
     }
 
+    public ConcertBuilder withTitle(String title) {
+        builder.title(Title.from(title).get());
+        return this;
+    }
+
+    public Concert build() {
+        return builder.build();
+    }
 }
