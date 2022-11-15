@@ -51,7 +51,7 @@ Installed:
 
 - gradle
 - JDK 17+
-- IDE (recommended IntelliJ Idea)
+- IDE (recommended: IntelliJ Idea)
 - git
 - docker
 - docker compose
