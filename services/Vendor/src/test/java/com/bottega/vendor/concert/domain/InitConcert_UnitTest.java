@@ -9,6 +9,7 @@ import java.util.HashSet;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
 
 class InitConcert_UnitTest extends ConcertLogicTestBase {
 
@@ -27,9 +28,10 @@ class InitConcert_UnitTest extends ConcertLogicTestBase {
     public void initConcert_assignsCategory(String title, String expectedCategory) {
         //given
         Concert newConcert = new Concert(new ConcertId(), Title.from(title).get(), ConcertDate.from(TestClockConfig.TEST_TIME_PLUS_30_DAYS.toString(), sharedFixtures.clock).get(), "vendor-id", new HashSet<>(), null);
+        CategoryService categoryService = mock(CategoryService.class);
 
         //when
-        newConcert.initNewConcert();
+        newConcert.initNewConcert(categoryService);
 
         //then
         assertThat(newConcert.getCategory().getValue()).isEqualTo(expectedCategory);
