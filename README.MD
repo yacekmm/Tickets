@@ -54,7 +54,7 @@ Installed:
 - IDE (recommended IntelliJ Idea)
 - git
 - docker
-- docker-compose
+- docker compose
 
 ### Running `vendor-ui`
 
