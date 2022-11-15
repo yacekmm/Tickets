@@ -20,7 +20,7 @@ class ApplyPercentageFactor_CompTest extends LogicTestBase {
 
     @Test
     void applyPercentageFactor_returnsSingleDiscountedPrice_onValidRequest() {
-        ItemPrice price = builders.dontLook().priceForItem(100_00, "item-id").inDb();
+        ItemPrice price = builders.aPrice().priceForItem(100_00, "item-id").inDb();
 
         //when
         Either<ErrorResult, List<ItemPrice>> result = priceFixtures.priceService.applyPercentageFactor("item-id", 10);
@@ -42,7 +42,7 @@ class ApplyPercentageFactor_CompTest extends LogicTestBase {
 
     @Test
     void applyPercentageFactor_publishesPriceChangeEvent_onPriceChange() {
-        ItemPrice price = builders.dontLook().priceForItem(100_00, "item-id").inDb();
+        ItemPrice price = builders.aPrice().priceForItem(100_00, "item-id").inDb();
 
         //when
         Either<ErrorResult, List<ItemPrice>> result = priceFixtures.priceService.applyPercentageFactor("item-id", 10);
@@ -55,7 +55,7 @@ class ApplyPercentageFactor_CompTest extends LogicTestBase {
 
     @Test
     void applyPercentageFactor_updatesReadModel_onPriceChange() {
-        ItemPrice price = builders.dontLook().priceForItem(100_00, "item-id").inDb();
+        ItemPrice price = builders.aPrice().priceForItem(100_00, "item-id").inDb();
 
         //when
         Either<ErrorResult, List<ItemPrice>> result = priceFixtures.priceService.applyPercentageFactor("item-id", 10);

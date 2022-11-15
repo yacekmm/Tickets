@@ -1,7 +1,7 @@
 package com.bottega.pricing.price.fixtures;
 
 import com.bottega.pricing.price.domain.*;
-import com.bottega.sharedlib.fixtures.UUIDs;
+import com.bottega.pricing.price.infra.repo.ItemPriceRepo;
 import com.bottega.sharedlib.repo.MoneyDbEntity;
 import com.bottega.sharedlib.vo.Money;
 import lombok.RequiredArgsConstructor;
@@ -13,15 +13,22 @@ import java.util.ArrayList;
 @RequiredArgsConstructor
 public class ItemPriceBuilder {
 
+    public final ItemPriceRepo itemPriceRepo;
+    private Money price = new Money(200_00);
+    private String itemId = "mock-item-id";
 
-    private int price = 200_00;
 
-    public ItemPrice build() {
-        return new ItemPrice(new PriceId(), MoneyDbEntity.from(new Money(price)), UUIDs.zeros(), new ArrayList<>());
+    public ItemPrice build(){
+        return new ItemPrice(new PriceId(), MoneyDbEntity.from(price), itemId, new ArrayList<>());
     }
 
-    public ItemPriceBuilder withPrice(int price) {
-        this.price = price;
+    public ItemPrice inDb() {
+        return itemPriceRepo.save(build());
+    }
+
+    public ItemPriceBuilder priceForItem(int price, String itemId) {
+        this.price = new Money(price);
+        this.itemId = itemId;
         return this;
     }
 }

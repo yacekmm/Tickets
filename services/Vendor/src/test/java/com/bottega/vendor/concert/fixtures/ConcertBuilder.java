@@ -1,9 +1,11 @@
 package com.bottega.vendor.concert.fixtures;
 
 import com.bottega.vendor.concert.domain.*;
+import com.bottega.vendor.concert.infra.repo.ConcertRepo;
+import com.bottega.vendor.concertRead.ConcertFinderRepo;
 import org.springframework.stereotype.Component;
 
-import java.time.Clock;
+import java.time.*;
 import java.util.HashSet;
 
 import static com.bottega.sharedlib.config.TestClockConfig.TEST_TIME_PLUS_30_DAYS;
@@ -11,18 +13,35 @@ import static com.bottega.sharedlib.config.TestClockConfig.TEST_TIME_PLUS_30_DAY
 @Component
 public class ConcertBuilder {
 
+    private final ConcertRepo concertRepo;
+    private final ConcertFinderRepo concertFinderRepo;
     private final Clock clock;
     private final Concert.ConcertBuilder builder;
 
-    public ConcertBuilder(Clock clock) {
+    public ConcertBuilder(ConcertRepo concertRepo, ConcertFinderRepo concertFinderRepo, Clock clock) {
+        this.concertRepo = concertRepo;
+        this.concertFinderRepo = concertFinderRepo;
         this.clock = clock;
         this.builder = Concert.builder()
                 .id(new ConcertId())
-                .title(Title.from("mock title of a concert").get())
-                .date(ConcertDate.from(TEST_TIME_PLUS_30_DAYS.toString(), this.clock).get())
-                .vendorId("mock-vendor-id")
                 .tags(new HashSet<>())
                 .category(null);
+
+        this.withTitle("mock title of a concert")
+                .withDate(TEST_TIME_PLUS_30_DAYS)
+                .withVendorId("mock-vendor-id");
+    }
+
+    public Concert build() {
+        return builder.build();
+    }
+
+    public Concert inDb() {
+        return concertRepo.save(build());
+    }
+
+    public Concert inFinderDb() {
+        return concertFinderRepo.save(build());
     }
 
     public ConcertBuilder withTitle(String title) {
@@ -30,7 +49,13 @@ public class ConcertBuilder {
         return this;
     }
 
-    public Concert build() {
-        return builder.build();
+    public ConcertBuilder withDate(Instant date) {
+        builder.date(ConcertDate.from(date.toString(), clock).get());
+        return this;
+    }
+
+    public ConcertBuilder withVendorId(String vendorId) {
+        builder.vendorId(vendorId);
+        return this;
     }
 }

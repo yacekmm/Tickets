@@ -12,7 +12,7 @@ public class MessagingPriceChangeBase extends CdcFrameworkTestBase {
 
     @BeforeEach
     void setUp() {
-        price = builders.dontLook().priceForItem(100_00, UUIDs.zeros()).inDb();
+        price = builders.aPrice().priceForItem(100_00, UUIDs.zeros()).inDb();
     }
 
     protected void applyPercentageDiscount(int percentage) {

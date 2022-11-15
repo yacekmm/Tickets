@@ -6,7 +6,7 @@ class InitConcert_UnitSpec extends SpecificationBase {
 
     def "initConcert - adds tags"() {
         given:
-        def newConcert = builders.aConcert().withTitle(title).build()
+        Concert newConcert = builders.aConcert().withTitle(title).build()
 
         when:
         newConcert.initNewConcert(concertFixtures.tagService, concertFixtures.categoryService)
@@ -28,7 +28,7 @@ class InitConcert_UnitSpec extends SpecificationBase {
 
     def "initConcert - assigns category"() {
         given:
-        def newConcert = builders.aConcert().withTitle(title).build()
+        Concert newConcert = builders.aConcert().withTitle(title).build()
 
         when:
         newConcert.initNewConcert(concertFixtures.tagService, concertFixtures.categoryService)
@@ -44,4 +44,5 @@ class InitConcert_UnitSpec extends SpecificationBase {
         "Scorpions on Mystic Festival" | "rock"
         "Rihanna the best of"          | "superstar"
     }
+
 }

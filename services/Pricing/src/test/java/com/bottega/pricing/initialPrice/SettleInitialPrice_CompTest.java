@@ -23,7 +23,7 @@ class SettleInitialPrice_CompTest extends LogicTestBase {
         String expectedItemId = "item-id";
 
         given(initPriceFixtures.priceService.addNewPrice(eq(expectedItemId), eq(new Money(expectedPrice))))
-                .willReturn(Either.right(builders.dontLook().priceForItem(expectedPrice, expectedItemId).build()));
+                .willReturn(Either.right(builders.aPrice().priceForItem(expectedPrice, expectedItemId).build()));
 
         //when
         Either<ErrorResult, ItemPrice> result = initPriceFixtures.initPriceService.settleInitialPrice(expectedItemId, 5, new HashSet<>());

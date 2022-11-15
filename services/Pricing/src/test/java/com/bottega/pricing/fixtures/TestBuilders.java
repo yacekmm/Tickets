@@ -1,6 +1,6 @@
 package com.bottega.pricing.fixtures;
 
-import com.bottega.pricing.price.fixtures.*;
+import com.bottega.pricing.price.fixtures.ItemPriceBuilder;
 import com.bottega.pricing.price.infra.repo.ItemPriceRepo;
 import com.bottega.sharedlib.config.ApiVersions;
 import io.restassured.RestAssured;
@@ -20,8 +20,8 @@ public class TestBuilders {
     @Value("${server.port}")
     private int port;
 
-    public DontLook dontLook() {
-        return new DontLook(priceRepo);
+    public ItemPriceBuilder aPrice() {
+        return new ItemPriceBuilder(priceRepo);
     }
 
     public RequestSpecification aRequestSpec() {
@@ -31,9 +31,5 @@ public class TestBuilders {
         return RestAssured.given()
                 .basePath(ApiVersions.V1)
                 .contentType(JSON);
-    }
-
-    public ItemPriceBuilder aPrice() {
-        return new ItemPriceBuilder();
     }
 }

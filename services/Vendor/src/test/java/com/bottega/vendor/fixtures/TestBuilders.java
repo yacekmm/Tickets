@@ -2,7 +2,7 @@ package com.bottega.vendor.fixtures;
 
 import com.bottega.sharedlib.config.ApiVersions;
 import com.bottega.vendor.agreements.fixtures.VendorAgreementBuilder;
-import com.bottega.vendor.concert.fixtures.*;
+import com.bottega.vendor.concert.fixtures.ConcertBuilder;
 import com.bottega.vendor.concert.infra.repo.ConcertRepo;
 import com.bottega.vendor.concertRead.ConcertFinderRepo;
 import io.restassured.RestAssured;
@@ -26,8 +26,8 @@ public class TestBuilders {
     @Value("${server.port}")
     private int port;
 
-    public DontLook dontLook() {
-        return new DontLook(concertRepo, concertFinderRepo, clock);
+    public ConcertBuilder aConcert() {
+        return new ConcertBuilder(concertRepo, concertFinderRepo, clock);
     }
 
     public VendorAgreementBuilder aVendorAgreement() {
@@ -41,9 +41,5 @@ public class TestBuilders {
         return RestAssured.given()
                 .basePath(ApiVersions.V1)
                 .contentType(JSON);
-    }
-
-    public ConcertBuilder aConcert(){
-        return new ConcertBuilder(clock);
     }
 }

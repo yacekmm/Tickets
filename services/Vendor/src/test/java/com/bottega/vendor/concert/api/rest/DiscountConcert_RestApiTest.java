@@ -13,7 +13,7 @@ public class DiscountConcert_RestApiTest extends FrameworkTestBase {
 
     @Test
     public void discountConcert_discounts_onValidRequest() {
-        Concert concert = builders.dontLook().inDb();
+        Concert concert = builders.aConcert().inDb();
 
         //when
         ValidatableResponse response = concertFixtures.concertHttpClient.discountConcert(concert.getId(), 10);
