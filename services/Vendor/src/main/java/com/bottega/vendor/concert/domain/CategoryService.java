@@ -16,7 +16,7 @@ public class CategoryService {
         defaultCategories.put("superstar", new String[]{"Rihanna"});
     }
 
-    Category categorize(Title title) {
+    public Category categorize(Title title) {
         return defaultCategories.entrySet().stream()
                 .filter(entry -> containsAnyIgnoreCase(title.getValue(), entry.getValue()))
                 .findFirst()
