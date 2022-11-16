@@ -34,7 +34,7 @@ public class PriceService {
                 .map(itemPrice -> itemPrice.applyFactor(percentageFactor(percentage, itemPrice)))
                 .peek(priceRepo::save)
                 .peek(priceUpdateService::updateReadModel)
-                //TODO publish price_changed event
+                .peek(itemPrice -> eventPublisher.publish(priceChange(itemPrice)))
                 .toList();
 
         if (updatedPrices.isEmpty()) {

@@ -15,6 +15,7 @@ import java.util.List;
 
 import static com.bottega.sharedlib.vo.error.ErrorResult.notFound;
 import static com.bottega.sharedlib.vo.error.GenericErrorCode.not_found;
+import static com.bottega.vendor.concert.domain.VendorEventFactory.concertCreated;
 import static io.vavr.control.Option.ofOptional;
 
 @ApplicationService
@@ -36,8 +37,9 @@ public class ConcertService {
         }
         return concertFactory.createConcert(title, dateTime, vendorAgreement.vendorId())
                 .peek(concert -> concert.initNewConcert(tagService, categoryService))
-                .peek(concertRepo::save)
-                .peek(concert -> eventPublisher.publish(VendorEventFactory.concertCreated(concert, vendorAgreement.profitMarginPercentage())));
+                .map(concertRepo::save)
+                //Outbox, post-transaction?
+                .peek(concert -> eventPublisher.publish(concertCreated(concert, vendorAgreement.profitMarginPercentage())));
     }
 
     public Either<ErrorResult, List<Price>> discountConcert(String concertId, int percentage) {
