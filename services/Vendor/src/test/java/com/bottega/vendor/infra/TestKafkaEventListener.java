@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.*;
 
-import static org.testcontainers.shaded.org.awaitility.Awaitility.await;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @Component
 @RequiredArgsConstructor
@@ -35,7 +35,7 @@ public class TestKafkaEventListener {
     }
 
     public Event singleEvent() {
-        await().until(() -> receivedEvents.size() == 1);
+        assertThat(receivedEvents).hasSize(1);
         return receivedEvents.get(0);
     }
 }
