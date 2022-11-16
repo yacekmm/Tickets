@@ -5,6 +5,9 @@ import com.bottega.pricing.price.domain.ItemPrice;
 import com.bottega.pricing.price.fixtures.InMemoryItemPriceRepo;
 import org.junit.jupiter.api.*;
 
+import static java.util.List.of;
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class ItemPriceRepo_DepTest extends FrameworkTestBase {
 
     private InMemoryItemPriceRepo fakeRepo;
@@ -23,9 +26,15 @@ public class ItemPriceRepo_DepTest extends FrameworkTestBase {
         ItemPrice otherPrice = builders.aPrice().priceForItem(100_00, "otherId").build();
 
         //when
+        fakeRepo.saveAll(of(itemPrice, otherPrice));
+        realRepo.saveAll(of(itemPrice, otherPrice));
 
         //then
+        assertThat(realRepo.findByItemId("item-id")).containsExactlyInAnyOrder(itemPrice);
+        assertThat(realRepo.findAll()).containsExactlyInAnyOrder(itemPrice, otherPrice);
 
+        assertThat(fakeRepo.findByItemId("item-id")).containsExactlyInAnyOrder(itemPrice);
+        assertThat(fakeRepo.findAll()).containsExactlyInAnyOrder(itemPrice, otherPrice);
     }
 
 }
