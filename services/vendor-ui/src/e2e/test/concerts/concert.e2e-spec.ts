@@ -1,14 +1,17 @@
-import {browser, By, element, protractor} from "protractor";
+import {By, element} from "protractor";
+import {BrowserTools} from "../shared/browser-tools";
 
 describe('ui', () => {
 
+  let browserTools: BrowserTools
+
   beforeEach(() => {
-    browser.ignoreSynchronization = true;
-    browser.get('http://localhost:4200/');
+    browserTools = new BrowserTools();
+    browserTools.initBrowser();
   });
 
   it('opens page', () => {
-    browser.driver.getTitle().then(pageTitle => expect(pageTitle).toEqual('Vendor UI'));
+    browserTools.getPageTitle().then(pageTitle => expect(pageTitle).toEqual('Vendor UI'));
   });
 
   it('creates concert', function () {
@@ -16,8 +19,7 @@ describe('ui', () => {
     element(By.id("input-concert-title")).sendKeys("concert Title");
     element(By.id("create-concert-submit")).click();
     let successConfirmation = element(By.className("mat-simple-snackbar"));
-    let expected = protractor.ExpectedConditions;
-    browser.wait(expected.visibilityOf(successConfirmation))
+    browserTools.waitUntilIsVisible(successConfirmation)
       .then(unused =>
         expect(successConfirmation.isDisplayed()).toBeTruthy()
       );
