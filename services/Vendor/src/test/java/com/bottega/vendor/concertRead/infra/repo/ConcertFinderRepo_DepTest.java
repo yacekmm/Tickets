@@ -12,7 +12,8 @@ public class ConcertFinderRepo_DepTest extends FrameworkTestBase {
 
     @BeforeEach
     void setUp() {
-
+        fakeRepo = new InMemoryConcertFinderRepo();
+        realRepo = concertReadFixtures.concertFinderRepo;
     }
 
     @Test
