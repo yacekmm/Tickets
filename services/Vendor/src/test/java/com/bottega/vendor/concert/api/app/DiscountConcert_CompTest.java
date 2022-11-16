@@ -3,6 +3,7 @@ package com.bottega.vendor.concert.api.app;
 import com.bottega.sharedlib.fixtures.ErrorAssert;
 import com.bottega.sharedlib.vo.error.ErrorResult;
 import com.bottega.vendor.concert.Price;
+import com.bottega.vendor.concert.domain.Concert;
 import com.bottega.vendor.concert.fixtures.ConcertLogicTestBase;
 import io.vavr.control.Either;
 import org.junit.jupiter.api.Test;
@@ -19,8 +20,10 @@ class DiscountConcert_CompTest extends ConcertLogicTestBase {
     @Test
     void discountConcert_discountsConcert_onValidInput() {
         //given
+        Concert concert = builders.aConcert().inDb();
 
         //when
+        Either<ErrorResult, List<Price>> result = concertFixtures.concertService.discountConcert(concert.getId().asString(), 10);
 
         //then
 
