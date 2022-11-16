@@ -18,12 +18,12 @@ public record PriceResponseDto(
     }
 
     record PriceFactorResponseDto(
-            String name,
+            String type,
             int value,
             Map<String, String> params
     ) {
         public PriceFactor toPriceFactor() {
-            return new PriceFactor(name, value, params);
+            return new PriceFactor(type, value, params);
         }
     }
 }
