@@ -19,7 +19,7 @@ public class FakePricingClient implements PricingClient {
                 of(new Price(
                         new Money(90_00),
                         of(new PriceFactor(
-                                null,
+                                "PERCENTAGE",
                                 percentage,
                                 null))))
         );
