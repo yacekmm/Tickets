@@ -14,7 +14,7 @@ import static com.bottega.sharedlib.fixtures.RepoEntries.SINGULAR;
 import static org.assertj.vavr.api.VavrAssertions.assertThat;
 import static org.mockito.BDDMockito.then;
 
-class ApplyPercentageFactor_CompTest extends LogicTestBase {
+class PriceService_ApplyPercentageFactor_CompTest extends LogicTestBase {
 
     @Test
     void applyPercentageFactor_returnsSingleDiscountedPrice_onValidRequest() {

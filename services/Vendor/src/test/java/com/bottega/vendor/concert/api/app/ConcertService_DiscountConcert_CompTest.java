@@ -17,7 +17,7 @@ import static com.bottega.sharedlib.vo.error.ErrorType.NOT_FOUND;
 import static com.bottega.sharedlib.vo.error.GenericErrorCode.not_found;
 import static org.assertj.vavr.api.VavrAssertions.assertThat;
 
-class DiscountConcert_CompTest extends ConcertLogicTestBase {
+class ConcertService_DiscountConcert_CompTest extends ConcertLogicTestBase {
 
 
     @Test

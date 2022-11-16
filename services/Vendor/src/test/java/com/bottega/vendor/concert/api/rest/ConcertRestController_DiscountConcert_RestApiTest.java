@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.hamcrest.Matchers.*;
 
-public class DiscountConcert_RestApiTest extends FrameworkTestBase {
+public class ConcertRestController_DiscountConcert_RestApiTest extends FrameworkTestBase {
 
 
     @Test

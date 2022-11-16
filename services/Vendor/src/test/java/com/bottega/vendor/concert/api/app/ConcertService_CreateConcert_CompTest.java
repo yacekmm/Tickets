@@ -16,7 +16,7 @@ import static org.assertj.vavr.api.VavrAssertions.assertThat;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
 
-class CreateConcert_CompTest extends ConcertLogicTestBase {
+class ConcertService_CreateConcert_CompTest extends ConcertLogicTestBase {
 
 
     @Test

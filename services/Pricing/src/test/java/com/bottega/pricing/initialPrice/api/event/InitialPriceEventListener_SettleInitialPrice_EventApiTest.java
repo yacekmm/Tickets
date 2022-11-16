@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import static com.bottega.sharedlib.fixtures.RepoEntries.SINGULAR;
 import static org.testcontainers.shaded.org.awaitility.Awaitility.await;
 
-class SettleInitialPrice_EventApiTest extends FrameworkTestBase {
+class InitialPriceEventListener_SettleInitialPrice_EventApiTest extends FrameworkTestBase {
 
     @Test
     public void settleInitialPrice_createsNewPrice() {

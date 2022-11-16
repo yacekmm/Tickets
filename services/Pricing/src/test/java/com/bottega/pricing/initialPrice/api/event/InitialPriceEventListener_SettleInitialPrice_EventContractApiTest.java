@@ -11,7 +11,7 @@ import org.springframework.cloud.contract.stubrunner.StubTrigger;
 import static com.bottega.sharedlib.fixtures.RepoEntries.SINGULAR;
 import static org.testcontainers.shaded.org.awaitility.Awaitility.await;
 
-class SettleInitialPrice_EventContractApiTest extends FrameworkTestBase {
+class InitialPriceEventListener_SettleInitialPrice_EventContractApiTest extends FrameworkTestBase {
 
     @Autowired
     StubTrigger trigger;

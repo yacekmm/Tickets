@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 import static com.bottega.sharedlib.fixtures.RepoEntries.SINGULAR;
 import static org.assertj.vavr.api.VavrAssertions.assertThat;
 
-class AddNewPrice_CompTest extends LogicTestBase {
+class PriceService_AddNewPrice_CompTest extends LogicTestBase {
 
     @Test
     void addNewPrice_createsPrice_onValidRequest() {

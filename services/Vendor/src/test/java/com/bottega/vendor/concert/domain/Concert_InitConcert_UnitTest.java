@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 import static java.util.stream.Collectors.toSet;
 import static org.assertj.core.api.Assertions.assertThat;
 
-class InitConcert_UnitTest extends ConcertLogicTestBase {
+class Concert_InitConcert_UnitTest extends ConcertLogicTestBase {
 
 
     private static Stream<Arguments> provideStringsForTags() {

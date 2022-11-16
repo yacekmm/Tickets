@@ -14,7 +14,7 @@ import static org.assertj.vavr.api.VavrAssertions.assertThat;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
 
-class SettleInitialPrice_CompTest extends LogicTestBase {
+class InitialPriceService_SettleInitialPrice_CompTest extends LogicTestBase {
 
     @Test
     public void settleInitialPrice_calculatesPrice_onValidInput() {
