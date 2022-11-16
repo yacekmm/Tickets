@@ -2,6 +2,30 @@
 
 You should import the `Tickets/build.gradle` as a root project to your IDE.
 
+## Verify after import
+
+Execute tests to check if the system is working on your machine and tests are green.
+
+I suggest running IntelliJ task `Tickets test --all` to run all kinds of tests in the system. Alternatively you can run `./gradlew test` for all the services. Follow this doc to find out details.
+
+Reach me out in case of any difficulties.
+
+# About `Tickets`
+
+## Business goal
+
+Tickets system is a cutting-edge Concert tickets selling platform with a revolutionary pricing algorithm and super friendly for Concert organizers (called Vendors) to sell their concerts with remarkable profit.
+
+## Purpose
+
+The system is built as a training example for [Testing Microservices](https://bottega.com.pl/szkolenie-ms-testing).
+
+## Architecture
+
+The overall System consists of many microservices. This repository holds a subset of them, essential for Vendors to create concerts. High level architecture is below.
+
+![img.png](docs/TicketsArchitecture.png)
+
 # Running
 
 Both Gradle and IntelliJ run configurations are available.
