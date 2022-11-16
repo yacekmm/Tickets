@@ -1,14 +1,12 @@
 package com.bottega.vendor.concert.domain;
 
-import com.bottega.sharedlib.config.ServicesProperties;
 import com.bottega.vendor.agreements.VendorService;
 import com.bottega.vendor.concert.api.app.ConcertService;
 import com.bottega.vendor.concert.fixtures.*;
 import com.bottega.vendor.concert.fixtures.clients.ConcertHttpClient;
 import com.bottega.vendor.concert.infra.repo.*;
-import com.bottega.vendor.fixtures.SharedFixtures;
-import com.bottega.vendor.infra.client.WebClientsConfig;
-import com.bottega.vendor.infra.client.pricing.*;
+import com.bottega.vendor.fixtures.*;
+import com.bottega.vendor.infra.client.pricing.PricingClient;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -63,10 +61,7 @@ public class ConcertFixtures {
     }
 
     private static void initClients(ConcertFixtures concertFixtures) {
-        ServicesProperties properties = new ServicesProperties();
-        properties.setPricing(new ServicesProperties.ServiceConfig("some-url", 10_000));
-        properties.setRequestTimeoutInSeconds(2);
-        concertFixtures.pricingClient = new HttpPricingClient(new WebClientsConfig().pricingWebClient(properties));
+        concertFixtures.pricingClient = new FakePricingClient();
     }
 
     private static void initMocks(ConcertFixtures concertFixtures) {
