@@ -6,8 +6,11 @@ import com.bottega.vendor.concertRead.fixtures.InMemoryConcertFinderRepo;
 import com.bottega.vendor.fixtures.FrameworkTestBase;
 import org.junit.jupiter.api.*;
 
+import java.util.List;
+
 import static com.bottega.sharedlib.config.TestClockConfig.*;
 import static java.util.List.of;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ConcertFinderRepo_DepTest extends FrameworkTestBase {
 
@@ -31,9 +34,11 @@ public class ConcertFinderRepo_DepTest extends FrameworkTestBase {
         realRepo.saveAll(of(concert_1, concert_2, other));
 
         //when
+        List<Concert> fakeRepoResult = fakeRepo.findByVendorIdOrderByDateAsc("vendor");
+        List<Concert> realRepoResult = realRepo.findByVendorIdOrderByDateAsc("vendor");
 
         //then
-
+        assertThat(fakeRepoResult).containsExactlyElementsOf(realRepoResult);
     }
 
 }
