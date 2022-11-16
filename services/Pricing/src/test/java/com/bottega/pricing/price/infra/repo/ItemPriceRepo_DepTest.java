@@ -11,7 +11,8 @@ public class ItemPriceRepo_DepTest extends FrameworkTestBase {
 
     @BeforeEach
     void setUp() {
-
+        fakeRepo = new InMemoryItemPriceRepo();
+        realRepo = priceFixtures.itemPriceRepo;
     }
 
     @Test
