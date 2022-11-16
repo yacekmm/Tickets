@@ -31,7 +31,16 @@ public class PriceRestController_ApplyPercentageFactor_RestApiTest extends Frame
         //then
         PriceJsonAssert.assertThatPrice(response)
                 .hasSinglePrice(itemPrice, 80_00)
-                .hasSinglePercentageFactor(10);
+                .hasSinglePercentageFactor(20);
+    }
+
+    @Test
+    public void applyFactor_returns404_onItemNotFound() {
+        //when
+
+
+        //then
+
     }
 
 }
