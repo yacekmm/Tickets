@@ -37,9 +37,7 @@ public class ConcertService {
         return concertFactory.createConcert(title, dateTime, vendorAgreement.vendorId())
                 .peek(concert -> concert.initNewConcert(tagService, categoryService))
                 .peek(concertRepo::save);
-                //TODO: save in repo
                 //TODO: publish event
-//                .peek(concert -> eventPublisher.publish(concertCreated(concert, 10)));
     }
 
     public Either<ErrorResult, List<Price>> discountConcert(String concertId, int percentage) {

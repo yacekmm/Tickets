@@ -2,7 +2,6 @@ package com.bottega.vendor.fixtures;
 
 import com.bottega.sharedlib.config.TestClockConfig;
 import com.bottega.sharedlib.event.EventPublisher;
-import com.bottega.sharedlib.infra.repo.FakeEventPublisher;
 import com.bottega.vendor.infra.TestKafkaEventListener;
 import io.vavr.control.Try;
 import lombok.SneakyThrows;

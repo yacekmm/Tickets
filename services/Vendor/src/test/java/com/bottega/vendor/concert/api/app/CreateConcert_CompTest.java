@@ -62,5 +62,18 @@ class CreateConcert_CompTest extends ConcertLogicTestBase {
         assertThat(result).isLeft();
     }
 
+    @Test
+    void createConcert_publishesEvent_onValidInput() {
+        //given
+        VendorAgreement vendorAgreement = builders.aVendorAgreement().build();
+        given(concertFixtures.vendorService.getVendorAgreement(anyString())).willReturn(vendorAgreement);
+
+        //when
+        Either<ErrorResult, Concert> result = concertFixtures.concertService.createConcert("Woodstock 2000", TEST_TIME_PLUS_30_DAYS.toString(), vendorAgreement.vendorId().asString());
+
+        //then
+        //TODO: check event publisher
+    }
+
 
 }
