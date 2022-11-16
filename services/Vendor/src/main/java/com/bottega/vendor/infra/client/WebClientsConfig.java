@@ -2,15 +2,13 @@ package com.bottega.vendor.infra.client;
 
 import com.bottega.sharedlib.config.ServicesProperties;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.*;
 import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.netty.http.client.HttpClient;
 
 import static java.time.Duration.ofSeconds;
-import static org.springframework.http.HttpHeaders.ACCEPT;
-import static org.springframework.http.HttpHeaders.CONTENT_TYPE;
+import static org.springframework.http.HttpHeaders.*;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Configuration
@@ -18,7 +16,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 public class WebClientsConfig {
 
     @Bean
-    WebClient pricingWebClient(ServicesProperties servicesProperties) {
+    public WebClient pricingWebClient(ServicesProperties servicesProperties) {
 
         final HttpClient httpClient = HttpClient.create()
                 .responseTimeout(ofSeconds(servicesProperties.getRequestTimeoutInSeconds()))
