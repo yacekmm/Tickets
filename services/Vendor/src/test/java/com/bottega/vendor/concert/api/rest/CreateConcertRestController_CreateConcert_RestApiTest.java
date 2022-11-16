@@ -55,17 +55,7 @@ public class CreateConcertRestController_CreateConcert_RestApiTest extends Frame
     @Test
     public void createConcert_returnsBadRequest_onDateTooSoon() {
         //when
-        ValidatableResponse response =
-                RestAssured.given()
-                        .port(8180)
-                        .contentType(JSON)
-                        .body(Maps.of(
-                                "title", "concert-title",
-                                "date", ofInstant(TEST_TIME, UTC).toString(),
-                                "vendorId", "some-id"
-                        ))
-                        .post("api/v1/concert")
-                        .then();
+        ValidatableResponse response = concertFixtures.concertHttpClient.createConcert("concert-title", ofInstant(TEST_TIME, UTC).toString(), "some-id");
 
         //then
         ErrorJsonAssert.assertThatError(response)
