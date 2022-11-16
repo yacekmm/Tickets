@@ -4,9 +4,7 @@ import com.bottega.sharedlib.infra.repo.InMemoryRepo;
 import com.bottega.vendor.concert.domain.*;
 import com.bottega.vendor.concertRead.ConcertFinderRepo;
 
-import java.util.List;
-
-import static java.util.Comparator.comparing;
+import java.util.*;
 
 public class InMemoryConcertFinderRepo
         extends InMemoryRepo<Concert, ConcertId>
@@ -14,9 +12,6 @@ public class InMemoryConcertFinderRepo
 
     @Override
     public List<Concert> findByVendorIdOrderByDateAsc(String vendorId) {
-        return database.values().stream()
-                .filter(concert -> concert.vendorId().getValue().equals(vendorId))
-                .sorted(comparing(concert -> concert.getDate().getUtcDate()))
-                .toList();
+        return new ArrayList<>();
     }
 }
