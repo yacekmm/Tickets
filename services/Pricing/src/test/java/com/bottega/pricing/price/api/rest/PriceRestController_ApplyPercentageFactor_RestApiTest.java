@@ -3,31 +3,18 @@ package com.bottega.pricing.price.api.rest;
 import com.bottega.pricing.fixtures.*;
 import com.bottega.pricing.price.domain.ItemPrice;
 import com.bottega.sharedlib.fixtures.ErrorJsonAssert;
-import io.restassured.RestAssured;
 import io.restassured.response.ValidatableResponse;
-import org.apache.groovy.util.Maps;
 import org.junit.jupiter.api.Test;
-
-import static io.restassured.http.ContentType.JSON;
 
 public class PriceRestController_ApplyPercentageFactor_RestApiTest extends FrameworkTestBase {
 
     @Test
     public void applyFactor_OK_onValidRequest() {
         //given
-        String itemId = "item-id";
-        ItemPrice itemPrice = builders.aPrice().priceForItem(100_00, itemId).inDb();
+        ItemPrice itemPrice = builders.aPrice().priceForItem(100_00, "item-id").inDb();
 
         //when
-        RestAssured.port = 8181;
-        ValidatableResponse response = RestAssured.given()
-                .contentType(JSON)
-                .body(Maps.of(
-                        "percentage", 20
-                ))
-                .pathParam("item-id", itemId)
-                .post("api/v1/item/{item-id}/price-factor/percentage")
-                .then();
+        ValidatableResponse response = priceFixtures.pricingHttpClient.applyPercentageFactor("item-id", 20);
 
         //then
         PriceJsonAssert.assertThatPrice(response)
@@ -38,15 +25,7 @@ public class PriceRestController_ApplyPercentageFactor_RestApiTest extends Frame
     @Test
     public void applyFactor_returns404_onItemNotFound() {
         //when
-        RestAssured.port = 8181;
-        ValidatableResponse response = RestAssured.given()
-                .contentType(JSON)
-                .body(Maps.of(
-                        "percentage", 20
-                ))
-                .pathParam("item-id", "non-existing-item-id")
-                .post("api/v1/item/{item-id}/price-factor/percentage")
-                .then();
+        ValidatableResponse response = priceFixtures.pricingHttpClient.applyPercentageFactor("non-existing-item-id", 10);
 
         //then
         ErrorJsonAssert.assertThatError(response)
