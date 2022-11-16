@@ -1,6 +1,6 @@
 package com.bottega.vendor.concert.api.rest;
 
-import com.bottega.sharedlib.fixtures.RepoEntries;
+import com.bottega.sharedlib.fixtures.*;
 import com.bottega.vendor.concert.domain.ConcertId;
 import com.bottega.vendor.concert.fixtures.asserts.ConcertAssert;
 import com.bottega.vendor.fixtures.FrameworkTestBase;
@@ -9,7 +9,9 @@ import io.restassured.response.ValidatableResponse;
 import org.apache.groovy.util.Maps;
 import org.junit.jupiter.api.Test;
 
-import static com.bottega.sharedlib.config.TestClockConfig.TEST_TIME_PLUS_30_DAYS;
+import static com.bottega.sharedlib.config.TestClockConfig.*;
+import static com.bottega.sharedlib.vo.error.ErrorType.BAD_REQUEST;
+import static com.bottega.sharedlib.vo.error.GenericErrorCode.invalid_request;
 import static io.restassured.http.ContentType.JSON;
 import static java.time.LocalDate.ofInstant;
 import static java.time.ZoneOffset.UTC;
@@ -54,12 +56,24 @@ public class CreateConcertRestController_CreateConcert_RestApiTest extends Frame
 
     @Test
     public void createConcert_returnsBadRequest_onDateTooSoon() {
-        //given
-
         //when
+        ValidatableResponse response =
+                RestAssured.given()
+                        .port(8180)
+                        .contentType(JSON)
+                        .body(Maps.of(
+                                "title", "concert-title",
+                                "date", ofInstant(TEST_TIME, UTC).toString(),
+                                "vendorId", "some-id"
+                        ))
+                        .post("api/v1/concert")
+                        .then();
 
         //then
-
+        ErrorJsonAssert.assertThatError(response)
+                .hasType(BAD_REQUEST)
+                .hasCode(invalid_request)
+                .hasDescription("invalid_date");
     }
 
 
