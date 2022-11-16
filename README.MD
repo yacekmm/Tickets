@@ -85,6 +85,8 @@ The project holds System Tests only, all under `src/test` with gradle task:
 All the configurations listed above are also exported to this repo as an IntelliJ Idea configurations. They reside
 in `.run` directory and should be automatically imported once `Tickets` project is imported.
 
+Some run configurations are using [Multirun plugin](https://plugins.jetbrains.com/plugin/7248-multirun) to start all microservices in the system. Consider installing the plugin: 
+
 # Tests
 
 ## `Pricing` and `Vendor` Microservices
