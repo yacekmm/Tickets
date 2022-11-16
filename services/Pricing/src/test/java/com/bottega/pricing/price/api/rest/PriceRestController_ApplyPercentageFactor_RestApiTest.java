@@ -2,6 +2,7 @@ package com.bottega.pricing.price.api.rest;
 
 import com.bottega.pricing.fixtures.*;
 import com.bottega.pricing.price.domain.ItemPrice;
+import com.bottega.sharedlib.fixtures.ErrorJsonAssert;
 import io.restassured.RestAssured;
 import io.restassured.response.ValidatableResponse;
 import org.apache.groovy.util.Maps;
@@ -37,10 +38,19 @@ public class PriceRestController_ApplyPercentageFactor_RestApiTest extends Frame
     @Test
     public void applyFactor_returns404_onItemNotFound() {
         //when
-
+        RestAssured.port = 8181;
+        ValidatableResponse response = RestAssured.given()
+                .contentType(JSON)
+                .body(Maps.of(
+                        "percentage", 20
+                ))
+                .pathParam("item-id", "non-existing-item-id")
+                .post("api/v1/item/{item-id}/price-factor/percentage")
+                .then();
 
         //then
-
+        ErrorJsonAssert.assertThatError(response)
+                .isNotFound("No price entries found for requested item. itemId: non-existing-item-id");
     }
 
 }
