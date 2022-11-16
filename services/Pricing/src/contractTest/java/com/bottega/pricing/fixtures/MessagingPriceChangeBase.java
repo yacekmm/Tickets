@@ -16,7 +16,7 @@ public class MessagingPriceChangeBase extends CdcFrameworkTestBase {
     }
 
     protected void applyPercentageDiscount(int percentage) {
-        priceFixtures.pricingHttpClient.notImportant(price.getItemId(), percentage);
+        priceFixtures.pricingHttpClient.applyPercentageFactor(price.getItemId(), percentage);
     }
     
     protected void settleInitialPrice(){
