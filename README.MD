@@ -2,6 +2,14 @@
 
 You should import the `Tickets/build.gradle` as a root project to your IDE.
 
+## Verify after import
+
+Execute tests to check if the system is working on your machine and tests are green.
+
+I suggest running IntelliJ task `Tickets test --all` to run all kinds of tests in the system. Alternatively you can run `./gradlew test` for all the services. Follow this doc to find out details.
+
+Reach me out in case of any difficulties.
+
 # Running
 
 Both Gradle and IntelliJ run configurations are available.
