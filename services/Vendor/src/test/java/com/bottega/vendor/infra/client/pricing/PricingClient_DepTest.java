@@ -9,6 +9,8 @@ import org.junit.jupiter.api.*;
 
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class PricingClient_DepTest extends FrameworkTestBase {
 
     FakePricingClient fakePricingClient;
@@ -30,7 +32,7 @@ public class PricingClient_DepTest extends FrameworkTestBase {
         Either<ErrorResult, List<Price>> fakeResult = fakePricingClient.applyPercentageDiscount(concertId, 10);
 
         //then
-
+        assertThat(fakeResult.get()).containsExactlyInAnyOrderElementsOf(realResult.get());
     }
 
 }
