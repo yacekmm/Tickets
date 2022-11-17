@@ -1,11 +1,17 @@
 package com.bottega.vendor.concert.fixtures.clients;
 
+import com.bottega.sharedlib.config.TestClockConfig;
 import com.bottega.vendor.concert.domain.ConcertId;
 import com.bottega.vendor.fixtures.TestBuilders;
 import io.restassured.response.ValidatableResponse;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 import org.apache.groovy.util.Maps;
 import org.springframework.stereotype.Component;
+
+import java.time.Instant;
+
+import static java.time.LocalDate.ofInstant;
+import static java.time.ZoneOffset.UTC;
 
 @Component
 @RequiredArgsConstructor
@@ -13,12 +19,24 @@ public class ConcertHttpClient {
 
     private final TestBuilders builders;
 
-    public ValidatableResponse createConcert(String title, String date, String vendorId) {
+    @Builder
+    public static class ConcertRequest {
+        @Builder.Default
+        public String title = "default-mock-title";
+
+        @Builder.Default
+        public Instant date = TestClockConfig.TEST_TIME_PLUS_30_DAYS;
+
+        @Builder.Default
+        public String vendorId = "default-vendor-id";
+    }
+
+    public ValidatableResponse createConcert(ConcertRequest concertRequest) {
         return builders.aRequestSpec()
                 .body(Maps.of(
-                        "title", title,
-                        "date", date,
-                        "vendorId", vendorId
+                        "title", concertRequest.title,
+                        "date", ofInstant(concertRequest.date, UTC).toString(),
+                        "vendorId", concertRequest.vendorId
                 ))
                 .post("/concert")
                 .then();

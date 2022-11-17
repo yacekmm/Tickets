@@ -6,7 +6,7 @@ import com.bottega.vendor.fixtures.SpecificationBase
 import static com.bottega.vendor.concert.domain.Title.from
 import static com.bottega.vendor.concert.fixtures.TitleAssertSpock.assertThatTitle
 
-class Title_MicroSpec extends SpecificationBase {
+class Title_FromString_MicroSpec extends SpecificationBase {
 
     def "fromString - OK - on valid input"() {
 

@@ -12,6 +12,7 @@ public class MessagingPriceChangeBase extends CdcFrameworkTestBase {
 
     @BeforeEach
     void setUp() {
+        //given
         price = builders.aPrice().priceForItem(100_00, UUIDs.zeros()).inDb();
     }
 

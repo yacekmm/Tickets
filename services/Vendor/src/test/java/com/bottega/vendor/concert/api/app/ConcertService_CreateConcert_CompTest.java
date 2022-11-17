@@ -9,33 +9,36 @@ import com.bottega.vendor.concert.fixtures.asserts.ConcertAssert;
 import io.vavr.control.Either;
 import org.junit.jupiter.api.Test;
 
-import java.util.Set;
-
 import static com.bottega.sharedlib.config.TestClockConfig.TEST_TIME_PLUS_30_DAYS;
+import static com.bottega.vendor.concert.fixtures.clients.ConcertHttpClient.ConcertRequest;
 import static org.assertj.vavr.api.VavrAssertions.assertThat;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
 
+
 class ConcertService_CreateConcert_CompTest extends ConcertLogicTestBase {
 
-
     @Test
-    void createConcert_createsConcert_onValidInput() {
+    void createConcert_OK() {
         //given
-        VendorAgreement vendorAgreement = builders.aVendorAgreement().forVendor("vendorId").build();
-        given(concertFixtures.vendorService.getVendorAgreement("vendorId")).willReturn(vendorAgreement);
+        ConcertRequest request = ConcertRequest.builder().build();
+        given(concertFixtures.vendorService.getVendorAgreement(anyString()))
+                .willReturn(builders.aVendorAgreement().forVendor(request.vendorId).build());
 
         //when
-        Either<ErrorResult, Concert> result = concertFixtures.concertService.createConcert("Woodstock 2000", TEST_TIME_PLUS_30_DAYS.toString(), vendorAgreement.vendorId().asString());
+        var result = concertFixtures.concertService.createConcert(
+                request.title, request.date.toString(), request.vendorId);
 
         //then
         assertThat(result).isRight();
-        ConcertAssert.assertThatConcert(result.get())
+
+        ConcertAssert
+                .assertThatConcert(concertFixtures.concertRepo.findAll().iterator().next())
+                .isPersistedIn(concertFixtures.concertRepo, RepoEntries.SINGULAR)
+                .hasTitle(request.title)
                 .hasIdAsUUID()
-                .hasTitle("Woodstock 2000")
                 .hasDate(TEST_TIME_PLUS_30_DAYS)
-                .hasVendorId(vendorAgreement.vendorId())
-                .hasTags(Set.of());
+                .hasVendorId(request.vendorId);
     }
 
     @Test

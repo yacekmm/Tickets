@@ -18,7 +18,7 @@ public class PriceJsonAssert {
                 .body("$", hasSize(1))
                 .body("[0].priceId", equalTo(expectedPriceId.getId().asString()))
                 .body("[0].itemId", equalTo(expectedPriceId.getItemId()))
-                .body("[0].price", equalTo(80_00));
+                .body("[0].price", equalTo(priceValue));
         return this;
     }
 

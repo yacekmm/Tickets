@@ -38,17 +38,17 @@ public class SharedFixtures {
         return (FakeEventPublisher) eventPublisher;
     }
 
-    @SneakyThrows
-    public void tearDown() {
-        kafkaBroker.doWithAdmin(adminClient -> Try.of(() ->
-                        adminClient.deleteTopics(kafkaBroker.getTopics()).all().get()));
-        testEventListener.tearDown();
-    }
-
     public void inTransaction(Runnable runnable) {
         transactionTemplate.execute((status) -> {
             runnable.run();
             return null;
         });
+    }
+
+    @SneakyThrows
+    public void tearDown() {
+        kafkaBroker.doWithAdmin(adminClient -> Try.of(() ->
+                adminClient.deleteTopics(kafkaBroker.getTopics()).all().get()));
+        testEventListener.tearDown();
     }
 }

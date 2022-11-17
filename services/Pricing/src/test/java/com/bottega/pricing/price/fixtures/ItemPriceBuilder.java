@@ -14,6 +14,8 @@ import java.util.ArrayList;
 public class ItemPriceBuilder {
 
     public final ItemPriceRepo itemPriceRepo;
+
+    //default values
     private Money price = new Money(200_00);
     private String itemId = "mock-item-id";
 

@@ -9,8 +9,7 @@ import static com.bottega.sharedlib.config.TestClockConfig.*;
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.hamcrest.Matchers.*;
 
-public class ConcertReadRestController_GetConcerts_RestApiTest extends FrameworkTestBase {
-
+public class ConcertReadRestController_FindConcerts_RestApiTest extends FrameworkTestBase {
 
     @Test
     public void findConcerts_returnsSortedConcertsForVendor_onValidRequest() {
