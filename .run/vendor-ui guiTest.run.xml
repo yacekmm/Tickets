@@ -1,8 +1,8 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="vendor-ui guiTest" type="JavaScriptTestRunnerProtractor">
     <config-file value="$PROJECT_DIR$/services/vendor-ui/src/e2e/conf.js" />
-    <node-interpreter value="project" />
-    <protractor-package value="$USER_HOME$/.nvm/versions/node/v14.17.6/lib/node_modules/protractor" />
+    <node-interpreter value="node" />
+    <protractor-package value="$PROJECT_DIR$/services/vendor-ui/node_modules/protractor" />
     <protractor-options value="" />
     <envs />
     <scope-kind value="ALL" />
