@@ -18,6 +18,7 @@
     <method v="2">
       <option name="Make" enabled="true" />
       <option name="RunConfigurationTask" enabled="true" run_configuration_name="SharedLib test --all" run_configuration_type="JUnit" />
+      <option name="RunConfigurationTask" enabled="true" run_configuration_name="Pricing test --all" run_configuration_type="JUnit" />
       <option name="RunConfigurationTask" enabled="true" run_configuration_name="Vendor test --all" run_configuration_type="JUnit" />
     </method>
   </configuration>
