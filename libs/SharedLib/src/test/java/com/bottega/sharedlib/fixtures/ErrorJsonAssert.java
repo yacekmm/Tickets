@@ -15,6 +15,7 @@ public class ErrorJsonAssert {
     private final ValidatableResponse errorResponse;
 
     public ErrorJsonAssert hasType(ErrorType expectedType) {
+        errorResponse.statusCode(expectedType.getHttpStatus().value());
         errorResponse.body("type", equalTo(expectedType.name()));
         return this;
     }
