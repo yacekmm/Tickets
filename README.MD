@@ -80,6 +80,8 @@ Installed:
 - docker
 - docker compose
 
+Operating System: Ubuntu (recommended). `Tickets` is also ready to run on Windows, however docker on Windows is unpredictable.
+
 ### Running `vendor-ui`
 
 As an Angular project the task config is different here.
