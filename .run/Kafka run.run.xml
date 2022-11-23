@@ -3,7 +3,7 @@
     <deployment type="docker-compose.yml">
       <settings>
         <option name="envFilePath" value="" />
-        <option name="sourceFilePath" value="infra/kafka/docker-compose.yml" />
+        <option name="sourceFilePath" value="../../infra/kafka/docker-compose.yml" />
       </settings>
     </deployment>
     <method v="2" />
