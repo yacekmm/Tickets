@@ -1,0 +1,12 @@
+plugins {
+    id 'java'
+    id 'idea'
+}
+
+group = 'com.bottega'
+version = '1.0.0'
+sourceCompatibility = '17'
+
+repositories {
+    mavenCentral()
+}

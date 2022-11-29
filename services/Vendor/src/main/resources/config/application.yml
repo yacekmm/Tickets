@@ -1,0 +1,6 @@
+spring.profiles.include:
+  serviceLocator,
+  db,
+  kafka
+
+server.port: ${services.vendor.port}

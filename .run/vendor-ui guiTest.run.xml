@@ -1,0 +1,13 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="vendor-ui guiTest" type="JavaScriptTestRunnerProtractor">
+    <config-file value="$PROJECT_DIR$/services/vendor-ui/src/e2e/conf.js" />
+    <node-interpreter value="node" />
+    <protractor-package value="$PROJECT_DIR$/services/vendor-ui/node_modules/protractor" />
+    <protractor-options value="" />
+    <envs />
+    <scope-kind value="ALL" />
+    <method v="2">
+      <option name="RunConfigurationTask" enabled="true" run_configuration_name="vendor-ui update webdriver" run_configuration_type="NodeJSConfigurationType" />
+    </method>
+  </configuration>
+</component>

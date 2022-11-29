@@ -1,0 +1,56 @@
+<mat-card>
+
+  <mat-card-header fxLayout="row" fxLayoutAlign="center center">
+    <mat-card-title>Create Concert</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content fxLayout="row" fxLayoutAlign="center center">
+
+    <form #createConcertForm="ngForm">
+
+      <p>Here you can create new Concert</p>
+
+      <div fxFill>
+
+        <mat-form-field fxFlex>
+
+          <mat-label>Concert Title</mat-label>
+          <input
+            id="input-concert-title"
+            matInput
+            type="text"
+            [(ngModel)]="modelCreateConcert.title"
+            name="concertTitle"
+            required
+            maxlength="100"
+          >
+
+        </mat-form-field>
+
+      </div>
+
+      <div fxFill>
+        <mat-calendar id="input-concert-date" [(selected)]="modelCreateConcert.date"></mat-calendar>
+      </div>
+
+
+      <button
+        id="create-concert-submit"
+        mat-raised-button
+        (click)="createConcert()"
+        color="primary"
+        [disabled]="!createConcertForm.valid || requestInProgress">
+
+        Create Concert
+      </button>
+
+    </form>
+  </mat-card-content>
+
+  <mat-card-content>
+    <mat-error fxLayoutAlign="center center">
+      {{errorMessage}}
+    </mat-error>
+  </mat-card-content>
+
+</mat-card>

@@ -1,0 +1,44 @@
+# https://docs.github.com/en/code-security/supply-chain-security/keeping-your-dependencies-updated-automatically/configuration-options-for-dependency-updates
+
+version: 2
+updates:
+  # vendor-ui
+  - package-ecosystem: "npm"
+    directory: "/services/vendor-ui"
+    schedule:
+      interval: "daily"
+      time: "04:30"
+    open-pull-requests-limit: 5
+
+  # Vendor
+  - package-ecosystem: "gradle"
+    directory: "/services/Vendor"
+    schedule:
+      interval: "daily"
+      time: "04:30"
+    open-pull-requests-limit: 5
+    
+  # Pricing
+  - package-ecosystem: "gradle"
+    directory: "/services/Pricing"
+    schedule:
+      interval: "daily"
+      time: "04:30"
+    open-pull-requests-limit: 5
+    
+  # SharedLib
+  - package-ecosystem: "gradle"
+    directory: "/libs/SharedLib"
+    schedule:
+      interval: "daily"
+      time: "04:30"
+    open-pull-requests-limit: 5  
+    
+    
+  # TicketsTests
+  - package-ecosystem: "gradle"
+    directory: "/SystemTests/TicketsTests"
+    schedule:
+      interval: "daily"
+      time: "04:30"
+    open-pull-requests-limit: 5  

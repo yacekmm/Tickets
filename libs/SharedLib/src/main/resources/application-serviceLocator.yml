@@ -1,0 +1,18 @@
+services:
+  request-timeout-in-seconds: 3
+  vendor:
+    port: 8080
+    url: http://localhost:${services.vendor.port}/
+  pricing:
+    port: 8081
+    url: http://localhost:${services.pricing.port}/
+
+---
+
+spring.config.activate.on-profile: test
+
+services:
+  vendor:
+    port: 8180
+  pricing:
+    port: 8181

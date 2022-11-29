@@ -1,0 +1,41 @@
+
+.sidenav-dropdown-indicator {
+  transition: transform .25s;
+
+  &.indicateOpen {
+    transform: rotate(180deg);
+  }
+}
+
+mat-nav-list {
+  overflow: hidden;
+  padding-top: 0;
+
+}
+
+.primary-menu {
+  border-top: #c5c5c5 solid 1px;
+  transition: max-height .4s cubic-bezier(.35, 0, .25, 1);
+  padding-top: 0;
+}
+
+.secondary-menu {
+  transition: max-height .4s cubic-bezier(.35, 0, .25, 1);
+  padding-top: 0;
+  padding-left: 15px;
+}
+
+.mat-nav-list .mat-list-item .mat-list-icon {
+  font-size: 20px;
+  height: 20px;
+  width: 20px;
+
+}
+
+.mat-chip:not(.mat-basic-chip) {
+  padding: 1px 7px;
+}
+
+.mat-nav-list .mat-list-item {
+  font-size: 14px;
+}

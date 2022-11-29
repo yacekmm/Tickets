@@ -1,0 +1,25 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Tickets test --all" type="JUnit" factoryName="JUnit">
+    <module name="Tickets.services.Vendor.contractTest" />
+    <extension name="coverage">
+      <pattern>
+        <option name="PATTERN" value="com.bottega.vendor.concert.domain.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+    </extension>
+    <option name="PACKAGE_NAME" value="com.bottega.vendor" />
+    <option name="MAIN_CLASS_NAME" value="" />
+    <option name="METHOD_NAME" value="" />
+    <option name="TEST_OBJECT" value="package" />
+    <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+    <patterns>
+      <pattern testClass=".*CompTest" />
+    </patterns>
+    <method v="2">
+      <option name="Make" enabled="true" />
+      <option name="RunConfigurationTask" enabled="true" run_configuration_name="SharedLib test --all" run_configuration_type="JUnit" />
+      <option name="RunConfigurationTask" enabled="true" run_configuration_name="Pricing test --all" run_configuration_type="JUnit" />
+      <option name="RunConfigurationTask" enabled="true" run_configuration_name="Vendor test --all" run_configuration_type="JUnit" />
+    </method>
+  </configuration>
+</component>
