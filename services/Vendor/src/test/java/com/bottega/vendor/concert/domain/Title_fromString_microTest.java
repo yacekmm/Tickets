@@ -1,20 +1,19 @@
 package com.bottega.vendor.concert.domain;
 
-import com.bottega.vendor.concert.fixtures.ConcertLogicTestBase;
+import com.bottega.vendor.concert.fixtures.*;
 import org.assertj.vavr.api.VavrAssertions;
 import org.junit.jupiter.api.Test;
 import static com.bottega.sharedlib.vo.error.ErrorResult.badRequest;
 import static com.bottega.vendor.concert.api.app.ConcertErrorCode.invalid_title;
 import static com.bottega.vendor.concert.domain.Title.from;
 import static org.apache.commons.lang3.StringUtils.repeat;
-import static org.assertj.core.api.Assertions.assertThat;
 
 class Title_fromString_microTest extends ConcertLogicTestBase {
 
     @Test
     public void fromString_OK_onValidString(){
         //expect
-        assertThat(from("This is a valid title").get().getValue()).isEqualTo("This is a valid title");
+        TitleAssert.assertThatTitle(from("This is a valid title for a concert")).hasValue("This is a valid title for a concert");
     }
 
     @Test
@@ -23,7 +22,7 @@ class Title_fromString_microTest extends ConcertLogicTestBase {
         String expectedValue = repeat("a", 10);
 
         //expect
-        assertThat(from("    " + expectedValue + "     ").get().getValue()).isEqualTo(expectedValue);
+        TitleAssert.assertThatTitle(from("     " + expectedValue + "    ")).hasValue(expectedValue);
     }
 
     @Test
