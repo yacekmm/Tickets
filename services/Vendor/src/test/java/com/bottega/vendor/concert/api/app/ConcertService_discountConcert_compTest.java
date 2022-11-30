@@ -1,5 +1,7 @@
 package com.bottega.vendor.concert.api.app;
 
+import java.util.List;
+
 import com.bottega.sharedlib.fixtures.ErrorAssert;
 import com.bottega.sharedlib.vo.Money;
 import com.bottega.sharedlib.vo.error.ErrorResult;
@@ -10,14 +12,11 @@ import com.bottega.vendor.concert.fixtures.asserts.PriceAssert;
 import io.vavr.control.Either;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
-
 import static com.bottega.sharedlib.vo.error.ErrorType.NOT_FOUND;
 import static com.bottega.sharedlib.vo.error.GenericErrorCode.not_found;
 import static org.assertj.vavr.api.VavrAssertions.assertThat;
 
-class ConcertService_DiscountConcert_CompTest extends ConcertLogicTestBase {
+class ConcertService_discountConcert_compTest extends ConcertLogicTestBase {
 
 
     @Test

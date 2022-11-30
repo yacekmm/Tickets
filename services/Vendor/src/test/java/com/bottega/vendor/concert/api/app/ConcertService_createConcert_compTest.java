@@ -8,7 +8,6 @@ import com.bottega.vendor.concert.fixtures.ConcertLogicTestBase;
 import com.bottega.vendor.concert.fixtures.asserts.ConcertAssert;
 import io.vavr.control.Either;
 import org.junit.jupiter.api.Test;
-
 import static com.bottega.sharedlib.config.TestClockConfig.TEST_TIME_PLUS_30_DAYS;
 import static com.bottega.vendor.concert.fixtures.clients.ConcertHttpClient.ConcertRequest;
 import static org.assertj.vavr.api.VavrAssertions.assertThat;
@@ -16,7 +15,7 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
 
 
-class ConcertService_CreateConcert_CompTest extends ConcertLogicTestBase {
+class ConcertService_createConcert_compTest extends ConcertLogicTestBase {
 
     @Test
     void createConcert_OK() {

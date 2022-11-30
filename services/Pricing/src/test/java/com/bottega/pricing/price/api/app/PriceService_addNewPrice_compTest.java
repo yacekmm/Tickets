@@ -8,11 +8,10 @@ import com.bottega.sharedlib.vo.Money;
 import com.bottega.sharedlib.vo.error.ErrorResult;
 import io.vavr.control.Either;
 import org.junit.jupiter.api.Test;
-
 import static com.bottega.sharedlib.fixtures.RepoEntries.SINGULAR;
 import static org.assertj.vavr.api.VavrAssertions.assertThat;
 
-class PriceService_AddNewPrice_CompTest extends LogicTestBase {
+class PriceService_addNewPrice_compTest extends LogicTestBase {
 
     @Test
     void addNewPrice_createsPrice_onValidRequest() {

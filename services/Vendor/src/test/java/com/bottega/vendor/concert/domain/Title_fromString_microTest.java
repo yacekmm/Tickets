@@ -2,11 +2,10 @@ package com.bottega.vendor.concert.domain;
 
 import com.bottega.vendor.concert.fixtures.*;
 import org.junit.jupiter.api.Test;
-
 import static com.bottega.vendor.concert.domain.Title.from;
 import static org.apache.commons.lang3.StringUtils.repeat;
 
-class Title_FromString_MicroTest extends ConcertLogicTestBase {
+class Title_fromString_microTest extends ConcertLogicTestBase {
 
     @Test
     public void fromString_OK_onValidString(){

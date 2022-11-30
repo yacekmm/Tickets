@@ -1,16 +1,15 @@
 package com.bottega.vendor.concert.domain;
 
-import com.bottega.vendor.concert.fixtures.ConcertLogicTestBase;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.*;
-
 import java.util.Set;
 import java.util.stream.Stream;
 
+import com.bottega.vendor.concert.fixtures.ConcertLogicTestBase;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.*;
 import static java.util.stream.Collectors.toSet;
 import static org.assertj.core.api.Assertions.assertThat;
 
-class Concert_InitConcert_UnitTest extends ConcertLogicTestBase {
+class Concert_initConcert_unitTest extends ConcertLogicTestBase {
 
 
     private static Stream<Arguments> provideStringsForTags() {

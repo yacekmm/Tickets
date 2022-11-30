@@ -4,11 +4,10 @@ import com.bottega.pricing.fixtures.FrameworkTestBase;
 import com.bottega.pricing.price.fixtures.PriceAssert;
 import com.bottega.sharedlib.event.payload.ConcertCreatedEventPayload;
 import org.junit.jupiter.api.Test;
-
 import static com.bottega.sharedlib.fixtures.RepoEntries.SINGULAR;
 import static org.testcontainers.shaded.org.awaitility.Awaitility.await;
 
-class InitialPriceEventListener_SettleInitialPrice_EventApiTest extends FrameworkTestBase {
+class InitialPriceEventListener_settleInitialPrice_eventApiTest extends FrameworkTestBase {
 
     @Test
     public void settleInitialPrice_createsNewPrice() {

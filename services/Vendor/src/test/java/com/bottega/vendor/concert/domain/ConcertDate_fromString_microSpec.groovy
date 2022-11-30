@@ -8,7 +8,7 @@ import static com.bottega.vendor.concert.fixtures.ConcertDateAssertSpock.assertT
 import static java.time.LocalDate.of
 import static java.time.temporal.ChronoUnit.DAYS
 
-class ConcertDate_FromString_MicroSpec extends SpecificationBase {
+class ConcertDate_fromString_microSpec extends SpecificationBase {
 
     def "fromString - OK - on valid input"() {
 

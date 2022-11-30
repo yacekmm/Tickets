@@ -1,17 +1,16 @@
 package com.bottega.vendor.infra.client.pricing;
 
+import java.util.List;
+
 import com.bottega.sharedlib.vo.error.ErrorResult;
 import com.bottega.vendor.concert.Price;
 import com.bottega.vendor.concert.domain.ConcertId;
 import com.bottega.vendor.fixtures.*;
 import io.vavr.control.Either;
 import org.junit.jupiter.api.*;
-
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class PricingClient_DepTest extends FrameworkTestBase {
+public class PricingClient_applyDiscount_depTest extends FrameworkTestBase {
 
     FakePricingClient fakePricingClient;
     PricingClient realPricingClient;
@@ -23,7 +22,7 @@ public class PricingClient_DepTest extends FrameworkTestBase {
     }
 
     @Test
-    public void fakeApplyDiscountClient_isValid() {
+    public void fakeApplyDiscount_isValid() {
         //given
         ConcertId concertId = new ConcertId();
 

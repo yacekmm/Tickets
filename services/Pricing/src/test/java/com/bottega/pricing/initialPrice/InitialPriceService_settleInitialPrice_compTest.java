@@ -1,5 +1,7 @@
 package com.bottega.pricing.initialPrice;
 
+import java.util.HashSet;
+
 import com.bottega.pricing.fixtures.LogicTestBase;
 import com.bottega.pricing.price.domain.ItemPrice;
 import com.bottega.pricing.price.fixtures.PriceAssert;
@@ -7,14 +9,11 @@ import com.bottega.sharedlib.vo.Money;
 import com.bottega.sharedlib.vo.error.ErrorResult;
 import io.vavr.control.Either;
 import org.junit.jupiter.api.Test;
-
-import java.util.HashSet;
-
 import static org.assertj.vavr.api.VavrAssertions.assertThat;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
 
-class InitialPriceService_SettleInitialPrice_CompTest extends LogicTestBase {
+class InitialPriceService_settleInitialPrice_compTest extends LogicTestBase {
 
     @Test
     public void settleInitialPrice_calculatesPrice_onValidInput() {

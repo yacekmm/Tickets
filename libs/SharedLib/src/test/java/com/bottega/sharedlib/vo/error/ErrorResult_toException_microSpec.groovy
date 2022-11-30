@@ -5,7 +5,7 @@ import spock.lang.Specification
 import static com.bottega.sharedlib.vo.error.ErrorType.*
 import static com.bottega.sharedlib.vo.error.GenericErrorCode.invalid_request
 
-class ErrorResult_MicroSpec extends Specification {
+class ErrorResult_toException_microSpec extends Specification {
 
     private static String desc = "my description"
     private static ErrorCode errCode = invalid_request

@@ -1,7 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Pricing apiTest" type="JUnit" factoryName="JUnit">
     <module name="Tickets.services.Pricing.test" />
-    <shortenClasspath name="ARGS_FILE" />
     <extension name="coverage">
       <pattern>
         <option name="PATTERN" value="com.bottega.vendor.concert.domain.*" />
@@ -14,7 +13,7 @@
     <option name="TEST_OBJECT" value="pattern" />
     <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
     <patterns>
-      <pattern testClass=".*Api(Test|Spec)" />
+      <pattern testClass=".*(A|a)pi(Test|Spec)" />
     </patterns>
     <method v="2">
       <option name="Make" enabled="true" />

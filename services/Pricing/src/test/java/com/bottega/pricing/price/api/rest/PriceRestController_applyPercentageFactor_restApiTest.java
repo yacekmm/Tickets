@@ -6,7 +6,7 @@ import com.bottega.sharedlib.fixtures.ErrorJsonAssert;
 import io.restassured.response.ValidatableResponse;
 import org.junit.jupiter.api.Test;
 
-public class PriceRestController_ApplyPercentageFactor_RestApiTest extends FrameworkTestBase {
+public class PriceRestController_applyPercentageFactor_restApiTest extends FrameworkTestBase {
 
     @Test
     public void applyFactor_OK_onValidRequest() {

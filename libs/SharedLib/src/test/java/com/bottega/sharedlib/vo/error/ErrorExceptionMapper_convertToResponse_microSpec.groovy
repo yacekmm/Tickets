@@ -7,7 +7,7 @@ import static com.bottega.sharedlib.vo.error.GenericErrorCode.invalid_request
 import static org.springframework.http.HttpStatus.*
 import static org.springframework.http.MediaType.APPLICATION_JSON
 
-class ErrorExceptionMapper_MicroSpec extends Specification {
+class ErrorExceptionMapper_convertToResponse_microSpec extends Specification {
 
     private static String desc = "my description"
     private static ErrorCode errCode = invalid_request

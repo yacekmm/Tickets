@@ -4,11 +4,10 @@ import com.bottega.pricing.fixtures.FrameworkTestBase;
 import com.bottega.pricing.price.domain.ItemPrice;
 import com.bottega.pricing.price.fixtures.InMemoryItemPriceRepo;
 import org.junit.jupiter.api.*;
-
 import static java.util.List.of;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ItemPriceRepo_DepTest extends FrameworkTestBase {
+public class ItemPriceRepo_saveAll_depTest extends FrameworkTestBase {
 
     private InMemoryItemPriceRepo fakeRepo;
     private ItemPriceRepo realRepo;
@@ -20,7 +19,7 @@ public class ItemPriceRepo_DepTest extends FrameworkTestBase {
     }
 
     @Test
-    public void inMemoryPriceRepo_isValid() {
+    public void saveAll_isValid() {
         //given
         ItemPrice itemPrice = builders.aPrice().priceForItem(100_00, "item-id").build();
         ItemPrice otherPrice = builders.aPrice().priceForItem(100_00, "otherId").build();

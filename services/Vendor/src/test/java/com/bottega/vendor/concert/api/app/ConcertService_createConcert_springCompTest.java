@@ -4,13 +4,12 @@ import com.bottega.sharedlib.fixtures.RepoEntries;
 import com.bottega.vendor.concert.fixtures.asserts.ConcertAssert;
 import com.bottega.vendor.fixtures.FrameworkTestBase;
 import org.junit.jupiter.api.Test;
-
 import static com.bottega.sharedlib.config.TestClockConfig.TEST_TIME_PLUS_30_DAYS;
 import static com.bottega.vendor.concert.fixtures.clients.ConcertHttpClient.ConcertRequest;
 import static org.assertj.vavr.api.VavrAssertions.assertThat;
 
 
-class ConcertService_CreateConcert_SpringCompTest extends FrameworkTestBase {
+class ConcertService_createConcert_springCompTest extends FrameworkTestBase {
 
     @Test
     void createConcert_OK() {

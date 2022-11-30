@@ -7,11 +7,10 @@ import com.bottega.sharedlib.fixtures.EventAssert;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.contract.stubrunner.StubTrigger;
-
 import static com.bottega.sharedlib.fixtures.RepoEntries.SINGULAR;
 import static org.testcontainers.shaded.org.awaitility.Awaitility.await;
 
-class InitialPriceEventListener_SettleInitialPrice_EventContractApiTest extends FrameworkTestBase {
+class InitialPriceEventListener_settleInitialPrice_eventContractApiTest extends FrameworkTestBase {
 
     @Autowired
     StubTrigger trigger;

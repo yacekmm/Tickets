@@ -1,15 +1,14 @@
 package com.bottega.vendor.concertRead;
 
+import java.util.List;
+
 import com.bottega.vendor.concert.domain.Concert;
 import com.bottega.vendor.concert.fixtures.ConcertLogicTestBase;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
-
 import static com.bottega.sharedlib.config.TestClockConfig.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ConcertReadService_FindConcerts_CompTest extends ConcertLogicTestBase {
+public class ConcertReadService_findConcerts_compTest extends ConcertLogicTestBase {
 
 
     @Test

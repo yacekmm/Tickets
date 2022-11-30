@@ -4,7 +4,7 @@ import com.bottega.pricing.fixtures.LogicTestBase;
 import com.bottega.pricing.price.fixtures.PriceAssert;
 import org.junit.jupiter.api.Test;
 
-class ItemPrice_ApplyFactor_UnitTest extends LogicTestBase {
+class ItemPrice_applyFactor_unitTest extends LogicTestBase {
 
     @Test
     void applyPercentageFactor_discountsPrice_onValidRequest() {

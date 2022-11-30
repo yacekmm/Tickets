@@ -4,11 +4,10 @@ import com.bottega.vendor.concert.domain.Concert;
 import com.bottega.vendor.fixtures.FrameworkTestBase;
 import io.restassured.response.ValidatableResponse;
 import org.junit.jupiter.api.Test;
-
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.hamcrest.Matchers.*;
 
-public class ConcertRestController_DiscountConcert_RestApiTest extends FrameworkTestBase {
+public class ConcertRestController_discountConcert_restApiTest extends FrameworkTestBase {
 
 
     @Test

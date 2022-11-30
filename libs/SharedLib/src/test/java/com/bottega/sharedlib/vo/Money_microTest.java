@@ -1,10 +1,9 @@
 package com.bottega.sharedlib.vo;
 
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class Money_MicroTest {
+class Money_microTest {
 
     @Test
     void createMoney_OK_fromInteger() {

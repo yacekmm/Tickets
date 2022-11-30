@@ -1,5 +1,7 @@
 package com.bottega.pricing.price.api.app;
 
+import java.util.List;
+
 import com.bottega.pricing.fixtures.LogicTestBase;
 import com.bottega.pricing.price.domain.ItemPrice;
 import com.bottega.pricing.price.fixtures.*;
@@ -7,14 +9,11 @@ import com.bottega.sharedlib.fixtures.*;
 import com.bottega.sharedlib.vo.error.ErrorResult;
 import io.vavr.control.Either;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
-
 import static com.bottega.sharedlib.fixtures.RepoEntries.SINGULAR;
 import static org.assertj.vavr.api.VavrAssertions.assertThat;
 import static org.mockito.BDDMockito.then;
 
-class PriceService_ApplyPercentageFactor_CompTest extends LogicTestBase {
+class PriceService_applyPercentageFactor_compTest extends LogicTestBase {
 
     @Test
     void applyPercentageFactor_returnsSingleDiscountedPrice_onValidRequest() {

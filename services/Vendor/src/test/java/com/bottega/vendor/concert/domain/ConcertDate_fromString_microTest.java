@@ -2,12 +2,11 @@ package com.bottega.vendor.concert.domain;
 
 import com.bottega.vendor.concert.fixtures.*;
 import org.junit.jupiter.api.Test;
-
 import static com.bottega.sharedlib.config.TestClockConfig.TEST_TIME;
 import static com.bottega.vendor.concert.domain.ConcertDate.from;
 import static java.time.temporal.ChronoUnit.DAYS;
 
-class ConcertDate_FromString_MicroTest extends ConcertLogicTestBase {
+class ConcertDate_fromString_microTest extends ConcertLogicTestBase {
 
     @Test
     public void fromString_OK_onDateString(){

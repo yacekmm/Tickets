@@ -1,18 +1,17 @@
 package com.bottega.vendor.concertRead.infra.repo;
 
+import java.util.List;
+
 import com.bottega.vendor.concert.domain.Concert;
 import com.bottega.vendor.concertRead.ConcertFinderRepo;
 import com.bottega.vendor.concertRead.fixtures.InMemoryConcertFinderRepo;
 import com.bottega.vendor.fixtures.FrameworkTestBase;
 import org.junit.jupiter.api.*;
-
-import java.util.List;
-
 import static com.bottega.sharedlib.config.TestClockConfig.*;
 import static java.util.List.of;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ConcertFinderRepo_DepTest extends FrameworkTestBase {
+public class ConcertFinderRepo_findForVendor_depTest extends FrameworkTestBase {
 
     private InMemoryConcertFinderRepo fakeRepo;
     private ConcertFinderRepo realRepo;
@@ -24,7 +23,7 @@ public class ConcertFinderRepo_DepTest extends FrameworkTestBase {
     }
 
     @Test
-    public void inMemoryConcertFinderRepo_isValid() {
+    public void findForVendor_isValid() {
         //given
         Concert concert_1 = builders.aConcert().withDate(TEST_TIME_PLUS_30_DAYS).withVendorId("vendor").inFinderDb();
         Concert concert_2 = builders.aConcert().withDate(TEST_TIME_PLUS_60_DAYS).withVendorId("vendor").inFinderDb();

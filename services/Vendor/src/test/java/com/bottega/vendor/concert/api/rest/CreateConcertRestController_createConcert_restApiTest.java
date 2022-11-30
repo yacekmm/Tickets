@@ -7,12 +7,11 @@ import com.bottega.vendor.concert.fixtures.clients.ConcertHttpClient.ConcertRequ
 import com.bottega.vendor.fixtures.FrameworkTestBase;
 import io.restassured.response.ValidatableResponse;
 import org.junit.jupiter.api.Test;
-
 import static com.bottega.sharedlib.config.TestClockConfig.*;
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.hamcrest.Matchers.equalTo;
 
-public class CreateConcertRestController_CreateConcert_RestApiTest extends FrameworkTestBase {
+public class CreateConcertRestController_createConcert_restApiTest extends FrameworkTestBase {
 
 
     @Test

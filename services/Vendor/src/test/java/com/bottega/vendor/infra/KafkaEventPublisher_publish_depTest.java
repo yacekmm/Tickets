@@ -5,10 +5,9 @@ import com.bottega.sharedlib.fixtures.EventAssert;
 import com.bottega.vendor.concert.domain.Concert;
 import com.bottega.vendor.fixtures.FrameworkTestBase;
 import org.junit.jupiter.api.Test;
-
 import static com.bottega.vendor.concert.domain.VendorEventFactory.concertCreated;
 
-class KafkaEventPublisher_DepTest extends FrameworkTestBase {
+class KafkaEventPublisher_publish_depTest extends FrameworkTestBase {
 
     @Test
     public void publishEvent_OK(){
