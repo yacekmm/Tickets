@@ -5,9 +5,12 @@ import java.time.*;
 
 import com.bottega.sharedlib.ddd.ValueObject;
 import com.bottega.sharedlib.vo.error.ErrorResult;
-import io.vavr.control.Validation;
+import io.vavr.control.*;
 import lombok.*;
+import static com.bottega.sharedlib.vo.error.ErrorResult.badRequest;
+import static com.bottega.vendor.concert.api.app.ConcertErrorCode.invalid_date;
 import static java.time.ZoneOffset.UTC;
+import static java.time.temporal.ChronoUnit.DAYS;
 
 @ValueObject
 @Embeddable
@@ -18,11 +21,19 @@ import static java.time.ZoneOffset.UTC;
 public class ConcertDate {
 
 
+    private static final int MIN_DATE_THRESHOLD_DAYS = 7;
+
     @Column(name = "date")
     private Instant date;
 
     public static Validation<ErrorResult, ConcertDate> from(String date, Clock clock) {
-        return Validation.valid(new ConcertDate(LocalDate.parse(date).atStartOfDay().toInstant(UTC)));
+        return Try.of(() -> LocalDate.parse(date).atStartOfDay().toInstant(UTC))
+                .orElse(Try.of(() -> Instant.parse(date)))
+                .toValidation()
+                .mapError(throwable -> badRequest(invalid_date, "Unsupported date format: %s", throwable.getMessage()))
+                .filter(instant -> instant.isAfter(clock.instant().plus(MIN_DATE_THRESHOLD_DAYS, DAYS)))
+                .getOrElse(Validation.invalid(badRequest(invalid_date, "Too early")))
+                .map(ConcertDate::new);
     }
 
     public LocalDate getUtcDate() {
