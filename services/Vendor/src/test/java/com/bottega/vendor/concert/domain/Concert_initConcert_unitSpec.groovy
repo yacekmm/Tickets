@@ -5,6 +5,9 @@ import com.bottega.vendor.fixtures.SpecificationBase
 
 class Concert_initConcert_unitSpec extends SpecificationBase {
 
+    def "initConcert - adds tags"() {
+
+    }
 
     def "initConcert - assigns category"() {
         given:
