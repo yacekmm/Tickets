@@ -1,13 +1,12 @@
 package com.bottega.vendor.concert.domain;
 
 import javax.persistence.*;
-import java.util.*;
+import java.util.Set;
 
 import com.bottega.sharedlib.ddd.AggregateRoot;
 import com.bottega.sharedlib.repo.BaseEntity;
 import com.bottega.vendor.agreements.VendorId;
 import lombok.*;
-import org.apache.commons.lang3.StringUtils;
 import static javax.persistence.CascadeType.*;
 import static javax.persistence.FetchType.LAZY;
 import static lombok.AccessLevel.*;
@@ -23,13 +22,6 @@ import static lombok.AccessLevel.*;
 @Builder(access = PUBLIC)
 public class Concert implements BaseEntity {
 
-    private static final Map<String, String[]> defaultCategories = new HashMap<>();
-
-    static {
-        defaultCategories.put("rock", new String[]{"Rock", "Scorpions"});
-        defaultCategories.put("superstar", new String[]{"Rihanna"});
-    }
-
     @EmbeddedId
     @EqualsAndHashCode.Include
     private ConcertId id;
@@ -42,8 +34,8 @@ public class Concert implements BaseEntity {
     @ManyToMany(fetch = LAZY, cascade = PERSIST)
     @JoinTable(
             name = "concert_tags",
-            joinColumns = { @JoinColumn(name = "concert_id") },
-            inverseJoinColumns = { @JoinColumn(name = "tag_id") }
+            joinColumns = {@JoinColumn(name = "concert_id")},
+            inverseJoinColumns = {@JoinColumn(name = "tag_id")}
     )
     private Set<Tag> tags;
     @ManyToOne(fetch = LAZY, cascade = ALL)
@@ -54,11 +46,7 @@ public class Concert implements BaseEntity {
         return new VendorId(vendorId);
     }
 
-    public void initNewConcert() {
-        category = defaultCategories.entrySet().stream()
-                .filter(entry -> StringUtils.containsAnyIgnoreCase(title.getValue(), entry.getValue()))
-                .findFirst()
-                .map(entry -> Category.from(entry.getKey()))
-                .orElse(Category.from("other"));
+    public void initNewConcert(CategoryService categoryService) {
+        category = categoryService.categorize(this);
     }
 }
