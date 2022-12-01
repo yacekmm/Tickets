@@ -3,6 +3,7 @@ package com.bottega.vendor.concert.domain;
 import java.util.*;
 
 import com.bottega.sharedlib.ddd.DomainService;
+import static org.apache.commons.lang3.StringUtils.containsAnyIgnoreCase;
 
 @DomainService
 public class TagService {
@@ -16,7 +17,13 @@ public class TagService {
     }
 
     public Set<Tag> tag(Title title) {
-        return null;
+        Set<Tag> tags = new HashSet<>();
+        defaultTags.forEach((tag, requiredSubstrings) -> {
+            if (containsAnyIgnoreCase(title.getValue(), requiredSubstrings)) {
+                tags.add(Tag.from(tag));
+            }
+        });
+        return tags;
     }
 
 }
