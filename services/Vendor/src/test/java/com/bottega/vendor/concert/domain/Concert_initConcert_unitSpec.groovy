@@ -1,13 +1,15 @@
 package com.bottega.vendor.concert.domain
 
-import com.bottega.sharedlib.config.TestClockConfig
+
 import com.bottega.vendor.fixtures.SpecificationBase
+
+import static com.bottega.sharedlib.config.TestClockConfig.TEST_TIME_PLUS_30_DAYS
 
 class Concert_initConcert_unitSpec extends SpecificationBase {
 
     def "initConcert - adds tags"() {
         given:
-        def newConcert = new Concert(new ConcertId(), Title.from(title).get(), ConcertDate.from(TestClockConfig.TEST_TIME_PLUS_30_DAYS.toString(), sharedFixtures.clock).get(), "vendor-id", new HashSet<>(), null)
+        def newConcert = new Concert(new ConcertId(), Title.from(title).get(), ConcertDate.from(TEST_TIME_PLUS_30_DAYS.toString(), sharedFixtures.clock).get(), "vendor-id", new HashSet<>(), null)
 
         when:
         newConcert.initNewConcert(concertFixtures.tagService, concertFixtures.categoryService)
@@ -21,11 +23,15 @@ class Concert_initConcert_unitSpec extends SpecificationBase {
         where:
         title                          | expectedTags
         "no tags apply"                | []
+        "Rock concert"                 | ["rock"]
+        "Scorpions in Warsaw!"         | ["rock"]
+        "Scorpions on Mystic Festival" | ["rock", "festival"]
+        "Rihanna the best of"          | ["pop"]
     }
 
     def "initConcert - assigns category"() {
         given:
-        def newConcert = new Concert(new ConcertId(), Title.from(title).get(), ConcertDate.from(TestClockConfig.TEST_TIME_PLUS_30_DAYS.toString(), sharedFixtures.clock).get(), "vendor-id", new HashSet<>(), null)
+        def newConcert = new Concert(new ConcertId(), Title.from(title).get(), ConcertDate.from(TEST_TIME_PLUS_30_DAYS.toString(), sharedFixtures.clock).get(), "vendor-id", new HashSet<>(), null)
 
         when:
         newConcert.initNewConcert(concertFixtures.tagService, concertFixtures.categoryService)

@@ -64,8 +64,8 @@ public class ConcertFixtures {
     }
 
     private static void initServices(ConcertFixtures concertFixtures) {
-        concertFixtures.categoryService = new CategoryService();
         concertFixtures.tagService = new TagService();
+        concertFixtures.categoryService = new CategoryService();
     }
 
     private static void initSut(ConcertFixtures concertFixtures, SharedFixtures sharedFixtures) {
