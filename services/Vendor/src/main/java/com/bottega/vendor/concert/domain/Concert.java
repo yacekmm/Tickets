@@ -1,13 +1,12 @@
 package com.bottega.vendor.concert.domain;
 
+import javax.persistence.*;
+import java.util.Set;
+
 import com.bottega.sharedlib.ddd.AggregateRoot;
 import com.bottega.sharedlib.repo.BaseEntity;
 import com.bottega.vendor.agreements.VendorId;
 import lombok.*;
-
-import javax.persistence.*;
-import java.util.Set;
-
 import static javax.persistence.CascadeType.*;
 import static javax.persistence.FetchType.LAZY;
 import static lombok.AccessLevel.*;
@@ -51,12 +50,6 @@ public class Concert implements BaseEntity {
 
     public VendorId vendorId() {
         return new VendorId(vendorId);
-    }
-
-
-    public void initNewConcert(TagService tagService, CategoryService categoryService) {
-        tags = tagService.tag(title);
-        category = categoryService.categorize(title);
     }
 
 }
