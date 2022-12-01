@@ -5,7 +5,7 @@ import com.bottega.vendor.concert.api.app.ConcertService;
 import com.bottega.vendor.concert.fixtures.*;
 import com.bottega.vendor.concert.fixtures.clients.ConcertHttpClient;
 import com.bottega.vendor.concert.infra.repo.*;
-import com.bottega.vendor.fixtures.SharedFixtures;
+import com.bottega.vendor.fixtures.*;
 import com.bottega.vendor.infra.client.pricing.PricingClient;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +35,8 @@ public class ConcertFixtures {
     //services
     @Autowired
     public TagService tagService;
+    @Autowired
+    public CategoryService categoryService;
 
     //mocks
     @Autowired
@@ -62,14 +64,16 @@ public class ConcertFixtures {
     }
 
     private static void initServices(ConcertFixtures concertFixtures) {
+        concertFixtures.categoryService = new CategoryService();
     }
 
     private static void initSut(ConcertFixtures concertFixtures, SharedFixtures sharedFixtures) {
         concertFixtures.concertService = new ConcertService(
                 new ConcertFactory(sharedFixtures.clock),
                 concertFixtures.concertRepo,
-                concertFixtures.pricingClient,
+                new FakePricingClient(),
                 sharedFixtures.fakeEventPublisher(),
+                concertFixtures.categoryService,
                 concertFixtures.vendorService
         );
     }
