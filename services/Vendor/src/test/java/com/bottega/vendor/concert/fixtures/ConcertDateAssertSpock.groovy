@@ -6,6 +6,8 @@ import groovy.transform.TupleConstructor
 import io.vavr.control.Validation
 import spock.lang.Specification
 
+import java.time.LocalDate
+
 @TupleConstructor
 class ConcertDateAssertSpock extends Specification {
 
@@ -15,4 +17,9 @@ class ConcertDateAssertSpock extends Specification {
         new ConcertDateAssertSpock(actualConcertDate)
     }
 
+    ConcertDateAssertSpock isEqualTo(LocalDate expectedDate) {
+        assert actualConcertDate.isValid()
+        assert actualConcertDate.get().utcDate == expectedDate
+        this
+    }
 }
