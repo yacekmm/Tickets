@@ -5,12 +5,22 @@ import java.util.stream.Stream;
 
 import com.bottega.sharedlib.config.TestClockConfig;
 import com.bottega.vendor.concert.fixtures.ConcertLogicTestBase;
+import org.junit.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class Concert_initConcert_unitTest extends ConcertLogicTestBase {
 
+    @Test
+    void initConcert_addsTags() {
+        //given
+
+        //when
+
+        //then
+
+    }
 
     public static Stream<Arguments> provideStringsForCategories() {
         return Stream.of(

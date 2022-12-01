@@ -34,8 +34,6 @@ public class ConcertFixtures {
 
     //services
     @Autowired
-    public TagService tagService;
-    @Autowired
     public CategoryService categoryService;
 
     //mocks
