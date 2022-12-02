@@ -1,15 +1,12 @@
 package com.bottega.vendor.concert.domain
 
-
 import com.bottega.vendor.fixtures.SpecificationBase
-
-import static com.bottega.sharedlib.config.TestClockConfig.TEST_TIME_PLUS_30_DAYS
 
 class Concert_initConcert_unitSpec extends SpecificationBase {
 
     def "initConcert - adds tags"() {
         given:
-        def newConcert = new Concert(new ConcertId(), Title.from(title).get(), ConcertDate.from(TEST_TIME_PLUS_30_DAYS.toString(), sharedFixtures.clock).get(), "vendor-id", new HashSet<>(), null)
+        def newConcert = builders.aConcert().withTitle(title).build()
 
         when:
         newConcert.initNewConcert(concertFixtures.tagService, concertFixtures.categoryService)
@@ -31,7 +28,7 @@ class Concert_initConcert_unitSpec extends SpecificationBase {
 
     def "initConcert - assigns category"() {
         given:
-        def newConcert = new Concert(new ConcertId(), Title.from(title).get(), ConcertDate.from(TEST_TIME_PLUS_30_DAYS.toString(), sharedFixtures.clock).get(), "vendor-id", new HashSet<>(), null)
+        def newConcert = builders.aConcert().withTitle(title).build()
 
         when:
         newConcert.initNewConcert(concertFixtures.tagService, concertFixtures.categoryService)
@@ -47,5 +44,4 @@ class Concert_initConcert_unitSpec extends SpecificationBase {
         "Scorpions on Mystic Festival" | "rock"
         "Rihanna the best of"          | "superstar"
     }
-
 }
