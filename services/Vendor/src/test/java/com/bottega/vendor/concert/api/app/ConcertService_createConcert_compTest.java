@@ -2,6 +2,7 @@ package com.bottega.vendor.concert.api.app;
 
 import java.util.Set;
 
+import com.bottega.sharedlib.fixtures.RepoEntries;
 import com.bottega.sharedlib.vo.error.ErrorResult;
 import com.bottega.vendor.agreements.VendorId;
 import com.bottega.vendor.concert.domain.Concert;
@@ -33,11 +34,12 @@ class ConcertService_createConcert_compTest extends ConcertLogicTestBase {
     @Test
     void createConcert_persistsConcert_onValidInput() {
         //when
-
-        //TODO: implement
+        Either<ErrorResult, Concert> result = concertFixtures.concertService.createConcert("Woodstock 2000", TEST_TIME_PLUS_30_DAYS.toString(), "vendor-id");
 
         //then
-
+        assertThat(result).isRight();
+        ConcertAssert.assertThatConcert(result.get())
+                .isPersistedIn(concertFixtures.concertRepo, RepoEntries.SINGULAR);
     }
 
 
