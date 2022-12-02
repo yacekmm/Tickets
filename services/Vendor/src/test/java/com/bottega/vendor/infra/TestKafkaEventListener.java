@@ -1,5 +1,7 @@
 package com.bottega.vendor.infra;
 
+import java.util.*;
+
 import com.bottega.sharedlib.event.Event;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.vavr.control.Try;
@@ -8,9 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.messaging.Message;
 import org.springframework.stereotype.Component;
-import org.testcontainers.shaded.org.awaitility.Awaitility;
-
-import java.util.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @Component
 @RequiredArgsConstructor
@@ -34,7 +34,7 @@ public class TestKafkaEventListener {
     }
 
     public Event singleEvent() {
-        Awaitility.await().until(() -> receivedEvents.size() == 1);
+        assertThat(receivedEvents).hasSize(1);
         return receivedEvents.get(0);
     }
 }
