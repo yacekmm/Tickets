@@ -32,4 +32,18 @@ export class ConcertOperations {
       );
     return this;
   }
+
+  openConcertsList() {
+    element(By.id("menu-concerts-list")).click();
+    return this;
+  }
+
+  assertAllConcertsListed(expectedConcertTitles: string[]) {
+    element.all(By.className('mat-row'))
+      .all(By.className('concert-title'))
+      .getText()
+      .then(value =>
+        expect(value).toEqual(expectedConcertTitles)
+      );
+  }
 }
