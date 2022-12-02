@@ -8,6 +8,7 @@ import com.bottega.vendor.concert.domain.ConcertId;
 import com.bottega.vendor.fixtures.*;
 import io.vavr.control.Either;
 import org.junit.jupiter.api.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class PricingClient_applyDiscount_depTest extends FrameworkTestBase {
 
@@ -30,7 +31,7 @@ public class PricingClient_applyDiscount_depTest extends FrameworkTestBase {
         Either<ErrorResult, List<Price>> fakeResult = fakePricingClient.applyPercentageDiscount(concertId, 10);
 
         //then
-
+        assertThat(fakeResult.get()).containsExactlyInAnyOrderElementsOf(realResult.get());
     }
 
 }
