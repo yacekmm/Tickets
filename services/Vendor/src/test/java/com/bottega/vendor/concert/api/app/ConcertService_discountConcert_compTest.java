@@ -32,7 +32,7 @@ class ConcertService_discountConcert_compTest extends ConcertLogicTestBase {
             Assertions.assertThat(prices).hasSize(1);
             PriceAssert.assertThatPrice(prices.get(0))
                     .equalTo(new Money(90_00))
-                    .hasFactors(new PriceFactor(null, 10, null));
+                    .hasFactors(new PriceFactor("PERCENTAGE", 10, null));
         });
     }
 
