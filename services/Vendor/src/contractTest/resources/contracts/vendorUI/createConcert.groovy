@@ -21,11 +21,11 @@ Contract.make {
 
         body(
                 title: $(
-                        producer('too short'),
+                        producer('some title'),
                         consumer(anyNonBlankString())
                 ),
                 date: $(
-                        producer('1987-03-07'),
+                        producer('2042-03-07T07:20:00Z'),
                         consumer(anyNonBlankString())
                 ),
                 vendorId: anyNonBlankString()
