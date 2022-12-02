@@ -31,7 +31,7 @@ public class PriceService {
 
         List<ItemPrice> updatedPrices = priceRepo.findByItemId(itemId).stream()
                 .map(itemPrice -> itemPrice.applyFactor(percentageFactor(percentage, itemPrice)))
-                //TODO save in repo
+                .peek(priceRepo::save)
                 //TODO update read model via priceUpdateService
                 //TODO publish price_changed event
                 .toList();
