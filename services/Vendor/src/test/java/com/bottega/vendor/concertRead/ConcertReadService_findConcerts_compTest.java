@@ -13,9 +13,10 @@ public class ConcertReadService_findConcerts_compTest extends ConcertLogicTestBa
 
     @Test
     public void findConcerts_returnsSortedConcertsForVendor_onValidRequest() {
-        Concert concert_1 = builders.dontLook().withDate(TEST_TIME_PLUS_30_DAYS).withVendorId("vendor").inFinderDb();
-        Concert concert_2 = builders.dontLook().withDate(TEST_TIME_PLUS_60_DAYS).withVendorId("vendor").inFinderDb();
-        builders.dontLook().withVendorId("other").inDb();
+        //given
+        Concert concert_1 = builders.aConcert().withDate(TEST_TIME_PLUS_30_DAYS).withVendorId("vendor").inFinderDb();
+        Concert concert_2 = builders.aConcert().withDate(TEST_TIME_PLUS_60_DAYS).withVendorId("vendor").inFinderDb();
+        builders.aConcert().withVendorId("other").inDb();
 
         //when
         List<Concert> result = concertReadFixtures.concertReadService.findConcertsForVendor("vendor");
