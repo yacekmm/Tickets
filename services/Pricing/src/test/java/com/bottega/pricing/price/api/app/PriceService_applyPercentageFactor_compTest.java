@@ -11,6 +11,7 @@ import io.vavr.control.Either;
 import org.junit.jupiter.api.Test;
 import static com.bottega.sharedlib.fixtures.RepoEntries.SINGULAR;
 import static org.assertj.vavr.api.VavrAssertions.assertThat;
+import static org.mockito.BDDMockito.then;
 
 class PriceService_applyPercentageFactor_compTest extends LogicTestBase {
 
@@ -51,9 +52,13 @@ class PriceService_applyPercentageFactor_compTest extends LogicTestBase {
     @Test
     void applyPercentageFactor_updatesReadModel_onPriceChange() {
         //given
+        ItemPrice price = builders.aPrice().priceForItem(100_00, "item-id").inDb();
 
         //when
+        Either<ErrorResult, List<ItemPrice>> result = priceFixtures.priceService.applyPercentageFactor("item-id", 10);
 
         //then
+        assertThat(result).isRight();
+        then(priceFixtures.priceUpdateService).should().updateReadModel(price);
     }
 }
