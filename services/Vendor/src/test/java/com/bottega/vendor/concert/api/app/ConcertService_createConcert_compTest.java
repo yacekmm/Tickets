@@ -4,7 +4,7 @@ import java.util.Set;
 
 import com.bottega.sharedlib.fixtures.RepoEntries;
 import com.bottega.sharedlib.vo.error.ErrorResult;
-import com.bottega.vendor.agreements.VendorId;
+import com.bottega.vendor.agreements.VendorAgreement;
 import com.bottega.vendor.concert.domain.Concert;
 import com.bottega.vendor.concert.fixtures.ConcertLogicTestBase;
 import com.bottega.vendor.concert.fixtures.asserts.ConcertAssert;
@@ -12,14 +12,20 @@ import io.vavr.control.Either;
 import org.junit.jupiter.api.Test;
 import static com.bottega.sharedlib.config.TestClockConfig.TEST_TIME_PLUS_30_DAYS;
 import static org.assertj.vavr.api.VavrAssertions.assertThat;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.BDDMockito.given;
 
 
 class ConcertService_createConcert_compTest extends ConcertLogicTestBase {
 
     @Test
     void createConcert_createsConcert_onValidInput() {
+        //given
+        VendorAgreement vendorAgreement = builders.aVendorAgreement().forVendor("vendorId").build();
+        given(concertFixtures.vendorService.getVendorAgreement("vendorId")).willReturn(vendorAgreement);
+
         //when
-        Either<ErrorResult, Concert> result = concertFixtures.concertService.createConcert("Woodstock 2000", TEST_TIME_PLUS_30_DAYS.toString(), "vendor-id");
+        Either<ErrorResult, Concert> result = concertFixtures.concertService.createConcert("Woodstock 2000", TEST_TIME_PLUS_30_DAYS.toString(), vendorAgreement.vendorId().asString());
 
         //then
         assertThat(result).isRight();
@@ -27,14 +33,18 @@ class ConcertService_createConcert_compTest extends ConcertLogicTestBase {
                 .hasIdAsUUID()
                 .hasTitle("Woodstock 2000")
                 .hasDate(TEST_TIME_PLUS_30_DAYS)
-                .hasVendorId(new VendorId("vendor-id"))
+                .hasVendorId(vendorAgreement.vendorId())
                 .hasTags(Set.of());
     }
 
     @Test
     void createConcert_persistsConcert_onValidInput() {
+        //given
+        VendorAgreement vendorAgreement = builders.aVendorAgreement().build();
+        given(concertFixtures.vendorService.getVendorAgreement(anyString())).willReturn(vendorAgreement);
+
         //when
-        Either<ErrorResult, Concert> result = concertFixtures.concertService.createConcert("Woodstock 2000", TEST_TIME_PLUS_30_DAYS.toString(), "vendor-id");
+        Either<ErrorResult, Concert> result = concertFixtures.concertService.createConcert("Woodstock 2000", TEST_TIME_PLUS_30_DAYS.toString(), vendorAgreement.vendorId().asString());
 
         //then
         assertThat(result).isRight();
