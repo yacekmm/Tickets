@@ -10,7 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.messaging.Message;
 import org.springframework.stereotype.Component;
-import static org.assertj.core.api.Assertions.assertThat;
+import org.testcontainers.shaded.org.awaitility.Awaitility;
 
 @Component
 @RequiredArgsConstructor
@@ -34,7 +34,7 @@ public class TestKafkaEventListener {
     }
 
     public Event singleEvent() {
-        assertThat(receivedEvents).hasSize(1);
+        Awaitility.await().until(() -> receivedEvents.size() == 1);
         return receivedEvents.get(0);
     }
 }
