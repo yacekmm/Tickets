@@ -42,5 +42,14 @@ class ConcertService_createConcert_compTest extends ConcertLogicTestBase {
                 .isPersistedIn(concertFixtures.concertRepo, RepoEntries.SINGULAR);
     }
 
+    @Test
+    void createConcert_returnsError_onVendorIdNotFound() {
+        //when
+        Either<ErrorResult, Concert> result = concertFixtures.concertService.createConcert("Woodstock 2000", TEST_TIME_PLUS_30_DAYS.toString(), "non-existing");
+
+        //then
+        assertThat(result).isLeft();
+    }
+
 
 }
