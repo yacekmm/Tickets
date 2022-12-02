@@ -1,4 +1,3 @@
-import {By, element} from "protractor";
 import {BrowserTools} from "../shared/browser-tools";
 import {ConcertOperations} from "./concert-operations";
 
@@ -26,18 +25,10 @@ describe('ui', () => {
   });
 
   it('lists stub concerts', () => {
-    //open concerts list
-    element(By.id("menu-concerts-list")).click();
-
-    //assert expected concerts are listed
-    element.all(By.className('mat-row'))
-      .all(By.className('concert-title'))
-      .getText()
-      .then(value =>
-        expect(value).toEqual(['Rihanna in Rome', 'Rock concert 2'])
-      );
+    concertOperations
+      .openConcertsList()
+      .assertAllConcertsListed(['Rihanna in Rome', 'Rock concert 2'])
   });
-
 
 });
 
