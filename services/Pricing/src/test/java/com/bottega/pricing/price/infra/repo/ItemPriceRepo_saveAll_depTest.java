@@ -21,8 +21,8 @@ public class ItemPriceRepo_saveAll_depTest extends FrameworkTestBase {
     @Test
     public void saveAll_isValid() {
         //given
-        ItemPrice itemPrice = builders.dontLook().priceForItem(100_00, "item-id").build();
-        ItemPrice otherPrice = builders.dontLook().priceForItem(100_00, "otherId").build();
+        ItemPrice itemPrice = builders.aPrice().priceForItem(100_00, "item-id").build();
+        ItemPrice otherPrice = builders.aPrice().priceForItem(100_00, "otherId").build();
 
         //when
         fakeRepo.saveAll(of(itemPrice, otherPrice));
