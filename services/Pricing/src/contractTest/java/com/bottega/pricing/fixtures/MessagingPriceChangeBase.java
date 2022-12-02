@@ -1,10 +1,10 @@
 package com.bottega.pricing.fixtures;
 
+import java.util.HashSet;
+
 import com.bottega.pricing.price.domain.ItemPrice;
 import com.bottega.sharedlib.fixtures.UUIDs;
 import org.junit.jupiter.api.BeforeEach;
-
-import java.util.HashSet;
 
 public class MessagingPriceChangeBase extends CdcFrameworkTestBase {
 
@@ -12,8 +12,7 @@ public class MessagingPriceChangeBase extends CdcFrameworkTestBase {
 
     @BeforeEach
     void setUp() {
-        //given
-        price = builders.aPrice().priceForItem(100_00, UUIDs.zeros()).inDb();
+        price = builders.dontLook().priceForItem(100_00, UUIDs.zeros()).inDb();
     }
 
     protected void applyPercentageDiscount(int percentage) {
