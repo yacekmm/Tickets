@@ -22,3 +22,5 @@ publishing {
 
 publishToMavenLocal.dependsOn generateClientStubs
 publishStubsToScm.dependsOn publishToMavenLocal
+
+build.finalizedBy publishToMavenLocal
