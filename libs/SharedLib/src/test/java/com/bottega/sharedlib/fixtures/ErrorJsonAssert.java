@@ -3,9 +3,9 @@ package com.bottega.sharedlib.fixtures;
 import com.bottega.sharedlib.vo.error.*;
 import io.restassured.response.ValidatableResponse;
 import lombok.RequiredArgsConstructor;
-import static com.bottega.sharedlib.vo.error.ErrorType.NOT_FOUND;
-import static com.bottega.sharedlib.vo.error.GenericErrorCode.not_found;
-import static org.apache.http.HttpStatus.SC_NOT_FOUND;
+import static com.bottega.sharedlib.vo.error.ErrorType.*;
+import static com.bottega.sharedlib.vo.error.GenericErrorCode.*;
+import static org.apache.http.HttpStatus.*;
 import static org.hamcrest.Matchers.equalTo;
 
 @RequiredArgsConstructor(staticName = "assertThatError")
@@ -35,4 +35,10 @@ public class ErrorJsonAssert {
                 .hasDescription(expectedDescription);
     }
 
+    public ErrorJsonAssert isBadRequest(String expectedDesc) {
+        errorResponse.statusCode(SC_BAD_REQUEST);
+        return hasType(BAD_REQUEST)
+                .hasCode(invalid_request)
+                .hasDescription(expectedDesc);
+    }
 }
