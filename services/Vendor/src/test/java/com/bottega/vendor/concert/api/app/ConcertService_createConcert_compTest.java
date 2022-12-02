@@ -2,7 +2,7 @@ package com.bottega.vendor.concert.api.app;
 
 import java.util.Set;
 
-import com.bottega.sharedlib.fixtures.RepoEntries;
+import com.bottega.sharedlib.fixtures.*;
 import com.bottega.sharedlib.vo.error.ErrorResult;
 import com.bottega.vendor.agreements.VendorAgreement;
 import com.bottega.vendor.concert.domain.Concert;
@@ -71,7 +71,15 @@ class ConcertService_createConcert_compTest extends ConcertLogicTestBase {
         Either<ErrorResult, Concert> result = concertFixtures.concertService.createConcert("Woodstock 2000", TEST_TIME_PLUS_30_DAYS.toString(), vendorAgreement.vendorId().asString());
 
         //then
-        //TODO: check event publisher
+        assertThat(result).hasRightValueSatisfying(concert ->
+                EventAssert.assertThatEventV1(sharedFixtures.fakeEventPublisher().singleEvent())
+                        .isConcertCreated(
+                                concert.getId().asString(),
+                                concert.getTitle().getValue(),
+                                concert.getDate().getUtcDate().toString(),
+                                new String[]{},
+                                vendorAgreement.profitMarginPercentage())
+        );
     }
 
 
