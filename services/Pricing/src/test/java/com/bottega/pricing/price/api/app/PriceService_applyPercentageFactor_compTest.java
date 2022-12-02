@@ -26,7 +26,6 @@ class PriceService_applyPercentageFactor_compTest extends LogicTestBase {
         assertThat(result).hasRightValueSatisfying(itemPrices ->
                 PriceAssert.assertThatPrice(itemPrices.get(0))
                         .isPersistedIn(priceFixtures.itemPriceRepo, SINGULAR)
-                        .hasItemId("item-id")
                         .hasPrice(90_00)
                         .hasId(price.getId())
                         .hasItemId(price.getItemId())
@@ -47,5 +46,14 @@ class PriceService_applyPercentageFactor_compTest extends LogicTestBase {
         assertThat(result).hasLeftValueSatisfying(errorResult ->
                 ErrorAssert.assertThatError(errorResult)
                         .isNotFound("No price entries found for requested item. itemId: item-id"));
+    }
+
+    @Test
+    void applyPercentageFactor_updatesReadModel_onPriceChange() {
+        //given
+
+        //when
+
+        //then
     }
 }
