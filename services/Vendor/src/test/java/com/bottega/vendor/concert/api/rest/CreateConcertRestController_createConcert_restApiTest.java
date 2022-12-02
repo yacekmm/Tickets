@@ -1,5 +1,8 @@
 package com.bottega.vendor.concert.api.rest;
 
+import com.bottega.sharedlib.fixtures.RepoEntries;
+import com.bottega.vendor.concert.domain.ConcertId;
+import com.bottega.vendor.concert.fixtures.asserts.ConcertAssert;
 import com.bottega.vendor.fixtures.FrameworkTestBase;
 import io.restassured.RestAssured;
 import io.restassured.response.ValidatableResponse;
@@ -9,6 +12,8 @@ import static com.bottega.sharedlib.config.TestClockConfig.TEST_TIME_PLUS_30_DAY
 import static io.restassured.http.ContentType.JSON;
 import static java.time.LocalDate.ofInstant;
 import static java.time.ZoneOffset.UTC;
+import static org.apache.http.HttpStatus.SC_OK;
+import static org.hamcrest.Matchers.equalTo;
 
 public class CreateConcertRestController_createConcert_restApiTest extends FrameworkTestBase {
 
@@ -29,7 +34,20 @@ public class CreateConcertRestController_createConcert_restApiTest extends Frame
                         .then();
 
         //then
+        response
+                .statusCode(SC_OK);
 
+        ConcertId concertId = ConcertAssert
+                .assertThatConcert(concertFixtures.concertRepo.findAll().iterator().next())
+                .isPersistedIn(concertFixtures.concertRepo, RepoEntries.SINGULAR)
+                .hasIdAsUUID()
+                .hasTitle("concert-title")
+                .hasDate(TEST_TIME_PLUS_30_DAYS)
+                .hasVendorId("some-id")
+                .extractId();
+
+        response
+                .body("id", equalTo(concertId.asString()));
     }
 
 }
