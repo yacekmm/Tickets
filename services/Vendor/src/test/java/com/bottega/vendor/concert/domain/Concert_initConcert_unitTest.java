@@ -26,6 +26,7 @@ class Concert_initConcert_unitTest extends ConcertLogicTestBase {
     @MethodSource("provideStringsForTags")
     void initConcert_addsTags(String title, Set<String> expectedTags) {
         //given
+        //TODO use builder
         Concert newConcert = new Concert(new ConcertId(), Title.from(title).get(), ConcertDate.from(TEST_TIME_PLUS_30_DAYS.toString(), sharedFixtures.clock).get(), "vendor-id", new HashSet<>(), null);
 
         //when
@@ -50,6 +51,7 @@ class Concert_initConcert_unitTest extends ConcertLogicTestBase {
     @MethodSource("provideStringsForCategories")
     void initConcert_assignsCategory(String title, String expectedCategory) {
         //given
+        //TODO use builder
         Concert newConcert = new Concert(new ConcertId(), Title.from(title).get(), ConcertDate.from(TEST_TIME_PLUS_30_DAYS.toString(), sharedFixtures.clock).get(), "vendor-id", new HashSet<>(), null);
 
         //when
