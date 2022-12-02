@@ -2,9 +2,11 @@ package com.bottega.pricing.initialPrice.api.event;
 
 import com.bottega.pricing.fixtures.FrameworkTestBase;
 import com.bottega.pricing.price.domain.ItemPrice;
+import com.bottega.pricing.price.fixtures.PriceAssert;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.contract.stubrunner.StubTrigger;
+import static com.bottega.sharedlib.fixtures.RepoEntries.SINGULAR;
 import static org.testcontainers.shaded.org.awaitility.Awaitility.await;
 
 class InitialPriceEventListener_settleInitialPrice_eventContractApiTest extends FrameworkTestBase {
@@ -25,7 +27,10 @@ class InitialPriceEventListener_settleInitialPrice_eventContractApiTest extends 
 
                     ItemPrice actualPrice = priceFixtures.itemPriceRepo.findAll().iterator().next();
 
-                    //TODO: assert that price is updated with expected values and persisted in DB
+                    PriceAssert.assertThatPrice(actualPrice)
+                            .isPersistedIn(priceFixtures.itemPriceRepo, SINGULAR)
+                            .hasPrice(105_00)
+                            .hasNoFactors();
 
                     //TODO: Assert that PRICE_CHANGED event was published, using TestEventListener
                 }
