@@ -9,8 +9,6 @@ import io.restassured.response.ValidatableResponse;
 import org.apache.groovy.util.Maps;
 import org.junit.jupiter.api.Test;
 import static com.bottega.sharedlib.config.TestClockConfig.*;
-import static com.bottega.sharedlib.vo.error.ErrorType.BAD_REQUEST;
-import static com.bottega.sharedlib.vo.error.GenericErrorCode.invalid_request;
 import static io.restassured.http.ContentType.JSON;
 import static java.time.LocalDate.ofInstant;
 import static java.time.ZoneOffset.UTC;
@@ -70,9 +68,7 @@ public class CreateConcertRestController_createConcert_restApiTest extends Frame
 
         //then
         ErrorJsonAssert.assertThatError(response)
-                .hasType(BAD_REQUEST)
-                .hasCode(invalid_request)
-                .hasDescription("invalid_date");
+                .isBadRequest("invalid_date");
     }
 
 
