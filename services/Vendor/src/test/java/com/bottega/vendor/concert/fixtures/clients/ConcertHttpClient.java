@@ -9,6 +9,8 @@ import io.restassured.response.ValidatableResponse;
 import lombok.*;
 import org.apache.groovy.util.Maps;
 import org.springframework.stereotype.Component;
+import static java.time.LocalDate.ofInstant;
+import static java.time.ZoneOffset.UTC;
 
 @Component
 @RequiredArgsConstructor
@@ -28,12 +30,12 @@ public class ConcertHttpClient {
         public String vendorId = "default-vendor-id";
     }
 
-    public ValidatableResponse notImportant(String title, String date, String vendorId) {
+    public ValidatableResponse createConcert(ConcertRequest concertRequest) {
         return builders.aRequestSpec()
                 .body(Maps.of(
-                        "title", title,
-                        "date", date,
-                        "vendorId", vendorId
+                        "title", concertRequest.title,
+                        "date", ofInstant(concertRequest.date, UTC).toString(),
+                        "vendorId", concertRequest.vendorId
                 ))
                 .post("/concert")
                 .then();
