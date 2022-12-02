@@ -14,7 +14,6 @@ import io.vavr.control.Either;
 import lombok.AllArgsConstructor;
 import static com.bottega.sharedlib.vo.error.ErrorResult.notFound;
 import static com.bottega.sharedlib.vo.error.GenericErrorCode.not_found;
-import static com.bottega.vendor.concert.domain.VendorEventFactory.concertCreated;
 import static io.vavr.control.Option.ofOptional;
 
 @ApplicationService
@@ -30,15 +29,11 @@ public class ConcertService {
     private final VendorService vendorService;
 
     public Either<ErrorResult, Concert> createConcert(String title, String dateTime, String vendorIdString) {
-        VendorAgreement vendorAgreement = vendorService.getVendorAgreement(vendorIdString);
-        if(vendorAgreement == null){
-            return Either.left(notFound(not_found, "Vendor contract not found for %s", vendorIdString));
-        }
-        return concertFactory.createConcert(title, dateTime, vendorAgreement.vendorId())
-                .peek(concert -> concert.initNewConcert(tagService, categoryService))
-                .map(concertRepo::save)
-                //Outbox, post-transaction?
-                .peek(concert -> eventPublisher.publish(concertCreated(concert, vendorAgreement.profitMarginPercentage())));
+        return concertFactory.createConcert(title, dateTime, new VendorId(vendorIdString))
+                .peek(concert -> concert.initNewConcert(tagService, categoryService));
+                //TODO: save in repo
+                //TODO: publish event
+//                .peek(concert -> eventPublisher.publish(concertCreated(concert, 10)));
     }
 
     public Either<ErrorResult, List<Price>> discountConcert(String concertId, int percentage) {
