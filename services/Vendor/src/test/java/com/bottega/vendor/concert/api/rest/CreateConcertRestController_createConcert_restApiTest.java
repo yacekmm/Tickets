@@ -50,4 +50,17 @@ public class CreateConcertRestController_createConcert_restApiTest extends Frame
                 .body("id", equalTo(concertId.asString()));
     }
 
+
+    @Test
+    public void createConcert_returnsBadRequest_onDateTooSoon() {
+        //given
+
+        //when
+
+        //then
+
+    }
+
+
+
 }
