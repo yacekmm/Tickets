@@ -11,7 +11,7 @@ public class PriceRestController_applyPercentageFactor_restApiTest extends Frame
     @Test
     public void applyFactor_OK_onValidRequest() {
         //given
-        ItemPrice itemPrice = builders.dontLook().priceForItem(100_00, "item-id").inDb();
+        ItemPrice itemPrice = builders.aPrice().priceForItem(100_00, "item-id").inDb();
 
         //when
         ValidatableResponse response = priceFixtures.pricingHttpClient.applyPercentageFactor("item-id", 20);

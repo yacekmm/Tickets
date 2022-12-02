@@ -22,7 +22,7 @@ class ConcertService_discountConcert_compTest extends ConcertLogicTestBase {
     @Test
     void discountConcert_discountsConcert_onValidInput() {
         //given
-        Concert concert = builders.dontLook().inDb();
+        Concert concert = builders.aConcert().inDb();
 
         //when
         Either<ErrorResult, List<Price>> result = concertFixtures.concertService.discountConcert(concert.getId().asString(), 10);
