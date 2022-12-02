@@ -10,6 +10,8 @@ import com.bottega.sharedlib.vo.error.ErrorResult;
 import io.vavr.control.Either;
 import org.junit.jupiter.api.Test;
 import static com.bottega.sharedlib.fixtures.RepoEntries.SINGULAR;
+import static com.bottega.sharedlib.vo.error.ErrorType.NOT_FOUND;
+import static com.bottega.sharedlib.vo.error.GenericErrorCode.not_found;
 import static org.assertj.vavr.api.VavrAssertions.assertThat;
 import static org.mockito.BDDMockito.then;
 
@@ -17,8 +19,7 @@ class PriceService_applyPercentageFactor_compTest extends LogicTestBase {
 
     @Test
     void applyPercentageFactor_returnsSingleDiscountedPrice_onValidRequest() {
-        //given
-        ItemPrice price = builders.aPrice().priceForItem(100_00, "item-id").inDb();
+        ItemPrice price = builders.dontLook().priceForItem(100_00, "item-id").inDb();
 
         //when
         Either<ErrorResult, List<ItemPrice>> result = priceFixtures.priceService.applyPercentageFactor("item-id", 10);
@@ -40,7 +41,7 @@ class PriceService_applyPercentageFactor_compTest extends LogicTestBase {
 
     @Test
     void applyPercentageFactor_publishesPriceChangeEvent_onPriceChange() {
-        ItemPrice price = builders.aPrice().priceForItem(100_00, "item-id").inDb();
+        ItemPrice price = builders.dontLook().priceForItem(100_00, "item-id").inDb();
 
         //when
         Either<ErrorResult, List<ItemPrice>> result = priceFixtures.priceService.applyPercentageFactor("item-id", 10);
@@ -53,8 +54,7 @@ class PriceService_applyPercentageFactor_compTest extends LogicTestBase {
 
     @Test
     void applyPercentageFactor_updatesReadModel_onPriceChange() {
-        //given
-        ItemPrice price = builders.aPrice().priceForItem(100_00, "item-id").inDb();
+        ItemPrice price = builders.dontLook().priceForItem(100_00, "item-id").inDb();
 
         //when
         Either<ErrorResult, List<ItemPrice>> result = priceFixtures.priceService.applyPercentageFactor("item-id", 10);
@@ -73,6 +73,9 @@ class PriceService_applyPercentageFactor_compTest extends LogicTestBase {
         assertThat(result)
                 .hasLeftValueSatisfying(err ->
                         ErrorAssert.assertThatError(err)
-                                .isNotFound("No price entries found for requested item. itemId: not-existing-id"));
+                                .hasType(NOT_FOUND)
+                                .hasCode(not_found)
+                                .hasDescription("No price entries found for requested item. itemId: not-existing-id")
+                );
     }
 }
