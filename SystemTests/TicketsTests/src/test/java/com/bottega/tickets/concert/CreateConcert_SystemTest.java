@@ -2,6 +2,7 @@ package com.bottega.tickets.concert;
 
 import java.time.*;
 
+import com.bottega.tickets.concert.fixtures.ConcertOperations;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -10,10 +11,12 @@ import static org.awaitility.Awaitility.await;
 public class CreateConcert_SystemTest {
 
     private SeleniumFixtures seleniumFixtures;
+    private ConcertOperations concertOperations;
 
     @BeforeEach
     void setUp() {
         seleniumFixtures = SeleniumFixtures.init("http://localhost:4200");
+        concertOperations = ConcertOperations.init(seleniumFixtures);
     }
 
     @AfterEach
@@ -25,7 +28,9 @@ public class CreateConcert_SystemTest {
     void createsConcert() {
         String concertTitle = "GUI test concert " + LocalDateTime.now();
 
-        seleniumFixtures.driver.findElement(By.id("menu-concerts-add")).click();
+        concertOperations
+                .openCreateConcertView();
+
         seleniumFixtures.driver.findElement(By.id("input-concert-title")).sendKeys(concertTitle);
         seleniumFixtures.driver.findElement(By.className("mat-calendar-next-button")).click();
         seleniumFixtures.driver.findElement(By.className("mat-calendar-next-button")).click();
