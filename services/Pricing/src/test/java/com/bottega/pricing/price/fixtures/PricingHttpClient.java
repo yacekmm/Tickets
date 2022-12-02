@@ -12,6 +12,17 @@ public class PricingHttpClient {
 
     private final TestBuilders builders;
 
+    public ValidatableResponse applyPercentageFactor(String parameterValue, int percentage) {
+        ValidatableResponse response = builders.aRequestSpec()
+                .body(Maps.of(
+                        "percentage", percentage
+                ))
+                .pathParam("item-id", parameterValue)
+                .post("item/{item-id}/price-factor/percentage")
+                .then();
+        return response;
+    }
+
     public ValidatableResponse notImportant(String itemId, int percentage) {
         return builders.aRequestSpec()
                 .body(Maps.of(
