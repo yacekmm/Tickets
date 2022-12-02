@@ -33,4 +33,13 @@ public class PriceRestController_applyPercentageFactor_restApiTest extends Frame
                 .hasSinglePercentageFactor(20);
     }
 
+    @Test
+    public void applyFactor_returns404_onItemNotFound() {
+        //when
+
+
+        //then
+
+    }
+
 }
