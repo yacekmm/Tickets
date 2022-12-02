@@ -1,17 +1,25 @@
 package com.bottega.pricing.price.api.app;
 
+import java.util.List;
+
 import com.bottega.pricing.fixtures.LogicTestBase;
+import com.bottega.pricing.price.domain.ItemPrice;
+import com.bottega.sharedlib.fixtures.ErrorAssert;
+import com.bottega.sharedlib.vo.error.ErrorResult;
+import io.vavr.control.Either;
 import org.junit.jupiter.api.Test;
+import static org.assertj.vavr.api.VavrAssertions.assertThat;
 
 class PriceService_applyPercentageFactor_compTest extends LogicTestBase {
 
     @Test
     void applyPercentageFactor_returnsSingleDiscountedPrice_onValidRequest() {
         //given
-
+        ItemPrice price = builders.aPrice().build();
+        priceFixtures.itemPriceRepo.save(price);
 
         //when
-
+        Either<ErrorResult, List<ItemPrice>> result = priceFixtures.priceService.applyPercentageFactor("item-id", 10);
 
         //then
     }
@@ -19,9 +27,11 @@ class PriceService_applyPercentageFactor_compTest extends LogicTestBase {
     @Test
     void applyPercentageFactor_returnsError_onNoPriceFound() {
         //when
-
+        Either<ErrorResult, List<ItemPrice>> result = priceFixtures.priceService.applyPercentageFactor("item-id", 10);
 
         //then
-
+        assertThat(result).hasLeftValueSatisfying(errorResult ->
+                ErrorAssert.assertThatError(errorResult)
+                        .isNotFound("No price entries found for requested item. itemId: item-id"));
     }
 }
