@@ -12,10 +12,9 @@ public class ConcertReadRestController_findConcerts_restApiTest extends Framewor
 
     @Test
     public void findConcerts_returnsSortedConcertsForVendor_onValidRequest() {
-        //given
-        Concert concert_1 = builders.aConcert().withDate(TEST_TIME_PLUS_30_DAYS).withVendorId("vendor").inDb();
-        Concert concert_2 = builders.aConcert().withDate(TEST_TIME_PLUS_60_DAYS).withVendorId("vendor").inDb();
-        builders.aConcert().withVendorId("other").inDb();
+        Concert concert_1 = builders.dontLook().withDate(TEST_TIME_PLUS_30_DAYS).withVendorId("vendor").inDb();
+        Concert concert_2 = builders.dontLook().withDate(TEST_TIME_PLUS_60_DAYS).withVendorId("vendor").inDb();
+        builders.dontLook().withVendorId("other").inDb();
 
         //when
         ValidatableResponse response = concertFixtures.concertHttpClient.findConcertsForVendor("vendor");

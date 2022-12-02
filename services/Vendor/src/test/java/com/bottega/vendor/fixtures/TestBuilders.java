@@ -1,8 +1,10 @@
 package com.bottega.vendor.fixtures;
 
+import java.time.Clock;
+
 import com.bottega.sharedlib.config.ApiVersions;
 import com.bottega.vendor.agreements.fixtures.VendorAgreementBuilder;
-import com.bottega.vendor.concert.fixtures.ConcertBuilder;
+import com.bottega.vendor.concert.fixtures.DontLook;
 import com.bottega.vendor.concert.infra.repo.ConcertRepo;
 import com.bottega.vendor.concertRead.ConcertFinderRepo;
 import io.restassured.RestAssured;
@@ -10,9 +12,6 @@ import io.restassured.specification.RequestSpecification;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-
-import java.time.Clock;
-
 import static io.restassured.http.ContentType.JSON;
 
 @Component
@@ -26,8 +25,8 @@ public class TestBuilders {
     @Value("${server.port}")
     private int port;
 
-    public ConcertBuilder aConcert() {
-        return new ConcertBuilder(concertRepo, concertFinderRepo, clock);
+    public DontLook dontLook() {
+        return new DontLook(concertRepo, concertFinderRepo, clock);
     }
 
     public VendorAgreementBuilder aVendorAgreement() {
@@ -42,4 +41,6 @@ public class TestBuilders {
                 .basePath(ApiVersions.V1)
                 .contentType(JSON);
     }
+
+    //TODO: add ConcertBuilder factory method here
 }
