@@ -72,7 +72,7 @@ Tasks available for Tests are as follows
 - `apiTest`: runs suites suffixed with `apiTest` and `apiSpec`
 - `contractTest`: runs contract tests defined in `/src/contractTests/resources/contracts`
 
-Note: `SharedLib` as an utils library contains only `microTest`,
+Note: `SharedLib` as a utils library contains only `microTest`,
 
 #### Prerequisites
 
