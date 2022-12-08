@@ -65,11 +65,11 @@ Tasks available for Tests are as follows
 ### Running `Vendor`, `Pricing` and `SharedLib`
 
 - `bootRun`: starts the service
-- `microTest`: runs suites suffixed with `MicroTest` and `MicroSpec`
-- `unitTest`: runs suites suffixed with `UnitTest` and `UnitSpec`
-- `compTest`: runs suites suffixed with `CompTest` and `CompSpec`
-- `depTest`: runs suites suffixed with `DepTest` and `DepSpec`
-- `apiTest`: runs suites suffixed with `CompTest` and `CompSpec`
+- `microTest`: runs suites suffixed with `microTest` and `microSpec`
+- `unitTest`: runs suites suffixed with `unitTest` and `unitSpec`
+- `compTest`: runs suites suffixed with `compTest` and `compSpec`
+- `depTest`: runs suites suffixed with `depTest` and `depSpec`
+- `apiTest`: runs suites suffixed with `apiTest` and `apiSpec`
 - `contractTest`: runs contract tests defined in `/src/contractTests/resources/contracts`
 
 Note: `SharedLib` as an utils library contains only `microTest`,
