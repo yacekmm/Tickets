@@ -18,6 +18,11 @@ The overall System consists of many microservices. This repository holds a subse
 
 You should import the `Tickets/build.gradle` as a root project to your IDE.
 
+## Publish Spring Cloud Contracts
+
+Some tests expect External services stubs managed by Spring Cloud Contract so those might fail until contracts are published to local maven repository because of AetherStubDownloader cannot download stubs. To publish contracts execute: `./gradlew publishToMavenLocal` in `Tickets/` or run IntelliJ configs named `Vendor/Pricing contract publish`
+
+
 ## Verify after import
 
 Execute tests to check if the system is working on your machine and tests are green.
