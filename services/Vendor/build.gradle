@@ -71,7 +71,7 @@ dependencies {
 
     testImplementation project(':libs:SharedLib')
     testImplementation project(':libs:SharedLib').sourceSets.test.output
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.1'
     testImplementation 'org.junit.jupiter:junit-jupiter-params:5.8.2'
     testImplementation 'org.assertj:assertj-core:3.21.0'
     testImplementation 'org.assertj:assertj-vavr:0.2.0'
