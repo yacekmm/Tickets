@@ -8,7 +8,7 @@ updates:
     schedule:
       interval: "daily"
       time: "04:30"
-    open-pull-requests-limit: 5
+    open-pull-requests-limit: 0
 
   # Vendor
   - package-ecosystem: "gradle"
@@ -16,7 +16,7 @@ updates:
     schedule:
       interval: "daily"
       time: "04:30"
-    open-pull-requests-limit: 5
+    open-pull-requests-limit: 0
     
   # Pricing
   - package-ecosystem: "gradle"
@@ -24,7 +24,7 @@ updates:
     schedule:
       interval: "daily"
       time: "04:30"
-    open-pull-requests-limit: 5
+    open-pull-requests-limit: 0
     
   # SharedLib
   - package-ecosystem: "gradle"
@@ -32,7 +32,7 @@ updates:
     schedule:
       interval: "daily"
       time: "04:30"
-    open-pull-requests-limit: 5  
+    open-pull-requests-limit: 0
     
     
   # TicketsTests
@@ -41,4 +41,4 @@ updates:
     schedule:
       interval: "daily"
       time: "04:30"
-    open-pull-requests-limit: 5  
+    open-pull-requests-limit: 0
