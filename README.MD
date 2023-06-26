@@ -4,6 +4,8 @@
 
 Tickets system is a cutting-edge Concert tickets selling platform with a revolutionary pricing algorithm and super friendly for Concert organizers (called Vendors) to sell their concerts with a remarkable profit.
 
+Please read full documentation here: [Tickets doc.pdf](https://drive.google.com/file/d/18jn20EdmDYWn8UeOI505hFEQaQbSXJnA/view?usp=sharing)
+
 ## Purpose
 
 The system is built as a training example for [Testing Microservices](https://bottega.com.pl/szkolenie-ms-testing).
