@@ -20,6 +20,12 @@ The overall System consists of many microservices. This repository holds a subse
 
 You should import the `Tickets/build.gradle` as a root project to your IDE.
 
+## Speed up test execution
+
+Gradle has a bug, and it executes tests slowly. Use IntelliJ Idea for build and test execution. 
+
+Go to: `Settings -> Build, Execution Deployment -> Build Tools -> Gradle` and set `Build and Run using` and `Run tests using` to value: `IntelliJ Idea` (not Gradle)
+
 ## Publish Spring Cloud Contracts
 
 Some tests expect External services stubs managed by Spring Cloud Contract so those might fail until contracts are published to local maven repository because of AetherStubDownloader cannot download stubs. To publish contracts execute: `./gradlew publishToMavenLocal` in `Tickets/` or run IntelliJ configs named `Vendor/Pricing contract publish`
