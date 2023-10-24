@@ -39,6 +39,12 @@ I suggest running IntelliJ task `Tickets test --all` to run all kinds of tests i
 
 Reach me out in case of any difficulties.
 
+
+## Known issues
+
+On Windows, Kafka Docker in Test Container setup might be unstable or unpredictable. When you encounter this happening, just drop it for now. Make sure `unit`, and `Api` tests are green.
+
+
 # Running
 
 Both Gradle and IntelliJ run configurations are available.
