@@ -52,6 +52,7 @@ Both Gradle and IntelliJ run configurations are available.
 Those are fine-grained configurations starting apps and executing tests on a desired level (Micro, Unit, Component,
 Dependency, Api, Contract, GUI, System)
 
+
 ## Starting off the whole Tickets system
 
 Tickets System consists of several services you need to run to see it working. See running instructions below:
@@ -76,6 +77,8 @@ in `services/<service>/gradle/test-suites.gradle`. To run all tests at once use 
 
 Tasks available for Tests are as follows
 
+Note: when running tests from IntelliJ, a small popup might appear asking which test task to execute (test, micro, unit, ...) - always select `test`
+
 ### Running `Vendor`, `Pricing` and `SharedLib`
 
 - `bootRun`: starts the service
@@ -99,7 +102,7 @@ Installed:
 - docker
 - docker compose
 
-Operating System: Ubuntu (recommended). `Tickets` is also ready to run on Windows, however docker on Windows is unpredictable.
+Operating System: Ubuntu (recommended). `Tickets` is also ready to run on Mac and Windows, however docker on Windows is unpredictable.
 
 ### Running `vendor-ui`
 
