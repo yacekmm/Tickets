@@ -77,7 +77,7 @@ in `services/<service>/gradle/test-suites.gradle`. To run all tests at once use 
 
 Tasks available for Tests are as follows
 
-Note: when running tests from IntelliJ, a small popup might appear asking which test task to execute (test, micro, unit, ...) - always select `test`
+Note: when running tests from IntelliJ, a small popup might appear asking which test task to execute (test, micro, unit, ...) - always select `test`, which runs all test levels
 
 ### Running `Vendor`, `Pricing` and `SharedLib`
 
