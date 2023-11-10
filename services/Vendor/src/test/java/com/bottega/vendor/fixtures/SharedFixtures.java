@@ -23,8 +23,8 @@ public class SharedFixtures {
     @Autowired
     public TestKafkaEventListener testKafkaListener;
 
-    @Autowired
-    private EmbeddedKafkaBroker kafkaBroker;
+//    @Autowired
+//    private EmbeddedKafkaBroker kafkaBroker;
 
     public static SharedFixtures init() {
         SharedFixtures fixtures = new SharedFixtures();
@@ -41,8 +41,8 @@ public class SharedFixtures {
 
     @SneakyThrows
     public void tearDown() {
-        kafkaBroker.doWithAdmin(adminClient -> Try.of(() ->
-                adminClient.deleteTopics(kafkaBroker.getTopics()).all().get()));
+//        kafkaBroker.doWithAdmin(adminClient -> Try.of(() ->
+//                adminClient.deleteTopics(kafkaBroker.getTopics()).all().get()));
         testKafkaListener.tearDown();
     }
 }
