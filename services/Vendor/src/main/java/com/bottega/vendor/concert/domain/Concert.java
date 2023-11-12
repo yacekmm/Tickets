@@ -1,15 +1,14 @@
 package com.bottega.vendor.concert.domain;
 
+import java.util.Set;
+
 import com.bottega.sharedlib.ddd.AggregateRoot;
 import com.bottega.sharedlib.repo.BaseEntity;
 import com.bottega.vendor.agreements.VendorId;
+import jakarta.persistence.*;
 import lombok.*;
-
-import javax.persistence.*;
-import java.util.Set;
-
-import static javax.persistence.CascadeType.*;
-import static javax.persistence.FetchType.LAZY;
+import static jakarta.persistence.CascadeType.*;
+import static jakarta.persistence.FetchType.LAZY;
 import static lombok.AccessLevel.*;
 
 @AggregateRoot

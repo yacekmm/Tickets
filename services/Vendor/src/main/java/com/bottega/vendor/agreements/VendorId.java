@@ -1,8 +1,8 @@
 package com.bottega.vendor.agreements;
 
 import com.bottega.sharedlib.repo.AggregateId;
+import jakarta.persistence.Embeddable;
 
-import javax.persistence.Embeddable;
 
 @Embeddable
 public class VendorId extends AggregateId {

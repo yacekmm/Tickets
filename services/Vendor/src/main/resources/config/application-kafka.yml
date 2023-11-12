@@ -1,22 +1,21 @@
 spring:
   kafka:
-    bootstrap-servers: localhost:9092
+#    bootstrap-servers: localhost:9092
     consumer:
-      auto-offset-reset: earliest
+#      auto-offset-reset: earliest
       group-id: vendor
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
-
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
 ---
 
-spring.config.activate.on-profile: test
-
-spring:
-  kafka:
-    bootstrap-servers: localhost:19092
-
-test:
-  topic: vendor.concert
+#spring.config.activate.on-profile: test
+#
+#spring:
+#  kafka:
+#    bootstrap-servers: localhost:19092
+#
+#test:
+#  topic: vendor.concert
