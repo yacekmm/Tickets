@@ -6,8 +6,11 @@ import java.util.concurrent.*;
 
 import com.bottega.vendor.concert.domain.ConcertFixtures;
 import org.apache.commons.logging.*;
+import org.apache.groovy.util.Maps;
+import org.apache.kafka.clients.admin.*;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
-import org.junit.jupiter.api.AfterEach;
+import org.apache.kafka.clients.producer.ProducerConfig;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.cloud.contract.stubrunner.spring.AutoConfigureStubRunner;
@@ -17,14 +20,12 @@ import org.springframework.cloud.contract.verifier.messaging.boot.AutoConfigureM
 import org.springframework.context.annotation.*;
 import org.springframework.kafka.annotation.*;
 import org.springframework.kafka.support.*;
-import org.springframework.kafka.test.context.EmbeddedKafka;
 import org.springframework.messaging.*;
 import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.test.context.*;
 import org.testcontainers.containers.KafkaContainer;
 import org.testcontainers.junit.jupiter.*;
-import org.testcontainers.shaded.org.awaitility.Awaitility;
 import org.testcontainers.utility.DockerImageName;
 
 import static com.bottega.sharedlib.config.CdcStubs.CDC_STUB_ID_PRICING;
@@ -40,18 +41,22 @@ import static org.testcontainers.shaded.org.awaitility.Awaitility.await;
 @AutoConfigureMessageVerifier
 public class FrameworkTestBase {
 
-    @Container
-    static KafkaContainer kafka = new KafkaContainer(DockerImageName.parse("confluentinc/cp-kafka:6.2.1")).withEmbeddedZookeeper();
+    //singleton container pattern: https://java.testcontainers.org/test_framework_integration/manual_lifecycle_control/#singleton-containers
+    static final KafkaContainer kafka;
+    static AdminClient kafkaAdmin;
+
+    static {
+        kafka = new KafkaContainer(DockerImageName.parse("confluentinc/cp-kafka:7.4.3"));//.withEmbeddedZookeeper();
+        kafka.start();
+    }
 
     @DynamicPropertySource
     static void kafkaProperties(DynamicPropertyRegistry registry) {
-        kafka.start();
-        await().until(() -> kafka.isRunning());
-//        System.out.println("--------------------------- " + kafka.getBootstrapServers());
-        registry.add("spring.kafka.bootstrap-servers", () -> {
-            return List.of(kafka.getHost() + ":" + kafka.getFirstMappedPort());
-        });
-//        registry.add("spring.kafka.bootstrap-servers", () -> List.of(kafka.getBootstrapServers()));
+        await().until(kafka::isRunning);
+        registry.add("spring.kafka.bootstrap-servers", kafka::getBootstrapServers);
+
+        kafkaAdmin = AdminClient.create(Maps.of(
+                ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, kafka.getBootstrapServers()));
     }
 
 
@@ -62,11 +67,18 @@ public class FrameworkTestBase {
     protected ConcertReadFixtures concertReadFixtures;
 
     @Autowired
-    protected
-    SharedFixtures sharedFixtures;
+    protected SharedFixtures sharedFixtures;
 
     @Autowired
     public TestBuilders builders;
+
+    @Autowired
+    private KafkaMessageVerifier kafkaMessageVerifier;
+
+    @BeforeEach
+    void beforeEach() {
+        kafkaMessageVerifier.reset();
+    }
 
     @AfterEach
     void tearDown() {
@@ -76,7 +88,6 @@ public class FrameworkTestBase {
     }
 }
 
-//@EnableKafka
 @Configuration
 class TestConfig {
 
@@ -94,33 +105,33 @@ class KafkaMessageVerifier implements MessageVerifierReceiver<Message<?>> {
 
     Map<String, BlockingQueue<Message<?>>> broker = new ConcurrentHashMap<>();
 
+    public void reset() {
+        broker.clear();
+    }
 
     @Override
     public Message receive(String destination, long timeout, TimeUnit timeUnit, @Nullable YamlContract contract) {
         broker.putIfAbsent(destination, new ArrayBlockingQueue<>(1));
-        BlockingQueue<Message<?>> messageQueue = broker.get(destination);
         Message<?> message;
         try {
-            message = messageQueue.poll(timeout, timeUnit);
-        }
-        catch (InterruptedException e) {
+            message = broker.get(destination).poll(timeout, timeUnit);
+        } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
         if (message != null) {
-            LOG.info("Removed a message from a topic [" + destination + "]");
+            LOG.info("Removed a message from a topic [" + destination + "]: " + message);
         }
         return message;
     }
 
 
-    @KafkaListener(id = "baristaContractTestListener", topicPattern = ".*")
+    @KafkaListener(id = "contractTestListener", topicPattern = ".*")
     public void listen(ConsumerRecord payload, @Header(KafkaHeaders.RECEIVED_TOPIC) String topic) {
-        LOG.info("Got a message from a topic [" + topic + "]");
+        LOG.info("Got a message from a topic [" + topic + "]: " + payload);
         Map<String, Object> headers = new HashMap<>();
         new DefaultKafkaHeaderMapper().toHeaders(payload.headers(), headers);
         broker.putIfAbsent(topic, new ArrayBlockingQueue<>(1));
-        BlockingQueue<Message<?>> messageQueue = broker.get(topic);
-        messageQueue.add(MessageBuilder.createMessage(payload.value(), new MessageHeaders(headers)));
+        broker.get(topic).add(MessageBuilder.createMessage(payload.value(), new MessageHeaders(headers)));
     }
 
     @Override
