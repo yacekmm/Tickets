@@ -9,5 +9,5 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create
-    database-platform: org.hibernate.dialect.PostgreSQL10Dialect
+#    database-platform: org.hibernate.dialect.PostgreSQLDialect
     open-in-view: false

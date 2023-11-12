@@ -8,7 +8,7 @@ import lombok.*;
 import org.apache.groovy.util.Maps;
 import org.springframework.stereotype.Component;
 
-import java.time.Instant;
+import java.time.*;
 
 import static java.time.LocalDate.ofInstant;
 import static java.time.ZoneOffset.UTC;
@@ -35,7 +35,7 @@ public class ConcertHttpClient {
         return builders.aRequestSpec()
                 .body(Maps.of(
                         "title", concertRequest.title,
-                        "date", ofInstant(concertRequest.date, UTC).toString(),
+                        "date", LocalDate.ofInstant(concertRequest.date, UTC).atStartOfDay().toLocalDate().toString(),
                         "vendorId", concertRequest.vendorId
                 ))
                 .post("/concert")
