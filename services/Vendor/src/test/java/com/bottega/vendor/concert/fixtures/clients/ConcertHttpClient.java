@@ -1,5 +1,7 @@
 package com.bottega.vendor.concert.fixtures.clients;
 
+import java.time.*;
+
 import com.bottega.sharedlib.config.TestClockConfig;
 import com.bottega.vendor.concert.domain.ConcertId;
 import com.bottega.vendor.fixtures.TestBuilders;
@@ -7,10 +9,6 @@ import io.restassured.response.ValidatableResponse;
 import lombok.*;
 import org.apache.groovy.util.Maps;
 import org.springframework.stereotype.Component;
-
-import java.time.*;
-
-import static java.time.LocalDate.ofInstant;
 import static java.time.ZoneOffset.UTC;
 
 @Component

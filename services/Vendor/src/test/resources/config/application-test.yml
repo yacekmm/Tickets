@@ -8,11 +8,3 @@ logging:
     state.change.logger: ${logging.test-level}
     org.springframework.kafka.listener: ${logging.test-level}
     org.apache.zookeeper: ${logging.test-level}
-
-#spring:
-#  kafka:
-#    consumer:
-#      properties:
-#        "key.serializer": "org.springframework.kafka.support.serializer.JsonSerializer"
-#        "key.deserializer": "org.springframework.kafka.support.serializer.JsonDeserializer"
-#      group-id: groupId

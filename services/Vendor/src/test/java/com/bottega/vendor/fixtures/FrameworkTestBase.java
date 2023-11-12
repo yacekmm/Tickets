@@ -7,7 +7,7 @@ import java.util.concurrent.*;
 import com.bottega.vendor.concert.domain.ConcertFixtures;
 import org.apache.commons.logging.*;
 import org.apache.groovy.util.Maps;
-import org.apache.kafka.clients.admin.*;
+import org.apache.kafka.clients.admin.AdminClient;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.junit.jupiter.api.*;
@@ -18,16 +18,15 @@ import org.springframework.cloud.contract.verifier.converter.YamlContract;
 import org.springframework.cloud.contract.verifier.messaging.MessageVerifierReceiver;
 import org.springframework.cloud.contract.verifier.messaging.boot.AutoConfigureMessageVerifier;
 import org.springframework.context.annotation.*;
-import org.springframework.kafka.annotation.*;
+import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.support.*;
 import org.springframework.messaging.*;
 import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.test.context.*;
 import org.testcontainers.containers.KafkaContainer;
-import org.testcontainers.junit.jupiter.*;
+import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
-
 import static com.bottega.sharedlib.config.CdcStubs.CDC_STUB_ID_PRICING;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.DEFINED_PORT;
 import static org.springframework.cloud.contract.stubrunner.spring.StubRunnerProperties.StubsMode.LOCAL;
@@ -36,7 +35,6 @@ import static org.testcontainers.shaded.org.awaitility.Awaitility.await;
 @SpringBootTest(webEnvironment = DEFINED_PORT)
 @ActiveProfiles({"test"})
 @AutoConfigureStubRunner(ids = CDC_STUB_ID_PRICING, stubsMode = LOCAL)
-//@EmbeddedKafka(partitions = 1, topics = { "vendor.concert" }, brokerProperties = { "listeners=PLAINTEXT://localhost:19092", "port=19092" })
 @Testcontainers
 @AutoConfigureMessageVerifier
 public class FrameworkTestBase {
@@ -46,7 +44,7 @@ public class FrameworkTestBase {
     static AdminClient kafkaAdmin;
 
     static {
-        kafka = new KafkaContainer(DockerImageName.parse("confluentinc/cp-kafka:7.4.3"));//.withEmbeddedZookeeper();
+        kafka = new KafkaContainer(DockerImageName.parse("confluentinc/cp-kafka:7.4.3"));
         kafka.start();
     }
 

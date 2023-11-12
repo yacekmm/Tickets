@@ -41,7 +41,6 @@
       <option name="RunConfigurationTask" enabled="true" run_configuration_name="Vendor unitTest" run_configuration_type="JUnit" />
       <option name="RunConfigurationTask" enabled="true" run_configuration_name="Vendor componentTest" run_configuration_type="JUnit" />
       <option name="RunConfigurationTask" enabled="true" run_configuration_name="Vendor dependencyTest" run_configuration_type="JUnit" />
-      <option name="RunConfigurationTask" enabled="true" run_configuration_name="Vendor apiTest" run_configuration_type="JUnit" />
     </method>
   </configuration>
 </component>
