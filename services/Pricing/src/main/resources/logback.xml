@@ -1,13 +1,13 @@
 <configuration>
 
-    <appender name="consoleLog" class="ch.qos.logback.core.ConsoleAppender" level="INFO">
+    <appender name="consoleLog" class="ch.qos.logback.core.ConsoleAppender">
             <encoder>
                 <pattern>%d{HH:mm:ss.SSS} %p [%t] %C{0}:%line: %m %n
                 </pattern>
             </encoder>
     </appender>
 
-    <root>
+    <root level="INFO">
         <appender-ref ref="consoleLog"/>
     </root>
 
