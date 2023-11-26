@@ -39,6 +39,7 @@ repositories {
 }
 
 apply from: file('gradle/spring-cloud-contract.gradle')
+apply from: file('gradle/test-suites.gradle')
 
 
 dependencies {
