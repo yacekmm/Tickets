@@ -4,6 +4,7 @@ import javax.annotation.Nullable;
 import java.util.*;
 import java.util.concurrent.*;
 
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,6 @@ import org.springframework.context.annotation.*;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.*;
-import org.springframework.kafka.support.converter.JsonMessageConverter;
 import org.springframework.messaging.*;
 import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.support.MessageBuilder;
@@ -26,10 +26,10 @@ public class KafkaContainerFixtures {
 
 
     @Autowired
-    private KafkaMessageVerifier kafkaMessageVerifier;
+    private KafkaReceiverVerifier kafkaReceiverVerifier;
 
     void beforeEach() {
-        kafkaMessageVerifier.reset();
+        kafkaReceiverVerifier.reset();
     }
 }
 
@@ -38,50 +38,38 @@ public class KafkaContainerFixtures {
 class TestConfig {
 
     @Bean
-    KafkaMessageVerifier kafkaTemplateMessageVerifier() {
-        return new KafkaMessageVerifier();
+    KafkaReceiverVerifier messageReceiverVerifier() {
+        return new KafkaReceiverVerifier();
     }
 
     @Bean
-    MessageVerifierSender<Message<?>> standaloneMessageVerifier(KafkaTemplate kafkaTemplate) {
-        return new MessageVerifierSender<>() {
-
-            @Override
-            public void send(Message<?> message, String destination, @Nullable YamlContract contract) {
-            }
-
-            @Override
-            public <T> void send(T payload, Map<String, Object> headers, String destination, @Nullable YamlContract contract) {
-                Map<String, Object> newHeaders = headers != null ? new HashMap<>(headers) : new HashMap<>();
-                newHeaders.put(KafkaHeaders.TOPIC, destination);
-                log.info("Sending: " + payload + destination);
-                kafkaTemplate.send(MessageBuilder.createMessage(payload, new MessageHeaders(newHeaders)));
-            }
-        };
-    }
-
-    @Bean
-    @Primary
-    JsonMessageConverter noopMessageConverter() {
-        return new NoopJsonMessageConverter();
-    }
-
-
-}
-
-class NoopJsonMessageConverter extends JsonMessageConverter {
-
-    NoopJsonMessageConverter() {
-    }
-
-    @Override
-    protected Object convertPayload(Message<?> message) {
-        return message.getPayload();
+    KafkaSenderVerifier messageSenderVerifier(KafkaTemplate kafkaTemplate) {
+        return new KafkaSenderVerifier(kafkaTemplate);
     }
 }
 
 @Slf4j
-class KafkaMessageVerifier implements MessageVerifierReceiver<Message<?>> {
+@AllArgsConstructor
+class KafkaSenderVerifier implements MessageVerifierSender {
+
+    private KafkaTemplate kafkaTemplate;
+
+    @Override
+    public void send(Object payload, Map headers, String destination, @org.jetbrains.annotations.Nullable YamlContract contract) {
+        Map<String, Object> newHeaders = headers != null ? new HashMap<>(headers) : new HashMap<>();
+        newHeaders.put(KafkaHeaders.TOPIC, destination);
+        log.info("Sending: " + payload + destination);
+        kafkaTemplate.send(MessageBuilder.createMessage(payload, new MessageHeaders(newHeaders)));
+    }
+
+    @Override
+    public void send(Object message, String destination, @org.jetbrains.annotations.Nullable YamlContract contract) {
+
+    }
+}
+
+@Slf4j
+class KafkaReceiverVerifier implements MessageVerifierReceiver<Message<?>> {
 
     Map<String, BlockingQueue<Message<?>>> broker = new ConcurrentHashMap<>();
 
