@@ -24,10 +24,10 @@ public class KafkaContainerFixtures {
 
 
     @Autowired
-    private KafkaMessageVerifier kafkaMessageVerifier;
+    private KafkaReceiverVerifier kafkaReceiverVerifier;
 
     void beforeEach() {
-        kafkaMessageVerifier.reset();
+        kafkaReceiverVerifier.reset();
     }
 }
 
@@ -35,16 +35,16 @@ public class KafkaContainerFixtures {
 class TestConfig {
 
     @Bean
-    KafkaMessageVerifier kafkaTemplateMessageVerifier() {
-        return new KafkaMessageVerifier();
+    KafkaReceiverVerifier kafkaReceiverVerifier() {
+        return new KafkaReceiverVerifier();
     }
 
 }
 
 
-class KafkaMessageVerifier implements MessageVerifierReceiver<Message<?>> {
+class KafkaReceiverVerifier implements MessageVerifierReceiver<Message<?>> {
 
-    private static final Log LOG = LogFactory.getLog(KafkaMessageVerifier.class);
+    private static final Log LOG = LogFactory.getLog(KafkaReceiverVerifier.class);
 
     Map<String, BlockingQueue<Message<?>>> broker = new ConcurrentHashMap<>();
 
