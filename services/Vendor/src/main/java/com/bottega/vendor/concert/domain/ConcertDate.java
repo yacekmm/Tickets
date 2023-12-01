@@ -1,13 +1,12 @@
 package com.bottega.vendor.concert.domain;
 
+import java.time.*;
+
 import com.bottega.sharedlib.ddd.ValueObject;
 import com.bottega.sharedlib.vo.error.ErrorResult;
 import io.vavr.control.*;
+import jakarta.persistence.*;
 import lombok.*;
-
-import javax.persistence.*;
-import java.time.*;
-
 import static com.bottega.sharedlib.vo.error.ErrorResult.badRequest;
 import static com.bottega.vendor.concert.api.app.ConcertErrorCode.invalid_date;
 import static java.time.ZoneOffset.UTC;

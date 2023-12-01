@@ -1,5 +1,7 @@
 package com.bottega.pricing.price.api.app;
 
+import java.util.List;
+
 import com.bottega.pricing.price.domain.ItemPrice;
 import com.bottega.pricing.price.infra.repo.ItemPriceRepo;
 import com.bottega.pricing.priceRead.api.app.PriceUpdateService;
@@ -9,10 +11,7 @@ import com.bottega.sharedlib.vo.Money;
 import com.bottega.sharedlib.vo.error.ErrorResult;
 import io.vavr.control.Either;
 import lombok.AllArgsConstructor;
-
-import javax.transaction.Transactional;
-import java.util.List;
-
+import org.springframework.transaction.annotation.Transactional;
 import static com.bottega.pricing.price.domain.PriceFactorFactory.percentageFactor;
 import static com.bottega.pricing.price.domain.PricingEventFactory.priceChange;
 import static com.bottega.sharedlib.vo.error.ErrorResult.notFound;

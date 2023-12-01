@@ -1,8 +1,8 @@
 package com.bottega.vendor.concert.domain;
 
 import com.bottega.sharedlib.repo.AggregateId;
+import jakarta.persistence.Embeddable;
 
-import javax.persistence.Embeddable;
 
 @Embeddable
 public class CategoryId extends AggregateId {

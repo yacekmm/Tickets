@@ -1,11 +1,10 @@
 package com.bottega.sharedlib.repo;
 
-import lombok.*;
-
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.UUID;
 
+import jakarta.persistence.*;
+import lombok.*;
 import static lombok.AccessLevel.PROTECTED;
 
 @NoArgsConstructor

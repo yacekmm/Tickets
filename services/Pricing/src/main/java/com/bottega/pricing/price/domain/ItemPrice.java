@@ -1,16 +1,15 @@
 package com.bottega.pricing.price.domain;
 
+import java.util.*;
+
 import com.bottega.sharedlib.ddd.AggregateRoot;
 import com.bottega.sharedlib.repo.*;
 import com.bottega.sharedlib.vo.Money;
+import jakarta.persistence.*;
 import lombok.*;
-
-import javax.persistence.*;
-import java.util.*;
-
 import static com.bottega.sharedlib.repo.MoneyDbEntity.from;
-import static javax.persistence.CascadeType.ALL;
-import static javax.persistence.FetchType.LAZY;
+import static jakarta.persistence.CascadeType.ALL;
+import static jakarta.persistence.FetchType.LAZY;
 import static lombok.AccessLevel.NONE;
 
 @AggregateRoot

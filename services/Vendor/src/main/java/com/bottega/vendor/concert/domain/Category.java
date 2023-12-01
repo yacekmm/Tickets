@@ -2,9 +2,9 @@ package com.bottega.vendor.concert.domain;
 
 import com.bottega.sharedlib.ddd.DomainEntity;
 import com.bottega.sharedlib.repo.BaseEntity;
+import jakarta.persistence.*;
 import lombok.*;
 
-import javax.persistence.*;
 import java.util.*;
 
 import static lombok.AccessLevel.PRIVATE;

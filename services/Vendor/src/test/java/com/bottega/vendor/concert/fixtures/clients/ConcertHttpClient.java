@@ -1,5 +1,7 @@
 package com.bottega.vendor.concert.fixtures.clients;
 
+import java.time.*;
+
 import com.bottega.sharedlib.config.TestClockConfig;
 import com.bottega.vendor.concert.domain.ConcertId;
 import com.bottega.vendor.fixtures.TestBuilders;
@@ -7,10 +9,6 @@ import io.restassured.response.ValidatableResponse;
 import lombok.*;
 import org.apache.groovy.util.Maps;
 import org.springframework.stereotype.Component;
-
-import java.time.Instant;
-
-import static java.time.LocalDate.ofInstant;
 import static java.time.ZoneOffset.UTC;
 
 @Component
@@ -35,7 +33,7 @@ public class ConcertHttpClient {
         return builders.aRequestSpec()
                 .body(Maps.of(
                         "title", concertRequest.title,
-                        "date", ofInstant(concertRequest.date, UTC).toString(),
+                        "date", LocalDate.ofInstant(concertRequest.date, UTC).atStartOfDay().toLocalDate().toString(),
                         "vendorId", concertRequest.vendorId
                 ))
                 .post("/concert")

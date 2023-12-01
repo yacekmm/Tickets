@@ -170,3 +170,15 @@ Tickets
 │   └── vendor-ui
 └── SystemTests/TicketsTests                    // separate project holding E2E System Tests for Tickets
 ```
+
+# Branching and Tagging
+
+Complete solution is on the `main` branch. Training assignments are on `training_tags` branch. Latter branch has tags corresponding to the tasks and their steps, where part of code from `main` is missing and there's a room for exercising.
+
+All feature development is made in branches as follows:
+1. start new branch from `main`
+2. When finished, Issue PR to `main`, squashing commits.
+3. `training_tags` branch should be rebased on `main` to reflect new features in assignments.
+   - Important: on a regular rebase, tags are not moved. To reflect rebased changes and migrate tags, use https://github.com/maastiff/git-rebase-autotags
+   - check if hook is present in https://github.com/maastiff/git-rebase-autotags#locally-in-repository
+   - check if it is enabled as in https://github.com/maastiff/git-rebase-autotags#configure

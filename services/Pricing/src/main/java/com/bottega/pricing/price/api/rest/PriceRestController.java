@@ -1,13 +1,12 @@
 package com.bottega.pricing.price.api.rest;
 
+import java.util.List;
+
 import com.bottega.pricing.price.api.app.PriceService;
 import com.bottega.sharedlib.vo.error.ErrorResult;
 import lombok.AllArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-
-import javax.transaction.Transactional;
-import java.util.List;
-
 import static com.bottega.sharedlib.config.ApiVersions.V1;
 
 @RestController

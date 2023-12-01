@@ -2,25 +2,9 @@ spring:
   kafka:
     bootstrap-servers: localhost:9092
     consumer:
-      auto-offset-reset: earliest
       group-id: pricing
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
-
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
----
-
-spring.config.activate.on-profile: test
-
-spring:
-  kafka:
-    bootstrap-servers: localhost:19091
-#    consumer:
-#      auto-offset-reset: earliest
-#      group-id: bottega
-
-#
-test:
-  topic: pricing.price
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
