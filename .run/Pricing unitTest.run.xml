@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Pricing unitTest" type="JUnit" factoryName="JUnit">
-    <module name="Ticketing.services.Pricing.test" />
+    <module name="Tickets.services.Pricing.test" />
     <shortenClasspath name="ARGS_FILE" />
     <extension name="coverage">
       <pattern>

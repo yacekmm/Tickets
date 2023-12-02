@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Promoter dependencyTest" type="JUnit" factoryName="JUnit">
-    <module name="Ticketing.services.Promoter.test" />
+    <module name="Tickets.services.Promoter.test" />
     <shortenClasspath name="ARGS_FILE" />
     <extension name="coverage">
       <pattern>

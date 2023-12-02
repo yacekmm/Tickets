@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="SharedLib test --all" type="JUnit" factoryName="JUnit">
-    <module name="Ticketing.libs.SharedLib.test" />
+    <module name="Tickets.libs.SharedLib.test" />
     <extension name="coverage">
       <pattern>
         <option name="PATTERN" value="com.bottega.sharedlib" />
