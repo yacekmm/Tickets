@@ -1,14 +1,14 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Pricing dependencyTest" type="JUnit" factoryName="JUnit">
-    <module name="Tickets.services.Pricing.test" />
+    <module name="Ticketing.services.Pricing.test" />
     <shortenClasspath name="ARGS_FILE" />
     <extension name="coverage">
       <pattern>
-        <option name="PATTERN" value="com.bottega.vendor.concert.domain.*" />
+        <option name="PATTERN" value="com.bottega.pricing.concert.domain.*" />
         <option name="ENABLED" value="true" />
       </pattern>
     </extension>
-    <option name="PACKAGE_NAME" value="com.bottega.vendor.concert.domain" />
+    <option name="PACKAGE_NAME" value="com.bottega.pricing.concert.domain" />
     <option name="MAIN_CLASS_NAME" value="" />
     <option name="METHOD_NAME" value="" />
     <option name="TEST_OBJECT" value="pattern" />

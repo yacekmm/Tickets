@@ -1,10 +1,10 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Pricing test --all" type="JUnit" factoryName="JUnit">
-    <module name="Tickets.services.Pricing.contractTest" />
+    <module name="Ticketing.services.Pricing.test" />
     <shortenClasspath name="ARGS_FILE" />
     <extension name="coverage">
       <pattern>
-        <option name="PATTERN" value="com.bottega.vendor.concert.domain.*" />
+        <option name="PATTERN" value="com.bottega.pricing.concert.domain.*" />
         <option name="ENABLED" value="true" />
       </pattern>
     </extension>
@@ -18,10 +18,10 @@
     </patterns>
     <method v="2">
       <option name="Make" enabled="true" />
-      <option name="RunConfigurationTask" enabled="true" run_configuration_name="Pricing microTest" run_configuration_type="JUnit" />
       <option name="RunConfigurationTask" enabled="true" run_configuration_name="Pricing unitTest" run_configuration_type="JUnit" />
       <option name="RunConfigurationTask" enabled="true" run_configuration_name="Pricing componentTest" run_configuration_type="JUnit" />
       <option name="RunConfigurationTask" enabled="true" run_configuration_name="Pricing dependencyTest" run_configuration_type="JUnit" />
+      <option name="RunConfigurationTask" enabled="true" run_configuration_name="Pricing microTest" run_configuration_type="JUnit" />
       <option name="RunConfigurationTask" enabled="true" run_configuration_name="Pricing apiTest" run_configuration_type="JUnit" />
     </method>
   </configuration>

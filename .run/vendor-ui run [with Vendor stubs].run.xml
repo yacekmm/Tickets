@@ -1,7 +1,0 @@
-<component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="vendor-ui run [with Vendor stubs]" type="Multirun" separateTabs="true" reuseTabsWithFailures="false" startOneByOne="true" markFailedProcess="true" hideSuccessProcess="false" delayTime="3.0">
-    <runConfiguration name="vendor-ui run" type="npm" />
-    <runConfiguration name="Vendor run api-stubs" type="Shell Script" />
-    <method v="2" />
-  </configuration>
-</component>

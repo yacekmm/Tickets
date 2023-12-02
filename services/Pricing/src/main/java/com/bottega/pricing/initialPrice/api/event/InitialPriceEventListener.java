@@ -1,5 +1,7 @@
 package com.bottega.pricing.initialPrice.api.event;
 
+import java.util.Arrays;
+
 import com.bottega.pricing.initialPrice.InitialPriceService;
 import com.bottega.sharedlib.event.Event;
 import com.bottega.sharedlib.event.payload.ConcertCreatedEventPayload;
@@ -10,9 +12,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.messaging.Message;
 import org.springframework.stereotype.Component;
-
-import java.util.Arrays;
-
 import static java.util.stream.Collectors.toSet;
 
 @Component
@@ -24,7 +23,7 @@ public class InitialPriceEventListener {
     private final ObjectMapper objectMapper;
 
 
-    @KafkaListener(id = "concert-listener", topics = "vendor.concert")
+    @KafkaListener(id = "concert-listener", topics = "promoter.concert")
     public void listen(Message<String> message) {
 
         Try.of(() -> objectMapper.readValue(message.getPayload(), Event.class))

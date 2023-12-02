@@ -1,9 +1,9 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="SharedLib test --all" type="JUnit" factoryName="JUnit">
-    <module name="Tickets.libs.SharedLib.test" />
+    <module name="Ticketing.libs.SharedLib.test" />
     <extension name="coverage">
       <pattern>
-        <option name="PATTERN" value="com.bottega.vendor.concert.domain.*" />
+        <option name="PATTERN" value="com.bottega.sharedlib" />
         <option name="ENABLED" value="true" />
       </pattern>
     </extension>

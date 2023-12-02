@@ -1,8 +1,7 @@
 package com.bottega.pricing.config;
 
 import org.apache.kafka.clients.admin.NewTopic;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.*;
 import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.kafka.config.TopicBuilder;
 
@@ -12,7 +11,7 @@ public class KafkaConsumerConfig {
 
     @Bean
     public NewTopic concert(){
-        return TopicBuilder.name("vendor.concert").partitions(1).build();
+        return TopicBuilder.name("promoter.concert").partitions(1).build();
     }
 
     @Bean
