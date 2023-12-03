@@ -57,7 +57,7 @@ dependencies {
     implementation 'org.springframework.kafka:spring-kafka'
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
     implementation 'org.apache.commons:commons-lang3:3.12.0'
-    implementation 'io.vavr:vavr:0.10.2'
+    implementation 'io.vavr:vavr:0.10.4'
 
     testImplementation 'io.vavr:vavr-test:0.10.4'
 
