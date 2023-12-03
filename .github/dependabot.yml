@@ -5,32 +5,32 @@ updates:
   # vendor-ui
   - package-ecosystem: "npm"
     directory: "/services/promoter-ui"
-#    schedule:
-#      interval: "daily"
+    schedule:
+      interval: "daily"
 #      time: "04:30"
 #    open-pull-requests-limit: 0
 
   # Vendor
   - package-ecosystem: "gradle"
     directory: "/services/Promoter"
-#    schedule:
-#      interval: "daily"
+    schedule:
+      interval: "daily"
 #      time: "04:30"
 #    open-pull-requests-limit: 0
     
   # Pricing
   - package-ecosystem: "gradle"
     directory: "/services/Pricing"
-#    schedule:
-#      interval: "daily"
+    schedule:
+      interval: "daily"
 #      time: "04:30"
 #    open-pull-requests-limit: 0
     
   # SharedLib
   - package-ecosystem: "gradle"
     directory: "/libs/SharedLib"
-#    schedule:
-#      interval: "daily"
+    schedule:
+      interval: "daily"
 #      time: "04:30"
 #    open-pull-requests-limit: 0
     
@@ -38,7 +38,7 @@ updates:
   # TicketsTests
   - package-ecosystem: "gradle"
     directory: "/SystemTests/TicketingTests"
-#    schedule:
-#      interval: "daily"
+    schedule:
+      interval: "daily"
 #      time: "04:30"
 #    open-pull-requests-limit: 0
