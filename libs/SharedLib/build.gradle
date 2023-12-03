@@ -22,7 +22,7 @@ dependencies {
     implementation 'javax.persistence:javax.persistence-api:2.2'
 
     implementation 'org.apache.commons:commons-lang3:3.11'
-    implementation 'io.vavr:vavr:0.10.2'
+    implementation 'io.vavr:vavr:0.10.4'
 
     //lombok
     compileOnly 'org.projectlombok:lombok'
