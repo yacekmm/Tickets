@@ -4,7 +4,7 @@
 
 Ticketing system is a cutting-edge concert tickets selling platform with a revolutionary pricing algorithm and super friendly for Concert Promoters to sell their concerts with a remarkable profit.
 
-Please read full documentation here: [Tickets doc.pdf](https://drive.google.com/file/d/18jn20EdmDYWn8UeOI505hFEQaQbSXJnA/view?usp=sharing)
+Please read full documentation here: [Tickets doc.pdf](https://drive.google.com/file/d/1wHNTqUuKC_To8y9hnwEq6-izZE2G6eSh/view?usp=sharing)
 
 ## Purpose
 
@@ -14,7 +14,7 @@ The system is built as a training example for [Testing Microservices](https://bo
 
 The overall System consists of many microservices. This repository holds a subset of them, essential for Promoter to create concerts. High level architecture is below.
 
-![img.png](docs/TicketsArchitecture.png)
+![img.png](docs/TicketsArchitecture.jpg)
 
 # Importing to IDE
 
@@ -64,10 +64,6 @@ Tickets System consists of several services you need to run to see it working. S
 | Promoter     | `Promoter run`     | `./gradlew bootRun` from `Promoter/`                                    |
 | Pricing      | `Pricing run`      | `./gradlew bootRun` from `Pricing/`                                     |
 
-## Opening the GUI
-
-Open `http://localhost:4200` in your browser and enjoy!
-
 # Run and test configurations
 
 ## Gradle
@@ -89,7 +85,7 @@ Note: when running tests from IntelliJ, a small popup might appear asking which 
 - `apiTest`: runs suites suffixed with `apiTest` and `apiSpec`
 - `contractTest`: runs contract tests defined in `/src/contractTests/resources/contracts`
 
-Note: `SharedLib`, as an utils library, contains only `microTest`s,
+Note: `SharedLib`, as a utils library, contains only `microTest`s,
 
 #### Prerequisites
 
