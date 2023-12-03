@@ -1,0 +1,9 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Promoter run" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <module name="Tickets.services.Promoter.main" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="com.bottega.promoter.PromoterApplication" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

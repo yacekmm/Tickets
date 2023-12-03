@@ -3,11 +3,12 @@ plugins {
     id 'io.spring.dependency-management' version '1.0.15.RELEASE'
     id 'java'
     id 'groovy'
+    id 'idea'
 }
 
 group = 'com.bottega'
 version = '1.0.0'
-sourceCompatibility = '17'
+sourceCompatibility = '21'
 
 repositories {
     mavenCentral()
@@ -49,4 +50,8 @@ sourceSets {
             srcDirs = ['src/test/java']
         }
     }
+}
+
+task wrapper(type: Wrapper){
+    gradleVersion = '8.5'
 }

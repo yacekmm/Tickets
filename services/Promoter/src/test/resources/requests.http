@@ -1,0 +1,10 @@
+
+### Create Concert
+POST http://localhost:8080/api/v1/concert
+Content-Type: application/json
+
+{
+  "title": "some-title",
+  "dateTime": "2023-11-05T08:15:30-05:00",
+  "promoterId": "some-uuid"
+}

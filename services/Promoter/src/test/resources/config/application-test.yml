@@ -1,0 +1,10 @@
+server.port: ${services.promoter.port}
+
+logging:
+  test-level: OFF
+  level:
+    org.apache.kafka: ${logging.test-level}
+    kafka: ${logging.test-level}
+    state.change.logger: ${logging.test-level}
+    org.springframework.kafka.listener: ${logging.test-level}
+    org.apache.zookeeper: ${logging.test-level}

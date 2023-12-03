@@ -2,9 +2,9 @@
 
 ## Business goal
 
-Tickets system is a cutting-edge Concert tickets selling platform with a revolutionary pricing algorithm and super friendly for Concert organizers (called Vendors) to sell their concerts with a remarkable profit.
+Ticketing system is a cutting-edge concert tickets selling platform with a revolutionary pricing algorithm and super friendly for Concert Promoters to sell their concerts with a remarkable profit.
 
-Please read full documentation here: [Tickets doc.pdf](https://drive.google.com/file/d/18jn20EdmDYWn8UeOI505hFEQaQbSXJnA/view?usp=sharing)
+Please read full documentation here: [Tickets doc.pdf](https://drive.google.com/file/d/1wHNTqUuKC_To8y9hnwEq6-izZE2G6eSh/view?usp=sharing)
 
 ## Purpose
 
@@ -12,9 +12,9 @@ The system is built as a training example for [Testing Microservices](https://bo
 
 ## Architecture
 
-The overall System consists of many microservices. This repository holds a subset of them, essential for Vendors to create concerts. High level architecture is below.
+The overall System consists of many microservices. This repository holds a subset of them, essential for Promoter to create concerts. High level architecture is below.
 
-![img.png](docs/TicketsArchitecture.png)
+![img.png](docs/TicketsArchitecture.jpg)
 
 # Importing to IDE
 
@@ -28,7 +28,7 @@ Go to: `Settings -> Build, Execution Deployment -> Build Tools -> Gradle` and se
 
 ## Publish Spring Cloud Contracts
 
-Some tests expect External services stubs managed by Spring Cloud Contract so those might fail until contracts are published to local maven repository because of AetherStubDownloader cannot download stubs. To publish contracts execute: `./gradlew publishToMavenLocal` in `Tickets/` or run IntelliJ configs named `Vendor/Pricing contract publish`
+Some tests expect External services stubs managed by Spring Cloud Contract so those might fail until contracts are published to local maven repository because of AetherStubDownloader cannot download stubs. To publish contracts execute: `./gradlew publishToMavenLocal` in `Tickets/` or run IntelliJ configs named `Promoter/Pricing contract publish`
 
 
 ## Verify after import
@@ -57,16 +57,12 @@ Dependency, Api, Contract, GUI, System)
 
 Tickets System consists of several services you need to run to see it working. See running instructions below:
 
-| Service    | IntelliJ Idea task | Manual command                                                          |
-|------------|--------------------|-------------------------------------------------------------------------|
-| Kafka      | `kafka run`        | run `docker-compose.yml` using `docker compose up` under `infra/kafka/` |
-| Vendor GUI | `vendor-ui run`    | `ng serve` from `vendor-ui/`                                            |
-| Vendor     | `Vendor run`       | `./gradlew bootRun` from `Vendor/`                                      |
-| Pricing    | `Pricing run`      | `./gradlew bootRun` from `Pricing/`                                     |
-
-## Opening the GUI
-
-Open `http://localhost:4200` in your browser and enjoy!
+| Service      | IntelliJ Idea task | Manual command                                                          |
+|--------------|--------------------|-------------------------------------------------------------------------|
+| Kafka        | `kafka run`        | run `docker-compose.yml` using `docker compose up` under `infra/kafka/` |
+| Promoter GUI | `promoter-ui run`  | `ng serve` from `promoter-ui/`                                          |
+| Promoter     | `Promoter run`     | `./gradlew bootRun` from `Promoter/`                                    |
+| Pricing      | `Pricing run`      | `./gradlew bootRun` from `Pricing/`                                     |
 
 # Run and test configurations
 
@@ -79,7 +75,7 @@ Tasks available for Tests are as follows
 
 Note: when running tests from IntelliJ, a small popup might appear asking which test task to execute (test, micro, unit, ...) - always select `test`, which runs all test levels
 
-### Running `Vendor`, `Pricing` and `SharedLib`
+### Running `Promoter`, `Pricing` and `SharedLib`
 
 - `bootRun`: starts the service
 - `microTest`: runs suites suffixed with `microTest` and `microSpec`
@@ -89,14 +85,14 @@ Note: when running tests from IntelliJ, a small popup might appear asking which 
 - `apiTest`: runs suites suffixed with `apiTest` and `apiSpec`
 - `contractTest`: runs contract tests defined in `/src/contractTests/resources/contracts`
 
-Note: `SharedLib`, as an utils library, contains only `microTest`s,
+Note: `SharedLib`, as a utils library, contains only `microTest`s,
 
 #### Prerequisites
 
 Installed:
 
 - gradle
-- JDK 17+
+- JDK 21+
 - IDE (recommended: IntelliJ Idea)
 - git
 - docker
@@ -104,12 +100,12 @@ Installed:
 
 Operating System: Ubuntu (recommended). `Tickets` is also ready to run on Mac and Windows, however docker on Windows is unpredictable.
 
-### Running `vendor-ui`
+### Running `promoter-ui`
 
 As an Angular project the task config is different here.
 
 - `ng serve`: runs app on under `localhost:4200`
-- `protractor conf.js` executes isolated GUI tests on `vendor-ui`. Note: execute from `services/vendor-ui/src/e2e`
+- `protractor conf.js` executes isolated GUI tests on `promoter-ui`. Note: execute from `services/promoter-ui/src/e2e`
 
 #### Prerequisites
 
@@ -120,9 +116,9 @@ Installed:
 - Protractor `npm install -g protractor`
 - Chrome Browser
 
-Before start, install node dependencies by running `npm install` from `services/vendor-ui`
+Before start, install node dependencies by running `npm install` from `services/promoter-ui`
 
-### Running `TicketsTests`
+### Running `TicketingTests`
 
 The project holds System Tests only, all under `src/test` with gradle task:
 
@@ -137,13 +133,13 @@ Some run configurations are using [Multirun plugin](https://plugins.jetbrains.co
 
 # Tests
 
-## `Pricing` and `Vendor` Microservices
+## `Pricing` and `Promoter` Microservices
 
 - All internal tests are under `src/test/java`
 - Contracts are under `src/contractTest/resources`
 - Generated contract tests are in `build/generated-test-sources/contractTest`
 
-## `vendor-ui`
+## `promoter-ui`
 
 Protractor tests are located under `src/e2e/test`
 
@@ -151,9 +147,9 @@ Protractor tests are located under `src/e2e/test`
 
 - All tests are under `src/test/java`
 
-# Vendor API Stubs
+# Promoter API Stubs
 
-To start Vendor Stub, based on Contract tests, see [README](services/Vendor/api-stubs/README.MD)
+To start Promoter Stub, based on Contract tests, see [README](services/Promoter/api-stubs/README.MD)
 
 # Project Structure
 
@@ -165,10 +161,10 @@ Tickets
 └── libs/SharedLib                              // Java library embedded in services
 └── services                                    // Microservices building up Tickets system
 │   └── Pricing
-│   └── Vendor
-|       └── api-stubs/run-contract-stubs.sh     // execute to run Vendor API Stubs based on Contract Tests to test vendor-ui
-│   └── vendor-ui
-└── SystemTests/TicketsTests                    // separate project holding E2E System Tests for Tickets
+│   └── Promoter
+|       └── api-stubs/run-contract-stubs.sh     // execute to run Promoter API Stubs based on Contract Tests to test promoter-ui
+│   └── promoter-ui
+└── SystemTests/TicketingTests                    // separate project holding E2E System Tests for Ticketing
 ```
 
 # Branching and Tagging

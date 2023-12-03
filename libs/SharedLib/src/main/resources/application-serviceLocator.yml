@@ -1,8 +1,8 @@
 services:
   request-timeout-in-seconds: 3
-  vendor:
+  promoter:
     port: 8080
-    url: http://localhost:${services.vendor.port}/
+    url: http://localhost:${services.promoter.port}/
   pricing:
     port: 8081
     url: http://localhost:${services.pricing.port}/
@@ -12,7 +12,7 @@ services:
 spring.config.activate.on-profile: test
 
 services:
-  vendor:
+  promoter:
     port: 8180
   pricing:
     port: 8181

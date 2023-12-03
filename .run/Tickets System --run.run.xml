@@ -1,9 +1,0 @@
-<component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Tickets System --run" type="Multirun" separateTabs="true" reuseTabsWithFailures="false" startOneByOne="true" markFailedProcess="true" hideSuccessProcess="false" delayTime="3.0">
-    <runConfiguration name="Kafka run" type="Docker" />
-    <runConfiguration name="vendor-ui run" type="npm" />
-    <runConfiguration name="Pricing run" type="Spring Boot" />
-    <runConfiguration name="Vendor run" type="Spring Boot" />
-    <method v="2" />
-  </configuration>
-</component>

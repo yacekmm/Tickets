@@ -1,8 +1,8 @@
 rootProject.name = 'Tickets'
-include ':libs:SharedLib', ':services:Vendor', ':services:Pricing', ':SystemTests:TicketsTests'
+include ':libs:SharedLib', ':services:Promoter', ':services:Pricing', ':SystemTests:TicketingTests'
 
 project(":libs:SharedLib").name = "SharedLib"
-project(":services:Vendor").name = "Vendor"
+project(":services:Promoter").name = "Promoter"
 project(":services:Pricing").name = "Pricing"
-project(':SystemTests:TicketsTests').name = 'TicketsTests'
+project(':SystemTests:TicketingTests').name = 'TicketingTests'
 

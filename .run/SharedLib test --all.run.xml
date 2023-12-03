@@ -3,7 +3,7 @@
     <module name="Tickets.libs.SharedLib.test" />
     <extension name="coverage">
       <pattern>
-        <option name="PATTERN" value="com.bottega.vendor.concert.domain.*" />
+        <option name="PATTERN" value="com.bottega.sharedlib" />
         <option name="ENABLED" value="true" />
       </pattern>
     </extension>
