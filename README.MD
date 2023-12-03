@@ -92,7 +92,7 @@ Note: `SharedLib`, as a utils library, contains only `microTest`s,
 Installed:
 
 - gradle
-- JDK 17+
+- JDK 21+
 - IDE (recommended: IntelliJ Idea)
 - git
 - docker
