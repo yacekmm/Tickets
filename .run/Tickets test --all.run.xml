@@ -1,6 +1,7 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Tickets test --all" type="JUnit" factoryName="JUnit">
     <module name="Tickets.services.Pricing.test" />
+    <shortenClasspath name="ARGS_FILE" />
     <extension name="coverage">
       <pattern>
         <option name="PATTERN" value="com.bottega.promoter.concert.domain.*" />
