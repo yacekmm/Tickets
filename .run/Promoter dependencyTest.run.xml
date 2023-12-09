@@ -18,6 +18,7 @@
     </patterns>
     <method v="2">
       <option name="Make" enabled="true" />
+      <option name="RunConfigurationTask" enabled="true" run_configuration_name="Pricing contract publish" run_configuration_type="GradleRunConfiguration" />
     </method>
   </configuration>
 </component>
