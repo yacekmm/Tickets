@@ -18,11 +18,7 @@
     </patterns>
     <method v="2">
       <option name="Make" enabled="true" />
-      <option name="RunConfigurationTask" enabled="true" run_configuration_name="Pricing unitTest" run_configuration_type="JUnit" />
-      <option name="RunConfigurationTask" enabled="true" run_configuration_name="Pricing componentTest" run_configuration_type="JUnit" />
-      <option name="RunConfigurationTask" enabled="true" run_configuration_name="Pricing dependencyTest" run_configuration_type="JUnit" />
-      <option name="RunConfigurationTask" enabled="true" run_configuration_name="Pricing microTest" run_configuration_type="JUnit" />
-      <option name="RunConfigurationTask" enabled="true" run_configuration_name="Pricing apiTest" run_configuration_type="JUnit" />
+      <option name="RunConfigurationTask" enabled="true" run_configuration_name="Promoter contract publish" run_configuration_type="GradleRunConfiguration" />
     </method>
   </configuration>
 </component>
