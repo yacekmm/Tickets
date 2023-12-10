@@ -94,6 +94,7 @@ dependencies {
     testImplementation 'org.testcontainers:kafka'
     testImplementation 'org.testcontainers:postgresql'
     testImplementation 'org.awaitility:awaitility:4.2.0'
+    testImplementation 'au.com.dius.pact.consumer:junit5:4.5.3'
 }
 
 dependencyManagement {

@@ -20,7 +20,7 @@ import static org.testcontainers.shaded.org.awaitility.Awaitility.await;
 
 @SpringBootTest(webEnvironment = DEFINED_PORT)
 @ActiveProfiles({"test"})
-@AutoConfigureStubRunner(ids = CDC_STUB_ID_PRICING, stubsMode = LOCAL)
+//@AutoConfigureStubRunner(ids = CDC_STUB_ID_PRICING, stubsMode = LOCAL)
 @Testcontainers
 @Slf4j
 public class FrameworkTestBase {
