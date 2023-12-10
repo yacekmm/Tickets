@@ -5,7 +5,7 @@ import org.apache.groovy.util.Maps;
 import org.apache.kafka.clients.admin.AdminClient;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.junit.jupiter.api.*;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.*;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.cloud.contract.stubrunner.spring.AutoConfigureStubRunner;
 import org.springframework.test.context.*;
@@ -32,6 +32,7 @@ public class FrameworkTestBase {
         kafka = new KafkaContainer(DockerImageName.parse("confluentinc/cp-kafka:7.4.3"));
         kafka.start();
     }
+    @Value("${server.port}") int port;
 
     @Autowired
     protected SharedFixtures sharedFixtures;
@@ -57,7 +58,7 @@ public class FrameworkTestBase {
     }
 
     @BeforeEach
-    void beforeEach() {
+    public void beforeEach() {
         kafkaContainerFixtures.beforeEach();
     }
 

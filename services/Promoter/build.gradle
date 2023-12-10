@@ -107,3 +107,5 @@ dependencyManagement {
 task wrapper(type: Wrapper){
     gradleVersion = '8.5'
 }
+
+//docker run --rm -v ${PWD}:/usr/lib/Tickets/ -w /usr/lib/Tickets/services/Promoter pactfoundation/pact-cli:latest pact-broker publish build/pacts --broker-base-url https://jacek.pactflow.io --broker-token _3OueOshqrE-c5B-5LIu1g --consumer-app-version 1.0.0

@@ -178,3 +178,9 @@ All feature development is made in branches as follows:
    - Important: on a regular rebase, tags are not moved. To reflect rebased changes and migrate tags, use https://github.com/maastiff/git-rebase-autotags
    - check if hook is present in https://github.com/maastiff/git-rebase-autotags#locally-in-repository
    - check if it is enabled as in https://github.com/maastiff/git-rebase-autotags#configure
+
+# Open API Docs
+
+Auto generated Open API Docs are available under:
+- json: `http://localhost:{port}/v3/api-docs`
+- yaml: `http://localhost:{port}/v3/api-docs.yaml`

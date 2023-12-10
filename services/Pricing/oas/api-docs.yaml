@@ -1,0 +1,64 @@
+openapi: 3.0.1
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+- url: http://localhost:8081
+  description: Generated server url
+paths:
+  /api/v1/item/{itemId}/price-factor/percentage:
+    post:
+      tags:
+      - price-rest-controller
+      operationId: applyPercentageFactor
+      parameters:
+      - name: itemId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PercentageFactorRequestDto'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PriceWithFactorsDto'
+components:
+  schemas:
+    PercentageFactorRequestDto:
+      type: object
+      properties:
+        percentage:
+          type: integer
+          format: int32
+    PriceFactorDto:
+      type: object
+      properties:
+        type:
+          type: string
+        value:
+          type: integer
+          format: int32
+    PriceWithFactorsDto:
+      type: object
+      properties:
+        priceId:
+          type: string
+        itemId:
+          type: string
+        price:
+          type: integer
+          format: int32
+        factors:
+          type: array
+          items:
+            $ref: '#/components/schemas/PriceFactorDto'

@@ -4,7 +4,7 @@ import java.util.Map;
 
 import au.com.dius.pact.consumer.dsl.PactDslWithProvider;
 import au.com.dius.pact.consumer.junit5.*;
-import au.com.dius.pact.core.model.V4Pact;
+import au.com.dius.pact.core.model.*;
 import au.com.dius.pact.core.model.annotations.Pact;
 import com.bottega.promoter.concert.domain.Concert;
 import com.bottega.promoter.fixtures.FrameworkTestBase;
@@ -15,11 +15,11 @@ import static org.apache.http.HttpStatus.SC_OK;
 import static org.hamcrest.Matchers.*;
 
 @ExtendWith(PactConsumerTestExt.class)
-@PactTestFor(providerName = "Tickets.Pricing", port = "8181")
+@PactTestFor(providerName = "Tickets.Pricing", port = "8181", pactVersion = PactSpecVersion.V3)
 public class ConcertRestController_discountConcert_restApiTest extends FrameworkTestBase {
 
     @Pact(provider = "Tickets.Pricing", consumer = "Tickets.Promoter")
-    public V4Pact createPact(PactDslWithProvider builder) {
+    public RequestResponsePact createPact(PactDslWithProvider builder) {
 
         return builder
                 .given("price for item exists", "itemId", "123")
@@ -41,13 +41,14 @@ public class ConcertRestController_discountConcert_restApiTest extends Framework
                             "price": 9000,
                             "factors": [
                               {
-                                "percentage": 10
+                                "type": "PERCENTAGE",
+                                "value": 10
                               }
                             ]
                           }
                         ]
                         """)
-                .toPact(V4Pact.class);
+                .toPact();
     }
 
     @Test

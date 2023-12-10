@@ -8,6 +8,8 @@ sourceSets {
 
 tasks.withType(Test) {
     useJUnitPlatform()
+
+    systemProperty("pact.verifier.publishResults", "true")
 }
 
 task microTest(type: Test) {
