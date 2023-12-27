@@ -26,16 +26,14 @@ Gradle has a bug, and it executes tests slowly. Use IntelliJ Idea for build and 
 
 Go to: `Settings -> Build, Execution Deployment -> Build Tools -> Gradle` and set `Build and Run using` and `Run tests using` to value: `IntelliJ Idea` (not Gradle)
 
-## Publish Spring Cloud Contracts
+## Setup Contract tests
 
-Some tests expect External services stubs managed by Spring Cloud Contract so those might fail until contracts are published to local maven repository because of AetherStubDownloader cannot download stubs. Read how to [publish contracts](#scc).
+Contract tests require additional setup on your machine to run. Read how to [configure contract tests](#contract-tests).
 
 
 ## Verify after import
 
 Execute tests to check if the system is working on your machine and tests are green: `Tickets test --all` or `./gradlew test`
-
-Note: tests named `pactVerificationTestTemplate` are contract tests, and they will be failing on your machine as they require secret token to PACT Broker. Secret will be provided to you on the training. You can ignore those failures for now.
 
 Reach me out in case of any difficulties.
 
@@ -147,15 +145,19 @@ Protractor tests are located under `src/e2e/test`
 
 - All tests are under `src/test/java`
 
-## Contract tests
+## <a name="contract-tests"></a>Contract tests
 
-Two tools for contract testing are implemented: Spring Cloud Contract and PACT
+Two tools for contract testing are implemented: `Spring Cloud Contract` and `PACT`. Contract testing requires additional infrastructure so it is not runnable by default. To make contract tests green, follow instructions below.
 
-### <a name="scc"></a>Spring Cloud Contract 
+### Spring Cloud Contract 
 
-Spring Cloud Contracts [SCC] uses local maven repository to publish contracts defined in sources. If producer contracts are missing in local repository, the consumer tests may fail. To publish contracts execute `./gradlew publishToMavenLocal` in `Tickets/` or run IntelliJ configs named `Promoter/Pricing contract publish`.
+Spring Cloud Contracts [SCC] uses local maven repository to publish contracts defined in sources. If producer contracts are missing in local repository, the consumer tests may fail because of `AetherStubDownloader` cannot download stubs. 
+
+To publish contracts execute `./gradlew publishToMavenLocal` in `Tickets/` or run IntelliJ configs named `Promoter/Pricing contract publish`.
 
 ### Pact
+
+Tests named `pactVerificationTestTemplate` are contract tests, and they will be failing on your machine as they require secret token to PACT Broker. Secret will be provided to you later. You can ignore those failures for now.
 
 There are Consumer, Provider and Pact Broker contracts verified using Pact Flow. Contract tests are fired like any other Framework Tests. There are additional steps for publishing pact verification results:
 - consumer: `./gradlew pactPublish` (update pact `consumerVersion` if needed in `build.gradle`)
