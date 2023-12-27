@@ -28,7 +28,7 @@ Go to: `Settings -> Build, Execution Deployment -> Build Tools -> Gradle` and se
 
 ## Publish Spring Cloud Contracts
 
-Some tests expect External services stubs managed by Spring Cloud Contract so those might fail until contracts are published to local maven repository because of AetherStubDownloader cannot download stubs. To publish contracts execute: `./gradlew publishToMavenLocal` in `Tickets/` or run IntelliJ configs named `Promoter/Pricing contract publish` [link](#SCC)
+Some tests expect External services stubs managed by Spring Cloud Contract so those might fail until contracts are published to local maven repository because of AetherStubDownloader cannot download stubs. Read how to [publish contracts](#scc).
 
 
 ## Verify after import
@@ -149,7 +149,11 @@ Protractor tests are located under `src/e2e/test`
 
 ## Contract tests
 
-### <a name="pookie"></a>Spring Cloud Contract 
+Two tools for contract testing are implemented: Spring Cloud Contract and PACT
+
+### <a name="scc"></a>Spring Cloud Contract 
+
+Spring Cloud Contracts [SCC] uses local maven repository to publish contracts defined in sources. If producer contracts are missing in local repository, the consumer tests may fail. To publish contracts execute `./gradlew publishToMavenLocal` in `Tickets/` or run IntelliJ configs named `Promoter/Pricing contract publish`.
 
 ### Pact
 
@@ -194,5 +198,3 @@ All feature development is made in branches as follows:
 Auto generated Open API Docs are available under:
 - json: `http://localhost:{port}/v3/api-docs`
 - yaml: `http://localhost:{port}/v3/api-docs.yaml`
-
-[pookie](#pookie)
