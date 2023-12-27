@@ -32,7 +32,6 @@ public class FrameworkTestBase {
         kafka = new KafkaContainer(DockerImageName.parse("confluentinc/cp-kafka:7.4.3"));
         kafka.start();
     }
-    @Value("${server.port}") int port;
 
     @Autowired
     protected SharedFixtures sharedFixtures;

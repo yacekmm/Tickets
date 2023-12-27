@@ -33,9 +33,9 @@ Some tests expect External services stubs managed by Spring Cloud Contract so th
 
 ## Verify after import
 
-Execute tests to check if the system is working on your machine and tests are green.
+Execute tests to check if the system is working on your machine and tests are green: `Tickets test --all` or `./gradlew test`
 
-I suggest running IntelliJ task `Tickets test --all` to run all kinds of tests in the system. Alternatively you can run `./gradlew test` for all the services. Follow this doc to find out details.
+Note: tests named `pactVerificationTestTemplate` are contract tests, and they will be failing on your machine as they require secret token to PACT Broker. Secret will be provided to you on the training. You can ignore those failures for now.
 
 Reach me out in case of any difficulties.
 

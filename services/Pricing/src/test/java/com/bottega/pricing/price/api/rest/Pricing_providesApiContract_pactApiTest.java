@@ -6,18 +6,24 @@ import au.com.dius.pact.provider.junitsupport.loader.*;
 import com.bottega.pricing.fixtures.FrameworkTestBase;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.boot.info.GitProperties;
 
 @Provider("Tickets.Pricing")
-@PactBroker(scheme = "https", host = "jacek.pactflow.io", authentication = @PactBrokerAuth(token = "_3OueOshqrE-c5B-5LIu1g"))
-public class PriceRestController_applyPercentageFactor_contractTest extends FrameworkTestBase {
+@PactBroker(url = "${PACT_BROKER_BASE_URL}", authentication = @PactBrokerAuth(token = "${PACT_BROKER_TOKEN}"))
+public class Pricing_providesApiContract_pactApiTest extends FrameworkTestBase {
 
     @Value("${server.port}") int port;
+
+    @Autowired
+    GitProperties gitProperties;
 
     @BeforeEach
     public void setupTestTarget(PactVerificationContext context) {
         super.beforeEach();
         context.setTarget(new HttpTestTarget("localhost", port));
+        System.setProperty("pact.verifier.publishResults", "true");
+        System.setProperty("pact.provider.version", gitProperties.getShortCommitId());
     }
 
     @TestTemplate
