@@ -153,19 +153,23 @@ Two tools for contract testing are implemented: `Spring Cloud Contract` and `PAC
 
 Spring Cloud Contracts [SCC] uses local maven repository to publish contracts defined in sources. If producer contracts are missing in local repository, the consumer tests may fail because of `AetherStubDownloader` cannot download stubs. 
 
+#### Publishing
+
 To publish contracts execute `./gradlew publishToMavenLocal` in `Tickets/` or run IntelliJ configs named `Promoter/Pricing contract publish`.
+
+#### Promoter API Stubs
+
+To start Promoter Stub, based on Contract tests, see [README](services/Promoter/api-stubs/README.MD)
 
 ### Pact
 
 Tests named `pactVerificationTestTemplate` are contract tests, and they will be failing on your machine as they require secret token to PACT Broker. Secret will be provided to you later. You can ignore those failures for now.
 
+#### Publishing
+
 There are Consumer, Provider and Pact Broker contracts verified using Pact Flow. Contract tests are fired like any other Framework Tests. There are additional steps for publishing pact verification results:
 - consumer: `./gradlew pactPublish` (update pact `consumerVersion` if needed in `build.gradle`)
 - provider: published automatically after verification, by setting `pact.verifier.publishResults` to `true` in `setupTestTarget`
-
-# Promoter API Stubs
-
-To start Promoter Stub, based on Contract tests, see [README](services/Promoter/api-stubs/README.MD)
 
 # Project Structure
 
