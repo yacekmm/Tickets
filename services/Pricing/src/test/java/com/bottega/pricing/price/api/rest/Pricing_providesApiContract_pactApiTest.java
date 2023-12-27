@@ -22,7 +22,7 @@ public class Pricing_providesApiContract_pactApiTest extends FrameworkTestBase {
     public void setupTestTarget(PactVerificationContext context) {
         super.beforeEach();
         context.setTarget(new HttpTestTarget("localhost", port));
-        System.setProperty("pact.verifier.publishResults", "true");
+        System.setProperty("pact.verifier.publishResults", "true"); // Should only be enabled in CI.
         System.setProperty("pact.provider.version", gitProperties.getShortCommitId());
         System.setProperty("pact.provider.tag", gitProperties.getBranch());
     }
