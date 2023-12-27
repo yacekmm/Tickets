@@ -116,12 +116,6 @@ Installed:
 
 Before start, install node dependencies by running `npm install` from `services/promoter-ui`
 
-### Running `TicketingTests`
-
-The project holds System Tests only, all under `src/test` with gradle task:
-
-- `test`: runs tests against the Tickets System
-
 ## Run configs in IntelliJ Idea
 
 All the configurations listed above are also exported to this repo as an IntelliJ Idea configurations. They reside
@@ -134,16 +128,21 @@ Some run configurations are using [Multirun plugin](https://plugins.jetbrains.co
 ## `Pricing` and `Promoter` Microservices
 
 - All internal tests are under `src/test/java`
-- Contracts are under `src/contractTest/resources`
-- Generated contract tests are in `build/generated-test-sources/contractTest`
+- contract tests location is documented [here](#contract-tests)
 
 ## `promoter-ui`
 
 Protractor tests are located under `src/e2e/test`
 
-## `SharedLib` and `TicketsTests`
+## `SharedLib`
 
 - All tests are under `src/test/java`
+
+## `TicketingTests`
+
+The project holds System Tests only, all under `src/test` with gradle task:
+
+- `test`: runs tests against the Tickets System
 
 ## <a name="contract-tests"></a>Contract tests
 
@@ -161,6 +160,10 @@ To publish contracts execute `./gradlew publishToMavenLocal` in `Tickets/` or ru
 
 To start Promoter Stub, based on Contract tests, see [README](services/Promoter/api-stubs/README.MD)
 
+#### Locations
+- Contracts are under `src/contractTest/resources`
+- Generated contract tests are in `build/generated-test-sources/contractTest`
+
 ### Pact
 
 Tests named `pactVerificationTestTemplate` are contract tests, and they will be failing on your machine as they require secret token to PACT Broker. Secret will be provided to you later. You can ignore those failures for now.
@@ -170,6 +173,11 @@ Tests named `pactVerificationTestTemplate` are contract tests, and they will be 
 There are Consumer, Provider and Pact Broker contracts verified using Pact Flow. Contract tests are fired like any other Framework Tests. There are additional steps for publishing pact verification results:
 - consumer: `./gradlew pactPublish` (update pact `consumerVersion` if needed in `build.gradle`)
 - provider: published automatically after verification, by setting `pact.verifier.publishResults` to `true` in `setupTestTarget`
+
+#### Locations
+
+- provider tests have suffix `pactApiTest`
+- consumer tests are annotated with `@PactTestFor`
 
 # Project Structure
 
