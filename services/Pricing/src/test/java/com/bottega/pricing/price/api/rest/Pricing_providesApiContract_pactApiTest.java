@@ -24,6 +24,7 @@ public class Pricing_providesApiContract_pactApiTest extends FrameworkTestBase {
         context.setTarget(new HttpTestTarget("localhost", port));
         System.setProperty("pact.verifier.publishResults", "true");
         System.setProperty("pact.provider.version", gitProperties.getShortCommitId());
+        System.setProperty("pact.provider.tag", gitProperties.getBranch());
     }
 
     @TestTemplate
