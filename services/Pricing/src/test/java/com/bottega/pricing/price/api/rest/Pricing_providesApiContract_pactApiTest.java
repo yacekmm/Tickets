@@ -35,7 +35,6 @@ public class Pricing_providesApiContract_pactApiTest extends FrameworkTestBase {
 
     @State("price for item exists")
     public void priceForItemDiscount() {
-        System.out.println("a price for item 123 exists");
         builders.aPrice().priceForItem(100_00, "123").inDb();
     }
 

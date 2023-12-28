@@ -1,11 +1,12 @@
 services:
-  request-timeout-in-seconds: 3
   promoter:
     port: 8080
-    url: http://localhost:${services.promoter.port}/
+    host: http://localhost
+    url: ${services.promoter.host}:${services.promoter.port}/
   pricing:
     port: 8081
-    url: http://localhost:${services.pricing.port}/
+    host: http://localhost
+    url: ${services.pricing.host}:${services.pricing.port}/
 
 ---
 
