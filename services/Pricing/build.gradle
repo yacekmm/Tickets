@@ -26,7 +26,6 @@ apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 apply plugin: 'spring-cloud-contract'
 apply plugin: 'maven-publish'
-//apply plugin: 'com.gorylenko.gradle-git-properties'// version '2.4.1'
 
 
 group = 'com.bottega'
@@ -115,12 +114,3 @@ dependencyManagement {
 task wrapper(type: Wrapper){
     gradleVersion = '8.5'
 }
-//
-//springBoot {
-//    buildInfo()
-//}
-
-//docker run --rm -v ${PWD}:/usr/lib/Tickets/ -w /usr/lib/Tickets/services/Pricing -e jacek.pactflow.io -e _3OueOshqrE-c5B-5LIu1g pactfoundation/pact-cli:latest pactflow publish-provider-contract oas/api-docs.yaml --provider "Tickets.Pricing" --provider-app-version 3a0994c --branch pact --content-type application/yaml --verification-exit-code=0 --verification-results-content-type text/plain --verifier postman --broker-base-url https://jacek.pactflow.io --broker-token _3OueOshqrE-c5B-5LIu1g
-
-//docker run --rm -v ${PWD}:/usr/lib/Tickets/ -w /usr/lib/Tickets/services/Pricing pactfoundation/pact-cli:latest pactflow publish-provider-contract oas/api-docs.yaml  --provider Tickets.Pricing --provider-app-version 0.1 --content-type application/yaml --broker-base-url https://jacek.pactflow.io --broker-token _3OueOshqrE-c5B-5LIu1g
-

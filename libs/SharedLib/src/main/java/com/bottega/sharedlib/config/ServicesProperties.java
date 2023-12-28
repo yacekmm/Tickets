@@ -14,7 +14,6 @@ public class ServicesProperties {
     private ServiceConfig pricing;
 
     public record ServiceConfig(
-            String url,
             String host,
             int port
     ){ }

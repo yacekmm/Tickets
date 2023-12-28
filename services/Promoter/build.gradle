@@ -116,15 +116,12 @@ pact {
 
     broker {
         pactBrokerUrl = System.getenv("PACT_BROKER_BASE_URL")
-
-        // OR to use a bearer token
         pactBrokerToken = System.getenv("PACT_BROKER_TOKEN")
     }
 
     publish {
         pactBrokerUrl = System.getenv("PACT_BROKER_BASE_URL")
         consumerVersion = "1.0.3"
-
     }
 
 }

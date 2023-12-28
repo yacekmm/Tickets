@@ -2,11 +2,9 @@ services:
   promoter:
     port: 8080
     host: http://localhost
-    url: ${services.promoter.host}:${services.promoter.port}/
   pricing:
     port: 8081
     host: http://localhost
-    url: ${services.pricing.host}:${services.pricing.port}/
 
 ---
 
