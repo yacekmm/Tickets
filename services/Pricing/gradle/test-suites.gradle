@@ -9,38 +9,3 @@ sourceSets {
 tasks.withType(Test) {
     useJUnitPlatform()
 }
-
-task microTest(type: Test) {
-    filter {
-        include '**/**MicroTest.class'
-        include '**/**MicroSpec.class'
-    }
-}
-
-task unitTest(type: Test) {
-    filter {
-        include '**/**UnitTest.class'
-        include '**/**UnitSpec.class'
-    }
-}
-
-task compTest(type: Test) {
-    filter {
-        include '**/**CompTest.class'
-        include '**/**CompSpec.class'
-    }
-}
-
-task depTest(type: Test) {
-    filter {
-        include '**/**DepTest.class'
-        include '**/**DepSpec.class'
-    }
-}
-
-task apiTest(type: Test) {
-    filter {
-        include '**/**ApiTest.class'
-        include '**/**ApiSpec.class'
-    }
-}

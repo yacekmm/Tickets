@@ -4,7 +4,7 @@
 
 Ticketing system is a cutting-edge concert tickets selling platform with a revolutionary pricing algorithm and super friendly for Concert Promoters to sell their concerts with a remarkable profit.
 
-Please read full documentation here: [Tickets doc.pdf](https://drive.google.com/file/d/1wHNTqUuKC_To8y9hnwEq6-izZE2G6eSh/view?usp=sharing)
+Full documentation here: [Tickets doc.pdf](https://drive.google.com/file/d/1wHNTqUuKC_To8y9hnwEq6-izZE2G6eSh/view?usp=sharing)
 
 ## Purpose
 
@@ -18,74 +18,59 @@ The overall System consists of many microservices. This repository holds a subse
 
 # Importing to IDE
 
+## How to import
+
 You should import the `Tickets/build.gradle` as a root project to your IDE.
 
-## Speed up test execution
+## Project Structure
 
-Gradle has a bug, and it executes tests slowly. Use IntelliJ Idea for build and test execution. 
+Important paths in project are:
 
-Go to: `Settings -> Build, Execution Deployment -> Build Tools -> Gradle` and set `Build and Run using` and `Run tests using` to value: `IntelliJ Idea` (not Gradle)
+```
+Tickets
+└── infra/kafka/docker-compose.yml              // Use to start Apache Kafka in docker on your machine
+└── libs/SharedLib                              // Java library embedded in services
+└── services                                    // Microservices in Tickets system
+│   └── Pricing
+│   └── Promoter
+|       └── api-stubs/run-contract-stubs.sh     // runs Promoter API Stubs based on Contract Tests to test promoter-ui
+│   └── promoter-ui
+└── SystemTests/TicketingTests                    // separate project holding E2E System Tests for Ticketing
+```
 
 ## Setup Contract tests
 
-Contract tests require additional setup on your machine to run. Read how to [configure contract tests](#contract-tests).
-
+Contract tests require additional setup on your machine to run. make sure you follow [contract tests configuration](#contract-tests).
 
 ## Verify after import
 
 Execute tests to check if the system is working on your machine and tests are green: `Tickets test --all` or `./gradlew test`
 
-Reach me out in case of any difficulties.
+## Speed up test execution
 
+Gradle has a bug, and it may execute tests slowly. Use IntelliJ Idea for build and test execution.
 
-## Known issues
+Go to: `Settings -> Build, Execution Deployment -> Build Tools -> Gradle` and set `Build and Run using` and `Run tests using` to value: `IntelliJ Idea` (not Gradle)
 
-On Windows, Kafka Docker in Test Container setup might be unstable or unpredictable. When you encounter this happening, just drop it for now. Make sure `unit`, and `Api` tests are green.
+# How to run the system
 
+Repository contains gradle and IntelliJ run configurations. IntelliJ configurations should be automatically imported once `Tickets` project is imported.
 
-# Running
+Some run configurations are using [Multirun plugin](https://plugins.jetbrains.com/plugin/7248-multirun) to start all microservices in the system. Consider installing it.
 
-Both Gradle and IntelliJ run configurations are available.
-
-Those are fine-grained configurations starting apps and executing tests on a desired level (Micro, Unit, Component,
-Dependency, Api, Contract, GUI, System)
-
-
-## Starting off the whole Tickets system
-
-Tickets System consists of several services you need to run to see it working. See running instructions below:
+To see the system working, start services:
 
 | Service      | IntelliJ Idea task | Manual command                                                          |
 |--------------|--------------------|-------------------------------------------------------------------------|
 | Kafka        | `kafka run`        | run `docker-compose.yml` using `docker compose up` under `infra/kafka/` |
-| Promoter GUI | `promoter-ui run`  | `ng serve` from `promoter-ui/`                                          |
+| Promoter GUI | `promoter-ui run`  | `ng serve` from `promoter-ui/` (starts on port 4200)                    |
 | Promoter     | `Promoter run`     | `./gradlew bootRun` from `Promoter/`                                    |
 | Pricing      | `Pricing run`      | `./gradlew bootRun` from `Pricing/`                                     |
 
-# Run and test configurations
 
-## Gradle
+# Prerequisites
 
-Execute gradle tasks by executing `./gradlew <task-name>`, where task names are defined
-in `services/<service>/gradle/test-suites.gradle`. To run all tests at once use task `test`
-
-Tasks available for Tests are as follows
-
-Note: when running tests from IntelliJ, a small popup might appear asking which test task to execute (test, micro, unit, ...) - always select `test`, which runs all test levels
-
-### Running `Promoter`, `Pricing` and `SharedLib`
-
-- `bootRun`: starts the service
-- `microTest`: runs suites suffixed with `microTest` and `microSpec`
-- `unitTest`: runs suites suffixed with `unitTest` and `unitSpec`
-- `compTest`: runs suites suffixed with `compTest` and `compSpec`
-- `depTest`: runs suites suffixed with `depTest` and `depSpec`
-- `apiTest`: runs suites suffixed with `apiTest` and `apiSpec`
-- `contractTest`: runs contract tests defined in `/src/contractTests/resources/contracts`
-
-Note: `SharedLib`, as a utils library, contains only `microTest`s,
-
-#### Prerequisites
+## Backend
 
 Installed:
 
@@ -95,17 +80,9 @@ Installed:
 - git
 - docker
 - docker compose
+- Operating System: Ubuntu, Mac, Windows. Note: docker on Windows can be unpredictable.
 
-Operating System: Ubuntu (recommended). `Tickets` is also ready to run on Mac and Windows, however docker on Windows is unpredictable.
-
-### Running `promoter-ui`
-
-As an Angular project the task config is different here.
-
-- `ng serve`: runs app on under `localhost:4200`
-- `protractor conf.js` executes isolated GUI tests on `promoter-ui`. Note: execute from `services/promoter-ui/src/e2e`
-
-#### Prerequisites
+## Web interface
 
 Installed:
 
@@ -116,27 +93,22 @@ Installed:
 
 Before start, install node dependencies by running `npm install` from `services/promoter-ui`
 
-## Run configs in IntelliJ Idea
-
-All the configurations listed above are also exported to this repo as an IntelliJ Idea configurations. They reside
-in `.run` directory and should be automatically imported once `Tickets` project is imported.
-
-Some run configurations are using [Multirun plugin](https://plugins.jetbrains.com/plugin/7248-multirun) to start all microservices in the system. Consider installing the plugin: 
-
 # Tests
 
-## `Pricing` and `Promoter` Microservices
+## `Pricing`, `Promoter` and `SharedLib`
 
 - All internal tests are under `src/test/java`
 - contract tests location is documented [here](#contract-tests)
+
+Execute gradle tasks by `./gradlew <task-name>`
+- `test`: runs all in-service tests
+- `contractTest`: runs Spring Cloud Contract tests defined in `/src/contractTests/resources/contracts`
 
 ## `promoter-ui`
 
 Protractor tests are located under `src/e2e/test`
 
-## `SharedLib`
-
-- All tests are under `src/test/java`
+- `protractor conf.js` executes isolated GUI tests on `promoter-ui`. Note: execute from `services/promoter-ui/src/e2e`
 
 ## `TicketingTests`
 
@@ -146,7 +118,7 @@ The project holds System Tests only, all under `src/test` with gradle task:
 
 ## <a name="contract-tests"></a>Contract tests
 
-Two tools for contract testing are implemented: `Spring Cloud Contract` and `PACT`. Contract testing requires additional infrastructure so it is not runnable by default. To make contract tests green, follow instructions below.
+Two tools for contract testing are implemented: `Spring Cloud Contract` and `PACT`. Contract testing requires additional infrastructure. To make contract tests green, follow instructions below.
 
 ### Spring Cloud Contract 
 
@@ -154,19 +126,20 @@ Spring Cloud Contracts [SCC] uses local maven repository to publish contracts de
 
 #### Publishing
 
-To publish contracts execute `./gradlew publishToMavenLocal` in `Tickets/` or run IntelliJ configs named `Promoter/Pricing contract publish`.
+Publish contracts execute `./gradlew publishToMavenLocal` in `Promoter` and `Pricing` or run IntelliJ configs named `Promoter/Pricing contract publish`.
 
 #### Promoter API Stubs
 
-To start Promoter Stub, based on Contract tests, see [README](services/Promoter/api-stubs/README.MD)
+To start Promoter Stub (optional), based on Contract tests, see [README](services/Promoter/api-stubs/README.MD)
 
 #### Locations
+
 - Contracts are under `src/contractTest/resources`
 - Generated contract tests are in `build/generated-test-sources/contractTest`
 
 ### Pact
 
-Tests named `pactVerificationTestTemplate` are contract tests, and they will be failing on your machine as they require secret token to PACT Broker. Secret will be provided to you later. You can ignore those failures for now.
+Tests named `pactVerificationTestTemplate` are PACT contract tests, and they will be failing on your machine as they require secret token to PACT Broker. Secret will be provided to you later. You can ignore these failures for now.
 
 #### Publishing
 
@@ -176,33 +149,17 @@ There are Consumer, Provider and Pact Broker contracts verified using Pact Flow.
 
 #### Locations
 
-- provider tests have suffix `pactApiTest`
+- provider tests have suffix `pact*Test`
 - consumer tests are annotated with `@PactTestFor`
-
-# Project Structure
-
-Important paths in project are:
-
-```
-Tickets
-└── infra/kafka/docker-compose.yml              // Use to start Apache Kafka in docker on your machine
-└── libs/SharedLib                              // Java library embedded in services
-└── services                                    // Microservices building up Tickets system
-│   └── Pricing
-│   └── Promoter
-|       └── api-stubs/run-contract-stubs.sh     // execute to run Promoter API Stubs based on Contract Tests to test promoter-ui
-│   └── promoter-ui
-└── SystemTests/TicketingTests                    // separate project holding E2E System Tests for Ticketing
-```
 
 # Branching and Tagging
 
-Complete solution is on the `main` branch. Training assignments are on `training_tags` branch. Latter branch has tags corresponding to the tasks and their steps, where part of code from `main` is missing and there's a room for exercising.
+Complete solution is on the `main` branch. Training assignments use tags corresponding to the tasks and their steps.
 
 All feature development is made in branches as follows:
 1. start new branch from `main`
 2. When finished, Issue PR to `main`, squashing commits.
-3. `training_tags` branch should be rebased on `main` to reflect new features in assignments.
+3. Branches with assignments should be rebased on `main` to reflect new features in assignments.
    - Important: on a regular rebase, tags are not moved. To reflect rebased changes and migrate tags, use https://github.com/maastiff/git-rebase-autotags
    - check if hook is present in https://github.com/maastiff/git-rebase-autotags#locally-in-repository
    - check if it is enabled as in https://github.com/maastiff/git-rebase-autotags#configure
