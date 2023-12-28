@@ -10,15 +10,15 @@ import io.vavr.control.Either;
 import org.junit.jupiter.api.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class PricingClient_applyDiscount_depTest extends FrameworkTestBase {
+public class PricingClient_applyDiscount_sccDepTest extends SccFrameworkTestBase {
 
     FakePricingClient fakePricingClient;
     PricingClient realPricingClient;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         fakePricingClient = new FakePricingClient();
-        realPricingClient = concertFixtures.pricingClient;
+        realPricingClient = new HttpPricingClient(sccPricingWebClient);
     }
 
     @Test

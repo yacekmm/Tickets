@@ -57,4 +57,9 @@ public class ConcertBuilder {
         builder.promoterId(promoterId);
         return this;
     }
+
+    public ConcertBuilder withId(String id) {
+        builder.id(new ConcertId(id));
+        return this;
+    }
 }

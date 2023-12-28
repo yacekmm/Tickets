@@ -1,18 +1,19 @@
 package com.bottega.promoter.concert.api.rest;
 
+import au.com.dius.pact.consumer.junit5.*;
 import com.bottega.promoter.concert.domain.Concert;
-import com.bottega.promoter.fixtures.FrameworkTestBase;
+import com.bottega.promoter.fixtures.*;
 import io.restassured.response.ValidatableResponse;
 import org.junit.jupiter.api.Test;
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.hamcrest.Matchers.*;
 
-public class ConcertRestController_discountConcert_restApiTest extends FrameworkTestBase {
-
+public class ConcertRestController_discountConcert_restApiTest extends PactFrameworkTestBase {
 
     @Test
+    @PactTestFor(pactMethod = "applyPercentageDiscount")
     public void discountConcert_discounts_onValidRequest() {
-        Concert concert = builders.aConcert().inDb();
+        Concert concert = builders.aConcert().withId("123").inDb();
 
         //when
         ValidatableResponse response = concertFixtures.concertHttpClient.discountConcert(concert.getId(), 10);

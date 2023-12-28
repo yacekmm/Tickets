@@ -17,8 +17,12 @@ public class WebClientsConfig {
     @Bean
     public WebClient pricingWebClient(ServicesProperties servicesProperties) {
 
+        return buildPricingWebClient(servicesProperties.getPricing().host(), servicesProperties.getPricing().port());
+    }
+
+    public static WebClient buildPricingWebClient(String host, int port) {
         final HttpClient httpClient = HttpClient.create()
-                .responseTimeout(ofSeconds(servicesProperties.getRequestTimeoutInSeconds()))
+                .responseTimeout(ofSeconds(3))
                 .doOnError(
                         (req, throwable) -> log.info("Error on HTTP Request. Req: {}, error: {}", req.fullPath(), throwable.toString()),
                         (res, throwable) -> log.info("Error on HTTP Response. Res: {}, error: {}", res, throwable.toString()));
@@ -26,7 +30,7 @@ public class WebClientsConfig {
                 .clientConnector(new ReactorClientHttpConnector(httpClient))
                 .defaultHeader(CONTENT_TYPE, APPLICATION_JSON_VALUE)
                 .defaultHeader(ACCEPT, APPLICATION_JSON_VALUE)
-                .baseUrl(servicesProperties.getPricing().url())
+                .baseUrl(host + ":" + port)
                 .build();
     }
 

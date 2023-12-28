@@ -8,23 +8,18 @@ import org.apache.kafka.clients.producer.ProducerConfig;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.cloud.contract.stubrunner.spring.AutoConfigureStubRunner;
 import org.springframework.test.context.*;
 import org.testcontainers.containers.KafkaContainer;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
-import static com.bottega.sharedlib.config.CdcStubs.CDC_STUB_ID_PRICING;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.DEFINED_PORT;
-import static org.springframework.cloud.contract.stubrunner.spring.StubRunnerProperties.StubsMode.LOCAL;
 import static org.testcontainers.shaded.org.awaitility.Awaitility.await;
 
 @SpringBootTest(webEnvironment = DEFINED_PORT)
 @ActiveProfiles({"test"})
-@AutoConfigureStubRunner(ids = CDC_STUB_ID_PRICING, stubsMode = LOCAL)
 @Testcontainers
 @Slf4j
 public class FrameworkTestBase {
-
 
     static KafkaContainer kafka;
     static AdminClient kafkaAdmin;

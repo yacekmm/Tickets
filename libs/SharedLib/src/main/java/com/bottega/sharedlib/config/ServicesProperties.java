@@ -10,13 +10,11 @@ import org.springframework.context.annotation.Configuration;
 @Setter
 public class ServicesProperties {
 
-    private int requestTimeoutInSeconds;
-
     private ServiceConfig promoter;
     private ServiceConfig pricing;
 
     public record ServiceConfig(
-            String url,
+            String host,
             int port
     ){ }
 }

@@ -15,6 +15,10 @@ buildscript {
     }
 }
 
+plugins {
+    id("com.gorylenko.gradle-git-properties") version "2.4.1"
+}
+
 apply plugin: 'java'
 apply plugin: 'groovy'
 apply plugin: 'idea'
@@ -22,6 +26,7 @@ apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 apply plugin: 'spring-cloud-contract'
 apply plugin: 'maven-publish'
+
 
 group = 'com.bottega'
 version = '1.0.0'
@@ -58,6 +63,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
     implementation 'org.apache.commons:commons-lang3:3.14.0'
     implementation 'io.vavr:vavr:0.10.4'
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0'
 
     testImplementation 'io.vavr:vavr-test:0.10.4'
 
@@ -81,6 +87,8 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.cloud:spring-cloud-starter-contract-stub-runner'
     testImplementation 'org.springframework.cloud:spring-cloud-starter-contract-verifier'
+    testImplementation 'au.com.dius.pact.provider:junit5:4.5.3'
+
     testImplementation 'org.springframework.kafka:spring-kafka-test'
     testImplementation 'io.rest-assured:rest-assured:5.3.1'
 
