@@ -5,7 +5,6 @@ import org.assertj.vavr.api.VavrAssertions;
 import org.junit.jupiter.api.Test;
 import static com.bottega.promoter.concert.api.app.ConcertErrorCode.invalid_title;
 import static com.bottega.promoter.concert.domain.Title.from;
-import static com.bottega.promoter.concert.fixtures.TitleAssert.assertThatTitle;
 import static com.bottega.sharedlib.vo.error.ErrorResult.badRequest;
 import static org.apache.commons.lang3.StringUtils.repeat;
 import static org.assertj.core.api.Assertions.assertThat;
