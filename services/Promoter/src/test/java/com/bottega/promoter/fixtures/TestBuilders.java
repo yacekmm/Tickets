@@ -2,7 +2,7 @@ package com.bottega.promoter.fixtures;
 
 import java.time.Clock;
 
-import com.bottega.promoter.concert.fixtures.*;
+import com.bottega.promoter.concert.fixtures.ConcertBuilder;
 import com.bottega.promoter.concert.infra.repo.ConcertRepo;
 import com.bottega.promoter.concertRead.ConcertFinderRepo;
 import com.bottega.sharedlib.config.ApiVersions;
@@ -24,8 +24,8 @@ public class TestBuilders {
     @Value("${server.port}")
     private int port;
 
-    public Builder aConcert() {
-        return new Builder(concertRepo, concertFinderRepo, clock);
+    public ConcertBuilder aConcert() {
+        return new ConcertBuilder(concertRepo, concertFinderRepo, clock);
     }
 
     public PromoterAgreementBuilder aPromoterAgreement() {
@@ -39,9 +39,5 @@ public class TestBuilders {
         return RestAssured.given()
                 .basePath(ApiVersions.V1)
                 .contentType(JSON);
-    }
-
-    public ConcertBuilder concert(){
-        return new ConcertBuilder(clock);
     }
 }
