@@ -31,14 +31,12 @@ class Concert_initConcert_unitTest extends ConcertLogicTestBase {
     void initConcert_assignsCategory(String title, String expectedCategory) {
         //given
         Concert newConcert = new Concert(new ConcertId(), Title.from(title).get(), ConcertDate.from(TEST_TIME_PLUS_30_DAYS.toString(), sharedFixtures.clock).get(), "vendor-id", new HashSet<>(), null);
-        CategoryService categoryService = mock(CategoryService.class);
-        given(categoryService.categorize(Title.from(title).get())).willReturn(Category.from(expectedCategory));
+        CategoryService categoryService = new CategoryService();
 
         //when
         newConcert.initNewConcert(categoryService);
 
         //then
-        then(categoryService).should().categorize(Title.from(title).get());
         assertThat(newConcert.getCategory().getValue()).isEqualTo(expectedCategory);
     }
 
