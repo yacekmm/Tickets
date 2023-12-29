@@ -11,9 +11,11 @@ class Concert_initConcert_unitSpec extends SpecificationBase {
     def "initConcert - assigns category"() {
         given:
         def newConcert = new Concert(new ConcertId(), Title.from(title).get(), ConcertDate.from(TEST_TIME_PLUS_30_DAYS.toString(), sharedFixtures.clock).get(), "vendor-id", new HashSet<>(), null)
+        def categoryService = Mock(CategoryService.class)
+        categoryService.categorize(Title.from(title).get()) >> Category.from(expectedCategory)
 
         when:
-        newConcert.initNewConcert()
+        newConcert.initNewConcert(categoryService)
 
         then:
         newConcert.category.value == expectedCategory
