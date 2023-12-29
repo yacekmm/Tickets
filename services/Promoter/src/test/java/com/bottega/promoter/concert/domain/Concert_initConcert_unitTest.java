@@ -4,12 +4,24 @@ import java.util.HashSet;
 import java.util.stream.Stream;
 
 import com.bottega.promoter.concert.fixtures.ConcertLogicTestBase;
+import org.junit.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.*;
 import static com.bottega.sharedlib.config.TestClockConfig.TEST_TIME_PLUS_30_DAYS;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class Concert_initConcert_unitTest extends ConcertLogicTestBase {
+
+    @Test
+    void initConcert_addsTags() {
+        //TODO tests
+        //given
+
+        //when
+
+        //then
+
+    }
 
     private static Stream<Arguments> provideStringsForCategories() {
         return Stream.of(
