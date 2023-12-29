@@ -1,15 +1,28 @@
 package com.bottega.promoter.concert.domain
 
-
 import com.bottega.promoter.fixtures.SpecificationBase
-import com.bottega.sharedlib.config.TestClockConfig
 
 import static com.bottega.sharedlib.config.TestClockConfig.TEST_TIME_PLUS_30_DAYS
 
 class Concert_initConcert_unitSpec extends SpecificationBase {
 
     def "initConcert - adds tags"() {
-        //TODO tests
+        given:
+        def newConcert = new Concert(new ConcertId(), Title.from(title).get(), ConcertDate.from(TEST_TIME_PLUS_30_DAYS.toString(), sharedFixtures.clock).get(), "vendor-id", new HashSet<>(), null)
+
+        when:
+        newConcert.initNewConcert(concertFixtures.tagService, concertFixtures.categoryService)
+
+        then:
+        with(newConcert.getTags().stream().map(Tag::getValue).toList()) {
+            size() == expectedTags.size()
+            containsAll(expectedTags)
+        }
+
+        where:
+        title                          | expectedTags
+        "no tags apply"                | []
+        //TODO more cases
     }
 
     def "initConcert - assigns category"() {
@@ -17,7 +30,7 @@ class Concert_initConcert_unitSpec extends SpecificationBase {
         def newConcert = new Concert(new ConcertId(), Title.from(title).get(), ConcertDate.from(TEST_TIME_PLUS_30_DAYS.toString(), sharedFixtures.clock).get(), "vendor-id", new HashSet<>(), null)
 
         when:
-        newConcert.initNewConcert(concertFixtures.categoryService)
+        newConcert.initNewConcert(concertFixtures.tagService, concertFixtures.categoryService)
 
         then:
         newConcert.category.value == expectedCategory
