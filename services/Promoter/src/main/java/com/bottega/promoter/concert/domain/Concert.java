@@ -1,15 +1,18 @@
 package com.bottega.promoter.concert.domain;
 
-import java.util.*;
-
 import com.bottega.promoter.agreements.PromoterId;
 import com.bottega.sharedlib.ddd.AggregateRoot;
 import com.bottega.sharedlib.repo.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
-import static jakarta.persistence.CascadeType.*;
+
+import java.util.Set;
+
+import static jakarta.persistence.CascadeType.ALL;
+import static jakarta.persistence.CascadeType.PERSIST;
 import static jakarta.persistence.FetchType.LAZY;
-import static lombok.AccessLevel.*;
+import static lombok.AccessLevel.NONE;
+import static lombok.AccessLevel.PUBLIC;
 
 @AggregateRoot
 @Entity
@@ -53,7 +56,7 @@ public class Concert implements BaseEntity {
     }
 
 
-    public void initNewConcert(CategoryService categoryService) {
+    public void initNewConcert(TagService tagService, CategoryService categoryService) {
         category = categoryService.categorize(title);
     }
 

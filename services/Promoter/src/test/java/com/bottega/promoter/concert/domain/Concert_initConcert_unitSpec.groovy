@@ -5,7 +5,22 @@ import com.bottega.promoter.fixtures.SpecificationBase
 class Concert_initConcert_unitSpec extends SpecificationBase {
 
     def "initConcert - adds tags"() {
-        //TODO tests
+        given:
+        Concert newConcert = builders.aConcert().withTitle(title).build()
+
+        when:
+        newConcert.initNewConcert(concertFixtures.tagService, concertFixtures.categoryService)
+
+        then:
+        with(newConcert.getTags().stream().map(Tag::getValue).toList()) {
+            size() == expectedTags.size()
+            containsAll(expectedTags)
+        }
+
+        where:
+        title                          | expectedTags
+        "no tags apply"                | []
+        //TODO more cases
     }
 
     def "initConcert - assigns category"() {
@@ -13,7 +28,7 @@ class Concert_initConcert_unitSpec extends SpecificationBase {
         Concert newConcert = builders.aConcert().withTitle(title).build()
 
         when:
-        newConcert.initNewConcert(concertFixtures.categoryService)
+        newConcert.initNewConcert(concertFixtures.tagService, concertFixtures.categoryService)
 
         then:
         newConcert.category.value == expectedCategory

@@ -2,10 +2,15 @@ package com.bottega.promoter.concert.domain;
 
 import com.bottega.promoter.agreements.PromoterService;
 import com.bottega.promoter.concert.api.app.ConcertService;
-import com.bottega.promoter.concert.fixtures.*;
+import com.bottega.promoter.concert.fixtures.InMemoryCategoryRepo;
+import com.bottega.promoter.concert.fixtures.InMemoryConcertRepo;
+import com.bottega.promoter.concert.fixtures.InMemoryTagRepo;
 import com.bottega.promoter.concert.fixtures.clients.ConcertHttpClient;
-import com.bottega.promoter.concert.infra.repo.*;
-import com.bottega.promoter.fixtures.*;
+import com.bottega.promoter.concert.infra.repo.CategoryRepo;
+import com.bottega.promoter.concert.infra.repo.ConcertRepo;
+import com.bottega.promoter.concert.infra.repo.TagRepo;
+import com.bottega.promoter.fixtures.FakePricingClient;
+import com.bottega.promoter.fixtures.SharedFixtures;
 import com.bottega.promoter.infra.client.pricing.PricingClient;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +38,8 @@ public class ConcertFixtures {
     public PricingClient pricingClient;
 
     //services
-    //TODO autowire TagService
+    @Autowired
+    public TagService tagService;
     @Autowired
     public CategoryService categoryService;
 
@@ -68,7 +74,7 @@ public class ConcertFixtures {
     }
 
     private static void initServices(ConcertFixtures concertFixtures) {
-        //TODO init TagService
+        concertFixtures.tagService = new TagService();
         concertFixtures.categoryService = new CategoryService();
     }
 
@@ -78,7 +84,7 @@ public class ConcertFixtures {
                 concertFixtures.concertRepo,
                 concertFixtures.pricingClient,
                 sharedFixtures.fakeEventPublisher(),
-                //TODO inject TagService
+                concertFixtures.tagService,
                 concertFixtures.categoryService,
                 concertFixtures.promoterService
         );
