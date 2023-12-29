@@ -26,5 +26,24 @@ public class TitleAssert {
         return this;
     }
 
-    //TODO implement
+    public TitleAssert isValid() {
+        assertThat(title).isValid();
+        return this;
+    }
+
+    public TitleAssert hasInvalidLengthError() {
+        return hasError(BAD_REQUEST, invalid_title, "Title length must be between 10 and 160 chars");
+    }
+
+    public TitleAssert hasBannedWordsError(String bannedWord) {
+        return hasError(BAD_REQUEST, invalid_title, "Title must not contain banned word: " + bannedWord);
+    }
+
+    private TitleAssert hasError(ErrorType errorType, ErrorCode errorCode, String description) {
+        assertThat(title).isInvalid();
+        assertThat(title.getError().getType()).isEqualTo(errorType);
+        assertThat(title.getError().getCode()).isEqualTo(errorCode);
+        assertThat(title.getError().getDescription()).isEqualTo(description);
+        return this;
+    }
 }
