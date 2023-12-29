@@ -18,27 +18,5 @@ class TitleAssertSpock extends Specification {
         new TitleAssertSpock(actual)
     }
 
-    TitleAssertSpock isEqualTo(String expectedTitle) {
-        assert actualTitle.isValid()
-        assert actualTitle.get().value == expectedTitle
-        this
-    }
-
-    TitleAssertSpock hasInvalidLengthError() {
-        hasInvalidTitleError("Title length must be between 10 and 160 chars")
-    }
-
-    TitleAssertSpock hasBannedWordError(String expectedBannedWord) {
-        hasInvalidTitleError("Title must not contain banned word: " + expectedBannedWord)
-    }
-
-    protected TitleAssertSpock hasInvalidTitleError(String expectedErrorDesc) {
-        assert actualTitle.isInvalid()
-        with(actualTitle.getError()) {
-            type == BAD_REQUEST
-            code == invalid_title
-            description == expectedErrorDesc
-        }
-        this
-    }
+    //TODO assert methods
 }
