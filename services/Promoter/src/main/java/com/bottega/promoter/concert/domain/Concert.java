@@ -1,6 +1,6 @@
 package com.bottega.promoter.concert.domain;
 
-import java.util.*;
+import java.util.Set;
 
 import com.bottega.promoter.agreements.PromoterId;
 import com.bottega.sharedlib.ddd.AggregateRoot;
@@ -54,6 +54,7 @@ public class Concert implements BaseEntity {
 
 
     public void initNewConcert(TagService tagService, CategoryService categoryService) {
+        tags = tagService.tag(title);
         category = categoryService.categorize(title);
     }
 
