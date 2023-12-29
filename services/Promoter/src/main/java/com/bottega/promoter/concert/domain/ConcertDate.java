@@ -26,13 +26,8 @@ public class ConcertDate {
     private Instant date;
 
     public static Validation<ErrorResult, ConcertDate> from(String date, Clock clock) {
-        return Try.of(() -> Instant.parse(date))
-                .orElse(Try.ofSupplier(() -> LocalDate.parse(date).atStartOfDay().toInstant(UTC)))
-                .toValidation()
-                .mapError(throwable -> badRequest(ConcertErrorCode.invalid_date, "Unsupported date format: " + throwable.getMessage()))
-                .filter(parsed -> parsed.isAfter(clock.instant().plus(MIN_DATE_THRESHOLD_DAYS, DAYS)))
-                .getOrElse(Validation.invalid(badRequest(ConcertErrorCode.invalid_date, "Too early")))
-                .map(ConcertDate::new);
+        //TODO implementation
+        return null;
     }
 
     public LocalDate getUtcDate() {
