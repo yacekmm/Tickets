@@ -2,7 +2,7 @@ package com.bottega.promoter.fixtures;
 
 import java.time.Clock;
 
-import com.bottega.promoter.concert.fixtures.Builder;
+import com.bottega.promoter.concert.fixtures.*;
 import com.bottega.promoter.concert.infra.repo.ConcertRepo;
 import com.bottega.promoter.concertRead.ConcertFinderRepo;
 import com.bottega.sharedlib.config.ApiVersions;
@@ -41,5 +41,7 @@ public class TestBuilders {
                 .contentType(JSON);
     }
 
-    //TODO: add method concert() returning new instance of ConcertBuilder
+    public ConcertBuilder concert(){
+        return new ConcertBuilder(clock);
+    }
 }
