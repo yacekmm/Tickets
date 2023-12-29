@@ -1,5 +1,6 @@
 package com.bottega.promoter.concert.domain
 
+
 import com.bottega.promoter.fixtures.SpecificationBase
 
 import static com.bottega.sharedlib.config.TestClockConfig.TEST_TIME_PLUS_30_DAYS
@@ -22,7 +23,10 @@ class Concert_initConcert_unitSpec extends SpecificationBase {
         where:
         title                          | expectedTags
         "no tags apply"                | []
-        //TODO more cases
+        "Rock concert"                 | ["rock"]
+        "Scorpions in Warsaw!"         | ["rock"]
+        "Scorpions on Mystic Festival" | ["rock", "festival"]
+        "Rihanna the best of"          | ["pop"]
     }
 
     def "initConcert - assigns category"() {
