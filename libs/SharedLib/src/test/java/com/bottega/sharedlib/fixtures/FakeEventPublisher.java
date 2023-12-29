@@ -19,6 +19,6 @@ public class FakeEventPublisher implements EventPublisher {
 
     public Event singleEvent() {
         assertThat(events).hasSize(1);
-        return events.get(0);
+        return events.getFirst();
     }
 }

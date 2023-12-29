@@ -27,7 +27,7 @@ class PriceService_applyPercentageFactor_compTest extends LogicTestBase {
 
         //then
         assertThat(result).hasRightValueSatisfying(itemPrices ->
-                assertThatPrice(itemPrices.get(0))
+                assertThatPrice(itemPrices.getFirst())
                         .isPersistedIn(priceFixtures.itemPriceRepo, SINGULAR)
                         .hasPrice(90_00)
                         .hasId(price.getId())
