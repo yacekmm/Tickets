@@ -25,5 +25,33 @@ class Title_fromString_microSpec extends SpecificationBase {
         "a".multiply(160) + " "      | "a".multiply(160)
     }
 
-    //TODO tests
+    def "fromString - returns error - on invalid length"() {
+
+        expect:
+        assertThatTitle(from(titleString))
+                .hasInvalidLengthError()
+
+        where:
+        titleString << [
+                null,
+                "a" * 9,
+                "a" * 161,
+                "a" * 9 + " "]
+    }
+
+    def "fromString - returns error - on banned words in title"() {
+
+        expect:
+        assertThatTitle(from(titleString))
+                .hasBannedWordError(expectedBannedWord)
+
+        where:
+        titleString                | expectedBannedWord
+        "rage against the machine" | "rage"
+        "VIOLENCE"                 | "violence"
+        "   Snickers   "           | "snickers"
+        "rage against the machine" | "rage"
+        "machine against the rage" | "rage"
+        "machine rage machine"     | "rage"
+    }
 }
