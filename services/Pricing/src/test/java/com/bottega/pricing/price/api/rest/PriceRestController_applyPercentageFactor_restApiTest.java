@@ -5,6 +5,8 @@ import com.bottega.pricing.price.domain.ItemPrice;
 import com.bottega.sharedlib.fixtures.ErrorJsonAssert;
 import io.restassured.response.ValidatableResponse;
 import org.junit.jupiter.api.Test;
+import static com.bottega.pricing.fixtures.PriceJsonAssert.assertThatPrice;
+import static com.bottega.sharedlib.fixtures.ErrorJsonAssert.assertThatError;
 
 public class PriceRestController_applyPercentageFactor_restApiTest extends FrameworkTestBase {
 
@@ -17,7 +19,7 @@ public class PriceRestController_applyPercentageFactor_restApiTest extends Frame
         ValidatableResponse response = priceFixtures.pricingHttpClient.applyPercentageFactor("item-id", 20);
 
         //then
-        PriceJsonAssert.assertThatPrice(response)
+        assertThatPrice(response)
                 .hasSinglePrice(itemPrice, 80_00)
                 .hasSinglePercentageFactor(20);
     }
@@ -28,7 +30,7 @@ public class PriceRestController_applyPercentageFactor_restApiTest extends Frame
         ValidatableResponse response = priceFixtures.pricingHttpClient.applyPercentageFactor("non-existing-item-id", 10);
 
         //then
-        ErrorJsonAssert.assertThatError(response)
+        assertThatError(response)
                 .isNotFound("No price entries found for requested item. itemId: non-existing-item-id");
     }
 

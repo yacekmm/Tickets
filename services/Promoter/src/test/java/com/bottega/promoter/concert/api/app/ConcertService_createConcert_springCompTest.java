@@ -6,6 +6,7 @@ import com.bottega.promoter.fixtures.FrameworkTestBase;
 import com.bottega.sharedlib.fixtures.RepoEntries;
 import org.assertj.vavr.api.VavrAssertions;
 import org.junit.jupiter.api.Test;
+import static com.bottega.promoter.concert.fixtures.asserts.ConcertAssert.assertThatConcert;
 import static com.bottega.sharedlib.config.TestClockConfig.TEST_TIME_PLUS_30_DAYS;
 
 
@@ -23,8 +24,7 @@ class ConcertService_createConcert_springCompTest extends FrameworkTestBase {
         //then
         VavrAssertions.assertThat(result).isRight();
 
-        ConcertAssert
-                .assertThatConcert(concertFixtures.concertRepo.findAll().iterator().next())
+        assertThatConcert(concertFixtures.concertRepo.findAll().iterator().next())
                 .isPersistedIn(concertFixtures.concertRepo, RepoEntries.SINGULAR)
                 .hasTitle(request.title)
                 .hasIdAsUUID()

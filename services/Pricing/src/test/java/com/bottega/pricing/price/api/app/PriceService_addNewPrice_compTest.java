@@ -8,6 +8,8 @@ import com.bottega.sharedlib.vo.Money;
 import com.bottega.sharedlib.vo.error.ErrorResult;
 import io.vavr.control.Either;
 import org.junit.jupiter.api.Test;
+import static com.bottega.pricing.price.fixtures.PriceAssert.assertThatPrice;
+import static com.bottega.sharedlib.fixtures.EventAssert.assertThatEventV1;
 import static com.bottega.sharedlib.fixtures.RepoEntries.SINGULAR;
 import static org.assertj.vavr.api.VavrAssertions.assertThat;
 
@@ -21,7 +23,7 @@ class PriceService_addNewPrice_compTest extends LogicTestBase {
 
         //then
         assertThat(result).hasRightValueSatisfying(itemPrice ->
-                PriceAssert.assertThatPrice(itemPrice)
+                assertThatPrice(itemPrice)
                         .isPersistedIn(priceFixtures.itemPriceRepo, SINGULAR)
                         .hasPrice(10_00)
                         .hasItemId("item-id")
@@ -37,7 +39,7 @@ class PriceService_addNewPrice_compTest extends LogicTestBase {
 
         //then
         assertThat(result).hasRightValueSatisfying(itemPrice ->
-                EventAssert.assertThatEventV1(sharedFixtures.fakeEventPublisher().singleEvent())
+                assertThatEventV1(sharedFixtures.fakeEventPublisher().singleEvent())
                         .isPriceChange(itemPrice.getPrice().toInt(), itemPrice.getId().asString(), itemPrice.getItemId()));
 
     }

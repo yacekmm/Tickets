@@ -10,7 +10,9 @@ import com.bottega.sharedlib.vo.error.ErrorResult;
 import io.vavr.control.Either;
 import org.assertj.vavr.api.VavrAssertions;
 import org.junit.jupiter.api.Test;
+import static com.bottega.promoter.concert.fixtures.asserts.ConcertAssert.assertThatConcert;
 import static com.bottega.sharedlib.config.TestClockConfig.TEST_TIME_PLUS_30_DAYS;
+import static com.bottega.sharedlib.fixtures.EventAssert.assertThatEventV1;
 import static org.assertj.vavr.api.VavrAssertions.assertThat;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
@@ -32,8 +34,7 @@ class ConcertService_createConcert_compTest extends ConcertLogicTestBase {
         //then
         VavrAssertions.assertThat(result).isRight();
 
-        ConcertAssert
-                .assertThatConcert(concertFixtures.concertRepo.findAll().iterator().next())
+        assertThatConcert(concertFixtures.concertRepo.findAll().iterator().next())
                 .isPersistedIn(concertFixtures.concertRepo, RepoEntries.SINGULAR)
                 .hasTitle(request.title)
                 .hasIdAsUUID()
@@ -52,7 +53,7 @@ class ConcertService_createConcert_compTest extends ConcertLogicTestBase {
 
         //then
         assertThat(result).isRight();
-        ConcertAssert.assertThatConcert(result.get())
+        assertThatConcert(result.get())
                 .isPersistedIn(concertFixtures.concertRepo, RepoEntries.SINGULAR);
     }
 
@@ -76,7 +77,7 @@ class ConcertService_createConcert_compTest extends ConcertLogicTestBase {
 
         //then
         assertThat(result).hasRightValueSatisfying(concert ->
-                EventAssert.assertThatEventV1(sharedFixtures.fakeEventPublisher().singleEvent())
+                assertThatEventV1(sharedFixtures.fakeEventPublisher().singleEvent())
                         .isConcertCreated(
                                 concert.getId().asString(),
                                 concert.getTitle().getValue(),

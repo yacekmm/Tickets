@@ -6,6 +6,7 @@ import com.bottega.sharedlib.event.Event;
 import com.bottega.sharedlib.fixtures.EventAssert;
 import org.junit.jupiter.api.Test;
 import static com.bottega.promoter.concert.domain.PromoterEventFactory.concertCreated;
+import static com.bottega.sharedlib.fixtures.EventAssert.assertThatEventV1;
 
 class KafkaEventPublisher_publish_depTest extends FrameworkTestBase {
 
@@ -19,7 +20,7 @@ class KafkaEventPublisher_publish_depTest extends FrameworkTestBase {
         sharedFixtures.eventPublisher.publish(concertCreated);
 
         //then
-        EventAssert.assertThatEventV1(sharedFixtures.testKafkaListener.singleEvent())
+        assertThatEventV1(sharedFixtures.testKafkaListener.singleEvent())
                 .isConcertCreated(concert.getId().asString(), concert.getTitle().getValue(), concert.getDate().getUtcDate().toString(), new String[]{}, 2);
     }
 }

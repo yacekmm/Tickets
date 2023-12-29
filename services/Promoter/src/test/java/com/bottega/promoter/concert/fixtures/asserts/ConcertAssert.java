@@ -11,10 +11,14 @@ import lombok.RequiredArgsConstructor;
 import static java.time.ZoneOffset.UTC;
 import static org.assertj.core.api.Assertions.*;
 
-@RequiredArgsConstructor(staticName = "assertThatConcert")
+@RequiredArgsConstructor
 public class ConcertAssert {
 
     private final Concert concert;
+
+    public static ConcertAssert assertThatConcert(Concert concert) {
+        return new ConcertAssert(concert);
+    }
 
     public ConcertAssert hasTitle(String expectedTitle) {
         assertThat(concert.getTitle().getValue()).isEqualTo(expectedTitle);

@@ -3,6 +3,7 @@ package com.bottega.pricing.price.domain;
 import com.bottega.pricing.fixtures.LogicTestBase;
 import com.bottega.pricing.price.fixtures.PriceAssert;
 import org.junit.jupiter.api.Test;
+import static com.bottega.pricing.price.fixtures.PriceAssert.assertThatPrice;
 
 class ItemPrice_applyFactor_unitTest extends LogicTestBase {
 
@@ -15,7 +16,7 @@ class ItemPrice_applyFactor_unitTest extends LogicTestBase {
         ItemPrice result = itemPrice.applyFactor(PriceFactorFactory.percentageFactor(10, itemPrice));
 
         //then
-        PriceAssert.assertThatPrice(result)
+        assertThatPrice(result)
                 .hasPrice(180_00)
                 .hasId(itemPrice.getId())
                 .hasItemId(itemPrice.getItemId());

@@ -9,6 +9,7 @@ import com.bottega.sharedlib.vo.Money;
 import com.bottega.sharedlib.vo.error.ErrorResult;
 import io.vavr.control.Either;
 import org.junit.jupiter.api.Test;
+import static com.bottega.pricing.price.fixtures.PriceAssert.assertThatPrice;
 import static org.assertj.vavr.api.VavrAssertions.assertThat;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
@@ -29,7 +30,7 @@ class InitialPriceService_settleInitialPrice_compTest extends LogicTestBase {
 
         //then
         assertThat(result).hasRightValueSatisfying(itemPrice ->
-                PriceAssert.assertThatPrice(itemPrice)
+                assertThatPrice(itemPrice)
                         .hasPrice(expectedPrice)
                         .hasItemId(expectedItemId)
                         .hasNoFactors()

@@ -9,6 +9,10 @@ import com.bottega.sharedlib.fixtures.*;
 import com.bottega.sharedlib.vo.error.ErrorResult;
 import io.vavr.control.Either;
 import org.junit.jupiter.api.Test;
+import static com.bottega.pricing.price.fixtures.PriceAssert.assertThatPrice;
+import static com.bottega.pricing.price.fixtures.PriceFactorAssert.assertThatFactor;
+import static com.bottega.sharedlib.fixtures.ErrorAssert.assertThatError;
+import static com.bottega.sharedlib.fixtures.EventAssert.assertThatEventV1;
 import static com.bottega.sharedlib.fixtures.RepoEntries.SINGULAR;
 import static org.assertj.vavr.api.VavrAssertions.assertThat;
 import static org.mockito.BDDMockito.then;
@@ -25,14 +29,14 @@ class PriceService_applyPercentageFactor_compTest extends LogicTestBase {
 
         //then
         assertThat(result).hasRightValueSatisfying(itemPrices ->
-                PriceAssert.assertThatPrice(itemPrices.get(0))
+                assertThatPrice(itemPrices.get(0))
                         .isPersistedIn(priceFixtures.itemPriceRepo, SINGULAR)
                         .hasPrice(90_00)
                         .hasId(price.getId())
                         .hasItemId(price.getItemId())
                         .hasFactors(1, factors ->
                                 factors.forEach(factor ->
-                                        PriceFactorAssert.assertThatFactor(factor)
+                                        assertThatFactor(factor)
                                                 .isPercentageFactor(10, price)
                                 ))
         );
@@ -47,7 +51,7 @@ class PriceService_applyPercentageFactor_compTest extends LogicTestBase {
 
         //then
         assertThat(result).isRight();
-        EventAssert.assertThatEventV1(sharedFixtures.fakeEventPublisher().singleEvent())
+        assertThatEventV1(sharedFixtures.fakeEventPublisher().singleEvent())
                 .isPriceChange(90_00, price.getId().asString(), price.getItemId());
     }
 
@@ -72,7 +76,7 @@ class PriceService_applyPercentageFactor_compTest extends LogicTestBase {
         //then
         assertThat(result)
                 .hasLeftValueSatisfying(err ->
-                        ErrorAssert.assertThatError(err)
+                        assertThatError(err)
                                 .isNotFound("No price entries found for requested item. itemId: not-existing-id"));
     }
 }
