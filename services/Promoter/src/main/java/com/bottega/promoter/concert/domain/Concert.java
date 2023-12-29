@@ -1,12 +1,13 @@
 package com.bottega.promoter.concert.domain;
 
-import java.util.Set;
+import java.util.*;
 
 import com.bottega.promoter.agreements.PromoterId;
 import com.bottega.sharedlib.ddd.AggregateRoot;
 import com.bottega.sharedlib.repo.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
+import org.apache.commons.lang3.StringUtils;
 import static jakarta.persistence.CascadeType.*;
 import static jakarta.persistence.FetchType.LAZY;
 import static lombok.AccessLevel.*;
@@ -21,6 +22,13 @@ import static lombok.AccessLevel.*;
 @ToString
 @Builder(access = PUBLIC)
 public class Concert implements BaseEntity {
+
+    private static final Map<String, String[]> defaultCategories = new HashMap<>();
+
+    static {
+        defaultCategories.put("rock", new String[]{"Rock", "Scorpions"});
+        defaultCategories.put("superstar", new String[]{"Rihanna"});
+    }
 
     @EmbeddedId
     @EqualsAndHashCode.Include
@@ -52,6 +60,12 @@ public class Concert implements BaseEntity {
         return new PromoterId(promoterId);
     }
 
-    //TODO method to init concert
+    public void initNewConcert() {
+        category = defaultCategories.entrySet().stream()
+                .filter(entry -> StringUtils.containsAnyIgnoreCase(title.getValue(), entry.getValue()))
+                .findFirst()
+                .map(entry -> Category.from(entry.getKey()))
+                .orElse(Category.from("other"));
+    }
 
 }
