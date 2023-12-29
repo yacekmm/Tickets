@@ -33,7 +33,8 @@ public class ConcertFixtures {
     public PricingClient pricingClient;
 
     //services
-    //TODO autowire TagService
+    @Autowired
+    public TagService tagService;
     @Autowired
     public CategoryService categoryService;
 
@@ -68,7 +69,7 @@ public class ConcertFixtures {
     }
 
     private static void initServices(ConcertFixtures concertFixtures) {
-        //TODO init TagService
+        concertFixtures.tagService = new TagService();
         concertFixtures.categoryService = new CategoryService();
     }
 
@@ -78,7 +79,7 @@ public class ConcertFixtures {
                 concertFixtures.concertRepo,
                 concertFixtures.pricingClient,
                 sharedFixtures.fakeEventPublisher(),
-                //TODO inject TagService
+                concertFixtures.tagService,
                 concertFixtures.categoryService,
                 concertFixtures.promoterService
         );
