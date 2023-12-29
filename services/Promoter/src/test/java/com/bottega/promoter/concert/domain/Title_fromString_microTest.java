@@ -1,17 +1,21 @@
 package com.bottega.promoter.concert.domain;
 
 import com.bottega.promoter.concert.fixtures.*;
+import org.assertj.vavr.api.VavrAssertions;
 import org.junit.jupiter.api.Test;
+import static com.bottega.promoter.concert.api.app.ConcertErrorCode.invalid_title;
 import static com.bottega.promoter.concert.domain.Title.from;
 import static com.bottega.promoter.concert.fixtures.TitleAssert.assertThatTitle;
+import static com.bottega.sharedlib.vo.error.ErrorResult.badRequest;
 import static org.apache.commons.lang3.StringUtils.repeat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class Title_fromString_microTest extends ConcertLogicTestBase {
 
     @Test
     public void fromString_OK_onValidString(){
         //expect
-        assertThatTitle(from("This is a valid title for a concert")).hasValue("This is a valid title for a concert");
+        assertThat(from("This is a valid title for a concert").get().getValue()).isEqualTo("This is a valid title for a concert");
     }
 
     @Test
@@ -20,33 +24,46 @@ class Title_fromString_microTest extends ConcertLogicTestBase {
         String expectedValue = repeat("a", 10);
 
         //expect
-        assertThatTitle(from("     " + expectedValue + "    ")).hasValue(expectedValue);
+        assertThat(from("    " + expectedValue + "     ").get().getValue()).isEqualTo(expectedValue);
     }
 
     @Test
     public void fromString_honorsLengthLimits(){
         //expect
-        assertThatTitle(from(repeat("a", 10))).isValid();
-        assertThatTitle(from(repeat("a", 160))).isValid();
+        VavrAssertions.assertThat(from(repeat("a", 10))).isValid();
+        VavrAssertions.assertThat(from(repeat("a", 160))).isValid();
 
-        assertThatTitle(from(repeat("a", 9))).hasInvalidLengthError();
-        assertThatTitle(from(repeat("a", 161))).hasInvalidLengthError();
+        assertInvalidLengthError(repeat("a", 9));
+        assertInvalidLengthError(repeat("a", 161));
 
-        assertThatTitle(from(repeat("a", 9) + " ")).hasInvalidLengthError();
-        assertThatTitle(from(repeat("a", 160) + " ")).isValid();
+        assertInvalidLengthError(repeat("a", 9) + " ");
+        VavrAssertions.assertThat(from(repeat("a", 160) + " ")).isValid();
 
-        assertThatTitle(from(null)).hasInvalidLengthError();
+        assertInvalidLengthError(null);
+    }
+
+
+    private void assertInvalidLengthError(String input) {
+        VavrAssertions.assertThat(from(input))
+                .isInvalid()
+                .containsInvalid(badRequest(invalid_title, "Title length must be between 10 and 160 chars"));
     }
 
     @Test
     public void fromString_reportsFirstBannedWord_onBannedWordInTitle(){
         //expect
-        assertThatTitle(from("rage against the machine")).hasBannedWordsError("rage");
-        assertThatTitle(from("VIOLENCE")).hasBannedWordsError("violence");
-        assertThatTitle(from("   Snickers   ")).hasBannedWordsError("snickers");
+        assertBannedWordsError("rage against the machine", "rage");
+        assertBannedWordsError("VIOLENCE", "violence");
+        assertBannedWordsError("   Snickers   ", "snickers");
 
-        assertThatTitle(from("rage against the machine")).hasBannedWordsError("rage");
-        assertThatTitle(from("machine against the rage")).hasBannedWordsError("rage");
-        assertThatTitle(from("machine rage machine")).hasBannedWordsError("rage");
+        assertBannedWordsError("rage against the machine", "rage");
+        assertBannedWordsError("machine against the rage", "rage");
+        assertBannedWordsError("machine rage machine", "rage");
+    }
+
+    private void assertBannedWordsError(String input, String bannedWord) {
+        VavrAssertions.assertThat(from(input))
+                .isInvalid()
+                .containsInvalid(badRequest(invalid_title, "Title must not contain banned word: " +  bannedWord));
     }
 }
