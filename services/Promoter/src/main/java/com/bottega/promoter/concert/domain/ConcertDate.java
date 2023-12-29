@@ -27,7 +27,7 @@ public class ConcertDate {
 
     public static Validation<ErrorResult, ConcertDate> from(String date, Clock clock) {
         //TODO implementation
-        return null;
+        return Validation.valid(new ConcertDate(LocalDate.parse(date).atStartOfDay().toInstant(UTC)));
     }
 
     public LocalDate getUtcDate() {
