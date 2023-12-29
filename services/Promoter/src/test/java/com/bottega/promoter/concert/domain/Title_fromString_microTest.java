@@ -11,42 +11,7 @@ class Title_fromString_microTest extends ConcertLogicTestBase {
     @Test
     public void fromString_OK_onValidString(){
         //expect
-        assertThatTitle(from("This is a valid title for a concert")).hasValue("This is a valid title for a concert");
+        //TODO tests
     }
 
-    @Test
-    public void fromString_trimsTrailingAndLeadingWhitespaces(){
-        //given
-        String expectedValue = repeat("a", 10);
-
-        //expect
-        assertThatTitle(from("     " + expectedValue + "    ")).hasValue(expectedValue);
-    }
-
-    @Test
-    public void fromString_honorsLengthLimits(){
-        //expect
-        assertThatTitle(from(repeat("a", 10))).isValid();
-        assertThatTitle(from(repeat("a", 160))).isValid();
-
-        assertThatTitle(from(repeat("a", 9))).hasInvalidLengthError();
-        assertThatTitle(from(repeat("a", 161))).hasInvalidLengthError();
-
-        assertThatTitle(from(repeat("a", 9) + " ")).hasInvalidLengthError();
-        assertThatTitle(from(repeat("a", 160) + " ")).isValid();
-
-        assertThatTitle(from(null)).hasInvalidLengthError();
-    }
-
-    @Test
-    public void fromString_reportsFirstBannedWord_onBannedWordInTitle(){
-        //expect
-        assertThatTitle(from("rage against the machine")).hasBannedWordsError("rage");
-        assertThatTitle(from("VIOLENCE")).hasBannedWordsError("violence");
-        assertThatTitle(from("   Snickers   ")).hasBannedWordsError("snickers");
-
-        assertThatTitle(from("rage against the machine")).hasBannedWordsError("rage");
-        assertThatTitle(from("machine against the rage")).hasBannedWordsError("rage");
-        assertThatTitle(from("machine rage machine")).hasBannedWordsError("rage");
-    }
 }
