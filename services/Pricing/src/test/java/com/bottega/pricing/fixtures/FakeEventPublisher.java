@@ -20,6 +20,6 @@ public class FakeEventPublisher implements EventPublisher {
 
     public Event singleEvent() {
         Assertions.assertThat(events).hasSize(1);
-        return events.get(0);
+        return events.getFirst();
     }
 }

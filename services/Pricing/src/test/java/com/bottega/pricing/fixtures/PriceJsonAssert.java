@@ -3,14 +3,17 @@ package com.bottega.pricing.fixtures;
 import com.bottega.pricing.price.domain.ItemPrice;
 import io.restassured.response.ValidatableResponse;
 import lombok.RequiredArgsConstructor;
-
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.hamcrest.Matchers.*;
 
-@RequiredArgsConstructor(staticName = "assertThatPrice")
+@RequiredArgsConstructor
 public class PriceJsonAssert {
 
     private final ValidatableResponse response;
+
+    public static PriceJsonAssert assertThatPrice(ValidatableResponse response) {
+        return new PriceJsonAssert(response);
+    }
 
     public PriceJsonAssert hasSinglePrice(ItemPrice expectedPriceId, int priceValue) {
         response

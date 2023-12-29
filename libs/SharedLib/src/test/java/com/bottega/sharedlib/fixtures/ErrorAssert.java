@@ -2,15 +2,18 @@ package com.bottega.sharedlib.fixtures;
 
 import com.bottega.sharedlib.vo.error.*;
 import lombok.RequiredArgsConstructor;
-
 import static com.bottega.sharedlib.vo.error.ErrorType.NOT_FOUND;
 import static com.bottega.sharedlib.vo.error.GenericErrorCode.not_found;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RequiredArgsConstructor(staticName = "assertThatError")
+@RequiredArgsConstructor
 public class ErrorAssert {
 
     private final ErrorResult error;
+
+    public static ErrorAssert assertThatError(ErrorResult error) {
+        return new ErrorAssert(error);
+    }
 
     public ErrorAssert hasType(ErrorType expectedType) {
         assertThat(error.getType()).isEqualTo(expectedType);

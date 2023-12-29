@@ -3,13 +3,14 @@ package com.bottega.promoter.concert.api.app;
 import com.bottega.promoter.agreements.PromoterAgreement;
 import com.bottega.promoter.concert.domain.Concert;
 import com.bottega.promoter.concert.fixtures.ConcertLogicTestBase;
-import com.bottega.promoter.concert.fixtures.asserts.ConcertAssert;
 import com.bottega.promoter.concert.fixtures.clients.ConcertHttpClient;
-import com.bottega.sharedlib.fixtures.*;
+import com.bottega.sharedlib.fixtures.RepoEntries;
 import com.bottega.sharedlib.vo.error.ErrorResult;
 import io.vavr.control.Either;
 import org.assertj.vavr.api.VavrAssertions;
 import org.junit.jupiter.api.Test;
+import static com.bottega.promoter.concert.fixtures.ConcertCreatedEventAssert.assertThatEvent;
+import static com.bottega.promoter.concert.fixtures.asserts.ConcertAssert.assertThatConcert;
 import static com.bottega.sharedlib.config.TestClockConfig.TEST_TIME_PLUS_30_DAYS;
 import static org.assertj.vavr.api.VavrAssertions.assertThat;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -32,8 +33,7 @@ class ConcertService_createConcert_compTest extends ConcertLogicTestBase {
         //then
         VavrAssertions.assertThat(result).isRight();
 
-        ConcertAssert
-                .assertThatConcert(concertFixtures.concertRepo.findAll().iterator().next())
+        assertThatConcert(concertFixtures.concertRepo.findAll().iterator().next())
                 .isPersistedIn(concertFixtures.concertRepo, RepoEntries.SINGULAR)
                 .hasTitle(request.title)
                 .hasIdAsUUID()
@@ -52,7 +52,7 @@ class ConcertService_createConcert_compTest extends ConcertLogicTestBase {
 
         //then
         assertThat(result).isRight();
-        ConcertAssert.assertThatConcert(result.get())
+        assertThatConcert(result.get())
                 .isPersistedIn(concertFixtures.concertRepo, RepoEntries.SINGULAR);
     }
 
@@ -76,13 +76,8 @@ class ConcertService_createConcert_compTest extends ConcertLogicTestBase {
 
         //then
         assertThat(result).hasRightValueSatisfying(concert ->
-                EventAssert.assertThatEventV1(sharedFixtures.fakeEventPublisher().singleEvent())
-                        .isConcertCreated(
-                                concert.getId().asString(),
-                                concert.getTitle().getValue(),
-                                concert.getDate().getUtcDate().toString(),
-                                new String[]{},
-                                promoterAgreement.profitMarginPercentage())
+                assertThatEvent(sharedFixtures.fakeEventPublisher().singleEvent())
+                        .isConcertCreatedV1(concert, promoterAgreement.profitMarginPercentage())
         );
     }
 

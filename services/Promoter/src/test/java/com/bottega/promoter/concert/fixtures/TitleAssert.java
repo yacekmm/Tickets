@@ -9,10 +9,14 @@ import static com.bottega.sharedlib.vo.error.ErrorType.BAD_REQUEST;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.vavr.api.VavrAssertions.assertThat;
 
-@RequiredArgsConstructor(staticName = "assertThatTitle")
+@RequiredArgsConstructor
 public class TitleAssert {
 
     private final Validation<ErrorResult, Title> title;
+
+    public static TitleAssert assertThatTitle(Validation<ErrorResult, Title> title) {
+        return new TitleAssert(title);
+    }
 
 
     public TitleAssert hasValue(String expectedValue) {

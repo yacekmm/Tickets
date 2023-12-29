@@ -5,10 +5,14 @@ import com.bottega.sharedlib.vo.Money;
 import lombok.RequiredArgsConstructor;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RequiredArgsConstructor(staticName = "assertThatPrice")
+@RequiredArgsConstructor
 public class PriceAssert {
 
     private final Price price;
+
+    public static PriceAssert assertThatPrice(Price price) {
+        return new PriceAssert(price);
+    }
 
     public PriceAssert equalTo(Money priceValue) {
         assertThat(price.getPrice()).isEqualTo(priceValue);

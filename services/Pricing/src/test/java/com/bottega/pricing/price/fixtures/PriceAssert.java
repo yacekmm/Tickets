@@ -1,22 +1,23 @@
 package com.bottega.pricing.price.fixtures;
 
-import com.bottega.pricing.price.domain.ItemPrice;
-import com.bottega.pricing.price.domain.PriceFactor;
-import com.bottega.pricing.price.domain.PriceId;
+import java.util.List;
+import java.util.function.Consumer;
+
+import com.bottega.pricing.price.domain.*;
 import com.bottega.pricing.price.infra.repo.ItemPriceRepo;
 import com.bottega.sharedlib.fixtures.RepoEntries;
 import com.bottega.sharedlib.vo.Money;
 import lombok.RequiredArgsConstructor;
-
-import java.util.List;
-import java.util.function.Consumer;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RequiredArgsConstructor(staticName = "assertThatPrice")
+@RequiredArgsConstructor
 public class PriceAssert {
-    
+
     private final ItemPrice price;
+
+    public static PriceAssert assertThatPrice(ItemPrice price) {
+        return new PriceAssert(price);
+    }
 
     public PriceAssert isPersistedIn(ItemPriceRepo repo, RepoEntries entries) {
         assertThat(repo.findAll()).hasSize(entries.allEntriesCount());

@@ -35,6 +35,6 @@ public class TestKafkaEventListener {
 
     public Event singleEvent() {
         Awaitility.await().until(() -> receivedEvents.size() == 1);
-        return receivedEvents.get(0);
+        return receivedEvents.getFirst();
     }
 }

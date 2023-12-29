@@ -3,16 +3,19 @@ package com.bottega.sharedlib.fixtures;
 import com.bottega.sharedlib.vo.error.*;
 import io.restassured.response.ValidatableResponse;
 import lombok.RequiredArgsConstructor;
-
 import static com.bottega.sharedlib.vo.error.ErrorType.*;
 import static com.bottega.sharedlib.vo.error.GenericErrorCode.*;
 import static org.apache.http.HttpStatus.*;
 import static org.hamcrest.Matchers.equalTo;
 
-@RequiredArgsConstructor(staticName = "assertThatError")
+@RequiredArgsConstructor
 public class ErrorJsonAssert {
 
     private final ValidatableResponse errorResponse;
+
+    public static ErrorJsonAssert assertThatError(ValidatableResponse errorResponse) {
+        return new ErrorJsonAssert(errorResponse);
+    }
 
     public ErrorJsonAssert hasType(ErrorType expectedType) {
         errorResponse.statusCode(expectedType.getHttpStatus().value());

@@ -7,7 +7,9 @@ import com.bottega.promoter.fixtures.FrameworkTestBase;
 import com.bottega.sharedlib.fixtures.*;
 import io.restassured.response.ValidatableResponse;
 import org.junit.jupiter.api.Test;
+import static com.bottega.promoter.concert.fixtures.asserts.ConcertAssert.assertThatConcert;
 import static com.bottega.sharedlib.config.TestClockConfig.*;
+import static com.bottega.sharedlib.fixtures.ErrorJsonAssert.assertThatError;
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.hamcrest.Matchers.equalTo;
 
@@ -26,8 +28,7 @@ public class CreateConcertRestController_createConcert_restApiTest extends Frame
         response
                 .statusCode(SC_OK);
 
-        ConcertId concertId = ConcertAssert
-                .assertThatConcert(concertFixtures.concertRepo.findAll().iterator().next())
+        ConcertId concertId = assertThatConcert(concertFixtures.concertRepo.findAll().iterator().next())
                 .isPersistedIn(concertFixtures.concertRepo, RepoEntries.SINGULAR)
                 .hasTitle("default-mock-title")
                 .hasIdAsUUID()
@@ -49,7 +50,7 @@ public class CreateConcertRestController_createConcert_restApiTest extends Frame
         ValidatableResponse response = concertFixtures.concertHttpClient.createConcert(concertRequest);
 
         //then
-        ErrorJsonAssert.assertThatError(response)
+        assertThatError(response)
                 .isBadRequest("invalid_date");
     }
 

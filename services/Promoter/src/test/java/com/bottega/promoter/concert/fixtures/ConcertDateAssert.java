@@ -10,11 +10,14 @@ import static java.time.LocalDate.of;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.vavr.api.VavrAssertions.assertThat;
 
-@RequiredArgsConstructor(staticName = "assertThatConcertDate")
+@RequiredArgsConstructor
 public class ConcertDateAssert {
 
     private final Validation<ErrorResult, ConcertDate> concertDate;
 
+    public static ConcertDateAssert assertThatConcertDate(Validation<ErrorResult, ConcertDate> concertDate) {
+        return new ConcertDateAssert(concertDate);
+    }
 
     public ConcertDateAssert isEqualTo(int year, int month, int day) {
 
