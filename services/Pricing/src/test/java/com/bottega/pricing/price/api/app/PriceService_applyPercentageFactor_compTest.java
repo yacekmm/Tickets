@@ -42,6 +42,7 @@ class PriceService_applyPercentageFactor_compTest extends LogicTestBase {
 
     @Test
     void applyPercentageFactor_publishesPriceChangeEvent_onPriceChange() {
+        //given
         ItemPrice price = builders.aPrice().priceForItem(100_00, "item-id").inDb();
 
         //when
