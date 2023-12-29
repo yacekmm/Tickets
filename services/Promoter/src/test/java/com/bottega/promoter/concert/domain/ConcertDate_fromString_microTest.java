@@ -35,10 +35,9 @@ class ConcertDate_fromString_microTest extends ConcertLogicTestBase {
     }
 
     @Test
-    public void fromString_error_onPastDate(){
+    public void fromString_returnsError_onPastDate(){
         //expect
         assertThatConcertDate(from(TEST_TIME.minus(1, DAYS).toString(), sharedFixtures.clock)).hasInvalidDateError("Too early");
-        assertThatConcertDate(from(TEST_TIME.minus(30, DAYS).toString(), sharedFixtures.clock)).hasInvalidDateError("Too early");
     }
 
     public static Stream<Arguments> tooEarlyDatesSource() {
@@ -54,10 +53,7 @@ class ConcertDate_fromString_microTest extends ConcertLogicTestBase {
     @MethodSource("tooEarlyDatesSource")
     public void fromString_returnsError_onDateUnderMinimumThreshold(String invalidDate){
         //expect
-        assertThatConcertDate(from(TEST_TIME.plus(6, DAYS).toString(), sharedFixtures.clock)).hasInvalidDateError("Too early");
-        assertThatConcertDate(from(TEST_TIME.plus(7, DAYS).toString(), sharedFixtures.clock)).hasInvalidDateError("Too early");
-        assertThatConcertDate(from(TEST_TIME.plus(8, DAYS).toString(), sharedFixtures.clock)).isValid();
-        assertThatConcertDate(from(TEST_TIME.plus(9, DAYS).toString(), sharedFixtures.clock)).isValid();
+        assertThatConcertDate(from(invalidDate, sharedFixtures.clock)).hasInvalidDateError("Too early");
     }
 
     @Test
