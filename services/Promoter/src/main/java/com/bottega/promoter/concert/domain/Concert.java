@@ -52,10 +52,6 @@ public class Concert implements BaseEntity {
         return new PromoterId(promoterId);
     }
 
-
-    public void initNewConcert(TagService tagService, CategoryService categoryService) {
-        tags = tagService.tag(title);
-        category = categoryService.categorize(title);
-    }
+    //TODO method to init concert
 
 }
