@@ -4,15 +4,13 @@ import java.util.List;
 
 import com.bottega.pricing.fixtures.LogicTestBase;
 import com.bottega.pricing.price.domain.ItemPrice;
-import com.bottega.pricing.price.fixtures.*;
-import com.bottega.sharedlib.fixtures.*;
 import com.bottega.sharedlib.vo.error.ErrorResult;
 import io.vavr.control.Either;
 import org.junit.jupiter.api.Test;
+import static com.bottega.pricing.fixtures.PriceChangeEventAssert.assertThatEvent;
 import static com.bottega.pricing.price.fixtures.PriceAssert.assertThatPrice;
 import static com.bottega.pricing.price.fixtures.PriceFactorAssert.assertThatFactor;
 import static com.bottega.sharedlib.fixtures.ErrorAssert.assertThatError;
-import static com.bottega.sharedlib.fixtures.EventAssert.assertThatEventV1;
 import static com.bottega.sharedlib.fixtures.RepoEntries.SINGULAR;
 import static org.assertj.vavr.api.VavrAssertions.assertThat;
 import static org.mockito.BDDMockito.then;
@@ -51,8 +49,8 @@ class PriceService_applyPercentageFactor_compTest extends LogicTestBase {
 
         //then
         assertThat(result).isRight();
-        assertThatEventV1(sharedFixtures.fakeEventPublisher().singleEvent())
-                .isPriceChange(90_00, price.getId().asString(), price.getItemId());
+        assertThatEvent(sharedFixtures.fakeEventPublisher().singleEvent())
+                .isPriceChangeV1(result.get().getFirst());
     }
 
     @Test

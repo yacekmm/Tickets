@@ -1,14 +1,11 @@
 package com.bottega.pricing.initialPrice.api.event;
 
-import com.bottega.pricing.fixtures.FrameworkTestBase;
+import com.bottega.pricing.fixtures.*;
 import com.bottega.pricing.price.domain.ItemPrice;
-import com.bottega.pricing.price.fixtures.PriceAssert;
-import com.bottega.sharedlib.fixtures.EventAssert;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.contract.stubrunner.StubTrigger;
 import static com.bottega.pricing.price.fixtures.PriceAssert.assertThatPrice;
-import static com.bottega.sharedlib.fixtures.EventAssert.assertThatEventV1;
 import static com.bottega.sharedlib.fixtures.RepoEntries.SINGULAR;
 import static org.testcontainers.shaded.org.awaitility.Awaitility.await;
 
@@ -35,8 +32,8 @@ class InitialPriceEventListener_settleInitialPrice_eventContractApiTest extends 
                             .hasPrice(105_00)
                             .hasNoFactors();
 
-                    assertThatEventV1(sharedFixtures.testEventListener.singleEvent())
-                            .isPriceChange(actualPrice.getPrice().toInt(), actualPrice.getId().asString(), actualPrice.getItemId());
+                    PriceChangeEventAssert.assertThatEvent(sharedFixtures.testEventListener.singleEvent())
+                            .isPriceChangeV1(actualPrice);
                 }
         );
     }

@@ -5,8 +5,6 @@ import java.util.List;
 import com.bottega.promoter.concert.*;
 import com.bottega.promoter.concert.domain.Concert;
 import com.bottega.promoter.concert.fixtures.ConcertLogicTestBase;
-import com.bottega.promoter.concert.fixtures.asserts.PriceAssert;
-import com.bottega.sharedlib.fixtures.ErrorAssert;
 import com.bottega.sharedlib.vo.Money;
 import com.bottega.sharedlib.vo.error.ErrorResult;
 import io.vavr.control.Either;
@@ -32,7 +30,7 @@ class ConcertService_discountConcert_compTest extends ConcertLogicTestBase {
         //then
         assertThat(result).hasRightValueSatisfying(prices -> {
             Assertions.assertThat(prices).hasSize(1);
-            assertThatPrice(prices.get(0))
+            assertThatPrice(prices.getFirst())
                     .equalTo(new Money(90_00))
                     .hasFactors(new PriceFactor("PERCENTAGE", 10, null));
         });
