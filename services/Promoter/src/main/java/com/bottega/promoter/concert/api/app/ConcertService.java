@@ -25,8 +25,6 @@ public class ConcertService {
     private final ConcertRepo concertRepo;
     private final PricingClient pricingClient;
     private final EventPublisher eventPublisher;
-    private final TagService tagService;
-    private final CategoryService categoryService;
     private final PromoterService promoterService;
 
     public Either<ErrorResult, Concert> createConcert(String title, String dateTime, String promoterIdString) {
@@ -35,7 +33,7 @@ public class ConcertService {
             return Either.left(notFound(not_found, "Promoter contract not found for %s", promoterIdString));
         }
         return concertFactory.createConcert(title, dateTime, promoterAgreement.promoterId())
-                .peek(concert -> concert.initNewConcert(tagService, categoryService))
+                //TODO init concert
                 .map(concertRepo::save)
                 .peek(concert -> eventPublisher.publish(concertCreated(concert, promoterAgreement.profitMarginPercentage())));
     }
