@@ -12,5 +12,19 @@ import static org.assertj.vavr.api.VavrAssertions.assertThat;
 @RequiredArgsConstructor
 public class TitleAssert {
 
+    private final Validation<ErrorResult, Title> title;
+
+    public static TitleAssert assertThatTitle(Validation<ErrorResult, Title> title) {
+        return new TitleAssert(title);
+    }
+
+
+    public TitleAssert hasValue(String expectedValue) {
+
+        assertThat(title).isValid();
+        assertThat(title.get().getValue()).isEqualTo(expectedValue);
+        return this;
+    }
+
     //TODO implement
 }
