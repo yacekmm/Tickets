@@ -20,5 +20,20 @@ class ConcertDateAssertSpock extends Specification {
         new ConcertDateAssertSpock(actualConcertDate)
     }
 
-    //TODO assert methods
+
+    ConcertDateAssertSpock isEqualTo(LocalDate expectedDate) {
+        assert actualConcertDate.isValid()
+        assert actualConcertDate.get().utcDate == expectedDate
+        this
+    }
+
+    ConcertDateAssertSpock hasInvalidDateError(String expectedErrorDesc) {
+        assert actualConcertDate.isInvalid()
+        with(actualConcertDate.getError()) {
+            type == BAD_REQUEST
+            code == invalid_date
+            description == expectedErrorDesc
+        }
+        this
+    }
 }
