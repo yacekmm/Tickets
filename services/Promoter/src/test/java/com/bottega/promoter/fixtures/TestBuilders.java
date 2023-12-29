@@ -1,8 +1,6 @@
 package com.bottega.promoter.fixtures;
 
-import java.time.Clock;
-
-import com.bottega.promoter.concert.fixtures.ConcertBuilder;
+import com.bottega.promoter.concert.fixtures.Builder;
 import com.bottega.promoter.concert.infra.repo.ConcertRepo;
 import com.bottega.promoter.concertRead.ConcertFinderRepo;
 import com.bottega.sharedlib.config.ApiVersions;
@@ -11,6 +9,9 @@ import io.restassured.specification.RequestSpecification;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+
+import java.time.Clock;
+
 import static io.restassured.http.ContentType.JSON;
 
 @Component
@@ -24,8 +25,8 @@ public class TestBuilders {
     @Value("${server.port}")
     private int port;
 
-    public ConcertBuilder aConcert() {
-        return new ConcertBuilder(concertRepo, concertFinderRepo, clock);
+    public Builder aConcert() {
+        return new Builder(concertRepo, concertFinderRepo, clock);
     }
 
     public PromoterAgreementBuilder aPromoterAgreement() {
@@ -40,4 +41,6 @@ public class TestBuilders {
                 .basePath(ApiVersions.V1)
                 .contentType(JSON);
     }
+
+    //TODO: add method concert() returning new instance of ConcertBuilder
 }
