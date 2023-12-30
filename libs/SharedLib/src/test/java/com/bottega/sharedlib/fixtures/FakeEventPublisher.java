@@ -9,16 +9,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class FakeEventPublisher implements EventPublisher {
 
-    private List<Event> events = new ArrayList<>();
-
     @Override
     public Either<ErrorResult, String> publish(Event event) {
-        events.add(event);
+        //TODO store events for later assertion
         return Either.right(null);
     }
 
     public Event singleEvent() {
-        assertThat(events).hasSize(1);
-        return events.getFirst();
+        //TODO assert that there is only one event
+        //TODO return it
+        return null;
     }
 }
