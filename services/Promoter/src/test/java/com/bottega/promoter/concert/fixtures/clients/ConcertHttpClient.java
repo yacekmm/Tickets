@@ -32,7 +32,7 @@ public class ConcertHttpClient {
     public ValidatableResponse createConcert(ConcertRequest concertRequest) {
         return builders.aRequestSpec()
                 .body(Maps.of(
-                        "title", concertRequest.title,
+                        //TODO bug here might cause tests to fail. check logs
                         "date", LocalDate.ofInstant(concertRequest.date, UTC).atStartOfDay().toLocalDate().toString(),
                         "promoterId", concertRequest.promoterId
                 ))
