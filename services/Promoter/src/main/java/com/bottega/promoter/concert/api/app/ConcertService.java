@@ -30,8 +30,10 @@ public class ConcertService {
     private final PromoterService promoterService;
 
     public Either<ErrorResult, Concert> createConcert(String title, String dateTime, String promoterIdString) {
-        //TODO get promoter agreement from promoterService
-        PromoterAgreement promoterAgreement = null;
+        PromoterAgreement promoterAgreement = promoterService.getPromoterAgreement(promoterIdString);
+        if(promoterAgreement == null){
+            return Either.left(notFound(not_found, "Promoter contract not found for %s", promoterIdString));
+        }
         return concertFactory.createConcert(title, dateTime, promoterAgreement.promoterId())
                 .peek(concert -> concert.initNewConcert(tagService, categoryService))
                 .map(concertRepo::save)
