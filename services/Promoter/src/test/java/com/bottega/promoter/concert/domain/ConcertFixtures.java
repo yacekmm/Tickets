@@ -61,7 +61,8 @@ public class ConcertFixtures {
     }
 
     private static void initClients(ConcertFixtures concertFixtures) {
-        concertFixtures.pricingClient = new FakePricingClient();
+        //TODO initialize
+        concertFixtures.pricingClient = null;
     }
 
     private static void initMocks(ConcertFixtures concertFixtures) {
