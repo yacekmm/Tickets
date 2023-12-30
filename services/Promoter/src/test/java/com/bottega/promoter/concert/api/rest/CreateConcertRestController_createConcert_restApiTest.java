@@ -43,13 +43,15 @@ public class CreateConcertRestController_createConcert_restApiTest extends Frame
 
     @Test
     public void createConcert_returnsBadRequest_onDateTooSoon() {
-        //TODO implement
         //given
+        ConcertHttpClient.ConcertRequest concertRequest = ConcertHttpClient.ConcertRequest.builder().date(TEST_TIME).build();
 
         //when
+        ValidatableResponse response = concertFixtures.concertHttpClient.createConcert(concertRequest);
 
         //then
-
+        assertThatError(response)
+                .isBadRequest("invalid_date");
     }
 
 
