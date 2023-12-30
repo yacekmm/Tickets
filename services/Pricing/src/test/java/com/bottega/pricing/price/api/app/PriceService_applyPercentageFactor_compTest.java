@@ -28,7 +28,7 @@ class PriceService_applyPercentageFactor_compTest extends LogicTestBase {
         //then
         assertThat(result).hasRightValueSatisfying(itemPrices ->
                 assertThatPrice(itemPrices.getFirst())
-                        //TODO test persistence
+                        .isPersistedIn(priceFixtures.itemPriceRepo, SINGULAR)
                         .hasPrice(90_00)
                         .hasId(price.getId())
                         .hasItemId(price.getItemId())
@@ -42,9 +42,7 @@ class PriceService_applyPercentageFactor_compTest extends LogicTestBase {
 
     @Test
     void applyPercentageFactor_publishesPriceChangeEvent_onPriceChange() {
-        //given
-        //TODO persist price
-        ItemPrice price = builders.aPrice().priceForItem(100_00, "item-id").build();
+        ItemPrice price = builders.aPrice().priceForItem(100_00, "item-id").inDb();
 
         //when
         Either<ErrorResult, List<ItemPrice>> result = priceFixtures.priceService.applyPercentageFactor("item-id", 10);
@@ -58,8 +56,7 @@ class PriceService_applyPercentageFactor_compTest extends LogicTestBase {
     @Test
     void applyPercentageFactor_updatesReadModel_onPriceChange() {
         //given
-        //TODO persist price
-        ItemPrice price = builders.aPrice().priceForItem(100_00, "item-id").build();
+        ItemPrice price = builders.aPrice().priceForItem(100_00, "item-id").inDb();
 
         //when
         Either<ErrorResult, List<ItemPrice>> result = priceFixtures.priceService.applyPercentageFactor("item-id", 10);
@@ -72,9 +69,12 @@ class PriceService_applyPercentageFactor_compTest extends LogicTestBase {
     @Test
     void applyPercentageFactor_returnsError_onNoPriceFound() {
         //when
-        //TODO implement
+        Either<ErrorResult, List<ItemPrice>> result = priceFixtures.priceService.applyPercentageFactor("not-existing-id", 10);
 
         //then
-
+        assertThat(result)
+                .hasLeftValueSatisfying(err ->
+                        assertThatError(err)
+                                .isNotFound("No price entries found for requested item. itemId: not-existing-id"));
     }
 }
