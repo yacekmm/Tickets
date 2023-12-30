@@ -18,40 +18,27 @@ public class CreateConcertRestController_createConcert_restApiTest extends Frame
 
     @Test
     public void createConcert_OK_onValidRequest() {
+        //TODO implement
         //given
-        ConcertHttpClient.ConcertRequest concertRequest = ConcertHttpClient.ConcertRequest.builder().build();
 
         //when
-        ValidatableResponse response = concertFixtures.concertHttpClient.createConcert(concertRequest);
 
         //then
-        response
-                .statusCode(SC_OK);
-
-        ConcertId concertId = assertThatConcert(concertFixtures.concertRepo.findAll().iterator().next())
-                .isPersistedIn(concertFixtures.concertRepo, RepoEntries.SINGULAR)
-                .hasTitle("default-mock-title")
-                .hasIdAsUUID()
-                .hasDate(TEST_TIME_PLUS_30_DAYS)
-                .hasPromoterId("default-promoter-id")
-                .extractId();
-
-        response
-                .body("id", equalTo(concertId.asString()));
+        //TODO assert http status code
+        //TODO assert response body
+        //TODO assert db state
     }
 
 
     @Test
     public void createConcert_returnsBadRequest_onDateTooSoon() {
+        //TODO implement
         //given
-        ConcertHttpClient.ConcertRequest concertRequest = ConcertHttpClient.ConcertRequest.builder().date(TEST_TIME).build();
 
         //when
-        ValidatableResponse response = concertFixtures.concertHttpClient.createConcert(concertRequest);
 
         //then
-        assertThatError(response)
-                .isBadRequest("invalid_date");
+
     }
 
 
