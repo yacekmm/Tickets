@@ -22,12 +22,18 @@ class ConcertService_discountConcert_compTest extends ConcertLogicTestBase {
     @Test
     void discountConcert_discountsConcert_onValidInput() {
         //given
+        Concert concert = builders.aConcert().inDb();
 
         //when
-        //TODO call discountConcert on concertFixtures.concertService
+        Either<ErrorResult, List<Price>> result = concertFixtures.concertService.discountConcert(concert.getId().asString(), 10);
 
         //then
-        //TODO assert that Pricing was implicitly called to discount the price
+        assertThat(result).hasRightValueSatisfying(prices -> {
+            Assertions.assertThat(prices).hasSize(1);
+            assertThatPrice(prices.getFirst())
+                    .equalTo(new Money(90_00))
+                    .hasFactors(new PriceFactor("PERCENTAGE", 10, null));
+        });
     }
 
     @Test
