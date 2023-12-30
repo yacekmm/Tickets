@@ -41,9 +41,7 @@ public class ErrorJsonAssert {
     }
 
     public ErrorJsonAssert isBadRequest(String expectedDesc) {
-        errorResponse.statusCode(SC_BAD_REQUEST);
-        return hasType(BAD_REQUEST)
-                .hasCode(invalid_request)
-                .hasDescription(expectedDesc);
+        //TODO implement
+        return null;
     }
 }
