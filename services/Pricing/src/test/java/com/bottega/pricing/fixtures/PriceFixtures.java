@@ -39,8 +39,7 @@ public class PriceFixtures {
     }
 
     private static void initMocks(PriceFixtures priceFixtures) {
-        //TODO initialize
-        priceFixtures.priceUpdateService = null;
+        priceFixtures.priceUpdateService = mock(PriceUpdateService.class);
     }
 
     private static void initRepos(PriceFixtures priceFixtures) {
