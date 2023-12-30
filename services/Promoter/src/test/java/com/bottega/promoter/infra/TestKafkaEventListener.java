@@ -11,6 +11,7 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.messaging.Message;
 import org.springframework.stereotype.Component;
 import org.testcontainers.shaded.org.awaitility.Awaitility;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @Component
 @RequiredArgsConstructor
@@ -35,7 +36,8 @@ public class TestKafkaEventListener {
     }
 
     public Event singleEvent() {
-        Awaitility.await().until(() -> receivedEvents.size() == 1);
+        //TODO tests are unstable as kafka listener is not always ready
+        assertThat(receivedEvents).hasSize(1);
         return receivedEvents.getFirst();
     }
 }
