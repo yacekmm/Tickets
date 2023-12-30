@@ -55,7 +55,8 @@ public class ConcertFixtures {
     }
 
     private static void initInfrastructure(ConcertFixtures concertFixtures) {
-        concertFixtures.concertRepo = new InMemoryConcertRepo();
+        //TODO initialize repo
+        concertFixtures.concertRepo = null;
         concertFixtures.categoryRepo = new InMemoryCategoryRepo();
         concertFixtures.tagRepo = new InMemoryTagRepo();
     }

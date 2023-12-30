@@ -27,7 +27,8 @@ public class InMemoryRepo<E extends BaseEntity, ID extends AggregateId> implemen
 
     @Override
     public Optional<E> findById(ID id) {
-        return Optional.ofNullable(database.get(id));
+        //TODO implement
+        throw new RuntimeException("Not Implemented");
     }
 
     @Override
@@ -37,7 +38,8 @@ public class InMemoryRepo<E extends BaseEntity, ID extends AggregateId> implemen
 
     @Override
     public Iterable<E> findAll() {
-        return database.values();
+        //TODO implement
+        throw new RuntimeException("Not Implemented");
     }
 
     @Override
