@@ -36,7 +36,7 @@ public class ConcertService {
         }
         return concertFactory.createConcert(title, dateTime, promoterAgreement.promoterId())
                 .peek(concert -> concert.initNewConcert(tagService, categoryService))
-                //TODO: save in repo
+                .map(concertRepo::save)
                 .peek(concert -> eventPublisher.publish(concertCreated(concert, promoterAgreement.profitMarginPercentage())));
     }
 
