@@ -65,8 +65,7 @@ public class ConcertFixtures {
     }
 
     private static void initMocks(ConcertFixtures concertFixtures) {
-        //TODO initialize
-        concertFixtures.promoterService = null;
+        concertFixtures.promoterService = Mockito.mock(PromoterService.class);
     }
 
     private static void initServices(ConcertFixtures concertFixtures) {

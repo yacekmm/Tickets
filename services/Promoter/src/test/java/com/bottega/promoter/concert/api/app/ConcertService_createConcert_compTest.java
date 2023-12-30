@@ -19,7 +19,6 @@ import static org.mockito.BDDMockito.given;
 
 class ConcertService_createConcert_compTest extends ConcertLogicTestBase {
 
-
     @Test
     void createConcert_OK() {
         //given
@@ -34,7 +33,6 @@ class ConcertService_createConcert_compTest extends ConcertLogicTestBase {
         //then
         VavrAssertions.assertThat(result).isRight();
 
-        //TODO fix test
         assertThatConcert(concertFixtures.concertRepo.findAll().iterator().next())
                 .isPersistedIn(concertFixtures.concertRepo, RepoEntries.SINGULAR)
                 .hasTitle(request.title)
@@ -61,10 +59,10 @@ class ConcertService_createConcert_compTest extends ConcertLogicTestBase {
     @Test
     void createConcert_returnsError_onPromoterIdNotFound() {
         //when
-        //TODO test
+        Either<ErrorResult, Concert> result = concertFixtures.concertService.createConcert("Woodstock 2000", TEST_TIME_PLUS_30_DAYS.toString(), "non-existing");
 
         //then
-
+        assertThat(result).isLeft();
     }
 
     @Test
