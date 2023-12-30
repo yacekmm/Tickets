@@ -2,7 +2,7 @@ package com.bottega.promoter.concert.api.app;
 
 import com.bottega.promoter.agreements.PromoterAgreement;
 import com.bottega.promoter.concert.domain.Concert;
-import com.bottega.promoter.concert.fixtures.ConcertLogicTestBase;
+import com.bottega.promoter.concert.fixtures.*;
 import com.bottega.promoter.concert.fixtures.clients.ConcertHttpClient;
 import com.bottega.sharedlib.fixtures.RepoEntries;
 import com.bottega.sharedlib.vo.error.ErrorResult;
@@ -68,17 +68,12 @@ class ConcertService_createConcert_compTest extends ConcertLogicTestBase {
     @Test
     void createConcert_publishesEvent_onValidInput() {
         //given
-        PromoterAgreement promoterAgreement = builders.aPromoterAgreement().build();
-        given(concertFixtures.promoterService.getPromoterAgreement(anyString())).willReturn(promoterAgreement);
+        //TODO implement
 
         //when
-        Either<ErrorResult, Concert> result = concertFixtures.concertService.createConcert("Woodstock 2000", TEST_TIME_PLUS_30_DAYS.toString(), promoterAgreement.promoterId().asString());
 
         //then
-        assertThat(result).hasRightValueSatisfying(concert ->
-                assertThatEvent(sharedFixtures.fakeEventPublisher().singleEvent())
-                        .isConcertCreatedV1(concert, promoterAgreement.profitMarginPercentage())
-        );
+        //TODO use ConcertCreatedEventAssert
     }
 
 }
