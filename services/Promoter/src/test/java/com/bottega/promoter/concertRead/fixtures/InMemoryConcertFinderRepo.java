@@ -15,7 +15,7 @@ public class InMemoryConcertFinderRepo
     public List<Concert> findByPromoterIdOrderByDateAsc(String promoterId) {
         return database.values().stream()
                 .filter(concert -> concert.promoterId().getValue().equals(promoterId))
-                //TODO method signature says it should be sorted...
+                .sorted(comparing(concert -> concert.getDate().getUtcDate()))
                 .toList();
     }
 }
