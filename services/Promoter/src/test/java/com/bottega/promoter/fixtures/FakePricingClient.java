@@ -14,13 +14,7 @@ public class FakePricingClient implements PricingClient {
 
     @Override
     public Either<ErrorResult, List<Price>> applyPercentageDiscount(ConcertId itemId, int percentage) {
-        return Either.right(
-                of(new Price(
-                        new Money(90_00),
-                        of(new PriceFactor(
-                                "PERCENTAGE",
-                                percentage,
-                                null))))
-        );
+        //TODO implement returning fake result
+        return null;
     }
 }
