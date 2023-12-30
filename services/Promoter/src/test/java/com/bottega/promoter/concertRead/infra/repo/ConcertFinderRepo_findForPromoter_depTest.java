@@ -18,8 +18,7 @@ public class ConcertFinderRepo_findForPromoter_depTest extends FrameworkTestBase
 
     @BeforeEach
     void setUp() {
-        fakeRepo = new InMemoryConcertFinderRepo();
-        realRepo = concertReadFixtures.concertFinderRepo;
+        //TODO initialize both repos
     }
 
     @Test
@@ -29,15 +28,13 @@ public class ConcertFinderRepo_findForPromoter_depTest extends FrameworkTestBase
         Concert concert_2 = builders.aConcert().withDate(TEST_TIME_PLUS_60_DAYS).withPromoterId("promoter").inFinderDb();
         Concert other = builders.aConcert().withPromoterId("other").inDb();
 
-        fakeRepo.saveAll(of(concert_1, concert_2, other));
-        realRepo.saveAll(of(concert_1, concert_2, other));
+        //TODO save all concerts in both repos
 
         //when
-        List<Concert> fakeRepoResult = fakeRepo.findByPromoterIdOrderByDateAsc("promoter");
-        List<Concert> realRepoResult = realRepo.findByPromoterIdOrderByDateAsc("promoter");
+        //TODO call findForPromoter on both repos
 
         //then
-        assertThat(fakeRepoResult).containsExactlyElementsOf(realRepoResult);
+        //TODO compare results
     }
 
 }
