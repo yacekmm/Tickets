@@ -2,6 +2,7 @@ package com.bottega.pricing.fixtures;
 
 import com.bottega.pricing.infra.TestKafkaEventListener;
 import com.bottega.sharedlib.event.EventPublisher;
+import com.bottega.sharedlib.fixtures.FakeEventPublisher;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
