@@ -57,11 +57,14 @@ class PriceService_applyPercentageFactor_compTest extends LogicTestBase {
     @Test
     void applyPercentageFactor_updatesReadModel_onPriceChange() {
         //given
-        //TODO test
+        ItemPrice price = builders.aPrice().priceForItem(100_00, "item-id").inDb();
 
         //when
+        Either<ErrorResult, List<ItemPrice>> result = priceFixtures.priceService.applyPercentageFactor("item-id", 10);
 
         //then
+        assertThat(result).isRight();
+        then(priceFixtures.priceUpdateService).should().updateReadModel(price);
     }
 
     @Test
