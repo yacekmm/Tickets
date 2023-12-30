@@ -12,12 +12,14 @@ class KafkaEventPublisher_publish_depTest extends FrameworkTestBase {
     @Test
     public void publishEvent_OK(){
         //given
-        //TODO prepare event with PromoterEventFactory
+        Concert concert = builders.aConcert().build();
+        Event concertCreated = concertCreated(concert, 2);
 
         //when
-        //TODO publish event with sharedFixtures.eventPublisher
+        sharedFixtures.eventPublisher.publish(concertCreated);
 
         //then
-        //TODO assert event was received sharedFixtures.testKafkaListener and ConcertCreatedEventAssert
+        ConcertCreatedEventAssert.assertThatEvent(sharedFixtures.testKafkaListener.singleEvent())
+                .isConcertCreatedV1(concert, 2);
     }
 }
