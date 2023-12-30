@@ -34,6 +34,7 @@ class ConcertService_createConcert_compTest extends ConcertLogicTestBase {
         VavrAssertions.assertThat(result).isRight();
 
         assertThatConcert(concertFixtures.concertRepo.findAll().iterator().next())
+                .isPersistedIn(concertFixtures.concertRepo, RepoEntries.SINGULAR)
                 .hasTitle(request.title)
                 .hasIdAsUUID()
                 .hasDate(TEST_TIME_PLUS_30_DAYS)
@@ -43,12 +44,16 @@ class ConcertService_createConcert_compTest extends ConcertLogicTestBase {
     @Test
     void createConcert_persistsConcert_onValidInput() {
         //given
-        //TODO test that concert is persisted in repo
+        PromoterAgreement promoterAgreement = builders.aPromoterAgreement().build();
+        given(concertFixtures.promoterService.getPromoterAgreement(anyString())).willReturn(promoterAgreement);
 
         //when
+        Either<ErrorResult, Concert> result = concertFixtures.concertService.createConcert("Woodstock 2000", TEST_TIME_PLUS_30_DAYS.toString(), promoterAgreement.promoterId().asString());
 
         //then
-
+        assertThat(result).isRight();
+        assertThatConcert(result.get())
+                .isPersistedIn(concertFixtures.concertRepo, RepoEntries.SINGULAR);
     }
 
     @Test
