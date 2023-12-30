@@ -14,7 +14,8 @@ public class ItemPriceRepo_saveAll_depTest extends FrameworkTestBase {
 
     @BeforeEach
     void setUp() {
-        //TODO initialize both repos
+        fakeRepo = new InMemoryItemPriceRepo();
+        realRepo = priceFixtures.itemPriceRepo;
     }
 
     @Test
@@ -24,10 +25,15 @@ public class ItemPriceRepo_saveAll_depTest extends FrameworkTestBase {
         ItemPrice otherPrice = builders.aPrice().priceForItem(100_00, "otherId").build();
 
         //when
-        //TODO save in both repos
+        fakeRepo.saveAll(of(itemPrice, otherPrice));
+        realRepo.saveAll(of(itemPrice, otherPrice));
 
         //then
+        assertThat(realRepo.findByItemId("item-id")).containsExactlyInAnyOrder(itemPrice);
+        assertThat(realRepo.findAll()).containsExactlyInAnyOrder(itemPrice, otherPrice);
 
+        assertThat(fakeRepo.findByItemId("item-id")).containsExactlyInAnyOrder(itemPrice);
+        assertThat(fakeRepo.findAll()).containsExactlyInAnyOrder(itemPrice, otherPrice);
     }
 
 }
