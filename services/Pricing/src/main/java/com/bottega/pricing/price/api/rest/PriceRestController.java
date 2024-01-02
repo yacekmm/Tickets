@@ -15,16 +15,15 @@ public class PriceRestController {
 
     private final PriceService priceService;
 
-    @PostMapping(path = V1 + "/item/{itemId}/price-factor/percentage")
+    //TODO specify path
     @ResponseBody
     @Transactional
     public List<PriceWithFactorsDto> applyPercentageFactor(
             @PathVariable("itemId") String itemId,
             @RequestBody PercentageFactorRequestDto factorRequestDto) {
 
-        return priceService.applyPercentageFactor(itemId, factorRequestDto.percentage())
-                .map(itemPrices -> itemPrices.stream().map(PriceWithFactorsDto::from).toList())
-                .getOrElseThrow(ErrorResult::toException);
+        //TODO implement API to satisfy contract requested by consumer
+        return null;
     }
 
 }

@@ -10,7 +10,7 @@ public class PromoterPercentageDiscountBase extends CdcFrameworkTestBase {
 
     @BeforeEach
     void setUp() {
-        price = builders.aPrice().priceForItem(100_00, UUIDs.zeros()).inDb();
+        //TODO contract expects system in specific state. Setup this state here
     }
 
 }
