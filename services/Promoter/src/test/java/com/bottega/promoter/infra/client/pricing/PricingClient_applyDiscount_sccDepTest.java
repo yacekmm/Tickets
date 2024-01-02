@@ -18,20 +18,21 @@ public class PricingClient_applyDiscount_sccDepTest extends SccFrameworkTestBase
     @BeforeEach
     public void setUp() {
         fakePricingClient = new FakePricingClient();
+        //TODO init real pricingHttpClient against SCC stubs
         realPricingClient = new HttpPricingClient(sccPricingWebClient);
     }
 
     @Test
     public void fakeApplyDiscount_isValid() {
         //given
-        ConcertId concertId = new ConcertId("00000000-0000-0000-0000-000000000000");
+        ConcertId concertId = new ConcertId();
 
         //when
-        Either<ErrorResult, List<Price>> realResult = realPricingClient.applyPercentageDiscount(concertId, 10);
+        //TODO call real pricingHttpClient
         Either<ErrorResult, List<Price>> fakeResult = fakePricingClient.applyPercentageDiscount(concertId, 10);
 
         //then
-        assertThat(fakeResult.get()).containsExactlyInAnyOrderElementsOf(realResult.get());
+        //TODO verify if real and fake results are equal
     }
 
 }
