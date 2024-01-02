@@ -9,10 +9,11 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @ExtendWith(PactConsumerTestExt.class)
-@PactTestFor(providerName = "Tickets.Pricing", port = "8181", pactVersion = PactSpecVersion.V3)
+@PactTestFor(providerName = PactFrameworkTestBase.PROVIDER_PRICING, port = "8181", pactVersion = PactSpecVersion.V3)
 public class PactFrameworkTestBase extends FrameworkTestBase {
 
     public static final String CONSUMER_PROMOTER = "Tickets.Promoter";
+    public static final String PROVIDER_PRICING = "Tickets.Pricing";
 
     @Autowired
     protected PricingPactFixtures pricingPactFixtures;
