@@ -9,7 +9,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import static com.bottega.sharedlib.repo.MoneyDbEntity.from;
 import static jakarta.persistence.CascadeType.ALL;
-import static jakarta.persistence.FetchType.LAZY;
+import static jakarta.persistence.FetchType.*;
 import static lombok.AccessLevel.NONE;
 
 @AggregateRoot
@@ -34,7 +34,7 @@ public class ItemPrice implements BaseEntity {
     @Column(name = "item_id")
     private String itemId;
 
-    @OneToMany(fetch = LAZY, cascade = ALL)
+    @OneToMany(fetch = EAGER, cascade = ALL)
     private List<PriceFactor> priceFactors;
 
     public static ItemPrice create(String itemId, Money price) {

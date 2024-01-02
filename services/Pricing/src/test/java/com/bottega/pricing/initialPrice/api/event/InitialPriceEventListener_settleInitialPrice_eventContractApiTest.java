@@ -23,19 +23,15 @@ class InitialPriceEventListener_settleInitialPrice_eventContractApiTest extends 
         //then
         await().until(() -> priceFixtures.itemPriceRepo.findAll().iterator().hasNext());
 
-        sharedFixtures.inTransaction(() -> {
+        ItemPrice actualPrice = priceFixtures.itemPriceRepo.findAll().iterator().next();
 
-                    ItemPrice actualPrice = priceFixtures.itemPriceRepo.findAll().iterator().next();
+        assertThatPrice(actualPrice)
+                .isPersistedIn(priceFixtures.itemPriceRepo, SINGULAR)
+                .hasPrice(105_00)
+                .hasNoFactors();
 
-                    assertThatPrice(actualPrice)
-                            .isPersistedIn(priceFixtures.itemPriceRepo, SINGULAR)
-                            .hasPrice(105_00)
-                            .hasNoFactors();
-
-                    PriceChangeEventAssert.assertThatEvent(sharedFixtures.testEventListener.singleEvent())
-                            .isPriceChangeV1(actualPrice);
-                }
-        );
+        PriceChangeEventAssert.assertThatEvent(sharedFixtures.testEventListener.singleEvent())
+                .isPriceChangeV1(actualPrice);
     }
 
 

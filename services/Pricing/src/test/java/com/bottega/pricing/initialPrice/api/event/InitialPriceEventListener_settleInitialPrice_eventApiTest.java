@@ -18,13 +18,11 @@ class InitialPriceEventListener_settleInitialPrice_eventApiTest extends Framewor
 
         //then
         await().until(() -> !priceFixtures.itemPriceRepo.findByItemId(payload.concertId()).isEmpty());
-        sharedFixtures.inTransaction(() ->
-                assertThatPrice(priceFixtures.itemPriceRepo.findByItemId(payload.concertId()).getFirst())
-                        .isPersistedIn(priceFixtures.itemPriceRepo, SINGULAR)
-                        .hasItemId(payload.concertId())
-                        .hasPrice(105_00)
-                        .hasNoFactors()
-        );
+        assertThatPrice(priceFixtures.itemPriceRepo.findByItemId(payload.concertId()).getFirst())
+                .isPersistedIn(priceFixtures.itemPriceRepo, SINGULAR)
+                .hasItemId(payload.concertId())
+                .hasPrice(105_00)
+                .hasNoFactors();
     }
 
 }
