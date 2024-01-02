@@ -152,6 +152,25 @@ There are Consumer, Provider and Pact Broker contracts verified using Pact Flow.
 - provider tests have suffix `pact*Test`
 - consumer tests are annotated with `@PactTestFor`
 
+#### Set credentials in env vars
+
+Pact Broker is secured. Credentials are stored as environment variables. To set them execute:
+
+##### Linux
+
+```shell
+export VAR_NAME="<value>"     # add this line to /etc/profile to make it persistent
+source ~/.bashrc              # reload new vars into current session
+printenv VAR_NAME             # check if variable is set
+```
+
+##### Windows
+
+```powershell
+$env:VAR_NAME="<value>"
+$env:VAR_NAME                 # check if variable is set
+```
+
 # Branching and Tagging
 
 Complete solution is on the `main` branch. Training assignments use tags corresponding to the tasks and their steps.
