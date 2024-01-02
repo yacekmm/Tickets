@@ -24,14 +24,14 @@ public class PricingClient_applyDiscount_pactDepTest extends PactFrameworkTestBa
     @Test
     public void fakeApplyDiscount_isValid() {
         //given
-        ConcertId concertId = new ConcertId("does contract expect something specific?");
+        ConcertId concertId = new ConcertId("123");
 
         //when
-        //TODO: get realResult from realPricingClient
+        Either<ErrorResult, List<Price>> realResult = realPricingClient.applyPercentageDiscount(concertId, 10);
         Either<ErrorResult, List<Price>> fakeResult = fakePricingClient.applyPercentageDiscount(concertId, 10);
 
         //then
-        //TODO assert that real and fake results are equal
+        assertThat(fakeResult.get()).containsExactlyInAnyOrderElementsOf(realResult.get());
     }
 
 }
