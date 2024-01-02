@@ -8,6 +8,10 @@ public class MessagingConcertCreatedBase extends CdcFrameworkTestBase {
 
 
     protected void createConcert(String title, String dateString, String promoterId) {
-        //TODO: implement code creating concert, to trigger CONCERT_CREATED event
+        concertFixtures.concertHttpClient.createConcert(builder()
+                .title(title)
+                .date(parse(dateString).atStartOfDay().toInstant(UTC))
+                .promoterId(promoterId)
+                .build());
     }
 }
