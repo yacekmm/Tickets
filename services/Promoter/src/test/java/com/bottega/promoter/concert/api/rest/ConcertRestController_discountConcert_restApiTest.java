@@ -11,7 +11,6 @@ import static org.hamcrest.Matchers.*;
 public class ConcertRestController_discountConcert_restApiTest extends PactFrameworkTestBase {
 
     @Test
-    @PactTestFor(pactMethod = "applyPercentageDiscount")
     public void discountConcert_discounts_onValidRequest() {
         Concert concert = builders.aConcert().withId("123").inDb();
 
