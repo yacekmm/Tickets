@@ -30,7 +30,8 @@ class InitialPriceEventListener_settleInitialPrice_eventContractApiTest extends 
                 .hasPrice(105_00)
                 .hasNoFactors();
 
-        //TODO assert that PriceChange event is published with PriceChangeEventAssert
+        PriceChangeEventAssert.assertThatEvent(sharedFixtures.testEventListener.singleEvent())
+                .isPriceChangeV1(actualPrice);
     }
 
 
