@@ -18,14 +18,17 @@ class InitialPriceEventListener_settleInitialPrice_eventContractApiTest extends 
     public void settleInitialPrice_createsPrice_OnContractTest() {
 
         //when
-        //TODO trigger stub named "triggerConcertCreatedEvent" with StubTrigger
+        trigger.trigger("triggerConcertCreatedEvent");
 
         //then
-        //TODO wait with Awaitility until price is persisted in priceFixtures.itemPriceRepo
+        await().until(() -> priceFixtures.itemPriceRepo.findAll().iterator().hasNext());
 
         ItemPrice actualPrice = priceFixtures.itemPriceRepo.findAll().iterator().next();
 
-        //TODO assert that actualPrice is equal to 105_00 with no factor, using PriceAssert
+        assertThatPrice(actualPrice)
+                .isPersistedIn(priceFixtures.itemPriceRepo, SINGULAR)
+                .hasPrice(105_00)
+                .hasNoFactors();
 
         //TODO assert that PriceChange event is published with PriceChangeEventAssert
     }
