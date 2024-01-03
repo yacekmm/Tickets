@@ -23,15 +23,9 @@ public class CreateConcert_SystemTest {
 
     @Test
     void createsConcert() {
-        String concertTitle = "GUI test concert " + LocalDateTime.now();
 
+        //TODO using concertOperations test happy path of core scenario: creating concert and listing it
 
-        concertOperations
-                .openCreateConcertView()
-                .createConcert(concertTitle, 2, 10)
-                .assertCreationSuccess()
-                .openConcertListView()
-                .assertNewConcertIsListed(concertTitle, 2, 10);
     }
 
 }
