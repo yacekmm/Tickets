@@ -1,34 +1,39 @@
-import {BrowserTools} from "../shared/browser-tools";
-import {ConcertOperations} from "./concert-operations";
+import {browser, By, element, protractor} from "protractor";
 
 describe('ui', () => {
 
-  let browserTools: BrowserTools
-  let concertOperations: ConcertOperations
-
   beforeEach(() => {
-    browserTools = new BrowserTools();
-    browserTools.initBrowser();
-    concertOperations = new ConcertOperations(browserTools);
+    browser.ignoreSynchronization = true;
+    browser.get('http://localhost:4200/');
   });
 
   it('opens page', () => {
-    concertOperations
-      .assertPageIsOpened();
+    browser.driver.getTitle().then(pageTitle => expect(pageTitle).toEqual('Promoter Platform'));
   });
 
   it('creates concert', function () {
-    concertOperations
-      .openAddConcert()
-      .createConcert()
-      .assertCreateConcertSuccess()
+    element(By.id("menu-concerts-add")).click()
+    element(By.id("input-concert-title")).sendKeys("concert Title");
+    element(By.id("create-concert-submit")).click();
+    let successConfirmation = element(By.className("mat-simple-snackbar"));
+    let expected = protractor.ExpectedConditions;
+    browser.wait(expected.visibilityOf(successConfirmation))
+      .then(unused =>
+        expect(successConfirmation.isDisplayed()).toBeTruthy()
+      );
   });
 
   it('lists stub concerts', () => {
-    concertOperations
-      .openConcertsList()
-      .assertAllConcertsListed(['Rihanna in Rome', 'Rock concert 2'])
+    element(By.id("menu-concerts-list")).click();
+
+    element.all(By.className('mat-row'))
+      .all(By.className('concert-title'))
+      .getText()
+      .then(value =>
+        expect(value).toEqual(['Rihanna in Rome', 'Rock concert 2'])
+      );
   });
+
 
 });
 
