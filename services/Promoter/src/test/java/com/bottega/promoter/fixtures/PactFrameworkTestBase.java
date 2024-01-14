@@ -5,6 +5,7 @@ import au.com.dius.pact.consumer.junit5.*;
 import au.com.dius.pact.core.model.*;
 import au.com.dius.pact.core.model.annotations.Pact;
 import com.bottega.promoter.concert.fixtures.PricingPactFixtures;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -17,6 +18,12 @@ public class PactFrameworkTestBase extends FrameworkTestBase {
 
     @Autowired
     protected PricingPactFixtures pricingPactFixtures;
+
+    @BeforeEach
+    void setUp() {
+        super.beforeEach();
+        System.setProperty("pact.rootDir", "build/pacts");
+    }
 
     @Pact(consumer = CONSUMER_PROMOTER)
     public RequestResponsePact applyPercentageDiscount(PactDslWithProvider builder) {
