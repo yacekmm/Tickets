@@ -25,6 +25,7 @@ public class Pricing_providesApiContract_pactApiTest extends FrameworkTestBase {
         System.setProperty("pact.verifier.publishResults", "true"); // Should only be enabled in CI.
         System.setProperty("pact.provider.version", gitProperties.getShortCommitId());
         System.setProperty("pact.provider.tag", gitProperties.getBranch());
+        System.setProperty("pact.rootDir", "build/pacts");
     }
 
     @TestTemplate
