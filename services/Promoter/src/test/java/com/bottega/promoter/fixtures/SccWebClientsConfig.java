@@ -10,6 +10,7 @@ import static com.bottega.sharedlib.config.CdcStubs.SCC_PRICING_PORT;
 public class SccWebClientsConfig {
 
     @Bean
+    @Primary
     public WebClient sccPricingWebClient(ServicesProperties servicesProperties) {
         return WebClientsConfig.buildPricingWebClient(servicesProperties.getPricing().host(), SCC_PRICING_PORT);
     }

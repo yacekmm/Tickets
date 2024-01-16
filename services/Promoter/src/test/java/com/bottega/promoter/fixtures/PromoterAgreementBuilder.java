@@ -9,7 +9,7 @@ public class PromoterAgreementBuilder {
     public PromoterAgreementBuilder() {
         this.builder = PromoterAgreement.builder()
                 .promoterId(new PromoterId("some-promoterId"))
-                .profitMarginPercentage(33);
+                .profitMarginPercentage(5);
     }
 
     public PromoterAgreementBuilder forPromoter(String promoterId){
