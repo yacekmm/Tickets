@@ -56,7 +56,4 @@ jobs:
             -e PACT_BROKER_BASE_URL=$PACT_BROKER_BASE_URL \
             -e PACT_BROKER_TOKEN=$PACT_BROKER_TOKEN \
             pactfoundation/pact-cli:latest \
-            broker record-deployment 
-            --pacticipant "Tickets.Promoter" 
-            --version ${{ github.sha }} 
-            --environment dev
+            broker record-deployment --pacticipant "Tickets.Promoter" --version ${{ github.sha }} --environment dev
