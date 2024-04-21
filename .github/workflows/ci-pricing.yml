@@ -2,6 +2,10 @@ name: Pricing CI
 
 on: [push]
 
+env:
+  PACT_BROKER_BASE_URL: ${{ vars.PACT_BROKER_BASE_URL }}
+  PACT_BROKER_TOKEN: ${{ secrets.PACT_BROKER_TOKEN }}
+
 jobs:
   build:
 
@@ -22,14 +26,14 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@417ae3ccd767c252f5661f1ace9f835f9654f2b5 # v3.1.0
 
-      - name: Publish Promoter contract
-        run: >-
-          cd services/Promoter &&
-          ./gradlew publishToMavenLocal
+#      - name: Publish Promoter contract
+#        run: >-
+#          cd services/Promoter &&
+#          ./gradlew publishToMavenLocal
       - name: Test
         run: >-
           cd services/Pricing &&
           ./gradlew --console verbose \
-          -DPACT_BROKER_URL=$PACT_BROKER_URL \
-          -DPACT_BROKER_TOKEN=$PACT_BROKER_TOKEN \
+#          -DPACT_BROKER_URL=$PACT_BROKER_URL \
+#          -DPACT_BROKER_TOKEN=$PACT_BROKER_TOKEN \
           test 
