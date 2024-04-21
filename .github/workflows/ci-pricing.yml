@@ -30,10 +30,8 @@ jobs:
         run: >-
           cd services/Promoter &&
           ./gradlew publishToMavenLocal
+
       - name: Test
         run: >-
           cd services/Pricing &&
-          ./gradlew --console verbose \
-#          -DPACT_BROKER_URL=$PACT_BROKER_URL \
-#          -DPACT_BROKER_TOKEN=$PACT_BROKER_TOKEN \
-          test 
+          ./gradlew test --console verbose
