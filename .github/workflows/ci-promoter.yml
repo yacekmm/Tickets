@@ -42,4 +42,4 @@ jobs:
           cd services/Promoter &&
           ./gradlew pactPublish \
           -Dpact.publish.consumer.version=${{ github.sha }} \
-          -Dpact.publish.consumer.branchName=${{ github.ref }}
+          -Dpact.publish.consumer.branchName=${{ github.ref_name }}
