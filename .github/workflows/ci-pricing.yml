@@ -1,4 +1,4 @@
-name: libs/SharedLib CI
+name: Pricing CI
 
 on: [push]
 
