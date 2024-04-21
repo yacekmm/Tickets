@@ -80,6 +80,7 @@ jobs:
             pactfoundation/pact-cli:1.1.0.0 \
             broker record-deployment --pacticipant="Tickets.Pricing" --environment=dev --version=${{ github.sha }}
 
+
   prod-deployment:
     needs: dev-deployment
     runs-on: ubuntu-latest
@@ -105,3 +106,11 @@ jobs:
             -e PACT_BROKER_TOKEN=$PACT_BROKER_TOKEN \
             pactfoundation/pact-cli:1.1.0.0 \
             broker record-deployment --pacticipant="Tickets.Pricing" --environment=prod --version=${{ github.sha }}
+
+      - name: Record Pact release to prod
+        run: >-
+          docker run --rm \
+            -e PACT_BROKER_BASE_URL=$PACT_BROKER_BASE_URL \
+            -e PACT_BROKER_TOKEN=$PACT_BROKER_TOKEN \
+            pactfoundation/pact-cli:1.1.0.0 \
+            broker record-release --pacticipant="Tickets.Pricing" --environment=prod --version=${{ github.sha }}
