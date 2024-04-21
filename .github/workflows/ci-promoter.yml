@@ -35,7 +35,13 @@ jobs:
       - name: Test
         run: >-
           cd services/Promoter &&
-          ./gradlew test
+          ./gradlew 
+          -Ppact.verifier.publishResults=true
+          -Ppact.provider.version=${{ github.sha }}
+          -Ppact.provider.branchName=${{ github.ref_name }}
+          -Ppact.provider.tag=${{ github.ref_name }}
+          -Ppact.rootDir=build/pacts
+          test
 
       - name: Publish Promoter Pact
         run: >-
@@ -74,7 +80,7 @@ jobs:
             broker record-deployment --pacticipant="Tickets.Promoter" --environment=dev --version=${{ github.sha }}
 
   prod-deployment:
-    needs: build
+    needs: dev-deployment
     runs-on: ubuntu-latest
     environment: prod
     steps:

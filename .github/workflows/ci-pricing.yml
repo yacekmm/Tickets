@@ -54,3 +54,54 @@ jobs:
             pactfoundation/pact-cli:1.1.0.0 \
             broker publish ${PWD}/services/Pricing/build/pacts --consumer-app-version=${{ github.sha }} --branch=${{github.ref_name}} --tag-with-git-branch
 
+  dev-deployment:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: dev
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Can I deploy to dev?
+        run: >-
+          docker run --rm \
+            -e PACT_BROKER_BASE_URL=$PACT_BROKER_BASE_URL \
+            -e PACT_BROKER_TOKEN=$PACT_BROKER_TOKEN \
+            pactfoundation/pact-cli:1.1.0.0 \
+            broker can-i-deploy --pacticipant="Tickets.Pricing" --to-environment=dev --version=${{ github.sha }}
+
+      - name: Deploy to Dev
+        run: echo "Deploying to dev"
+
+      - name: Record Pact deployment to dev
+        run: >-
+          docker run --rm \
+            -e PACT_BROKER_BASE_URL=$PACT_BROKER_BASE_URL \
+            -e PACT_BROKER_TOKEN=$PACT_BROKER_TOKEN \
+            pactfoundation/pact-cli:1.1.0.0 \
+            broker record-deployment --pacticipant="Tickets.Pricing" --environment=dev --version=${{ github.sha }}
+
+  prod-deployment:
+    needs: dev-deployment
+    runs-on: ubuntu-latest
+    environment: prod
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Can I deploy to prod?
+        run: >-
+          docker run --rm \
+            -e PACT_BROKER_BASE_URL=$PACT_BROKER_BASE_URL \
+            -e PACT_BROKER_TOKEN=$PACT_BROKER_TOKEN \
+            pactfoundation/pact-cli:1.1.0.0 \
+            broker can-i-deploy --pacticipant="Tickets.Pricing" --to-environment=prod --version=${{ github.sha }}
+
+      - name: Deploy to prod
+        run: echo "Deploying to prod"
+
+      - name: Record Pact deployment to prod
+        run: >-
+          docker run --rm \
+            -e PACT_BROKER_BASE_URL=$PACT_BROKER_BASE_URL \
+            -e PACT_BROKER_TOKEN=$PACT_BROKER_TOKEN \
+            pactfoundation/pact-cli:1.1.0.0 \
+            broker record-deployment --pacticipant="Tickets.Pricing" --environment=prod --version=${{ github.sha }}
