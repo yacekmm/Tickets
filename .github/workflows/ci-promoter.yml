@@ -43,7 +43,7 @@ jobs:
           ./gradlew 
           -Ppact.publish.consumer.version=${{ github.sha }} 
           -Ppact.publish.consumer.branchName=${{ github.ref_name }} 
-          -Ppact.publish.consumer.tags=${{ github.workflow }} 
+          -Ppact.publish.consumer.tags="${{ github.workflow }}" 
           pactPublish
 
   deployment:
