@@ -45,6 +45,7 @@ jobs:
 
       - name: Publish Pricing Pact
         run: >-
+          pwd && ls -la && 
           docker run --rm \
             -w ${PWD} \
             -v ${PWD}:${PWD} \
