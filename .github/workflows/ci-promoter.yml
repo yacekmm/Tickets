@@ -47,18 +47,16 @@ jobs:
           pactPublish
 
   deployment:
-#    pact-record-deployment-provider:
-#      needs: pact-can-i-deploy-provider
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: record deployment
         run: >-
-          docker run --rm 
-            -e PACT_BROKER_BASE_URL=$PACT_BROKER_BASE_URL 
-            -e PACT_BROKER_TOKEN=$PACT_BROKER_TOKEN 
-            pactfoundation/pact-cli:latest 
-            broker record-deployment 
-            --pacticipant "Tickets.Promoter" 
-            --version ${{ github.sha }} 
+          docker run --rm \
+            -e PACT_BROKER_BASE_URL=$PACT_BROKER_BASE_URL \
+            -e PACT_BROKER_TOKEN=$PACT_BROKER_TOKEN \
+            pactfoundation/pact-cli:latest \
+            broker record-deployment \
+            --pacticipant "Tickets.Promoter" \ 
+            --version ${{ github.sha }} \
             --environment dev
