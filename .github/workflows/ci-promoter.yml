@@ -57,5 +57,5 @@ jobs:
           docker run --rm \
             -e PACT_BROKER_BASE_URL=$PACT_BROKER_BASE_URL \
             -e PACT_BROKER_TOKEN=$PACT_BROKER_TOKEN \
-            pactfoundation/pact-cli:latest \
-            broker record-deployment --pacticipant "Tickets.Promoter" --environment dev --to-environment dev --version ${{ github.sha }}
+            pactfoundation/pact-cli:1.1.0.0 \
+            broker record-deployment --pacticipant="Tickets.Promoter" --environment=dev --version=${{ github.sha }}
