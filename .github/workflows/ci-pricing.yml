@@ -29,4 +29,7 @@ jobs:
       - name: Test
         run: >-
           cd services/Pricing &&
-          ./gradlew test --console verbose
+          ./gradlew \
+          -PPACT_BROKER_URL=$PACT_BROKER_URL \
+          -PPACT_BROKER_TOKEN=$PACT_BROKER_TOKEN \
+          test --console verbose
