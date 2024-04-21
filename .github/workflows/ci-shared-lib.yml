@@ -25,7 +25,7 @@ jobs:
       - name: dir
         run: cd libs/SharedLib
       - name: Build with Gradle Wrapper
-        run: gradlew test --info
+        run: ./gradlew test --info
 #
 #  dependency-submission:
 #
