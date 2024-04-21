@@ -40,7 +40,7 @@ jobs:
       - name: Publish Promoter Pact
         run: >-
           cd services/Promoter &&
-          ./gradlew \
-          -Ppact.publish.consumer.version=${{ github.sha }} \
-          -Ppact.publish.consumer.branchName=${{ github.ref_name }} \
+          ./gradlew 
+          -Ppact.publish.consumer.version=${{ github.sha }} 
+          -Ppact.publish.consumer.branchName=${{ github.ref_name }} 
           pactPublish
