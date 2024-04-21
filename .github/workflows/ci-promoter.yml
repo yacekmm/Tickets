@@ -47,7 +47,7 @@ jobs:
             -e PACT_BROKER_TOKEN=$PACT_BROKER_TOKEN \
             pactfoundation/pact-cli:1.1.0.0 \
             broker publish 
-            ${PWD}/build/pacts \
+            ${PWD}/build/pacts 
             --consumer-app-version=${{ github.sha }}
             --tag-with-git-branch 
 
