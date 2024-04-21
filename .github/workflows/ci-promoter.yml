@@ -52,8 +52,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: ./record-deployment
-        env:
-          environment: dev
-          application_name: Tickets.promoter
-          version: ${{ github.sha }}
+      - name: record deployment
+        run: >-
+          docker run --rm 
+            -e PACT_BROKER_BASE_URL=$PACT_BROKER_BASE_URL 
+            -e PACT_BROKER_TOKEN=$PACT_BROKER_TOKEN 
+            pactfoundation/pact-cli:latest 
+            broker record-deployment 
+            --pacticipant "Tickets.Promoter" 
+            --version ${{ github.sha }} 
+            --environment dev
