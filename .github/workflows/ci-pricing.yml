@@ -45,7 +45,10 @@ jobs:
 
       - name: Publish Pricing Pact
         run: >-
-          pwd && ls -la ${PWD}/services/Pricing/build &&
+          pwd && 
+          ls -la ${PWD}/services/Pricing/build &&
+          ls -la ${PWD}/services/Pricing/target &&
+          cd ${PWD} &&
           docker run --rm \
             -w ${PWD} \
             -v ${PWD}:${PWD} \
