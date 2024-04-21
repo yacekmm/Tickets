@@ -1,4 +1,5 @@
 name: SharedLib CI
+run-name: SharedLib CI
 
 on: [push]
 

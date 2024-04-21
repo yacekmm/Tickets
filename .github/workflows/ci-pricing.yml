@@ -1,4 +1,5 @@
 name: Pricing CI
+run-name: Pricing CI
 
 on: [push]
 

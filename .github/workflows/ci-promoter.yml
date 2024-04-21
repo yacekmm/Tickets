@@ -1,4 +1,5 @@
 name: Promoter CI
+run-name: Promoter CI
 
 on: [push]
 
