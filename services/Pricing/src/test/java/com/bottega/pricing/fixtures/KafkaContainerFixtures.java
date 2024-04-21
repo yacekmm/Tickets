@@ -43,6 +43,7 @@ class TestConfig {
     }
 
     @Bean
+    @SuppressWarnings({"rawtypes"})
     KafkaSenderVerifier messageSenderVerifier(KafkaTemplate kafkaTemplate) {
         return new KafkaSenderVerifier(kafkaTemplate);
     }
@@ -50,6 +51,7 @@ class TestConfig {
 
 @Slf4j
 @AllArgsConstructor
+@SuppressWarnings({"rawtypes", "unchecked"})
 class KafkaSenderVerifier implements MessageVerifierSender {
 
     private KafkaTemplate kafkaTemplate;
@@ -69,6 +71,7 @@ class KafkaSenderVerifier implements MessageVerifierSender {
 }
 
 @Slf4j
+@SuppressWarnings({"rawtypes"})
 class KafkaReceiverVerifier implements MessageVerifierReceiver<Message<?>> {
 
     Map<String, BlockingQueue<Message<?>>> broker = new ConcurrentHashMap<>();
