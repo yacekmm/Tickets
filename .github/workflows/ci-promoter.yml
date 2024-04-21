@@ -45,7 +45,7 @@ jobs:
             -e PACT_BROKER_BASE_URL=$PACT_BROKER_BASE_URL \
             -e PACT_BROKER_TOKEN=$PACT_BROKER_TOKEN \
             pactfoundation/pact-cli:1.1.0.0 \
-            broker publish ${PWD}/services/Promoter/build/pacts --consumer-app-version=${{ github.sha }} --tag-with-git-branch
+            broker publish ${PWD}/services/Promoter/build/pacts --consumer-app-version=${{ github.sha }} --branch=${{github.ref_name}} --tag-with-git-branch
   deployment:
     needs: build
     runs-on: ubuntu-latest
