@@ -2,6 +2,10 @@ name: Promoter CI
 
 on: [push]
 
+env:
+  PACT_BROKER_BASE_URL: ${{ vars.PACT_BROKER_BASE_URL }}
+  PACT_BROKER_TOKEN: ${{ secrets.PACT_BROKER_TOKEN }}
+
 jobs:
   build:
 
@@ -26,7 +30,8 @@ jobs:
         run: >-
           cd services/Pricing &&
           ./gradlew publishToMavenLocal
+
       - name: Test
         run: >-
           cd services/Promoter &&
-          ./gradlew test --console verbose
+          ./gradlew test
