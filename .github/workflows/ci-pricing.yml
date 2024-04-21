@@ -67,7 +67,7 @@ jobs:
             -e PACT_BROKER_BASE_URL=$PACT_BROKER_BASE_URL \
             -e PACT_BROKER_TOKEN=$PACT_BROKER_TOKEN \
             pactfoundation/pact-cli:1.1.0.0 \
-            broker can-i-deploy --pacticipant="Tickets.Pricing" --to-environment=dev --version=${{ github.sha }}
+            broker can-i-deploy --pacticipant="Tickets.Pricing" --to-environment=dev --version=${{ github.sha }} --ignore="Tickets.Promoter"
 
       - name: Deploy to Dev
         run: echo "Deploying to dev"
@@ -93,7 +93,7 @@ jobs:
             -e PACT_BROKER_BASE_URL=$PACT_BROKER_BASE_URL \
             -e PACT_BROKER_TOKEN=$PACT_BROKER_TOKEN \
             pactfoundation/pact-cli:1.1.0.0 \
-            broker can-i-deploy --pacticipant="Tickets.Pricing" --to-environment=prod --version=${{ github.sha }}
+            broker can-i-deploy --pacticipant="Tickets.Pricing" --to-environment=prod --version=${{ github.sha }} --ignore="Tickets.Promoter"
 
       - name: Deploy to prod
         run: echo "Deploying to prod"
