@@ -44,3 +44,15 @@ jobs:
           -Ppact.publish.consumer.version=${{ github.sha }} 
           -Ppact.publish.consumer.branchName=${{ github.ref_name }} 
           pactPublish
+
+  deployment:
+#    pact-record-deployment-provider:
+#      needs: pact-can-i-deploy-provider
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./record-deployment
+        env:
+          environment: dev
+          application_name: Tickets.promoter
+          version: ${{ github.sha }}
