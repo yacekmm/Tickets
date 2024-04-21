@@ -36,3 +36,10 @@ jobs:
         run: >-
           cd services/Promoter &&
           ./gradlew test
+
+      - name: Publish Promoter Pact
+        run: >-
+          cd services/Promoter &&
+          ./gradlew pactPublish \
+          -Dpact.publish.consumer.version=${{ github.sha }} \
+          -Dpact.publish.consumer.branchName=${{ github.ref }}
