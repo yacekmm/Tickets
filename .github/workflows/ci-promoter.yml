@@ -1,7 +1,12 @@
 name: Promoter CI
 run-name: Promoter CI
 
-on: [push]
+on:
+  push:
+    branches:
+      - '**'
+  workflow_dispatch:
+  repository_dispatch:
 
 env:
   PACT_BROKER_BASE_URL: ${{ vars.PACT_BROKER_BASE_URL }}
