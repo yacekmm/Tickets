@@ -1,7 +1,11 @@
 name: Pricing CI
 run-name: Pricing CI
 
-on: [push]
+on:
+  push:
+  repository_dispatch:
+    types:
+      - webhook
 
 env:
   PACT_BROKER_BASE_URL: ${{ vars.PACT_BROKER_BASE_URL }}
