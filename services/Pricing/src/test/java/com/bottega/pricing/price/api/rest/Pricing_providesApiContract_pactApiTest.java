@@ -10,19 +10,16 @@ import org.springframework.beans.factory.annotation.*;
 import org.springframework.boot.info.GitProperties;
 
 @Provider("Tickets.Pricing")
-@PactBroker(url = "https://jacek.pactflow.io", authentication = @PactBrokerAuth(token = "${PACT_BROKER_TOKEN}"))
+@PactBroker(url = "${PACT_BROKER_BASE_URL}", authentication = @PactBrokerAuth(token = "${PACT_BROKER_TOKEN}"))
 public class Pricing_providesApiContract_pactApiTest extends FrameworkTestBase {
 
     @Value("${server.port}") int port;
-
-//    @Autowired
-//    GitProperties gitProperties;
 
     @BeforeEach
     public void setupTestTarget(PactVerificationContext context) {
         super.beforeEach();
         context.setTarget(new HttpTestTarget("localhost", port));
-        System.setProperty("pact.verifier.publishResults", "true"); // Should only be enabled in CI.
+//        System.setProperty("pact.verifier.publishResults", "true"); // Should only be enabled in CI.
 //        System.setProperty("pact.provider.version", gitProperties.getShortCommitId());
 //        System.setProperty("pact.provider.tag", gitProperties.getBranch());
         System.setProperty("pact.rootDir", "build/pacts");

@@ -121,7 +121,6 @@ pact {
 
     publish {
         pactBrokerUrl = System.getenv("PACT_BROKER_BASE_URL")
-//        consumerVersion = "1.0.4"
     }
 
 }
