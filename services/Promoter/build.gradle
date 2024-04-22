@@ -117,10 +117,6 @@ tasks.withType(Test) {
         events = ["passed", "failed", "skipped"]
         exceptionFormat = "full"
     }
-    systemProperties["pact.verifier.publishResults"] = getProperty("pact.verifier.publishResults")
-    systemProperties["pact.provider.version"] = getProperty("pact.provider.version")
-    systemProperties["pact.provider.tag"] = getProperty("pact.provider.tag")
-    systemProperties["pact.rootDir"] = getProperty("pact.rootDir")
 }
 
 pact {

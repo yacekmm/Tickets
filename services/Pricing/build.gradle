@@ -1,3 +1,5 @@
+import static java.lang.System.getProperty
+
 buildscript {
     ext {
         springBootVersion = '3.2.0'
@@ -112,6 +114,17 @@ dependencyManagement {
     }
 }
 
+tasks.withType(Test) {
+    testLogging {
+        events = ["passed", "failed", "skipped"]
+        exceptionFormat = "full"
+    }
+    systemProperties["pact.verifier.publishResults"] = System.getProperty("pact.verifier.publishResults")
+    systemProperties["pact.provider.version"] = System.getProperty("pact.provider.version")
+    systemProperties["pact.provider.tag"] = System.getProperty("pact.provider.tag")
+    systemProperties["pact.rootDir"] = System.getProperty("pact.rootDir")
+}
+
 pact {
 
     broker {
@@ -121,7 +134,6 @@ pact {
 
     publish {
         pactBrokerUrl = System.getenv("PACT_BROKER_BASE_URL")
-
     }
 
 }
