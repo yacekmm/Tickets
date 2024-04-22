@@ -7,8 +7,6 @@ on:
       - '**'
   workflow_dispatch:
   repository_dispatch:
-    types:
-      - webhook
 
 env:
   PACT_BROKER_BASE_URL: ${{ vars.PACT_BROKER_BASE_URL }}
