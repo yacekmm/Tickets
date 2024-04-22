@@ -3,6 +3,8 @@ run-name: Pricing CI
 
 on:
   push:
+    branches:
+      - '**'
   repository_dispatch:
     types:
       - webhook
