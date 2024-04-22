@@ -36,23 +36,12 @@ jobs:
         run: >-
           cd services/Pricing &&
           ./gradlew 
-          -Ppact.verifier.publishResults=true
-          -Ppact.provider.version=${{ github.sha }}
-          -Ppact.provider.branchName=${{ github.ref_name }}
-          -Ppact.provider.tag=${{ github.ref_name }}
-          -Ppact.rootDir=build/pacts
+          -Dpact.verifier.publishResults=true
+          -Dpact.provider.version=${{ github.sha }}
+          -Dpact.provider.branchName=${{ github.ref_name }}
+          -Dpact.provider.tag=${{ github.ref_name }}
+          -Dpact.rootDir=build/pacts
           test
-
-#      - name: Publish Pricing Pact
-#        run: >-
-#          cd ${PWD} &&
-#          docker run --rm \
-#            -w ${PWD} \
-#            -v ${PWD}:${PWD} \
-#            -e PACT_BROKER_BASE_URL=$PACT_BROKER_BASE_URL \
-#            -e PACT_BROKER_TOKEN=$PACT_BROKER_TOKEN \
-#            pactfoundation/pact-cli:1.1.0.0 \
-#            broker publish services/Pricing/build/pacts --consumer-app-version=${{ github.sha }} --branch=${{github.ref_name}} --tag-with-git-branch
 
   dev-deployment:
     needs: build
