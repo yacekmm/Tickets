@@ -108,8 +108,19 @@ dependencyManagement {
     }
 }
 
-task wrapper(type: Wrapper){
+task wrapper(type: Wrapper) {
     gradleVersion = '8.5'
+}
+
+tasks.withType(Test) {
+    testLogging {
+        events = ["passed", "failed", "skipped"]
+        exceptionFormat = "full"
+    }
+    systemProperties["pact.verifier.publishResults"] = getProperty("pact.verifier.publishResults")
+    systemProperties["pact.provider.version"] = getProperty("pact.provider.version")
+    systemProperties["pact.provider.tag"] = getProperty("pact.provider.tag")
+    systemProperties["pact.rootDir"] = getProperty("pact.rootDir")
 }
 
 pact {
