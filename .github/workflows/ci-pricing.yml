@@ -5,6 +5,7 @@ on:
   push:
     branches:
       - '**'
+  workflow_dispatch:
   repository_dispatch:
     types:
       - webhook
