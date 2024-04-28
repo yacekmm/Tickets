@@ -3,12 +3,9 @@ run-name: Promoter CI
 
 on:
   push:
-    branches:
-      - '**'
   workflow_dispatch:
-    action: webhook
   repository_dispatch:
-    action: webhook
+    types: [promoter-ci-webhook]
 
 env:
   PACT_BROKER_BASE_URL: ${{ vars.PACT_BROKER_BASE_URL }}

@@ -3,12 +3,9 @@ run-name: Pricing CI
 
 on:
   push:
-    branches:
-      - '**'
   workflow_dispatch:
-    event_type: webhook
   repository_dispatch:
-    type: webhook
+    types: [pricing-ci-webhook]
 
 env:
   PACT_BROKER_BASE_URL: ${{ vars.PACT_BROKER_BASE_URL }}
