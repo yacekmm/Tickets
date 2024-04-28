@@ -6,9 +6,9 @@ on:
     branches:
       - '**'
   workflow_dispatch:
-    action: webhook
+    event_type: webhook
   repository_dispatch:
-    action: webhook
+    event_type: webhook
 
 env:
   PACT_BROKER_BASE_URL: ${{ vars.PACT_BROKER_BASE_URL }}
