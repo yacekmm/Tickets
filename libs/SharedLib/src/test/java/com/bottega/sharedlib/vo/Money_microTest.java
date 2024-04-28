@@ -1,6 +1,7 @@
 package com.bottega.sharedlib.vo;
 
 import org.junit.jupiter.api.Test;
+import static com.bottega.sharedlib.vo.Money.ZERO;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class Money_microTest {
@@ -33,7 +34,7 @@ class Money_microTest {
     @Test
     void subtract_OK() {
         //expect
-        assertEquals(Money.ZERO, new Money(50).subtract(new Money(50)));
+        assertEquals(ZERO, new Money(50).subtract(new Money(50)));
         assertEquals(new Money(998), new Money(1020).subtract(new Money(22)));
         assertEquals(new Money(-1), new Money(2).subtract(new Money(3)));
     }
