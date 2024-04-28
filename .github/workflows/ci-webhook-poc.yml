@@ -6,7 +6,7 @@ on:
     branches:
       - '**'
   workflow_dispatch:
-    event_type: webhook
+    types: [poc]
   repository_dispatch:
     types: [poc]
 
