@@ -1,0 +1,30 @@
+name: Pricing CI
+run-name: Pricing CI
+
+on:
+  push:
+    branches:
+      - '**'
+  workflow_dispatch:
+    event_type: webhook
+  repository_dispatch:
+    types: [webhook]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      - name: PoC
+        run: >-
+          echo "o ja cie"
