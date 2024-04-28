@@ -2,9 +2,6 @@ name: Pricing CI
 run-name: Pricing CI
 
 on:
-  push:
-    branches:
-      - '**'
   workflow_dispatch:
     types: [poc]
   repository_dispatch:
