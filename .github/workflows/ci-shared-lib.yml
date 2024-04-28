@@ -27,7 +27,7 @@ jobs:
       - name: Test
         uses: dorny/paths-filter@v3
         with:
-          patterns: |
+          filters: |
             libs/SharedLib/**
           run: >-
             cd libs/SharedLib &&
