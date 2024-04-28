@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
     event_type: webhook
   repository_dispatch:
-    types: [webhook]
+    types: [poc]
 
 jobs:
   build:
