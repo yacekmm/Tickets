@@ -124,6 +124,7 @@ tasks.withType(Test) {
     systemProperties["pact.provider.version"] = System.getProperty("pact.provider.version")
     systemProperties["pact.provider.tag"] = System.getProperty("pact.provider.tag")
     systemProperties["pact.rootDir"] = System.getProperty("pact.rootDir")
+    systemProperties["pact.verifier.ignoreNoConsumers"] = System.getProperty("pact.verifier.ignoreNoConsumers")
 }
 
 pact {
