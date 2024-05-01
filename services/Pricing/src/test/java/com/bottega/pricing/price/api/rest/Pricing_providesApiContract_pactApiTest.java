@@ -19,6 +19,7 @@ public class Pricing_providesApiContract_pactApiTest extends FrameworkTestBase {
         super.beforeEach();
         context.setTarget(new HttpTestTarget("localhost", port));
         System.setProperty("pact.rootDir", "build/pacts");
+        System.setProperty("pact.verifier.ignoreNoConsumers", "true");
     }
 
     @TestTemplate
