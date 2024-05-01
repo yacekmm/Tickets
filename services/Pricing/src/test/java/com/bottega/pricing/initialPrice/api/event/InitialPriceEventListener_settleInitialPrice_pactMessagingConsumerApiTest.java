@@ -47,17 +47,6 @@ class InitialPriceEventListener_settleInitialPrice_pactMessagingConsumerApiTest 
     @SneakyThrows
     MessagePact concertCreatedPact(MessagePactBuilder builder) {
 
-        Event event = Event.builder()
-                .type(CONCERT_CREATED)
-                .payload(new ConcertCreatedEventPayload(
-                        "concert-id",
-                        "this has to be a valid title",
-                        "2025-12-12",
-                        new String[]{},
-                        5))
-                .build();
-
-
         DslPart json = new PactDslJsonBody()
                 .uuid("id")
                 .stringType("type", "CONCERT_CREATED")
@@ -73,7 +62,6 @@ class InitialPriceEventListener_settleInitialPrice_pactMessagingConsumerApiTest 
 
         return builder.expectsToReceive("CONCERT_CREATED event")
                 .withContent(json)
-//                .withContent(new String(stringSerializer.serialize("promoter.concert", objectMapper.writeValueAsString(event)), StandardCharsets.UTF_8))
                 .toPact();
     }
 
