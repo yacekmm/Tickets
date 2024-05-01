@@ -13,12 +13,15 @@ import org.springframework.beans.factory.annotation.Value;
 @IgnoreNoPactsToVerify
 public class Pricing_providesApiContract_pactApiTest extends FrameworkTestBase {
 
-    @Value("${server.port}") int port;
+    @Value("${server.port}")
+    int port;
 
     @BeforeEach
     public void setupTestTarget(PactVerificationContext context) {
         super.beforeEach();
-        context.setTarget(new HttpTestTarget("localhost", port));
+        if (context != null) {
+            context.setTarget(new HttpTestTarget("localhost", port));
+        }
         System.setProperty("pact.rootDir", "build/pacts");
 //        System.setProperty("pact.verifier.ignoreNoConsumers", "true");
     }
@@ -26,7 +29,9 @@ public class Pricing_providesApiContract_pactApiTest extends FrameworkTestBase {
     @TestTemplate
     @ExtendWith(PactVerificationInvocationContextProvider.class)
     public void pricingPactProviderVerification(PactVerificationContext context) {
-        context.verifyInteraction();
+        if (context != null) {
+            context.verifyInteraction();
+        }
     }
 
     @State("price for item exists")
