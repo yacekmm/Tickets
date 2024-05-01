@@ -23,7 +23,7 @@ public class Pricing_providesApiContract_pactApiTest extends FrameworkTestBase {
 
     @TestTemplate
     @ExtendWith(PactVerificationInvocationContextProvider.class)
-    public void pactVerificationTestTemplate(PactVerificationContext context) {
+    public void pricingPactProviderVerification(PactVerificationContext context) {
         context.verifyInteraction();
     }
 

@@ -43,11 +43,11 @@ jobs:
         run: >-
           cd services/Pricing &&
           ./gradlew 
-          -Dpact.verifier.publishResults=true
-          -Dpact.provider.version=${{ github.sha }}
-          -Dpact.provider.branchName=${{ github.ref_name }}
-          -Dpact.provider.tag=${{ github.ref_name }}
-          -Dpact.rootDir=build/pacts
+          -Ppact.verifier.publishResults=true
+          -Ppact.provider.version=${{ github.sha }}
+          -Ppact.provider.branchName=${{ github.ref_name }}
+          -Ppact.provider.tag=${{ github.ref_name }}
+          -Ppact.rootDir=build/pacts
           -Ppact.verifier.ignoreNoConsumers=true
           test
 
