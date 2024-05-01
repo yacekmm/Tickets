@@ -15,6 +15,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 public class WebClientsConfig {
 
     @Bean
+    @Primary
     public WebClient pricingWebClient(ServicesProperties servicesProperties) {
 
         return buildPricingWebClient(servicesProperties.getPricing().host(), servicesProperties.getPricing().port());

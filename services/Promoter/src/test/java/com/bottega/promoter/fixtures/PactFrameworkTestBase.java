@@ -10,12 +10,12 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @ExtendWith(PactConsumerTestExt.class)
-@PactTestFor(providerName = PactFrameworkTestBase.PROVIDER_PRICING, port = "8181", pactVersion = PactSpecVersion.V3)
+@PactTestFor(providerName = PactFrameworkTestBase.PACT_PRICING, port = "8181", pactVersion = PactSpecVersion.V3)
 @SuppressWarnings("deprecation")
 public class PactFrameworkTestBase extends FrameworkTestBase {
 
-    public static final String CONSUMER_PROMOTER = "Tickets.Promoter";
-    public static final String PROVIDER_PRICING = "Tickets.Pricing";
+    public static final String PACT_PROMOTER = "Tickets.Promoter";
+    public static final String PACT_PRICING = "Tickets.Pricing";
 
     @Autowired
     protected PricingPactFixtures pricingPactFixtures;
@@ -26,7 +26,7 @@ public class PactFrameworkTestBase extends FrameworkTestBase {
         System.setProperty("pact.rootDir", "build/pacts");
     }
 
-    @Pact(consumer = CONSUMER_PROMOTER)
+    @Pact(consumer = PACT_PROMOTER)
     public RequestResponsePact applyPercentageDiscount(PactDslWithProvider builder) {
         return pricingPactFixtures.applyPercentageDiscount(builder);
     }

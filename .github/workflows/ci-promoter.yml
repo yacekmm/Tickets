@@ -5,6 +5,7 @@ on:
   push:
     paths:
       - 'services/Promoter/**'
+      - '.github'
   workflow_dispatch:
   repository_dispatch:
     types: [promoter-ci-webhook]
@@ -33,7 +34,7 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@417ae3ccd767c252f5661f1ace9f835f9654f2b5 # v3.1.0
 
-      - name: Publish Pricing Spring Cloud Contract
+      - name: Publish Pricing Spring Cloud Contract to local maven repo
         run: >-
           cd services/Pricing &&
           ./gradlew publishToMavenLocal
@@ -49,7 +50,7 @@ jobs:
           -Ppact.rootDir=build/pacts
           test
 
-      - name: Publish Promoter Pact
+      - name: Publish Promoter Consumer Pacts
         run: >-
           docker run --rm \
             -w ${PWD} \

@@ -105,6 +105,7 @@ dependencies {
     testImplementation 'org.testcontainers:kafka'
     testImplementation 'org.testcontainers:postgresql'
     testImplementation 'org.awaitility:awaitility:4.2.0'
+    testImplementation 'au.com.dius.pact.consumer:junit5:4.5.3'
 }
 
 dependencyManagement {
@@ -119,10 +120,6 @@ tasks.withType(Test) {
         events = ["passed", "failed", "skipped"]
         exceptionFormat = "full"
     }
-    systemProperties["pact.verifier.publishResults"] = System.getProperty("pact.verifier.publishResults", "false")
-    systemProperties["pact.provider.version"] = System.getProperty("pact.provider.version")
-    systemProperties["pact.provider.tag"] = System.getProperty("pact.provider.tag")
-    systemProperties["pact.rootDir"] = System.getProperty("pact.rootDir")
 }
 
 pact {
@@ -140,4 +137,20 @@ pact {
 
 task wrapper(type: Wrapper){
     gradleVersion = '8.5'
+}
+
+
+pact {
+
+    broker {
+        pactBrokerUrl = System.getenv("PACT_BROKER_BASE_URL")
+        pactBrokerToken = System.getenv("PACT_BROKER_TOKEN")
+    }
+
+    publish {
+        pactDirectory = "build/pacts"
+        pactBrokerUrl = System.getenv("PACT_BROKER_BASE_URL")
+        consumerVersion = "1.0.4"
+    }
+
 }

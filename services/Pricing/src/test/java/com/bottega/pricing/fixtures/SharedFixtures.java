@@ -12,6 +12,7 @@ import org.springframework.transaction.support.TransactionTemplate;
 public class SharedFixtures {
 
     //infra
+    @Autowired
     public EventPublisher eventPublisher;
 
     @Autowired

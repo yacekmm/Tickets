@@ -17,10 +17,11 @@ import org.testcontainers.shaded.org.awaitility.Awaitility;
 @Slf4j
 public class TestKafkaEventListener {
 
+    public static final String TOPIC = "promoter.concert";
     private final ObjectMapper objectMapper;
     private List<Event> receivedEvents = new ArrayList<>();
 
-    @KafkaListener(id = "test-concert-listener", topics = "promoter.concert")
+    @KafkaListener(id = "test-concert-listener", topics = TOPIC)
     public void listen(Message<String> message) {
 
         Try.of(() -> objectMapper.readValue(message.getPayload(), Event.class))

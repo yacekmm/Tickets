@@ -53,7 +53,7 @@ public class FrameworkTestBase {
     }
 
     @BeforeEach
-    void beforeEach() {
+    public void beforeEach() {
         kafkaContainerFixtures.beforeEach();
     }
 
