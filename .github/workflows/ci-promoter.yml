@@ -5,6 +5,7 @@ on:
   push:
     paths:
       - 'services/Promoter/**'
+      - '.github'
   workflow_dispatch:
   repository_dispatch:
     types: [promoter-ci-webhook]
