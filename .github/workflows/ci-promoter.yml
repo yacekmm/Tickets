@@ -51,7 +51,7 @@ jobs:
           -Ppact.verifier.ignoreNoConsumers=true
           test
 
-      - name: Publish Promoter Pact
+      - name: Publish Promoter Consumer Pacts
         run: >-
           docker run --rm \
             -w ${PWD} \
