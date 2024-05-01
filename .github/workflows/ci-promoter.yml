@@ -19,14 +19,6 @@ jobs:
       contents: read
 
     steps:
-      - uses: dorny/paths-filter@v3
-        id: changes
-        with:
-          filters: |
-            promoter:
-              - 'services/Promoter/**'
-
-          # run only if some file in 'src' folder was changed
       - uses: actions/checkout@v4
       - name: Set up JDK
         uses: actions/setup-java@v4
@@ -56,7 +48,6 @@ jobs:
           test
 
       - name: Publish Promoter Pact
-        if: steps.changes.outputs.promoter == 'true'
         run: >-
           docker run --rm \
             -w ${PWD} \
@@ -67,7 +58,6 @@ jobs:
             broker publish ${PWD}/services/Promoter/build/pacts --consumer-app-version=${{ github.sha }} --branch=${{github.ref_name}} --tag-with-git-branch
 
   dev-deployment:
-    if: steps.changes.outputs.promoter == 'true'
     needs: build
     runs-on: ubuntu-latest
     environment: dev
@@ -94,7 +84,6 @@ jobs:
             broker record-deployment --pacticipant="Tickets.Promoter" --environment=dev --version=${{ github.sha }}
 
   prod-deployment:
-    if: steps.changes.outputs.promoter == 'true'
     needs: dev-deployment
     runs-on: ubuntu-latest
     environment: prod

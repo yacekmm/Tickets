@@ -19,12 +19,6 @@ jobs:
       contents: read
 
     steps:
-      - uses: dorny/paths-filter@v3
-        id: changes
-        with:
-          filters: |
-            pricing:
-              - 'services/Pricing/**'
       - uses: actions/checkout@v4
       - name: Set up JDK
         uses: actions/setup-java@v4
@@ -46,7 +40,7 @@ jobs:
         run: >-
           cd services/Pricing &&
           ./gradlew 
-          -Dpact.verifier.publishResults=${{ steps.changes.outputs.pricing }}
+          -Dpact.verifier.publishResults=true
           -Dpact.provider.version=${{ github.sha }}
           -Dpact.provider.branchName=${{ github.ref_name }}
           -Dpact.provider.tag=${{ github.ref_name }}
@@ -54,7 +48,6 @@ jobs:
           test
 
   dev-deployment:
-    if: steps.changes.outputs.pricing == 'true'
     needs: build
     runs-on: ubuntu-latest
     environment: dev
@@ -82,7 +75,6 @@ jobs:
 
 
   prod-deployment:
-    if: steps.changes.outputs.pricing == 'true'
     needs: dev-deployment
     runs-on: ubuntu-latest
     environment: prod
