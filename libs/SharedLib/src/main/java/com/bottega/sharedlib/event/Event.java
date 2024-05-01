@@ -1,9 +1,8 @@
 package com.bottega.sharedlib.event;
 
-import lombok.*;
-
 import java.util.UUID;
 
+import lombok.*;
 import static com.bottega.sharedlib.event.EventVersion.v1;
 
 @Builder

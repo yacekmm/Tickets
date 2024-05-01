@@ -10,7 +10,7 @@ updates:
       time: "04:30"
     open-pull-requests-limit: 0
 
-  # Vendor
+  # Promoter
   - package-ecosystem: "gradle"
     directory: "/services/Promoter"
     schedule:

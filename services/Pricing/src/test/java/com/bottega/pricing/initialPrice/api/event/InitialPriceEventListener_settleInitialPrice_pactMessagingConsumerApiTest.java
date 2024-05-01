@@ -1,9 +1,10 @@
 package com.bottega.pricing.initialPrice.api.event;
 
 import java.nio.charset.StandardCharsets;
-import java.util.List;
+import java.util.*;
 
 import au.com.dius.pact.consumer.MessagePactBuilder;
+import au.com.dius.pact.consumer.dsl.*;
 import au.com.dius.pact.consumer.junit5.*;
 import au.com.dius.pact.core.model.PactSpecVersion;
 import au.com.dius.pact.core.model.annotations.Pact;
@@ -16,17 +17,20 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.vavr.control.Try;
 import lombok.SneakyThrows;
 import org.apache.kafka.common.serialization.*;
+import org.assertj.core.api.Assertions;
+import org.json.*;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import static com.bottega.pricing.price.fixtures.PriceAssert.assertThatPrice;
 import static com.bottega.sharedlib.event.EventType.CONCERT_CREATED;
 import static com.bottega.sharedlib.fixtures.RepoEntries.SINGULAR;
+import static com.toomuchcoding.jsonassert.JsonAssertion.assertThat;
 import static org.testcontainers.shaded.org.awaitility.Awaitility.await;
 
 @ExtendWith(PactConsumerTestExt.class)
 @PactTestFor(providerName = "Tickets.Promoter", providerType = ProviderType.ASYNCH, pactVersion = PactSpecVersion.V3)
-class InitialPriceEventListener_settleInitialPrice_pactEventApiTest extends FrameworkTestBase {
+class InitialPriceEventListener_settleInitialPrice_pactMessagingConsumerApiTest extends FrameworkTestBase {
 
     @Autowired
     ObjectMapper objectMapper;
@@ -46,22 +50,37 @@ class InitialPriceEventListener_settleInitialPrice_pactEventApiTest extends Fram
         Event event = Event.builder()
                 .type(CONCERT_CREATED)
                 .payload(new ConcertCreatedEventPayload(
-                        "id",
+                        "concert-id",
                         "this has to be a valid title",
                         "2025-12-12",
                         new String[]{},
                         5))
                 .build();
 
+
+        DslPart json = new PactDslJsonBody()
+                .uuid("id")
+                .stringType("type", "CONCERT_CREATED")
+                .object("payload")
+                .stringType("serialization_type", "CONCERT_CREATED")
+                .uuid("concertId")
+                .stringType("title", "this has to be a valid title")
+                .stringType("date", "2025-12-12")
+                .integerType("profitMarginPercentage", 5)
+                .array("tags")
+                .closeArray()
+                .closeObject();
+
         return builder.expectsToReceive("CONCERT_CREATED event")
-                .withContent(new String(stringSerializer.serialize("promoter.concert", objectMapper.writeValueAsString(event)), StandardCharsets.UTF_8))
+                .withContent(json)
+//                .withContent(new String(stringSerializer.serialize("promoter.concert", objectMapper.writeValueAsString(event)), StandardCharsets.UTF_8))
                 .toPact();
     }
 
     @Test
     @SneakyThrows
     @PactTestFor(pactMethod = "concertCreatedPact", providerType = ProviderType.ASYNCH)
-    public void settleInitialPrice_createsPrice_OnContractTest(List<Message> messages) {
+    public void settleInitialPrice_createsPrice_onConcertCreatedEvent(List<Message> messages) {
         //when
         triggerEvents(messages);
 
