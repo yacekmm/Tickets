@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 
 @Provider("Tickets.Pricing")
 @PactBroker(url = "https://jacek.pactflow.io", authentication = @PactBrokerAuth(token = "${PACT_BROKER_TOKEN}"))
+@IgnoreNoPactsToVerify
 public class Pricing_providesApiContract_pactApiTest extends FrameworkTestBase {
 
     @Value("${server.port}") int port;
@@ -19,7 +20,7 @@ public class Pricing_providesApiContract_pactApiTest extends FrameworkTestBase {
         super.beforeEach();
         context.setTarget(new HttpTestTarget("localhost", port));
         System.setProperty("pact.rootDir", "build/pacts");
-        System.setProperty("pact.verifier.ignoreNoConsumers", "true");
+//        System.setProperty("pact.verifier.ignoreNoConsumers", "true");
     }
 
     @TestTemplate
