@@ -109,8 +109,15 @@ dependencyManagement {
     }
 }
 
-task wrapper(type: Wrapper){
+task wrapper(type: Wrapper) {
     gradleVersion = '8.5'
+}
+
+tasks.withType(Test) {
+    testLogging {
+        events = ["passed", "failed", "skipped"]
+        exceptionFormat = "full"
+    }
 }
 
 pact {
@@ -122,7 +129,6 @@ pact {
 
     publish {
         pactBrokerUrl = System.getenv("PACT_BROKER_BASE_URL")
-        consumerVersion = "1.0.4"
     }
 
 }

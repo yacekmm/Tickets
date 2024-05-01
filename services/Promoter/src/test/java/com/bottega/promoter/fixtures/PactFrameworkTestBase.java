@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 @ExtendWith(PactConsumerTestExt.class)
 @PactTestFor(providerName = PactFrameworkTestBase.PACT_PRICING, port = "8181", pactVersion = PactSpecVersion.V3)
+@SuppressWarnings("deprecation")
 public class PactFrameworkTestBase extends FrameworkTestBase {
 
     public static final String PACT_PROMOTER = "Tickets.Promoter";
