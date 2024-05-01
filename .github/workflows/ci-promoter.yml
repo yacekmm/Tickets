@@ -3,6 +3,8 @@ run-name: Promoter CI
 
 on:
   push:
+    paths:
+      - 'services/Promoter/**'
   workflow_dispatch:
   repository_dispatch:
     types: [promoter-ci-webhook]

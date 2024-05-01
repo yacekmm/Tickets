@@ -3,6 +3,8 @@ run-name: Pricing CI
 
 on:
   push:
+    paths:
+      - 'services/Pricing/**'
   workflow_dispatch:
   repository_dispatch:
     types: [pricing-ci-webhook]
