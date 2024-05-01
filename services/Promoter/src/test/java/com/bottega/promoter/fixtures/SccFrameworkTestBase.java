@@ -14,7 +14,4 @@ public class SccFrameworkTestBase extends FrameworkTestBase {
             .stubsMode(LOCAL)
             .downloadStub(CDC_STUB_ID_PRICING);
 
-    @Autowired
-    protected WebClient sccPricingWebClient;
-
 }

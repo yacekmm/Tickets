@@ -6,7 +6,7 @@ import java.util.Map;
 import au.com.dius.pact.provider.*;
 import au.com.dius.pact.provider.junit5.*;
 import au.com.dius.pact.provider.junitsupport.Provider;
-import au.com.dius.pact.provider.junitsupport.loader.PactFolder;
+import au.com.dius.pact.provider.junitsupport.loader.*;
 import com.bottega.promoter.concert.fixtures.clients.ConcertHttpClient;
 import com.bottega.promoter.fixtures.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -18,8 +18,8 @@ import static com.bottega.promoter.infra.TestKafkaEventListener.TOPIC;
 import static java.time.ZoneOffset.UTC;
 
 @Provider(PactFrameworkTestBase.PACT_PROMOTER)
-@PactFolder("build/pacts")
-//@PactBroker(url = "${PACT_BROKER_BASE_URL}", authentication = @PactBrokerAuth(token = "${PACT_BROKER_TOKEN}"))
+//@PactFolder("build/pacts")
+@PactBroker(url = "${PACT_BROKER_BASE_URL}", authentication = @PactBrokerAuth(token = "${PACT_BROKER_TOKEN}"))
 public class CreateConcertRestController_createConcert_pactMessagingProviderApiTest extends FrameworkTestBase {
 
     @Autowired
@@ -53,8 +53,7 @@ public class CreateConcertRestController_createConcert_pactMessagingProviderApiT
 
         return new MessageAndMetadata(
                 objectMapper.writeValueAsBytes(sharedFixtures.testKafkaListener.singleEvent()),
-                Map.of("contentType", "application/json", "topic", TOPIC)
-                );
+                Map.of("contentType", "application/json"));
     }
 
 }
