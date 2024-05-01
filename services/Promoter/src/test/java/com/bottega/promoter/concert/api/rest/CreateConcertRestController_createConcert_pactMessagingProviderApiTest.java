@@ -29,13 +29,17 @@ public class CreateConcertRestController_createConcert_pactMessagingProviderApiT
     @TestTemplate
     @ExtendWith(PactVerificationInvocationContextProvider.class)
     void testTemplate(PactVerificationContext context) {
-        Try.run(context::verifyInteraction);
+        if(context!= null) {
+            context.verifyInteraction();
+        }
     }
 
     @BeforeEach
     void before(PactVerificationContext context) {
         super.beforeEach();
-        Try.run(() -> context.setTarget(new MessageTestTarget()));
+        if(context!= null) {
+            context.setTarget(new MessageTestTarget());
+        }
         System.setProperty("pact.verifier.publishResults", "false"); // Should only be enabled in CI.
         System.setProperty("pact.rootDir", "build/pacts");
     }
