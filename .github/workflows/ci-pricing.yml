@@ -47,6 +47,7 @@ jobs:
           -Dpact.provider.branchName=${{ github.ref_name }}
           -Dpact.provider.tag=${{ github.ref_name }}
           -Dpact.rootDir=build/pacts
+          -Ppact.verifier.ignoreNoConsumers=true
           test
 
   dev-deployment:
