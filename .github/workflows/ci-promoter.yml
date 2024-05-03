@@ -13,6 +13,8 @@ on:
 env:
   PACT_BROKER_BASE_URL: ${{ vars.PACT_BROKER_BASE_URL }}
   PACT_BROKER_TOKEN: ${{ secrets.PACT_BROKER_TOKEN }}
+  PACTICIPANT: "Tickets.Promoter"
+  PACT_VERSION: $PACTICIPANT-${{ github.sha }}
 
 jobs:
   build:
@@ -44,7 +46,7 @@ jobs:
           cd services/Promoter &&
           ./gradlew
           -Ppact.verifier.publishResults=true
-          -Ppact.provider.version=${{ github.sha }}
+          -Ppact.provider.version=$PACT_VERSION
           -Ppact.provider.branchName=${{ github.ref_name }}
           -Ppact.provider.tag=${{ github.ref_name }}
           -Ppact.rootDir=build/pacts
@@ -58,7 +60,7 @@ jobs:
             -e PACT_BROKER_BASE_URL=$PACT_BROKER_BASE_URL \
             -e PACT_BROKER_TOKEN=$PACT_BROKER_TOKEN \
             pactfoundation/pact-cli:1.1.0.0 \
-            broker publish ${PWD}/services/Promoter/build/pacts --consumer-app-version=${{ github.sha }} --branch=${{github.ref_name}} --tag-with-git-branch
+            broker publish ${PWD}/services/Promoter/build/pacts --consumer-app-version=$PACT_VERSION --branch=${{github.ref_name}} --tag-with-git-branch
 
   dev-deployment:
     needs: build
@@ -73,7 +75,7 @@ jobs:
             -e PACT_BROKER_BASE_URL=$PACT_BROKER_BASE_URL \
             -e PACT_BROKER_TOKEN=$PACT_BROKER_TOKEN \
             pactfoundation/pact-cli:1.1.0.0 \
-            broker can-i-deploy --pacticipant="Tickets.Promoter" --to-environment=dev --version=${{ github.sha }}
+            broker can-i-deploy --pacticipant=$PACTICIPANT --to-environment=dev --version=$PACT_VERSION
 
       - name: Deploy to Dev
         run: echo "Deploying to dev"
@@ -84,7 +86,7 @@ jobs:
             -e PACT_BROKER_BASE_URL=$PACT_BROKER_BASE_URL \
             -e PACT_BROKER_TOKEN=$PACT_BROKER_TOKEN \
             pactfoundation/pact-cli:1.1.0.0 \
-            broker record-deployment --pacticipant="Tickets.Promoter" --environment=dev --version=${{ github.sha }}
+            broker record-deployment --pacticipant=$PACTICIPANT --environment=dev --version=$PACT_VERSION
 
   prod-deployment:
     needs: dev-deployment
@@ -99,7 +101,7 @@ jobs:
             -e PACT_BROKER_BASE_URL=$PACT_BROKER_BASE_URL \
             -e PACT_BROKER_TOKEN=$PACT_BROKER_TOKEN \
             pactfoundation/pact-cli:1.1.0.0 \
-            broker can-i-deploy --pacticipant="Tickets.Promoter" --to-environment=prod --version=${{ github.sha }}
+            broker can-i-deploy --pacticipant=$PACTICIPANT --to-environment=prod --version=$PACT_VERSION
 
       - name: Deploy to prod
         run: echo "Deploying to prod"
@@ -110,7 +112,7 @@ jobs:
             -e PACT_BROKER_BASE_URL=$PACT_BROKER_BASE_URL \
             -e PACT_BROKER_TOKEN=$PACT_BROKER_TOKEN \
             pactfoundation/pact-cli:1.1.0.0 \
-            broker record-deployment --pacticipant="Tickets.Promoter" --environment=prod --version=${{ github.sha }}
+            broker record-deployment --pacticipant=$PACTICIPANT --environment=prod --version=$PACT_VERSION
 
       - name: Record Pact release to prod
         run: >-
@@ -118,4 +120,4 @@ jobs:
             -e PACT_BROKER_BASE_URL=$PACT_BROKER_BASE_URL \
             -e PACT_BROKER_TOKEN=$PACT_BROKER_TOKEN \
             pactfoundation/pact-cli:1.1.0.0 \
-            broker record-release --pacticipant="Tickets.Promoter" --environment=prod --version=${{ github.sha }}
+            broker record-release --pacticipant=$PACTICIPANT --environment=prod --version=$PACT_VERSION
