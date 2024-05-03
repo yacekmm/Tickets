@@ -4,7 +4,7 @@ run-name: SharedLib CI
 on:
   push:
     paths:
-      - 'services/Promoter/**'
+      - 'libs/SharedLib/**'
   workflow_dispatch:
 
 jobs:
