@@ -38,7 +38,7 @@ public class CreateConcertRestController_createConcert_pactMessagingProviderApiT
         if(context!= null) {
             context.setTarget(new MessageTestTarget(List.of("com.bottega")));
         }
-        System.setProperty("pact.verifier.publishResults", "false"); // Should only be enabled in CI.
+//        System.setProperty("pact.verifier.publishResults", "false"); // Should only be enabled in CI.
         System.setProperty("pact.rootDir", "build/pacts");
     }
 
