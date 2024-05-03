@@ -93,10 +93,9 @@ jobs:
             pactfoundation/pact-cli:1.1.0.0 \
             broker record-deployment --pacticipant=$PACTICIPANT --environment=dev --version=$PACTICIPANT-${{ github.sha }}
 
-  prod-deployment:
+  prod-can-i-deploy:
     needs: dev-deployment
     runs-on: ubuntu-latest
-    environment: prod
     steps:
       - uses: actions/checkout@v2
 
@@ -107,6 +106,13 @@ jobs:
             -e PACT_BROKER_TOKEN=$PACT_BROKER_TOKEN \
             pactfoundation/pact-cli:1.1.0.0 \
             broker can-i-deploy --pacticipant=$PACTICIPANT --to-environment=prod --version=$PACTICIPANT-${{ github.sha }}
+
+  prod-deployment:
+    needs: dev-deployment
+    runs-on: ubuntu-latest
+    environment: prod
+    steps:
+      - uses: actions/checkout@v2
 
       - name: Deploy to prod
         run: echo "Deploying to prod"
