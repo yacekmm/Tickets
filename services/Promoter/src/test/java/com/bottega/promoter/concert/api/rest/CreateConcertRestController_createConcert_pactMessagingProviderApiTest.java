@@ -1,7 +1,7 @@
 package com.bottega.promoter.concert.api.rest;
 
 import java.time.LocalDate;
-import java.util.Map;
+import java.util.*;
 
 import au.com.dius.pact.provider.*;
 import au.com.dius.pact.provider.junit5.*;
@@ -10,12 +10,10 @@ import au.com.dius.pact.provider.junitsupport.loader.*;
 import com.bottega.promoter.concert.fixtures.clients.ConcertHttpClient;
 import com.bottega.promoter.fixtures.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.vavr.control.Try;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import static com.bottega.promoter.infra.TestKafkaEventListener.TOPIC;
 import static java.time.ZoneOffset.UTC;
 
 @Provider(PactFrameworkTestBase.PACT_PROMOTER)
@@ -38,7 +36,7 @@ public class CreateConcertRestController_createConcert_pactMessagingProviderApiT
     void before(PactVerificationContext context) {
         super.beforeEach();
         if(context!= null) {
-            context.setTarget(new MessageTestTarget());
+            context.setTarget(new MessageTestTarget(List.of("com.bottega")));
         }
         System.setProperty("pact.verifier.publishResults", "false"); // Should only be enabled in CI.
         System.setProperty("pact.rootDir", "build/pacts");
