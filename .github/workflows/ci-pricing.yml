@@ -61,7 +61,7 @@ jobs:
             pactfoundation/pact-cli:1.1.0.0 \
             broker publish ${PWD}/services/Pricing/build/pacts --consumer-app-version=$PACTICIPANT-${{ github.sha }} --branch=${{github.ref_name}} --tag-with-git-branch
 
-  dev-deployment:
+  dev-can-i-deploy:
     needs: build
     runs-on: ubuntu-latest
     environment: dev
@@ -74,7 +74,14 @@ jobs:
             -e PACT_BROKER_BASE_URL=$PACT_BROKER_BASE_URL \
             -e PACT_BROKER_TOKEN=$PACT_BROKER_TOKEN \
             pactfoundation/pact-cli:1.1.0.0 \
-            broker can-i-deploy --pacticipant=$PACTICIPANT --to-environment=dev --version=$PACTICIPANT-${{ github.sha }} --ignore="Tickets.Promoter"
+            broker can-i-deploy --pacticipant=$PACTICIPANT --to-environment=dev --version=$PACTICIPANT-${{ github.sha }}"
+
+  dev-deployment:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: dev
+    steps:
+      - uses: actions/checkout@v2
 
       - name: Deploy to Dev
         run: echo "Deploying to dev"
