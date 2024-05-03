@@ -44,11 +44,11 @@ jobs:
         run: >-
           cd services/Promoter &&
           ./gradlew
-          -Ppact.verifier.publishResults=true
-          -Ppact.provider.version=$PACTICIPANT-${{ github.sha }}
-          -Ppact.provider.branchName=${{ github.ref_name }}
-          -Ppact.provider.tag=${{ github.ref_name }}
-          -Ppact.rootDir=build/pacts
+          -Dpact.verifier.publishResults=true
+          -Dpact.provider.version=$PACTICIPANT-${{ github.sha }}
+          -Dpact.provider.branchName=${{ github.ref_name }}
+          -Dpact.provider.tag=${{ github.ref_name }}
+          -Dpact.rootDir=build/pacts
           test
 
       - name: Publish Promoter Consumer Pacts
