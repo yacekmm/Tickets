@@ -15,4 +15,6 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: rebase
-        run: .github/rebaser.sh
+        run: |
+          chmod u+x .github/rebaser.sh
+          .github/rebaser.sh
