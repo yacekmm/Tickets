@@ -1,7 +1,9 @@
 
-cd Tickets
-git config --global user.email "jacek.milewski.k@gmail.com"
-git config --global user.name "Jacek Milewski"
+#cd Tickets
+#git config --global user.email "jacek.milewski.k@gmail.com"
+#git config --global user.name "Jacek Milewski"
+
+chmod u+x rebaser.sh
 
 git reset --hard HEAD
 git fetch origin
