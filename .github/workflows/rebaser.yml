@@ -1,0 +1,18 @@
+name: Rebaser
+run-name: Rebaser
+
+on:
+  workflow_dispatch:
+
+jobs:
+  rebase:
+
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: rebase
+        run: .github/rebaser.sh
