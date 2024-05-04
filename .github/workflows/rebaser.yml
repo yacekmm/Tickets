@@ -2,6 +2,7 @@ name: Rebaser
 run-name: Rebaser
 
 on:
+  push:
   workflow_dispatch:
 
 jobs:
@@ -16,5 +17,6 @@ jobs:
 
       - name: rebase
         run: |
-          chmod u+x .github/rebaser.sh
-          .github/rebaser.sh
+          mv .github/rebaser.sh ../rebaser.sh
+          chmod u+x ../rebaser.sh
+          ../rebaser.sh
