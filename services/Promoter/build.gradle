@@ -16,7 +16,7 @@ buildscript {
 }
 
 plugins {
-    id("au.com.dius.pact") version "4.6.4"
+    id("au.com.dius.pact") version "4.6.9"
 }
 
 apply plugin: 'java'
@@ -98,8 +98,8 @@ dependencies {
     testImplementation 'org.testcontainers:kafka'
     testImplementation 'org.testcontainers:postgresql'
     testImplementation 'org.awaitility:awaitility:4.2.0'
-    testImplementation 'au.com.dius.pact.consumer:junit5:4.5.3'
-    testImplementation 'au.com.dius.pact.provider:junit5:4.5.3'
+    testImplementation 'au.com.dius.pact.consumer:junit5:4.6.9'
+    testImplementation 'au.com.dius.pact.provider:junit5:4.6.9'
 }
 
 dependencyManagement {
