@@ -1,30 +1,46 @@
 
-#cd Tickets
-#git config --global user.email "jacek.milewski.k@gmail.com"
-#git config --global user.name "Jacek Milewski"
+for branch in `git branch -r | grep -v HEAD | grep 'origin/x-' | cut -d/ -f2-`;do
 
+  echo "===========rebase $branch?"
+  read
 
+  echo "-------abort outstanding old rebase?"
+  read
+  git rebase --abort
 
+  if git show-ref --verify --quiet refs/heads/$branch; then
+    echo "-------checkout local branch $branch?"
+    read
+    git checkout $branch
+    echo "-------update?"
+    read
+    git fetch origin
 
-#git reset --hard HEAD
-#git fetch origin
-#git checkout -b test_branch origin/test_branch
-#git rebase origin/main
-#git push origin test_branch --force
-#git checkout -b main origin/main
+    echo "-------merge?"
+    read
+    git merge origin/$branch
+  else
+    echo "-------Create new local branch for $branch?"
+    read
+    git checkout -b $branch origin/$branch
+  fi
 
-for branch in `git branch -r | grep -v HEAD | grep 'test_b' | cut -d/ -f2-`;do
-  branch_name=$(echo -e `git show --format="%ci" $branch | head -n 1` \\t$branch)
-
-  echo $branch_name
-
-  git reset --hard HEAD
-  git fetch origin
-  git checkout -b $branch_name origin/$branch_name
+  echo "-------rebase $branch on main?"
+  read
   git rebase origin/main
-  git push origin $branch_name --force
-  git checkout -b main origin/main
 
-done | sort -r
+#  prefixed_branch=x-$branch
 
+#  echo "-------add prefix?"
+#  read
+#  git checkout -b $prefixed_branch
+
+  echo "-------force push branch $branch?"
+  read
+  git push -u origin $branch --force
+
+done
+
+echo "===========done"
 read
+
