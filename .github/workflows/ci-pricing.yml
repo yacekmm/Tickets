@@ -5,7 +5,7 @@ on:
   push:
     paths:
       - 'services/Pricing/**'
-      - '.github'
+      - 'libs/SharedLib/**'
   workflow_dispatch:
   repository_dispatch:
     types: [pricing-ci-webhook]

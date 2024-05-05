@@ -15,24 +15,24 @@ updates:
     directory: "/services/Promoter"
     schedule:
       interval: "daily"
-      time: "04:30"
-    open-pull-requests-limit: 0
+#      time: "04:30"
+    open-pull-requests-limit: 3
     
   # Pricing
   - package-ecosystem: "gradle"
     directory: "/services/Pricing"
     schedule:
       interval: "daily"
-      time: "04:30"
-    open-pull-requests-limit: 0
+#      time: "04:30"
+    open-pull-requests-limit: 3
     
   # SharedLib
   - package-ecosystem: "gradle"
     directory: "/libs/SharedLib"
     schedule:
       interval: "daily"
-      time: "04:30"
-    open-pull-requests-limit: 0
+#      time: "04:30"
+    open-pull-requests-limit: 3
     
     
   # TicketingTests
