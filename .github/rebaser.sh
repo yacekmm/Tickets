@@ -4,20 +4,15 @@ for branch in `git branch -r | grep -v HEAD | grep 'origin/x-' | cut -d/ -f2-`;d
   echo "===========rebase $branch?"
   read
 
-  echo "-------abort outstanding old rebase?"
-  read
+  echo "-------aborting outstanding old rebase"
   git rebase --abort
 
   if git show-ref --verify --quiet refs/heads/$branch; then
-    echo "-------checkout local branch $branch?"
-    read
+    echo "-------checkout local branch $branch"
     git checkout $branch
-    echo "-------update?"
-    read
+    echo "-------update"
     git fetch origin
-
-    echo "-------merge?"
-    read
+    echo "-------merge"
     git merge origin/$branch
   else
     echo "-------Create new local branch for $branch?"
