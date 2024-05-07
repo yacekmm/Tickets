@@ -15,7 +15,9 @@ updates:
     directory: "/services/Promoter"
     schedule:
       interval: "daily"
-#      time: "04:30"
+      time: "10:30"
+    ignore:
+      update-types: ["version-update:semver-patch"]
     open-pull-requests-limit: 3
     
   # Pricing
@@ -23,7 +25,9 @@ updates:
     directory: "/services/Pricing"
     schedule:
       interval: "daily"
-#      time: "04:30"
+      time: "10:30"
+    ignore:
+      update-types: ["version-update:semver-patch"]
     open-pull-requests-limit: 3
     
   # SharedLib
@@ -31,7 +35,9 @@ updates:
     directory: "/libs/SharedLib"
     schedule:
       interval: "daily"
-#      time: "04:30"
+      time: "10:30"
+    ignore:
+      update-types: ["version-update:semver-patch"]
     open-pull-requests-limit: 3
     
     
