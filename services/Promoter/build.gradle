@@ -97,7 +97,7 @@ dependencies {
     testImplementation 'org.testcontainers:junit-jupiter'
     testImplementation 'org.testcontainers:kafka'
     testImplementation 'org.testcontainers:postgresql'
-    testImplementation 'org.awaitility:awaitility:4.2.0'
+    testImplementation 'org.awaitility:awaitility:4.2.1'
     testImplementation 'au.com.dius.pact.consumer:junit5:4.6.9'
     testImplementation 'au.com.dius.pact.provider:junit5:4.6.9'
 }
