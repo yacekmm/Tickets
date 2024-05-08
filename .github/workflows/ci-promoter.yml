@@ -6,6 +6,8 @@ on:
     paths:
       - 'services/Promoter/**'
       - 'libs/SharedLib/**'
+      - '.github/workflows/ci-promoter.yml'
+      - '.github/workflows/ci-shared-lib.yml'
   workflow_dispatch:
   repository_dispatch:
     types: [promoter-ci-webhook]
@@ -65,7 +67,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: Can I deploy to dev?
         run: >-
@@ -81,7 +83,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: dev
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: Deploy to Dev
         run: echo "Deploying to dev"
@@ -98,7 +100,7 @@ jobs:
     needs: dev-deployment
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: Can I deploy to prod?
         run: >-
@@ -114,7 +116,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: prod
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: Deploy to prod
         run: echo "Deploying to prod"
