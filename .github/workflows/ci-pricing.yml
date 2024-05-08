@@ -6,6 +6,8 @@ on:
     paths:
       - 'services/Pricing/**'
       - 'libs/SharedLib/**'
+      - '.github/workflows/ci-pricing.yml'
+      - '.github/workflows/ci-shared-lib.yml'
   workflow_dispatch:
   repository_dispatch:
     types: [pricing-ci-webhook]

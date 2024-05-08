@@ -6,6 +6,8 @@ on:
     paths:
       - 'services/Promoter/**'
       - 'libs/SharedLib/**'
+      - '.github/workflows/ci-promoter.yml'
+      - '.github/workflows/ci-shared-lib.yml'
   workflow_dispatch:
   repository_dispatch:
     types: [promoter-ci-webhook]
