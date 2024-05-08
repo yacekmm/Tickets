@@ -64,7 +64,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
     implementation 'org.apache.commons:commons-lang3:3.14.0'
     implementation 'io.vavr:vavr:0.10.4'
-    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0'
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0'
 
     testImplementation 'io.vavr:vavr-test:0.10.4'
 
