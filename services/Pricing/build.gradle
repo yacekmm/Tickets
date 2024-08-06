@@ -103,7 +103,7 @@ dependencies {
     testImplementation 'org.testcontainers:postgresql'
     testImplementation 'org.awaitility:awaitility:4.2.1'
     testImplementation 'au.com.dius.pact.consumer:junit5:4.6.10'
-    testImplementation 'au.com.dius.pact.provider:junit5:4.6.11'
+    testImplementation 'au.com.dius.pact.provider:junit5:4.6.12'
 }
 
 dependencyManagement {
