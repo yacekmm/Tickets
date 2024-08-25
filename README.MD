@@ -116,7 +116,7 @@ The project holds System Tests only, all under `src/test` with gradle task:
 
 - `test`: runs tests against the Tickets System
 
-## <a name="contract-tests"></a>Contract tests
+## <a name="contract-tests"></a> Contract tests
 
 Two tools for contract testing are implemented: `Spring Cloud Contract` and `PACT`. Contract testing requires additional infrastructure. To make contract tests green, follow instructions below.
 
@@ -171,17 +171,29 @@ $env:VAR_NAME="<value>"
 $env:VAR_NAME                 # check if variable is set
 ```
 
-# Branching and Tagging
+# Branching and Rebasing
 
-Complete solution is on the `main` branch. Training assignments use tags corresponding to the tasks and their steps.
+Complete solution is on the `main` branch.
+
+## Development
 
 All feature development is made in branches as follows:
 1. start new branch from `main`
 2. When finished, Issue PR to `main`, squashing commits.
-3. Branches with assignments should be rebased on `main` to reflect new features in assignments.
-   - Important: on a regular rebase, tags are not moved. To reflect rebased changes and migrate tags, use https://github.com/maastiff/git-rebase-autotags
-   - check if hook is present in https://github.com/maastiff/git-rebase-autotags#locally-in-repository
-   - check if it is enabled as in https://github.com/maastiff/git-rebase-autotags#configure
+3. Remember to rebase assignment branches on `main` to reflect new features (see [Rebasing](#rebasing))
+
+## Branches with assignments
+
+Training assignments:
+
+- use branches corresponding to the tasks and their steps
+- are prefixed with `x-` in the branch name
+
+## <a name="rebasing"></a> Rebasing
+
+Branches with assignments must be rebased on `main` to reflect new features added to `main` in assignments branches. Use `rebaser.sh` to rebase:
+1. Navigate to `Tickets/.github` directory (on Windows use GitCmd)
+2. Run `./rebaser.sh` to rebase and push all branches starting with `x-` on `main`
 
 # Open API Docs
 
