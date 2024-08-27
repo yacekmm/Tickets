@@ -4,14 +4,18 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.groovy.util.Maps;
 import org.apache.kafka.clients.admin.AdminClient;
 import org.apache.kafka.clients.producer.ProducerConfig;
-import org.junit.jupiter.api.*;
-import org.springframework.beans.factory.annotation.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.cloud.contract.stubrunner.spring.AutoConfigureStubRunner;
-import org.springframework.test.context.*;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.DynamicPropertyRegistry;
+import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.KafkaContainer;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
+
 import static com.bottega.sharedlib.config.CdcStubs.CDC_STUB_ID_PROMOTER;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.DEFINED_PORT;
 import static org.springframework.cloud.contract.stubrunner.spring.StubRunnerProperties.StubsMode.LOCAL;
@@ -58,6 +62,7 @@ public class FrameworkTestBase {
 
     @BeforeEach
     public void beforeEach() {
+        System.setProperty("pact.rootDir", "build/pacts");
         kafkaContainerFixtures.beforeEach();
     }
 
