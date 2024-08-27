@@ -3,7 +3,7 @@ package com.bottega.promoter.fixtures;
 import au.com.dius.pact.consumer.junit5.PactConsumerTestExt;
 import au.com.dius.pact.consumer.junit5.PactTestFor;
 import au.com.dius.pact.core.model.PactSpecVersion;
-import com.bottega.promoter.concert.fixtures.PricingPactFixtures;
+import com.bottega.promoter.concert.fixtures.PricingStubs;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -16,6 +16,6 @@ public class PactFrameworkTestBase_liveCoding extends FrameworkTestBase {
     public static final String PACT_PRICING_LIVE_CODING = "LiveCoding.Tickets.Pricing";
 
     @Autowired
-    protected PricingPactFixtures pricingPactFixtures;
+    protected PricingStubs pricingStubs;
 
 }

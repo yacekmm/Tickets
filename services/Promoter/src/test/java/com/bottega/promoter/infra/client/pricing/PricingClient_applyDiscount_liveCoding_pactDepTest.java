@@ -25,8 +25,8 @@ public class PricingClient_applyDiscount_liveCoding_pactDepTest extends PactFram
 
     @Pact(consumer = PACT_PROMOTER_LIVE_CODING)
     @SuppressWarnings("unused")
-    public RequestResponsePact applyPercentageDiscount(PactDslWithProvider builder) {
-        return pricingPactFixtures.applyPercentageDiscount(builder);
+    public RequestResponsePact stubApplyPercentageDiscount(PactDslWithProvider builder) {
+        return pricingStubs.stubApplyPercentageDiscount(builder);
     }
 
     @Test
