@@ -63,12 +63,6 @@ jobs:
 #            pactfoundation/pact-cli:1.1.0.0 \
 #            broker publish ${PWD}/services/Pricing/build/pacts --consumer-app-version=$PACTICIPANT-${{ github.sha }} --branch=${{github.ref_name}} --tag-with-git-branch
 
-  dev-can-i-deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
   dev-deployment:
     needs: build
     runs-on: ubuntu-latest
