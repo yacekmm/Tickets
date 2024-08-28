@@ -86,7 +86,7 @@ jobs:
             broker can-i-deploy --pacticipant=$PACTICIPANT --to-environment=dev --version=$PACTICIPANT-${{ github.sha }}
 
   dev-deployment:
-    if: ${{ github.ref_name == 'main' }}
+#    if: ${{ github.ref_name == 'main' }}
     needs: build
     runs-on: ubuntu-latest
     environment: dev
@@ -119,7 +119,7 @@ jobs:
             broker can-i-deploy --pacticipant=$PACTICIPANT --to-environment=prod --version=$PACTICIPANT-${{ github.sha }}
 
   prod-deployment:
-    if: ${{ github.ref_name == 'main' }}
+#    if: ${{ github.ref_name == 'main' }}
     needs: dev-deployment
     runs-on: ubuntu-latest
     environment: prod
