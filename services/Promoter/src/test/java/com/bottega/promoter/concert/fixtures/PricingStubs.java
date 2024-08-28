@@ -2,6 +2,7 @@ package com.bottega.promoter.concert.fixtures;
 
 import au.com.dius.pact.consumer.dsl.PactDslWithProvider;
 import au.com.dius.pact.core.model.RequestResponsePact;
+import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.client.WireMock;
 import com.github.tomakehurst.wiremock.http.HttpHeader;
 import com.github.tomakehurst.wiremock.http.HttpHeaders;
@@ -57,8 +58,8 @@ public class PricingStubs {
                 .toPact();
     }
 
-    public void stubApplyPercentageDiscount() {
-        WireMock.stubFor(WireMock.request(METHOD, WireMock.urlEqualTo(PATH))
+    public void stubApplyPercentageDiscount(WireMockServer pricingMockServer) {
+        pricingMockServer.stubFor(WireMock.request(METHOD, WireMock.urlEqualTo(PATH))
                         .withRequestBody(WireMock.equalToJson(REQ_BODY))
                 .willReturn(WireMock.aResponse()
                         .withStatus(RES_STATUS)

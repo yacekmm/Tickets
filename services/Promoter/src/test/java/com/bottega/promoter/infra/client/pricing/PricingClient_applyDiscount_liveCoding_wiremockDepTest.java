@@ -3,15 +3,16 @@ package com.bottega.promoter.infra.client.pricing;
 import com.bottega.promoter.concert.domain.ConcertId;
 import com.bottega.promoter.concert.fixtures.PricingStubs;
 import com.bottega.promoter.fixtures.FrameworkTestBase;
-import com.github.tomakehurst.wiremock.client.WireMock;
+import com.github.tomakehurst.wiremock.WireMockServer;
+import com.github.tomakehurst.wiremock.common.ConsoleNotifier;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.contract.wiremock.AutoConfigureWireMock;
 
+import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.options;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@AutoConfigureWireMock(port = 8181)
 public class PricingClient_applyDiscount_liveCoding_wiremockDepTest extends FrameworkTestBase {
 
     PricingClient httpPricingClient;
@@ -19,16 +20,26 @@ public class PricingClient_applyDiscount_liveCoding_wiremockDepTest extends Fram
     @Autowired
     PricingStubs pricingStubs;
 
+    static WireMockServer pricingMockServer;
+
     @BeforeEach
     void setUp() {
         httpPricingClient = concertFixtures.pricingClient;
-        WireMock.reset();
+
+        pricingMockServer = new WireMockServer(options().port(8181)
+                .notifier(new ConsoleNotifier(true)));
+        pricingMockServer.start();
+    }
+
+    @AfterEach
+    void tearDown() {
+        pricingMockServer.stop();
     }
 
     @Test
     public void applyDiscount_isValid() {
         //given
-        pricingStubs.stubApplyPercentageDiscount();
+        pricingStubs.stubApplyPercentageDiscount(pricingMockServer);
 
         //when
         var result = httpPricingClient.applyPercentageDiscount(new ConcertId("123"), 10);
