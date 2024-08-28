@@ -1,0 +1,139 @@
+name: Promoter CI
+run-name: Promoter CI
+
+on:
+  push:
+    paths:
+      - 'services/Promoter/**'
+      - 'libs/SharedLib/**'
+      - '.github/workflows/ci-promoter.yml'
+      - '.github/workflows/ci-promoter-liveCoding.yml'
+      - '.github/workflows/ci-shared-lib.yml'
+  workflow_dispatch:
+  repository_dispatch:
+    types: [promoter-ci-webhook]
+
+env:
+  PACT_BROKER_BASE_URL: ${{ vars.PACT_BROKER_BASE_URL }}
+  PACT_BROKER_TOKEN: ${{ secrets.PACT_BROKER_TOKEN }}
+  PACTICIPANT: "LiveCoding.Tickets.Promoter"
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      # Configure Gradle for optimal use in GiHub Actions, including caching of downloaded dependencies.
+      # See: https://github.com/gradle/actions/blob/main/setup-gradle/README.md
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@417ae3ccd767c252f5661f1ace9f835f9654f2b5 # v3.1.0
+
+      - name: Publish Pricing Spring Cloud Contract to local maven repo
+        run: >-
+          cd services/Pricing &&
+          ./gradlew publishToMavenLocal
+
+      - name: Test
+        run: >-
+          cd services/Promoter &&
+          ./gradlew
+#          -Dpact.verifier.publishResults=true
+#          -Dpact.provider.version=$PACTICIPANT-${{ github.sha }}
+#          -Dpact.provider.branchName=${{ github.ref_name }}
+#          -Dpact.provider.tag=${{ github.ref_name }}
+          -Dpact.rootDir=build/pacts
+          test publishToMavenLocal
+
+      - name: Publish Promoter Consumer Pacts
+        run: >-
+          docker run --rm \
+            -w ${PWD} \
+            -v ${PWD}:${PWD} \
+            -e PACT_BROKER_BASE_URL=$PACT_BROKER_BASE_URL \
+            -e PACT_BROKER_TOKEN=$PACT_BROKER_TOKEN \
+            pactfoundation/pact-cli:1.1.0.0 \
+            broker publish ${PWD}/services/Promoter/build/pacts --consumer-app-version=$PACTICIPANT-${{ github.sha }} --branch=${{github.ref_name}} --tag-with-git-branch
+
+  dev-can-i-deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Can I deploy to dev?
+        run: >-
+          docker run --rm \
+            -e PACT_BROKER_BASE_URL=$PACT_BROKER_BASE_URL \
+            -e PACT_BROKER_TOKEN=$PACT_BROKER_TOKEN \
+            pactfoundation/pact-cli:1.1.0.0 \
+            broker can-i-deploy --pacticipant=$PACTICIPANT --to-environment=dev --version=$PACTICIPANT-${{ github.sha }}
+
+  dev-deployment:
+    if: ${{ github.ref_name == 'main' }}
+    needs: build
+    runs-on: ubuntu-latest
+    environment: dev
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy to Dev
+        run: echo "Deploying to dev"
+
+      - name: Record Pact deployment to dev
+        run: >-
+          docker run --rm \
+            -e PACT_BROKER_BASE_URL=$PACT_BROKER_BASE_URL \
+            -e PACT_BROKER_TOKEN=$PACT_BROKER_TOKEN \
+            pactfoundation/pact-cli:1.1.0.0 \
+            broker record-deployment --pacticipant=$PACTICIPANT --environment=dev --version=$PACTICIPANT-${{ github.sha }}
+
+  prod-can-i-deploy:
+    needs: dev-deployment
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Can I deploy to prod?
+        run: >-
+          docker run --rm \
+            -e PACT_BROKER_BASE_URL=$PACT_BROKER_BASE_URL \
+            -e PACT_BROKER_TOKEN=$PACT_BROKER_TOKEN \
+            pactfoundation/pact-cli:1.1.0.0 \
+            broker can-i-deploy --pacticipant=$PACTICIPANT --to-environment=prod --version=$PACTICIPANT-${{ github.sha }}
+
+  prod-deployment:
+    if: ${{ github.ref_name == 'main' }}
+    needs: dev-deployment
+    runs-on: ubuntu-latest
+    environment: prod
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy to prod
+        run: echo "Deploying to prod"
+
+      - name: Record Pact deployment to prod
+        run: >-
+          docker run --rm \
+            -e PACT_BROKER_BASE_URL=$PACT_BROKER_BASE_URL \
+            -e PACT_BROKER_TOKEN=$PACT_BROKER_TOKEN \
+            pactfoundation/pact-cli:1.1.0.0 \
+            broker record-deployment --pacticipant=$PACTICIPANT --environment=prod --version=$PACTICIPANT-${{ github.sha }}
+
+      - name: Record Pact release to prod
+        run: >-
+          docker run --rm \
+            -e PACT_BROKER_BASE_URL=$PACT_BROKER_BASE_URL \
+            -e PACT_BROKER_TOKEN=$PACT_BROKER_TOKEN \
+            pactfoundation/pact-cli:1.1.0.0 \
+            broker record-release --pacticipant=$PACTICIPANT --environment=prod --version=$PACTICIPANT-${{ github.sha }}

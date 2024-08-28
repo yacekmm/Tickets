@@ -28,6 +28,7 @@ public class Pricing_providesApiContract_liveCoding_pactApiTest extends Framewor
         if (context != null) {
             context.setTarget(new HttpTestTarget("localhost", port));
         }
+        System.setProperty("pact.verifier.publishResults", "true");
     }
 
     @TestTemplate
