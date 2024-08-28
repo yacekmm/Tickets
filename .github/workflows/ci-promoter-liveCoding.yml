@@ -47,12 +47,19 @@ jobs:
         run: >-
           cd services/Promoter &&
           ./gradlew
+          -Dpact.rootDir=build/pacts
+          test publishToMavenLocal
+
+# with publish contracts:
+#        run: >-
+#          cd services/Promoter &&
+#          ./gradlew
 #          -Dpact.verifier.publishResults=true
 #          -Dpact.provider.version=$PACTICIPANT-${{ github.sha }}
 #          -Dpact.provider.branchName=${{ github.ref_name }}
 #          -Dpact.provider.tag=${{ github.ref_name }}
-          -Dpact.rootDir=build/pacts
-          test publishToMavenLocal
+#          -Dpact.rootDir=build/pacts
+#          test publishToMavenLocal
 
       - name: Publish Promoter Consumer Pacts
         run: >-
