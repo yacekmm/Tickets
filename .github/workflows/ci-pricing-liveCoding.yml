@@ -69,6 +69,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+  dev-deployment:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: dev
+    steps:
+      - uses: actions/checkout@v4
+
       - name: Can I deploy to dev?
         run: >-
           docker run --rm \
@@ -76,14 +83,6 @@ jobs:
             -e PACT_BROKER_TOKEN=$PACT_BROKER_TOKEN \
             pactfoundation/pact-cli:1.1.0.0 \
             broker can-i-deploy --pacticipant=$PACTICIPANT --to-environment=dev --version=$PACTICIPANT-${{ github.sha }}
-
-  dev-deployment:
-#    if: ${{ github.ref_name == 'main' }}
-    needs: build
-    runs-on: ubuntu-latest
-    environment: dev
-    steps:
-      - uses: actions/checkout@v4
 
       - name: Deploy to Dev
         run: echo "Deploying to dev"
@@ -96,10 +95,10 @@ jobs:
             pactfoundation/pact-cli:1.1.0.0 \
             broker record-deployment --pacticipant=$PACTICIPANT --environment=dev --version=$PACTICIPANT-${{ github.sha }}
 
-
-  prod-can-i-deploy:
+  prod-deployment:
     needs: dev-deployment
     runs-on: ubuntu-latest
+    environment: prod
     steps:
       - uses: actions/checkout@v4
 
@@ -110,15 +109,6 @@ jobs:
             -e PACT_BROKER_TOKEN=$PACT_BROKER_TOKEN \
             pactfoundation/pact-cli:1.1.0.0 \
             broker can-i-deploy --pacticipant=$PACTICIPANT --to-environment=prod --version=$PACTICIPANT-${{ github.sha }} --ignore="Tickets.Promoter"
-
-
-  prod-deployment:
-#    if: ${{ github.ref_name == 'main' }}
-    needs: dev-deployment
-    runs-on: ubuntu-latest
-    environment: prod
-    steps:
-      - uses: actions/checkout@v4
 
       - name: Deploy to prod
         run: echo "Deploying to prod"
