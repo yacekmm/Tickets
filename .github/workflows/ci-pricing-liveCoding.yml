@@ -1,5 +1,5 @@
-name: Pricing CI
-run-name: Pricing CI
+name: LiveCoding Pricing CI
+run-name: LiveCoding Pricing CI
 
 on:
   push:

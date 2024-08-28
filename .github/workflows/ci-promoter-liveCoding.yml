@@ -1,5 +1,5 @@
-name: Promoter CI
-run-name: Promoter CI
+name: LiveCoding Promoter CI
+run-name: LiveCoding Promoter CI
 
 on:
   push:
