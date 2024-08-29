@@ -9,7 +9,7 @@ import com.bottega.promoter.fixtures.PactFrameworkTestBase_liveCoding;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static com.bottega.promoter.concert.fixtures.asserts.PriceAssert.assertThatPrice;
 
 public class PricingClient_applyDiscount_liveCoding_pactDepTest extends PactFrameworkTestBase_liveCoding {
 
@@ -36,7 +36,8 @@ public class PricingClient_applyDiscount_liveCoding_pactDepTest extends PactFram
         var result = httpPricingClient.applyPercentageDiscount(new ConcertId("123"), 10);
 
         //then
-        assertThat(result.get().getFirst().getPrice().toInt()).isEqualTo(90_00);
+        assertThatPrice(result.get().getFirst())
+                .equalTo(90_00);
     }
 
 }

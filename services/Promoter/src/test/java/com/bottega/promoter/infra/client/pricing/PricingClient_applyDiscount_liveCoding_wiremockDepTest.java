@@ -10,8 +10,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import static com.bottega.promoter.concert.fixtures.asserts.PriceAssert.assertThatPrice;
 import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.options;
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class PricingClient_applyDiscount_liveCoding_wiremockDepTest extends FrameworkTestBase {
 
@@ -45,7 +45,8 @@ public class PricingClient_applyDiscount_liveCoding_wiremockDepTest extends Fram
         var result = httpPricingClient.applyPercentageDiscount(new ConcertId("123"), 10);
 
         //then
-        assertThat(result.get().getFirst().getPrice().toInt()).isEqualTo(90_00);
+        assertThatPrice(result.get().getFirst())
+                .equalTo(90_00);
     }
 
 }
