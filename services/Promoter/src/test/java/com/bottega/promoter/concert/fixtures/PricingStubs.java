@@ -2,16 +2,24 @@ package com.bottega.promoter.concert.fixtures;
 
 import au.com.dius.pact.consumer.dsl.PactDslWithProvider;
 import au.com.dius.pact.core.model.RequestResponsePact;
+import com.bottega.promoter.concert.Price;
+import com.bottega.promoter.concert.PriceFactor;
+import com.bottega.promoter.concert.domain.ConcertId;
+import com.bottega.promoter.pricing.api.app.PricingService;
+import com.bottega.sharedlib.vo.Money;
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.client.WireMock;
 import com.github.tomakehurst.wiremock.http.HttpHeader;
 import com.github.tomakehurst.wiremock.http.HttpHeaders;
+import io.vavr.control.Either;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
 import java.util.stream.Collectors;
 
 import static com.github.tomakehurst.wiremock.http.HttpHeader.httpHeader;
+import static java.util.List.of;
+import static org.mockito.BDDMockito.given;
 
 @Component
 public class PricingStubs {
@@ -58,12 +66,25 @@ public class PricingStubs {
                 .toPact();
     }
 
-    public void stubApplyPercentageDiscount(WireMockServer pricingMockServer) {
-        pricingMockServer.stubFor(WireMock.request(METHOD, WireMock.urlEqualTo(PATH))
+    public void stubApplyPercentageDiscount(WireMockServer pricingWireMockServer) {
+        pricingWireMockServer.stubFor(WireMock.request(METHOD, WireMock.urlEqualTo(PATH))
                         .withRequestBody(WireMock.equalToJson(REQ_BODY))
                 .willReturn(WireMock.aResponse()
                         .withStatus(RES_STATUS)
                         .withHeaders(HEADERS)
                         .withBody(RESP_BODY)));
+    }
+
+    public void stubApplyPercentageDiscount(PricingService pricingServiceMock) {
+        given(pricingServiceMock.applyPercentageDiscount(new ConcertId("123"), 10))
+                .willReturn(Either.right(
+                        of(new Price(
+                                new Money(90_00),
+                                of(new PriceFactor(
+                                        "PERCENTAGE",
+                                        10,
+                                        null))))
+                ));
+
     }
 }
