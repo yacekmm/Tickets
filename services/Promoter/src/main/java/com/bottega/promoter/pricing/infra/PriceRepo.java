@@ -4,12 +4,12 @@ import com.bottega.promoter.concert.Price;
 import com.bottega.promoter.concert.domain.ConcertId;
 import com.bottega.sharedlib.vo.Money;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PriceRepo {
     public List<Price> findByItemId(ConcertId concertId) {
-        return List.of(new Price(new Money(100_00), Collections.emptyList()));
+        return List.of(new Price(new Money(100_00), new ArrayList<>()));
     }
 
     public void save(Price price) {

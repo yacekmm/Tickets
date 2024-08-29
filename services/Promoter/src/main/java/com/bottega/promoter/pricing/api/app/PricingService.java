@@ -6,6 +6,7 @@ import com.bottega.promoter.concert.domain.ConcertId;
 import com.bottega.promoter.pricing.infra.PriceRepo;
 import com.bottega.sharedlib.vo.error.ErrorResult;
 import io.vavr.control.Either;
+import lombok.AllArgsConstructor;
 
 import java.util.List;
 
@@ -13,6 +14,7 @@ import static com.bottega.sharedlib.vo.error.ErrorResult.notFound;
 import static com.bottega.sharedlib.vo.error.GenericErrorCode.not_found;
 import static io.vavr.control.Either.left;
 
+@AllArgsConstructor
 public class PricingService {
 
     private PriceRepo priceRepo;
