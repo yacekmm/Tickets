@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import static com.bottega.promoter.concert.fixtures.asserts.PriceAssert.assertThatPrice;
 
-class PricingServiceTest extends ConcertLogicTestBase {
+class PricingService_liveCoding_Test extends ConcertLogicTestBase {
 
     private PricingService pricingService;
 
