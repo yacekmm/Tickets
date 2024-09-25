@@ -26,6 +26,11 @@ public class PriceAssert {
         return this;
     }
 
+    public PriceAssert hasPercentageFactor(int value) {
+        assertThat(price.getFactors()).contains(new PriceFactor("PERCENTAGE", value, null));
+        return this;
+    }
+
     public PriceAssert equalTo(int priceValue) {
         return equalTo(new Money(priceValue));
     }

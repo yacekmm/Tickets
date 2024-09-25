@@ -26,6 +26,7 @@ class PricingService_liveCoding_Test extends ConcertLogicTestBase {
 
         //then
         assertThatPrice(result.get().getFirst())
-                .equalTo(90_00);
+                .equalTo(90_00)
+                .hasPercentageFactor(10);
     }
 }
