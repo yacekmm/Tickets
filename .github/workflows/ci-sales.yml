@@ -6,7 +6,7 @@ on:
     paths:
       - 'services/Sales/**'
       - 'libs/SharedLib/**'
-      - '.github/workflows/ci-pricing.yml'
+      - '.github/workflows/ci-sales.yml'
       - '.github/workflows/ci-shared-lib.yml'
   workflow_dispatch:
   repository_dispatch:
@@ -37,25 +37,3 @@ jobs:
           cd services/Sales &&
           ./gradlew 
           test
-
-  dev-deployment:
-    if: ${{ github.ref_name == 'main' }}
-    needs: build
-    runs-on: ubuntu-latest
-    environment: dev
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Deploy to Dev
-        run: echo "Deploying to dev"
-
-  prod-deployment:
-    if: ${{ github.ref_name == 'main' }}
-    needs: dev-deployment
-    runs-on: ubuntu-latest
-    environment: prod
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Deploy to prod
-        run: echo "Deploying to prod"
