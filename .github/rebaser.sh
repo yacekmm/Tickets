@@ -6,6 +6,8 @@ for branch in `git branch -r | grep -v HEAD | grep 'origin/x-' | cut -d/ -f2-`;d
 
   echo "-------aborting outstanding old rebase"
   git rebase --abort
+  git checkout main
+  git reset --hard
 
   if git show-ref --verify --quiet refs/heads/$branch; then
     echo "-------checkout local branch $branch"
