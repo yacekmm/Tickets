@@ -24,6 +24,7 @@
       <option name="RunConfigurationTask" enabled="true" run_configuration_name="Promoter contract publish" run_configuration_type="GradleRunConfiguration" />
       <option name="RunConfigurationTask" enabled="true" run_configuration_name="Promoter contractTest" run_configuration_type="GradleRunConfiguration" />
       <option name="RunConfigurationTask" enabled="true" run_configuration_name="Pricing contractTest" run_configuration_type="GradleRunConfiguration" />
+      <option name="RunConfigurationTask" enabled="true" run_configuration_name="Sales test --all" run_configuration_type="JUnit" />
     </method>
   </configuration>
 </component>

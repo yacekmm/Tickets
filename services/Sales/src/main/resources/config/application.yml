@@ -1,0 +1,6 @@
+spring.profiles.include:
+  - serviceLocator
+  - db
+
+server.port: ${services.sales.port}
+

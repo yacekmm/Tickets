@@ -1,0 +1,107 @@
+buildscript {
+    ext {
+        springBootVersion = '3.3.3'
+        springCloudVersion = '2022.0.4'
+        cloudContractVersion = '4.1.4'
+        testcontainersVersion = '1.20.1'
+    }
+    repositories {
+        mavenCentral()
+        google()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath("org.springframework.cloud:spring-cloud-contract-gradle-plugin:${cloudContractVersion}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'groovy'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'spring-cloud-contract'
+apply plugin: 'maven-publish'
+
+group = 'com.bottega'
+version = '1.0.0'
+sourceCompatibility = '21'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+dependencies {
+    implementation project(':libs:SharedLib')
+
+    implementation platform("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
+    implementation platform("org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}")
+
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'com.vladmihalcea:hibernate-types-60:2.21.1'
+    implementation 'io.hypersistence:hypersistence-utils-hibernate-60:3.8.2'
+    implementation 'org.springframework.boot:spring-boot-starter-quartz'
+    implementation 'org.springframework.boot:spring-boot-starter-web-services'
+    implementation 'org.springframework.kafka:spring-kafka'
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+    implementation 'org.apache.commons:commons-lang3:3.16.0'
+    implementation 'io.vavr:vavr:0.10.4'
+
+    testImplementation 'io.vavr:vavr-test:0.10.4'
+
+    //lombok
+    compileOnly 'org.projectlombok:lombok'
+    testCompileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    testAnnotationProcessor 'org.projectlombok:lombok'
+
+    runtimeOnly 'com.h2database:h2'
+
+    testImplementation platform("org.springframework.cloud:spring-cloud-contract-dependencies:${cloudContractVersion}")
+
+    testImplementation project(':libs:SharedLib')
+    testImplementation project(':libs:SharedLib').sourceSets.test.output
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.3'
+    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.10.3'
+    testImplementation 'org.assertj:assertj-core:3.26.3'
+    testImplementation 'org.assertj:assertj-vavr:0.4.3'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'io.rest-assured:rest-assured:5.5.0'
+
+    //spock
+    testImplementation platform('org.apache.groovy:groovy-bom:4.0.22')
+    testImplementation 'org.apache.groovy:groovy'
+    testImplementation platform("org.spockframework:spock-bom:2.3-groovy-4.0")
+    testImplementation "org.spockframework:spock-core"
+
+    testImplementation 'org.testcontainers:junit-jupiter'
+    testImplementation 'org.testcontainers:postgresql'
+    testImplementation 'org.awaitility:awaitility:4.2.2'
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.testcontainers:testcontainers-bom:${testcontainersVersion}"
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '8.5'
+}
+
+tasks.withType(Test) {
+    testLogging {
+        events = ["passed", "failed", "skipped"]
+        exceptionFormat = "full"
+    }
+}
