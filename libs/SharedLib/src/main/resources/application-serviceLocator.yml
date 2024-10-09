@@ -5,6 +5,9 @@ services:
   pricing:
     port: 8081
     host: http://localhost
+  sales:
+    port: 8082
+    host: http://localhost
 
 ---
 
@@ -15,3 +18,5 @@ services:
     port: 8180
   pricing:
     port: 8181
+  sales:
+    port: 8182

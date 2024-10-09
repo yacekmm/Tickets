@@ -1,0 +1,11 @@
+sourceSets {
+    test {
+        groovy {
+            srcDirs = ['src/test/java']
+        }
+    }
+}
+
+tasks.withType(Test) {
+    useJUnitPlatform()
+}
