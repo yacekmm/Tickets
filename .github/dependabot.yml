@@ -6,38 +6,52 @@ updates:
   - package-ecosystem: "npm"
     directory: "/services/promoter-ui"
     schedule:
-      interval: "daily"
-      time: "04:30"
+      interval: "weekly"
+      time: "12:30"
     open-pull-requests-limit: 0
 
   # Promoter
   - package-ecosystem: "gradle"
     directory: "/services/Promoter"
     schedule:
-      interval: "daily"
-      time: "10:30"
+      interval: "weekly"
+      time: "12:30"
     ignore:
-      update-types: ["version-update:semver-patch"]
+      - dependency-name: "*"
+        update-types: ["version-update:semver-patch"]
     open-pull-requests-limit: 3
     
   # Pricing
   - package-ecosystem: "gradle"
     directory: "/services/Pricing"
     schedule:
-      interval: "daily"
-      time: "10:30"
+      interval: "weekly"
+      time: "12:30"
     ignore:
-      update-types: ["version-update:semver-patch"]
+      - dependency-name: "*"
+        update-types: ["version-update:semver-patch"]
     open-pull-requests-limit: 3
-    
+
+  # Sales
+  - package-ecosystem: "gradle"
+    directory: "/services/Sales"
+    schedule:
+      interval: "weekly"
+      time: "12:30"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-patch"]
+    open-pull-requests-limit: 3
+
   # SharedLib
   - package-ecosystem: "gradle"
     directory: "/libs/SharedLib"
     schedule:
-      interval: "daily"
-      time: "10:30"
+      interval: "weekly"
+      time: "12:30"
     ignore:
-      update-types: ["version-update:semver-patch"]
+      - dependency-name: "*"
+        update-types: ["version-update:semver-patch"]
     open-pull-requests-limit: 3
     
     
@@ -45,6 +59,9 @@ updates:
   - package-ecosystem: "gradle"
     directory: "/SystemTests/TicketingTests"
     schedule:
-      interval: "daily"
-      time: "04:30"
+      interval: "weekly"
+      time: "12:30"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-patch"]
     open-pull-requests-limit: 0
