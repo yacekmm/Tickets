@@ -70,17 +70,70 @@ class OrderTest {
 
         // then
         assertEquals(response.orderStatus(), OrderStatus.SUBMITTED.name());
-        transactionTemplate.execute(status ->
-        {
-            Order orderFromDb = orderRepository.findById(order.getId()).get();
-            assertEquals(OrderStatus.SUBMITTED, orderFromDb.getStatus());
-            List<Product> products = orderFromDb.getProducts();
-            assertEquals(1, products.size());
 
-            Product firstProduct = products.get(0);
-            assertEquals("Gizmo", firstProduct.getName());
-            assertEquals(new Money(2.33, Currency.PLN), firstProduct.getPrice());
-            return null;
+        Order orderFromDb = orderRepository.findById(order.getId()).get();
+        assertEquals(OrderStatus.SUBMITTED, orderFromDb.getStatus());
+
+        List<Product> products = orderFromDb.getProducts();
+        assertEquals(1, products.size());
+
+        Product firstProduct = products.get(0);
+        assertEquals("Gizmo", firstProduct.getName());
+        assertEquals(new Money(2.33, Currency.PLN), firstProduct.getPrice());
+
+        assertEquals(new Money(2.33, Currency.PLN), orderFromDb.getTotal());
+    }
+
+    @Test
+    public void vipSubmitsOrder2() {
+        // given
+        Address address = new Address("31, Street St.", "City", "Country");
+        Client client = new Client("John Doe");
+        client.addAddress(address);
+        Order order = new Order(client);
+        order.setShippingAddress(address);
+        order.setPriority(new OrderPriority(PriorityType.VIP, 5));
+        Product product = new Product("Gizmo", new Money(2.33, Currency.PLN));
+        Product product2 = new Product("Magic", new Money(5.20, Currency.PLN));
+        order.addProduct(product);
+        order.addProduct(product2);
+        transactionTemplate.executeWithoutResult(status ->
+        {
+            addressRepository.save(address);
+            clientRepository.save(client);
+            productRepository.save(product);
+            productRepository.save(product2);
+            orderRepository.save(order);
         });
+
+        // when
+        RestAssured.reset();
+        RestAssured.port = port;
+        RestAssured.basePath = "/v1";
+        SubmitResponseDto response = RestAssured.given()
+                .log().all()
+                .post("/orders/" + order.getId() + "/submit")
+                .then()
+                .log().all()
+                .extract()
+                .as(SubmitResponseDto.class);
+
+        // then
+        assertEquals(response.orderStatus(), OrderStatus.SUBMITTED.name());
+
+        Order orderFromDb = orderRepository.findById(order.getId()).get();
+        assertEquals(OrderStatus.SUBMITTED, orderFromDb.getStatus());
+
+        List<Product> products = orderFromDb.getProducts();
+        assertEquals(2, products.size());
+
+        Product firstProduct = products.get(0);
+        assertEquals("Gizmo", firstProduct.getName());
+        assertEquals(new Money(2.33, Currency.PLN), firstProduct.getPrice());
+        Product secondProduct = products.get(1);
+        assertEquals("Magic", secondProduct.getName());
+        assertEquals(new Money(5.20, Currency.PLN), secondProduct.getPrice());
+
+        assertEquals(new Money(6.78, Currency.PLN), orderFromDb.getTotal());
     }
 }
