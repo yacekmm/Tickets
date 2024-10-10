@@ -32,17 +32,25 @@ public class Order {
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
 
+    @Embedded
+    private Money total;
+
     public Order(Client client) {
         this.client = client;
         this.status = OrderStatus.CREATED;
+        this.total = new Money(0, Currency.PLN);
     }
 
 
     public void addProduct(Product product) {
         products.add(product);
+        total = total.add(product.getPrice());
     }
 
     public void submit() {
         this.status = OrderStatus.SUBMITTED;
+        if(priority.getType().equals(PriorityType.VIP) && products.size() >= 2) {
+            total = total.discount(10);
+        }
     }
 }
