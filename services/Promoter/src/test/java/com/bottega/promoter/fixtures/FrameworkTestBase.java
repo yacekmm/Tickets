@@ -60,6 +60,7 @@ public class FrameworkTestBase {
     @BeforeEach
     public void beforeEach() {
         kafkaContainerFixtures.beforeEach();
+        System.setProperty("pact.rootDir", "build/pacts");
     }
 
 

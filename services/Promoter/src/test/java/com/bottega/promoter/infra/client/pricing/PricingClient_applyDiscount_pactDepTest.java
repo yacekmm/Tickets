@@ -1,37 +1,30 @@
 package com.bottega.promoter.infra.client.pricing;
 
-import java.util.List;
-
 import com.bottega.promoter.concert.Price;
 import com.bottega.promoter.concert.domain.ConcertId;
-import com.bottega.promoter.fixtures.*;
+import com.bottega.promoter.fixtures.FrameworkTestBase;
+import com.bottega.sharedlib.vo.Money;
 import com.bottega.sharedlib.vo.error.ErrorResult;
 import io.vavr.control.Either;
-import org.junit.jupiter.api.*;
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
 
-public class PricingClient_applyDiscount_pactDepTest extends PactFrameworkTestBase {
+import java.util.List;
 
-    FakePricingClient fakePricingClient;
-    PricingClient realPricingClient;
+import static com.bottega.promoter.concert.fixtures.asserts.PriceAssert.assertThatPrice;
 
-    @BeforeEach
-    void setUp() {
-        fakePricingClient = new FakePricingClient();
-        realPricingClient = concertFixtures.pricingClient;
-    }
+public class PricingClient_applyDiscount_pactDepTest extends FrameworkTestBase {
 
     @Test
-    public void fakeApplyDiscount_isValid() {
+    public void applyDiscount_isValid() {
         //given
         ConcertId concertId = new ConcertId("123");
 
         //when
-        Either<ErrorResult, List<Price>> realResult = realPricingClient.applyPercentageDiscount(concertId, 10);
-        Either<ErrorResult, List<Price>> fakeResult = fakePricingClient.applyPercentageDiscount(concertId, 10);
+        Either<ErrorResult, List<Price>> result = concertFixtures.pricingClient.applyPercentageDiscount(concertId, 10);
 
         //then
-        assertThat(fakeResult.get()).containsExactlyInAnyOrderElementsOf(realResult.get());
+        assertThatPrice(result.get().get(0))
+                .equalTo(new Money(90_00));
     }
 
 }
