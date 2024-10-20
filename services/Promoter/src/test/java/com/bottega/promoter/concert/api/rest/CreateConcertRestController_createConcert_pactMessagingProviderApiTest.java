@@ -25,7 +25,7 @@ import java.util.Map;
 
 import static java.time.ZoneOffset.UTC;
 
-@Provider(PactFrameworkTestBase.PACT_PROMOTER_MESSAGING)
+@Provider(PactFrameworkTestBase.PACT_PROMOTER)
 @PactBroker(url = "${PACT_BROKER_BASE_URL}", authentication = @PactBrokerAuth(token = "${PACT_BROKER_TOKEN}"))
 @IgnoreNoPactsToVerify
 public class CreateConcertRestController_createConcert_pactMessagingProviderApiTest extends FrameworkTestBase {

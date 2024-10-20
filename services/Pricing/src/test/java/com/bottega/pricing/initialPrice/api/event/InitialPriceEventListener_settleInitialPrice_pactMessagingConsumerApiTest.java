@@ -30,7 +30,7 @@ import static com.bottega.sharedlib.fixtures.RepoEntries.SINGULAR;
 import static org.testcontainers.shaded.org.awaitility.Awaitility.await;
 
 @ExtendWith(PactConsumerTestExt.class)
-@PactTestFor(providerName = "Tickets.Promoter.Messaging", providerType = ProviderType.ASYNCH, pactVersion = PactSpecVersion.V3)
+@PactTestFor(providerName = "Tickets.Promoter", providerType = ProviderType.ASYNCH, pactVersion = PactSpecVersion.V3)
 class InitialPriceEventListener_settleInitialPrice_pactMessagingConsumerApiTest extends FrameworkTestBase {
 
     @Autowired
@@ -43,7 +43,7 @@ class InitialPriceEventListener_settleInitialPrice_pactMessagingConsumerApiTest 
         System.setProperty("pact.rootDir", "build/pacts");
     }
 
-    @Pact(consumer = "Tickets.Pricing.Messaging")
+    @Pact(consumer = "Tickets.Pricing")
     @SneakyThrows
     MessagePact concertCreatedPact(MessagePactBuilder builder) {
 
