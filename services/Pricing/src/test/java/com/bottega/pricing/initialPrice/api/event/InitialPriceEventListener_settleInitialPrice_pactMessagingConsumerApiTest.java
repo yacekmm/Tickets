@@ -18,7 +18,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.vavr.control.Try;
 import lombok.SneakyThrows;
 import org.apache.kafka.common.serialization.StringDeserializer;
-import org.apache.kafka.common.serialization.StringSerializer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -36,7 +35,6 @@ class InitialPriceEventListener_settleInitialPrice_pactMessagingConsumerApiTest 
 
     @Autowired
     ObjectMapper objectMapper;
-    StringSerializer stringSerializer = new StringSerializer();
     StringDeserializer stringDeserializer = new StringDeserializer();
 
     @BeforeEach
