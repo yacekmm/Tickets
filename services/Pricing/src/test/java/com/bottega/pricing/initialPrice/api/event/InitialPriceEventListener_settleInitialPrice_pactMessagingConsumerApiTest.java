@@ -1,35 +1,37 @@
 package com.bottega.pricing.initialPrice.api.event;
 
-import java.nio.charset.StandardCharsets;
-import java.util.*;
-
 import au.com.dius.pact.consumer.MessagePactBuilder;
-import au.com.dius.pact.consumer.dsl.*;
-import au.com.dius.pact.consumer.junit5.*;
+import au.com.dius.pact.consumer.dsl.DslPart;
+import au.com.dius.pact.consumer.dsl.PactDslJsonBody;
+import au.com.dius.pact.consumer.junit5.PactConsumerTestExt;
+import au.com.dius.pact.consumer.junit5.PactTestFor;
+import au.com.dius.pact.consumer.junit5.ProviderType;
 import au.com.dius.pact.core.model.PactSpecVersion;
 import au.com.dius.pact.core.model.annotations.Pact;
-import au.com.dius.pact.core.model.messaging.*;
-import com.bottega.pricing.fixtures.*;
+import au.com.dius.pact.core.model.messaging.Message;
+import au.com.dius.pact.core.model.messaging.MessagePact;
+import com.bottega.pricing.fixtures.FrameworkTestBase;
+import com.bottega.pricing.fixtures.PriceChangeEventAssert;
 import com.bottega.pricing.price.domain.ItemPrice;
 import com.bottega.sharedlib.event.Event;
-import com.bottega.sharedlib.event.payload.ConcertCreatedEventPayload;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.vavr.control.Try;
 import lombok.SneakyThrows;
-import org.apache.kafka.common.serialization.*;
-import org.assertj.core.api.Assertions;
-import org.json.*;
-import org.junit.jupiter.api.*;
+import org.apache.kafka.common.serialization.StringDeserializer;
+import org.apache.kafka.common.serialization.StringSerializer;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
+
 import static com.bottega.pricing.price.fixtures.PriceAssert.assertThatPrice;
-import static com.bottega.sharedlib.event.EventType.CONCERT_CREATED;
 import static com.bottega.sharedlib.fixtures.RepoEntries.SINGULAR;
-import static com.toomuchcoding.jsonassert.JsonAssertion.assertThat;
 import static org.testcontainers.shaded.org.awaitility.Awaitility.await;
 
 @ExtendWith(PactConsumerTestExt.class)
-@PactTestFor(providerName = "Tickets.Promoter", providerType = ProviderType.ASYNCH, pactVersion = PactSpecVersion.V3)
+@PactTestFor(providerName = "Tickets.Promoter.Messaging", providerType = ProviderType.ASYNCH, pactVersion = PactSpecVersion.V3)
 class InitialPriceEventListener_settleInitialPrice_pactMessagingConsumerApiTest extends FrameworkTestBase {
 
     @Autowired
@@ -43,7 +45,7 @@ class InitialPriceEventListener_settleInitialPrice_pactMessagingConsumerApiTest 
         System.setProperty("pact.rootDir", "build/pacts");
     }
 
-    @Pact(consumer = "Tickets.Pricing")
+    @Pact(consumer = "Tickets.Pricing.Messaging")
     @SneakyThrows
     MessagePact concertCreatedPact(MessagePactBuilder builder) {
 

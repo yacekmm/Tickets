@@ -1,8 +1,10 @@
 package com.bottega.promoter.fixtures;
 
 import au.com.dius.pact.consumer.dsl.PactDslWithProvider;
-import au.com.dius.pact.consumer.junit5.*;
-import au.com.dius.pact.core.model.*;
+import au.com.dius.pact.consumer.junit5.PactConsumerTestExt;
+import au.com.dius.pact.consumer.junit5.PactTestFor;
+import au.com.dius.pact.core.model.PactSpecVersion;
+import au.com.dius.pact.core.model.RequestResponsePact;
 import au.com.dius.pact.core.model.annotations.Pact;
 import com.bottega.promoter.concert.fixtures.PricingPactFixtures;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,7 +17,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class PactFrameworkTestBase extends FrameworkTestBase {
 
     public static final String PACT_PROMOTER = "Tickets.Promoter";
+    public static final String PACT_PROMOTER_MESSAGING = "Tickets.Promoter.Messaging";
     public static final String PACT_PRICING = "Tickets.Pricing";
+    public static final String PACT_PRICING_MESSAGING = "Tickets.Pricing.Messaging";
 
     @Autowired
     protected PricingPactFixtures pricingPactFixtures;
