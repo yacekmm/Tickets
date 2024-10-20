@@ -1,4 +1,4 @@
-package com.bottega.pricing.initialPrice.api.event;
+package com.bottega.promoter.concertRead;
 
 import au.com.dius.pact.consumer.MessagePactBuilder;
 import au.com.dius.pact.consumer.dsl.DslPart;
@@ -10,14 +10,13 @@ import au.com.dius.pact.core.model.PactSpecVersion;
 import au.com.dius.pact.core.model.annotations.Pact;
 import au.com.dius.pact.core.model.messaging.Message;
 import au.com.dius.pact.core.model.messaging.MessagePact;
-import com.bottega.pricing.fixtures.FrameworkTestBase;
-import com.bottega.pricing.fixtures.PriceChangeEventAssert;
-import com.bottega.pricing.price.domain.ItemPrice;
+import com.bottega.promoter.fixtures.FrameworkTestBase;
 import com.bottega.sharedlib.event.Event;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.vavr.control.Try;
 import lombok.SneakyThrows;
 import org.apache.kafka.common.serialization.StringDeserializer;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -25,13 +24,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-import static com.bottega.pricing.price.fixtures.PriceAssert.assertThatPrice;
-import static com.bottega.sharedlib.fixtures.RepoEntries.SINGULAR;
 import static org.testcontainers.shaded.org.awaitility.Awaitility.await;
 
 @ExtendWith(PactConsumerTestExt.class)
-@PactTestFor(providerName = "Tickets.Promoter", providerType = ProviderType.ASYNCH, pactVersion = PactSpecVersion.V3)
-class InitialPriceEventListener_settleInitialPrice_pactMessagingConsumerApiTest extends FrameworkTestBase {
+@PactTestFor(providerName = "Tickets.Pricing.Messaging", providerType = ProviderType.ASYNCH, pactVersion = PactSpecVersion.V3)
+class PriceChangeEventListener_updatesReadModel_pactMessagingConsumerApiTest extends FrameworkTestBase {
 
     @Autowired
     ObjectMapper objectMapper;
@@ -43,54 +40,43 @@ class InitialPriceEventListener_settleInitialPrice_pactMessagingConsumerApiTest 
         System.setProperty("pact.rootDir", "build/pacts");
     }
 
-    @Pact(consumer = "Tickets.Pricing")
+    @Pact(consumer = "Tickets.Promoter.Messaging")
     @SneakyThrows
-    MessagePact concertCreatedPact(MessagePactBuilder builder) {
+    MessagePact priceChangedPact(MessagePactBuilder builder) {
 
         DslPart json = new PactDslJsonBody()
                 .uuid("id")
-                .stringType("type", "CONCERT_CREATED")
+                .stringType("type", "PRICE_CHANGE")
                 .object("payload")
-                .stringType("serialization_type", "CONCERT_CREATED")
-                .uuid("concertId")
-                .stringType("title", "this has to be a valid title")
-                .stringType("date", "2025-12-12")
-                .integerType("profitMarginPercentage", 5)
-                .array("tags")
-                .closeArray()
+                .stringType("serialization_type", "PRICE_CHANGE")
+                .uuid("priceId")
+                .uuid("itemId")
+                .integerType("price", 100_00)
                 .closeObject();
 
-        return builder.expectsToReceive("CONCERT_CREATED event")
+        return builder.expectsToReceive("PRICE_CHANGE event")
                 .withContent(json)
                 .toPact();
     }
 
     @Test
     @SneakyThrows
-    @PactTestFor(pactMethod = "concertCreatedPact", providerType = ProviderType.ASYNCH)
+    @PactTestFor(pactMethod = "priceChangedPact", providerType = ProviderType.ASYNCH)
     public void settleInitialPrice_createsPrice_onConcertCreatedEvent(List<Message> messages) {
         //when
         triggerEvents(messages);
 
         //then
-        await().until(() -> priceFixtures.itemPriceRepo.findAll().iterator().hasNext());
-
-        ItemPrice actualPrice = priceFixtures.itemPriceRepo.findAll().iterator().next();
-
-        assertThatPrice(actualPrice)
-                .isPersistedIn(priceFixtures.itemPriceRepo, SINGULAR)
-                .hasPrice(105_00)
-                .hasNoFactors();
-
-        PriceChangeEventAssert.assertThatEvent(sharedFixtures.testEventListener.singleEvent())
-                .isPriceChangeV1(actualPrice);
+        await().until(() -> concertReadFixtures.concertPriceRepo.findAll().iterator().hasNext());
+        ConcertPrice concertPrice = concertReadFixtures.concertPriceRepo.findAll().iterator().next();
+        Assertions.assertThat(concertPrice.getPrice()).isEqualTo(100_00);
     }
 
     @SneakyThrows
     private void triggerEvents(List<Message> messages) {
         messages.stream()
                 .map(Message::contentsAsBytes)
-                .map(bytes -> stringDeserializer.deserialize("promoter.concert", bytes))
+                .map(bytes -> stringDeserializer.deserialize("pricing.price", bytes))
                 .map(deserialized -> Try.of(() -> objectMapper.readValue(deserialized, Event.class)))
                 .map(Try::get)
                 .forEach(sharedFixtures.eventPublisher::publish);
