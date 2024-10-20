@@ -25,8 +25,32 @@ import java.util.Map;
 @IgnoreNoPactsToVerify
 public class InitialPriceEventPublisher_emitsPriceChangeEvent_pactMessagingProviderTest extends FrameworkTestBase {
 
-    //TODO: append suffix `.Messaging`  Provider and Consumer names to distinguish it from previous assignments
+    @Autowired
+    ObjectMapper objectMapper;
 
-    //TODO: use initPriceFixtures.initPriceChangeEventPublisher.publishConcertCreatedEvent(); method to trigger Pricing service to emit PRICE_CHANGE event
+    @TestTemplate
+    @ExtendWith(PactVerificationInvocationContextProvider.class)
+    void testTemplate(PactVerificationContext context) {
+        context.verifyInteraction();
+    }
+
+    @BeforeEach
+    void before(PactVerificationContext context) {
+        super.beforeEach();
+        context.setTarget(new MessageTestTarget(List.of("com.bottega")));
+//        System.setProperty("pact.verifier.publishResults", "true"); // Should only be enabled in CI.
+        System.setProperty("pact.rootDir", "build/pacts");
+    }
+
+    @SneakyThrows
+    @PactVerifyProvider("PRICE_CHANGE event")
+    MessageAndMetadata createConcert_emitsPriceChangePactEvent() {
+        //when
+        initPriceFixtures.initPriceChangeEventPublisher.publishConcertCreatedEvent();
+
+        return new MessageAndMetadata(
+                objectMapper.writeValueAsBytes(sharedFixtures.testEventListener.singleEvent()),
+                Map.of("contentType", "application/json"));
+    }
 
 }
