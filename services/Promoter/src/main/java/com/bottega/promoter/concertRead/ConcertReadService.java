@@ -15,12 +15,14 @@ import java.util.List;
 public class ConcertReadService {
 
     private final ConcertFinderRepo concertFinderRepo;
+    private final ConcertPriceRepo concertPriceRepo;
 
     List<Concert> findConcertsForPromoter(String promoterId) {
         return concertFinderRepo.findByPromoterIdOrderByDateAsc(promoterId);
     }
 
     public void updatePrice(ConcertId concertId, Money price) {
+        concertPriceRepo.save(new ConcertPrice(concertId, price.toInt()));
         log.info("Updating price for concert with id: {}, price: {}", concertId, price);
     }
 }
