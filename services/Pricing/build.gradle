@@ -87,6 +87,13 @@ dependencies {
     testImplementation 'org.assertj:assertj-core:3.26.3'
     testImplementation 'org.assertj:assertj-vavr:0.4.3'
 
+    //kotest
+
+    def kotestVersion = '6.0.0.M1'
+    testImplementation "io.kotest:kotest-runner-junit5-jvm:$kotestVersion"
+    testImplementation "io.kotest:kotest-assertions-core-jvm:$kotestVersion"
+    testImplementation "io.kotest:kotest-property-jvm:$kotestVersion"
+
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.cloud:spring-cloud-starter-contract-stub-runner'
     testImplementation 'org.springframework.cloud:spring-cloud-starter-contract-verifier'
