@@ -59,6 +59,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-quartz'
     implementation 'org.springframework.boot:spring-boot-starter-web-services'
     implementation 'org.springframework.kafka:spring-kafka'
+    //FIXME: added 3.9.0 only for the purpose of the bug: https://issues.apache.org/jira/browse/KAFKA-17121
+    implementation 'org.apache.kafka:kafka-clients:3.9.0'
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
     implementation 'org.apache.commons:commons-lang3:3.17.0'
     implementation 'io.vavr:vavr:0.10.4'
