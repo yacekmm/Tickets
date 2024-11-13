@@ -38,6 +38,8 @@ repositories {
     mavenLocal()
 }
 
+apply from: file('gradle/test-suites.gradle')
+
 dependencies {
     implementation project(':libs:SharedLib')
 
