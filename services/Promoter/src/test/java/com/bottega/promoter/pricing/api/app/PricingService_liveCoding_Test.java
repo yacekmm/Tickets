@@ -11,16 +11,21 @@ import static com.bottega.promoter.concert.fixtures.asserts.PriceAssert.assertTh
 class PricingService_liveCoding_Test extends ConcertLogicTestBase {
 
     private PricingService pricingService;
+    private PriceRepo priceRepo;
 
     @Override
     @BeforeEach
     protected void setUp() {
         super.setUp();
-        pricingService = new PricingService(new PriceRepo());
+        priceRepo = new PriceRepo();
+        pricingService = new PricingService(priceRepo);
     }
 
     @Test
     void applyPercentageDiscount_returnsDiscountedPrice() {
+        //given
+        priceRepo.savePriceFor("123", 100_00);
+
         //when
         var result = pricingService.applyPercentageDiscount(new ConcertId("123"), 10);
 

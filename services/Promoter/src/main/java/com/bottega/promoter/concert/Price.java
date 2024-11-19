@@ -14,6 +14,8 @@ import java.util.List;
 @Getter
 public class Price {
 
+    private String id;
+    private String itemId;
     private Money price;
     private List<PriceFactor> factors;
 
@@ -22,4 +24,5 @@ public class Price {
         this.factors.add(factor);
         return this;
     }
+
 }

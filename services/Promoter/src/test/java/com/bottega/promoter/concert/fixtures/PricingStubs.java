@@ -79,6 +79,8 @@ public class PricingStubs {
         given(pricingServiceMock.applyPercentageDiscount(new ConcertId("123"), 10))
                 .willReturn(Either.right(
                         of(new Price(
+                                "stubId",
+                                "stubItemId",
                                 new Money(90_00),
                                 of(new PriceFactor(
                                         "PERCENTAGE",

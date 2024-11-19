@@ -4,15 +4,26 @@ import com.bottega.promoter.concert.Price;
 import com.bottega.promoter.concert.domain.ConcertId;
 import com.bottega.sharedlib.vo.Money;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class PriceRepo {
+
+    Map<String, Price> db = new HashMap<>();
+
     public List<Price> findByItemId(ConcertId concertId) {
-        return List.of(new Price(new Money(100_00), new ArrayList<>()));
+        return db.values().stream()
+                .filter(price -> price.getItemId().equals(concertId.asString()))
+                .toList();
     }
 
-    public void save(Price price) {
-        //who cares
+    public Price savePriceFor(String itemId, int priceValue) {
+        Price price = new Price(UUID.randomUUID().toString(), itemId, new Money(priceValue), new ArrayList<>());
+        db.put(price.getId(), price);
+        return price;
+    }
+
+    public Price save(Price price) {
+        db.put(price.getId(), price);
+        return price;
     }
 }
