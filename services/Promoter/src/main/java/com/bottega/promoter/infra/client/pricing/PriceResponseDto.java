@@ -1,9 +1,11 @@
 package com.bottega.promoter.infra.client.pricing;
 
-import java.util.*;
-
-import com.bottega.promoter.concert.*;
+import com.bottega.promoter.concert.Price;
+import com.bottega.promoter.concert.PriceFactor;
 import com.bottega.sharedlib.vo.Money;
+
+import java.util.Arrays;
+import java.util.Map;
 
 public record PriceResponseDto(
         int price,
@@ -11,6 +13,8 @@ public record PriceResponseDto(
 
     public Price toPrice() {
         return new Price(
+                "fake-id",
+                "item-id",
                 new Money(price),
                 Arrays.stream(factors)
                         .map(PriceFactorResponseDto::toPriceFactor)

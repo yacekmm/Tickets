@@ -1,24 +1,28 @@
 package com.bottega.promoter.concert.api.app;
 
-import java.util.List;
-
-import com.bottega.promoter.agreements.*;
+import com.bottega.promoter.agreements.PromoterAgreement;
+import com.bottega.promoter.agreements.PromoterService;
 import com.bottega.promoter.concert.Price;
 import com.bottega.promoter.concert.domain.*;
 import com.bottega.promoter.concert.infra.repo.ConcertRepo;
 import com.bottega.promoter.infra.client.pricing.PricingClient;
+import com.bottega.promoter.pricing.api.app.PricingService;
 import com.bottega.sharedlib.ddd.ApplicationService;
 import com.bottega.sharedlib.event.EventPublisher;
 import com.bottega.sharedlib.vo.error.ErrorResult;
 import io.vavr.control.Either;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+
+import java.util.List;
+
 import static com.bottega.promoter.concert.domain.PromoterEventFactory.concertCreated;
 import static com.bottega.sharedlib.vo.error.ErrorResult.notFound;
 import static com.bottega.sharedlib.vo.error.GenericErrorCode.not_found;
 import static io.vavr.control.Option.ofOptional;
 
 @ApplicationService
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class ConcertService {
 
     private final ConcertFactory concertFactory;
@@ -28,6 +32,8 @@ public class ConcertService {
     private final TagService tagService;
     private final CategoryService categoryService;
     private final PromoterService promoterService;
+    @Setter
+    private PricingService pricingService;
 
     public Either<ErrorResult, Concert> createConcert(String title, String dateTime, String promoterIdString) {
         PromoterAgreement promoterAgreement = promoterService.getPromoterAgreement(promoterIdString);
@@ -44,5 +50,11 @@ public class ConcertService {
         return ofOptional(concertRepo.findById(new ConcertId(concertId)))
                 .toEither(notFound(not_found, "Concert with given ID does not exist. ID: " + concertId))
                 .flatMap(concert -> pricingClient.applyPercentageDiscount(concert.getId(), percentage));
+    }
+
+    public Either<ErrorResult, List<Price>> discountConcertLiveCoding(String concertId, int percentage) {
+        return ofOptional(concertRepo.findById(new ConcertId(concertId)))
+                .toEither(notFound(not_found, "Concert with given ID does not exist. ID: " + concertId))
+                .flatMap(concert -> pricingService.applyPercentageDiscount(concert.getId(), percentage));
     }
 }

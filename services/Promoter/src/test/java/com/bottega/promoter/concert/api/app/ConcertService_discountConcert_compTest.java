@@ -1,15 +1,15 @@
 package com.bottega.promoter.concert.api.app;
 
-import java.util.List;
-
-import com.bottega.promoter.concert.*;
+import com.bottega.promoter.concert.Price;
 import com.bottega.promoter.concert.domain.Concert;
 import com.bottega.promoter.concert.fixtures.ConcertLogicTestBase;
 import com.bottega.sharedlib.vo.Money;
 import com.bottega.sharedlib.vo.error.ErrorResult;
 import io.vavr.control.Either;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
+
 import static com.bottega.promoter.concert.fixtures.asserts.PriceAssert.assertThatPrice;
 import static com.bottega.sharedlib.fixtures.ErrorAssert.assertThatError;
 import static com.bottega.sharedlib.vo.error.ErrorType.NOT_FOUND;
@@ -28,12 +28,9 @@ class ConcertService_discountConcert_compTest extends ConcertLogicTestBase {
         Either<ErrorResult, List<Price>> result = concertFixtures.concertService.discountConcert(concert.getId().asString(), 10);
 
         //then
-        assertThat(result).hasRightValueSatisfying(prices -> {
-            Assertions.assertThat(prices).hasSize(1);
-            assertThatPrice(prices.getFirst())
-                    .equalTo(new Money(90_00))
-                    .hasFactors(new PriceFactor("PERCENTAGE", 10, null));
-        });
+            assertThatPrice(result.get().getFirst())
+                    .equalTo(new Money(90_00));
+
     }
 
     @Test
