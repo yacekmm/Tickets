@@ -127,7 +127,7 @@ task wrapper(type: Wrapper) {
 }
 
 tasks.withType(Test) {
-    jvmArgs "-javaagent:${configurations.mockitoAgent.files[0]}"
+    jvmArgs "-Xshare:off", "-javaagent:${configurations.mockitoAgent.files[0]}"
 
     testLogging {
         events = ["passed", "failed", "skipped"]
