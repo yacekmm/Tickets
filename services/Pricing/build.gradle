@@ -28,7 +28,6 @@ apply plugin: 'io.spring.dependency-management'
 apply plugin: 'spring-cloud-contract'
 apply plugin: 'maven-publish'
 
-
 group = 'com.bottega'
 version = '1.0.0'
 sourceCompatibility = '21'
@@ -37,6 +36,8 @@ configurations {
     compileOnly {
         extendsFrom annotationProcessor
     }
+    //solving https://github.com/OpenRefine/OpenRefine/issues/6913
+    mockitoAgent
 }
 
 repositories {
@@ -61,8 +62,6 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-quartz'
     implementation 'org.springframework.boot:spring-boot-starter-web-services'
     implementation 'org.springframework.kafka:spring-kafka'
-    //FIXME: added 3.9.0 only for the purpose of the bug: https://issues.apache.org/jira/browse/KAFKA-17121
-    implementation 'org.apache.kafka:kafka-clients:3.9.0'
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
     implementation 'org.apache.commons:commons-lang3:3.17.0'
     implementation 'io.vavr:vavr:0.10.4'
@@ -107,7 +106,13 @@ dependencies {
     testImplementation 'org.testcontainers:postgresql'
     testImplementation 'org.awaitility:awaitility:4.2.2'
     testImplementation 'au.com.dius.pact.consumer:junit5:4.6.14'
-    testImplementation 'au.com.dius.pact.provider:junit5:4.6.13'
+    testImplementation 'au.com.dius.pact.provider:junit5:4.6.12'
+
+    mockitoAgent "org.mockito:mockito-core:5.14.2"
+
+    //FIXME: added 3.9.0 only for the purpose of the bug: https://issues.apache.org/jira/browse/KAFKA-17121
+    implementation 'org.apache.kafka:kafka-clients:3.9.0+'
+    implementation 'org.apache.kafka:kafka-server-common:3.9.0+'
 }
 
 dependencyManagement {
@@ -117,7 +122,13 @@ dependencyManagement {
     }
 }
 
+task wrapper(type: Wrapper) {
+    gradleVersion = '8.5'
+}
+
 tasks.withType(Test) {
+    jvmArgs "-javaagent:${configurations.mockitoAgent.files[0]}"
+
     testLogging {
         events = ["passed", "failed", "skipped"]
         exceptionFormat = "full"
@@ -127,7 +138,6 @@ tasks.withType(Test) {
     systemProperties["pact.provider.branchName"] = System.getProperty("pact.provider.branchName")
     systemProperties["pact.provider.tag"] = System.getProperty("pact.provider.tag")
     systemProperties["pact.rootDir"] = System.getProperty("pact.rootDir")
-
 }
 
 pact {
@@ -139,26 +149,6 @@ pact {
 
     publish {
         pactBrokerUrl = System.getenv("PACT_BROKER_BASE_URL")
-    }
-
-}
-
-task wrapper(type: Wrapper){
-    gradleVersion = '8.5'
-}
-
-
-pact {
-
-    broker {
-        pactBrokerUrl = System.getenv("PACT_BROKER_BASE_URL")
-        pactBrokerToken = System.getenv("PACT_BROKER_TOKEN")
-    }
-
-    publish {
-        pactDirectory = "build/pacts"
-        pactBrokerUrl = System.getenv("PACT_BROKER_BASE_URL")
-        consumerVersion = "1.0.4"
     }
 
 }
