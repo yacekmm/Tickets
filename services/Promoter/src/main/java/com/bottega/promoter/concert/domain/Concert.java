@@ -57,6 +57,7 @@ public class Concert implements BaseEntity {
 
 
     public void initNewConcert(TagService tagService, CategoryService categoryService) {
+        tags = tagService.tag(title);
         category = categoryService.categorize(title);
     }
 

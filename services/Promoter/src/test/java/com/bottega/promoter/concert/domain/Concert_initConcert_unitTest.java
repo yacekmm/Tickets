@@ -13,10 +13,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class Concert_initConcert_unitTest extends ConcertLogicTestBase {
 
+
     private static Stream<Arguments> provideStringsForTags() {
         return Stream.of(
-                Arguments.of("no tags apply", Set.of())
-                //TODO more cases
+                Arguments.of("no tags apply", Set.of()),
+                Arguments.of("Rock concert", Set.of("rock")),
+                Arguments.of("Scorpions in Warsaw!", Set.of("rock")),
+                Arguments.of("Scorpions on Mystic Festival", Set.of("rock", "festival")),
+                Arguments.of("Rihanna the best of", Set.of("pop"))
         );
     }
 
