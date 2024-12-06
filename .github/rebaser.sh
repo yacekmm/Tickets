@@ -10,6 +10,8 @@ for branch in `git branch -r | grep -v HEAD | grep 'origin/x-' | cut -d/ -f2-`;d
   git reset --hard
 
   if git show-ref --verify --quiet refs/heads/$branch; then
+    echo "-------remove local branch $branch"
+    git branch -D $branch
     echo "-------checkout local branch $branch"
     git checkout $branch
     echo "-------update"
@@ -18,12 +20,12 @@ for branch in `git branch -r | grep -v HEAD | grep 'origin/x-' | cut -d/ -f2-`;d
     git merge origin/$branch
   else
     echo "-------Create new local branch for $branch?"
-    read
+#    read
     git checkout -b $branch origin/$branch
   fi
 
   echo "-------rebase $branch on main?"
-  read
+#  read
   git rebase origin/main
 
 #  prefixed_branch=x-$branch
@@ -39,5 +41,5 @@ for branch in `git branch -r | grep -v HEAD | grep 'origin/x-' | cut -d/ -f2-`;d
 done
 
 echo "===========done"
-read
+#read
 
