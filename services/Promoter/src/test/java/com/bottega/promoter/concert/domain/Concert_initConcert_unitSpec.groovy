@@ -1,10 +1,6 @@
 package com.bottega.promoter.concert.domain
 
-
 import com.bottega.promoter.fixtures.SpecificationBase
-import com.bottega.sharedlib.config.TestClockConfig
-
-import static com.bottega.sharedlib.config.TestClockConfig.TEST_TIME_PLUS_30_DAYS
 
 class Concert_initConcert_unitSpec extends SpecificationBase {
 
@@ -14,7 +10,7 @@ class Concert_initConcert_unitSpec extends SpecificationBase {
 
     def "initConcert - assigns category"() {
         given:
-        def newConcert = new Concert(new ConcertId(), Title.from(title).get(), ConcertDate.from(TEST_TIME_PLUS_30_DAYS.toString(), sharedFixtures.clock).get(), "vendor-id", new HashSet<>(), null)
+        Concert newConcert = builders.aConcert().withTitle(title).build()
 
         when:
         newConcert.initNewConcert(concertFixtures.categoryService)
