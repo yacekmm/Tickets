@@ -1,6 +1,6 @@
 version: '3'
 services:
   kafka:
-    image: confluentinc/confluent-local:latest
+    image: apache/kafka:3.9.0
     ports:
       - "9092:9092"
