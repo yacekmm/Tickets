@@ -34,6 +34,8 @@ configurations {
     compileOnly {
         extendsFrom annotationProcessor
     }
+    //solving https://github.com/OpenRefine/OpenRefine/issues/6913
+    mockitoAgent
 }
 
 repositories {
@@ -42,6 +44,7 @@ repositories {
 }
 
 apply from: file('gradle/test-suites.gradle')
+
 
 dependencies {
     implementation project(':libs:SharedLib')
@@ -93,6 +96,8 @@ dependencies {
     testImplementation 'org.testcontainers:junit-jupiter'
     testImplementation 'org.testcontainers:postgresql'
     testImplementation 'org.awaitility:awaitility:4.2.2'
+
+    mockitoAgent "org.mockito:mockito-core:5.14.2"
 }
 
 dependencyManagement {
@@ -107,7 +112,7 @@ task wrapper(type: Wrapper) {
 }
 
 tasks.withType(Test) {
-    jvmArgs "-Xshare:off"
+    jvmArgs "-Xshare:off", "-javaagent:${configurations.mockitoAgent.files[0]}"
 
     testLogging {
         events = ["passed", "failed", "skipped"]
