@@ -26,6 +26,7 @@ public class Pricing_providesApiContract_pactApiTest extends FrameworkTestBase {
     public void setupTestTarget(PactVerificationContext context) {
         super.beforeEach();
         context.setTarget(new HttpTestTarget("localhost", port));
+        System.setProperty("pact.verifier.publishResults", "true");
     }
 
     @TestTemplate
