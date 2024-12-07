@@ -15,6 +15,10 @@ buildscript {
     }
 }
 
+plugins {
+    id("au.com.dius.pact") version "4.6.14"
+}
+
 apply plugin: 'java'
 apply plugin: 'groovy'
 apply plugin: 'idea'
@@ -130,4 +134,17 @@ tasks.withType(Test) {
         events = ["passed", "failed", "skipped"]
         exceptionFormat = "full"
     }
+}
+
+pact {
+
+    broker {
+        pactBrokerUrl = System.getenv("PACT_BROKER_BASE_URL")
+        pactBrokerToken = System.getenv("PACT_BROKER_TOKEN")
+    }
+
+    publish {
+        pactBrokerUrl = System.getenv("PACT_BROKER_BASE_URL")
+    }
+
 }
