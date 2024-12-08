@@ -23,7 +23,7 @@ import java.util.Map;
 @Provider("Tickets.Pricing.Messaging")
 @PactBroker(url = "${PACT_BROKER_BASE_URL}", authentication = @PactBrokerAuth(token = "${PACT_BROKER_TOKEN}"))
 @IgnoreNoPactsToVerify
-public class InitialPriceEventListener_emitsPriceChangeEvent_pactMessagingProviderApiTest extends FrameworkTestBase {
+public class InitialPriceEventPublisher_emitsPriceChangeEvent_pactMessagingProviderTest extends FrameworkTestBase {
 
     @Autowired
     ObjectMapper objectMapper;
