@@ -82,10 +82,11 @@ dependencies {
 
     testImplementation project(':libs:SharedLib')
     testImplementation project(':libs:SharedLib').sourceSets.test.output
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.11.2'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.11.2'
-    testImplementation 'org.junit.platform:junit-platform-commons:1.12.0'
-    testImplementation 'org.junit.platform:junit-platform-launcher:1.11.2'
+    def junitMinor = '11.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.' + junitMinor
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.' + junitMinor
+    testImplementation 'org.junit.platform:junit-platform-commons:1.' + junitMinor
+    testImplementation 'org.junit.platform:junit-platform-launcher:1.' + junitMinor
     testImplementation 'org.assertj:assertj-core:3.27.0'
     testImplementation 'org.assertj:assertj-vavr:0.4.3'
 
@@ -109,7 +110,7 @@ dependencies {
     testImplementation 'au.com.dius.pact.consumer:junit5:4.6.14'
     testImplementation 'au.com.dius.pact.provider:junit5:4.6.12'
 
-    mockitoAgent "org.mockito:mockito-core:5.15.2"
+    mockitoAgent "org.mockito:mockito-core:5.16.0"
 
     //FIXME: added 3.9.0 only for the purpose of the bug: https://issues.apache.org/jira/browse/KAFKA-17121
     implementation 'org.apache.kafka:kafka-clients:3.9.0+'
