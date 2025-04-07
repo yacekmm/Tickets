@@ -112,7 +112,7 @@ dependencies {
     testImplementation 'au.com.dius.pact.consumer:junit5:4.6.14'
     testImplementation 'au.com.dius.pact.provider:junit5:4.6.12'
 
-    mockitoAgent "org.mockito:mockito-core:5.16.0"
+    mockitoAgent "org.mockito:mockito-core:5.17.0"
 
     //FIXME: added 3.9.0 only for the purpose of the bug: https://issues.apache.org/jira/browse/KAFKA-17121
     implementation 'org.apache.kafka:kafka-clients:4.0.0+'
