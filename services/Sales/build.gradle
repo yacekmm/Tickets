@@ -98,7 +98,7 @@ dependencies {
     testImplementation 'org.testcontainers:postgresql'
     testImplementation 'org.awaitility:awaitility:4.3.0'
 
-    mockitoAgent "org.mockito:mockito-core:5.16.0"
+    mockitoAgent "org.mockito:mockito-core:5.17.0"
 }
 
 dependencyManagement {
