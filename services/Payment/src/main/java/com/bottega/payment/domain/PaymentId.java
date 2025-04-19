@@ -11,7 +11,7 @@ public class PaymentId extends AggregateId {
         super(AggregateId.generate());
     }
 
-    public PaymentId(String concertId) {
-        super(concertId);
+    public PaymentId(String id) {
+        super(id);
     }
 }

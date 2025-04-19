@@ -12,6 +12,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
+@Embeddable
 public class Payment implements BaseEntity {
 
     @Id
@@ -24,14 +25,20 @@ public class Payment implements BaseEntity {
     @Embedded
     private Money amount;
 
-    public Payment(Money amount) {
+    @Embedded
+    private PayerEmail payerEmail;
+
+
+    public Payment(Money amount, PayerEmail payerEmail) {
         this.id = new PaymentId();
         this.status = PaymentStatus.CREATED;
         this.amount = amount;
+        this.payerEmail = payerEmail;
     }
 
 
     public void paid() {
         this.status = PaymentStatus.PAID;
     }
+
 }
