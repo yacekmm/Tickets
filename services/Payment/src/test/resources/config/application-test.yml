@@ -1,0 +1,1 @@
+server.port: ${services.payment.port}

@@ -1,0 +1,117 @@
+buildscript {
+    ext {
+        springBootVersion = '3.4.0'
+        springCloudVersion = '2024.0.0'
+        testcontainersVersion = '1.20.2'
+    }
+    repositories {
+        mavenCentral()
+        google()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'groovy'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'maven-publish'
+
+group = 'com.bottega'
+version = '1.0.0'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+    //solving https://github.com/OpenRefine/OpenRefine/issues/6913
+    mockitoAgent
+}
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+apply from: file('gradle/test-suites.gradle')
+
+
+dependencies {
+    implementation project(':libs:SharedLib')
+
+    implementation platform("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
+    implementation platform("org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}")
+
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'com.vladmihalcea:hibernate-types-60:2.21.1'
+    implementation 'io.hypersistence:hypersistence-utils-hibernate-60:3.9.0'
+    implementation 'org.springframework.boot:spring-boot-starter-quartz'
+    implementation 'org.springframework.boot:spring-boot-starter-web-services'
+    implementation 'org.springframework.kafka:spring-kafka'
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+    implementation 'org.apache.commons:commons-lang3:3.17.0'
+    implementation 'io.vavr:vavr:0.10.4'
+
+    testImplementation 'io.vavr:vavr-test:0.10.4'
+
+    //lombok
+    compileOnly 'org.projectlombok:lombok'
+    testCompileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    testAnnotationProcessor 'org.projectlombok:lombok'
+
+    runtimeOnly 'com.h2database:h2'
+
+    testImplementation project(':libs:SharedLib')
+    testImplementation project(':libs:SharedLib').sourceSets.test.output
+    def junitMinor = '11.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.' + junitMinor
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.' + junitMinor
+    testImplementation 'org.junit.platform:junit-platform-commons:1.' + junitMinor
+    testImplementation 'org.junit.platform:junit-platform-launcher:1.' + junitMinor
+    testImplementation 'org.assertj:assertj-core:3.27.0'
+    testImplementation 'org.assertj:assertj-vavr:0.4.3'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'io.rest-assured:rest-assured:5.5.0'
+
+    //spock
+    testImplementation platform('org.apache.groovy:groovy-bom:4.0.23')
+    testImplementation 'org.apache.groovy:groovy'
+    testImplementation platform("org.spockframework:spock-bom:2.3-groovy-4.0")
+    testImplementation "org.spockframework:spock-core"
+
+    testImplementation 'org.testcontainers:junit-jupiter'
+    testImplementation 'org.testcontainers:postgresql'
+    testImplementation 'org.awaitility:awaitility:4.3.0'
+
+    mockitoAgent "org.mockito:mockito-core:5.17.0"
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.testcontainers:testcontainers-bom:${testcontainersVersion}"
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '8.5'
+}
+
+tasks.withType(Test) {
+    jvmArgs "-Xshare:off", "-javaagent:${configurations.mockitoAgent.files[0]}"
+
+    testLogging {
+        events = ["passed", "failed", "skipped"]
+        exceptionFormat = "full"
+    }
+}

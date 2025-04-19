@@ -8,6 +8,9 @@ services:
   sales:
     port: 8082
     host: http://localhost
+  payment:
+    port: 8083
+    host: http://localhost
 
 ---
 
@@ -20,3 +23,6 @@ services:
     port: 8181
   sales:
     port: 8182
+  payment:
+    port: 8183
+
