@@ -1,8 +1,6 @@
 package com.bottega.payment.domain;
 
 import jakarta.persistence.Embeddable;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,12 +16,9 @@ import java.math.RoundingMode;
 @ToString
 public class Money {
     private double amount;
-    @Enumerated(EnumType.STRING)
-    private Currency currency;
 
-    public Money(double amount, Currency currency) {
+    public Money(double amount) {
         this.amount = roundToTwoDecimalPlaces(amount);
-        this.currency = currency;
     }
 
     private double roundToTwoDecimalPlaces(double value) {
@@ -33,10 +28,10 @@ public class Money {
     }
 
     public Money add(Money money) {
-        return new Money(amount + money.amount, currency);
+        return new Money(amount + money.amount);
     }
 
     public Money discount(int percentage) {
-        return new Money(amount * (100 - percentage) / 100, currency);
+        return new Money(amount * (100 - percentage) / 100);
     }
 }
