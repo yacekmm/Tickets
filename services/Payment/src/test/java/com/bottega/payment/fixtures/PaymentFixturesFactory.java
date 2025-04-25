@@ -2,7 +2,7 @@ package com.bottega.payment.fixtures;
 
 import com.bottega.payment.domain.ports.out.PaymentRepo;
 import com.bottega.payment.infra.InMemoryPaymentRepo;
-import com.bottega.payment.infra.SyncNotifier;
+import com.bottega.payment.infra.sync.SyncNotifier;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor

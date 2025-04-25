@@ -28,6 +28,7 @@ public class Payment implements BaseEntity {
     @Embedded
     private PayerEmail payerEmail;
 
+    private boolean dirty;
 
     public Payment(Money amount, PayerEmail payerEmail) {
         this.id = new PaymentId();
@@ -41,4 +42,7 @@ public class Payment implements BaseEntity {
         this.status = PaymentStatus.PAID;
     }
 
+    public void dirty(boolean isDirty) {
+        this.dirty = isDirty;
+    }
 }
