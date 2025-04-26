@@ -2,6 +2,7 @@ package com.bottega.payment.infra.fallbackoutbox;
 
 import com.bottega.payment.domain.Payment;
 import com.bottega.payment.domain.ports.out.Notifier;
+import com.bottega.payment.infra.HttpClientReq;
 import com.bottega.payment.infra.NotifierHttpClient;
 import com.bottega.payment.infra.outbox.NotifierOutboxRepo;
 import com.bottega.payment.infra.outbox.PaymentConfirmation;
@@ -16,7 +17,7 @@ public class FallbackOutboxNotifier implements Notifier {
     @Override
     public void sendConfirmation(Payment payment) {
         try {
-            notifierHttpClient.send(NotifierHttpClient.HttpClientReq.from(payment));
+            notifierHttpClient.send(HttpClientReq.from(payment));
         } catch (Exception e) {
             System.err.println("Failed to send notification, saving to outbox: " + e.getMessage());
             notifierOutboxRepo.save(PaymentConfirmation.from(payment));

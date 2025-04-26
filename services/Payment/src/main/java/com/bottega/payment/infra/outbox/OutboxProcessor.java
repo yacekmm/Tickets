@@ -1,12 +1,12 @@
 package com.bottega.payment.infra.outbox;
 
+import com.bottega.payment.infra.HttpClientReq;
 import com.bottega.payment.infra.NotifierHttpClient;
-import com.bottega.payment.infra.NotifierHttpClient.HttpClientReq;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
 
 @RequiredArgsConstructor
-public class OutboxProcessing {
+public class OutboxProcessor {
 
     private final NotifierOutboxRepo notifierOutboxRepo;
     private final NotifierHttpClient notifierHttpClient;

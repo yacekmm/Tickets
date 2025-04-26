@@ -2,8 +2,8 @@ package com.bottega.payment.infra.sharedoutbox;
 
 import com.bottega.payment.domain.Payment;
 import com.bottega.payment.domain.ports.out.Notifier;
+import com.bottega.payment.infra.HttpClientReq;
 import com.bottega.payment.infra.NotifierHttpClient;
-import com.bottega.payment.infra.NotifierHttpClient.HttpClientReq;
 import com.bottega.payment.infra.outbox.NotifierOutboxRepo;
 import lombok.RequiredArgsConstructor;
 

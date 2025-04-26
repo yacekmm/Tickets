@@ -1,7 +1,7 @@
 package com.bottega.payment.infra.instantoutbox;
 
+import com.bottega.payment.infra.HttpClientReq;
 import com.bottega.payment.infra.NotifierHttpClient;
-import com.bottega.payment.infra.NotifierHttpClient.HttpClientReq;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
 

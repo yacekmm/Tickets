@@ -1,16 +1,14 @@
-package com.bottega.payment.infra.sync;
+package com.bottega.payment.infra.consumerredelivery;
 
-import com.bottega.payment.domain.Payment;
-import com.bottega.payment.domain.ports.out.Notifier;
 import com.bottega.payment.infra.HttpClientReq;
 import com.bottega.payment.infra.NotifierHttpClient;
 
-public class SyncNotifier implements Notifier {
+public class SyncNotifier implements SequencedNotifier {
 
     private NotifierHttpClient notifierHttpClient;
 
     @Override
-    public void sendConfirmation(Payment payment) {
+    public void sendConfirmation(SequencedPayment payment) {
         notifierHttpClient.send(HttpClientReq.from(payment));
     }
 }

@@ -1,11 +1,12 @@
 package com.bottega.payment.infra;
 
-import com.bottega.payment.domain.Payment;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.reactive.function.client.WebClient;
 
+@RequiredArgsConstructor
 public class NotifierHttpClient {
 
-    private WebClient notifierClient;
+    private final WebClient notifierClient;
 
     public void send(HttpClientReq req) {
         notifierClient.post()
@@ -16,19 +17,4 @@ public class NotifierHttpClient {
                 .block();
     }
 
-    public record HttpClientReq(
-            String template,
-            String to,
-            String paymentId,
-            String status
-    ) {
-        public static HttpClientReq from(Payment payment) {
-            return new HttpClientReq(
-                    "payment_confirmation",
-                    payment.getPayerEmail().toString(),
-                    payment.getId().asString(),
-                    payment.getStatus().name()
-            );
-        }
-    }
 }
