@@ -1,4 +1,4 @@
-package com.bottega.payment.infra.outbox;
+package com.bottega.payment.infra.instantoutbox;
 
 import com.bottega.payment.domain.Payment;
 import com.bottega.payment.domain.ports.out.Notifier;

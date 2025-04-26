@@ -19,6 +19,8 @@ public class PaymentService {
     public void onPaid(PaymentId paymentId) {
         Payment payment = paymentRepo.findById(paymentId).orElseThrow();
         payment.paid();
+
         notifier.sendConfirmation(payment);
+        paymentRepo.save(payment);
     }
 }

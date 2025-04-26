@@ -1,4 +1,4 @@
-package com.bottega.payment.infra.outbox;
+package com.bottega.payment.infra.instantoutbox;
 
 import com.bottega.payment.infra.NotifierHttpClient;
 import com.bottega.payment.infra.NotifierHttpClient.HttpClientReq;
