@@ -1,9 +1,12 @@
 package com.bottega.payment.infra.consumerredelivery.consumer;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class SmtpClient {
 
     public void send(Mail mail) {
-        //send email
+        log.info("Sending mail...");
     }
 
     public record Mail(){
