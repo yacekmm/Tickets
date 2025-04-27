@@ -1,6 +1,9 @@
 package com.bottega.payment.infra.consumerredelivery.consumer;
 
+import java.util.UUID;
+
 public record EmailSeqReq(
+        UUID id,
         String to,
         String template,
         long sequence
