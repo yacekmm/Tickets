@@ -12,6 +12,6 @@ public class NaiveAsyncNotifier implements Notifier {
 
     @Override
     public void sendConfirmation(Payment payment) {
-        kafkaTemplate.send("payment.completed", payment);
+        kafkaTemplate.send("payment", payment);
     }
 }
