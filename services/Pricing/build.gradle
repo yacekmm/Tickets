@@ -88,7 +88,7 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.' + junitMinor
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.' + junitMinor
     testImplementation 'org.junit.platform:junit-platform-commons:1.' + junitMinor
-    testImplementation 'org.junit.platform:junit-platform-launcher:1.' + junitMinor
+    testImplementation 'org.junit.platform:junit-platform-launcher:1.13.0' + junitMinor
     testImplementation 'org.assertj:assertj-core:3.27.0'
     testImplementation 'org.assertj:assertj-vavr:0.4.3'
 
