@@ -78,8 +78,8 @@ dependencies {
     testImplementation project(':libs:SharedLib')
     testImplementation project(':libs:SharedLib').sourceSets.test.output
     def junitMinor = '11.2'
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.' + junitMinor
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.' + junitMinor
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.13.3' + junitMinor
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.13.3' + junitMinor
     testImplementation 'org.junit.platform:junit-platform-commons:1.' + junitMinor
     testImplementation 'org.junit.platform:junit-platform-launcher:1.' + junitMinor
     testImplementation 'org.assertj:assertj-core:3.27.0'
