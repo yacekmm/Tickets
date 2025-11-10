@@ -102,7 +102,7 @@ dependencies {
     testImplementation 'io.rest-assured:rest-assured:5.5.0'
 
     //spock
-    testImplementation platform('org.apache.groovy:groovy-bom:4.0.23')
+    testImplementation platform('org.apache.groovy:groovy-bom:5.0.2')
     testImplementation 'org.apache.groovy:groovy'
     testImplementation platform("org.spockframework:spock-bom:2.3-groovy-4.0")
     testImplementation "org.spockframework:spock-core"
