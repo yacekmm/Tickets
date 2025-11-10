@@ -66,7 +66,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web-services'
     implementation 'org.springframework.kafka:spring-kafka'
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
-    implementation 'org.apache.commons:commons-lang3:3.17.0'
+    implementation 'org.apache.commons:commons-lang3:3.19.0'
     implementation 'io.vavr:vavr:0.10.4'
     implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.1'
 
