@@ -3,7 +3,7 @@ buildscript {
         springBootVersion = '3.5.7'
         springCloudVersion = '2025.0.0'
         cloudContractVersion = '4.3.0'
-        testcontainersVersion = '1.20.2'
+        testcontainersVersion = '2.0.2'
     }
     repositories {
         mavenCentral()
