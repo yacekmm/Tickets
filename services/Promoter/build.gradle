@@ -2,7 +2,7 @@ buildscript {
     ext {
         springBootVersion = '3.5.7'
         springCloudVersion = '2025.0.0'
-        cloudContractVersion = '4.3.0'
+        cloudContractVersion = '5.0.0'
         testcontainersVersion = '2.0.2'
     }
     repositories {
