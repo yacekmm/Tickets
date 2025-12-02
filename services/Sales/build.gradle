@@ -96,6 +96,7 @@ dependencies {
     testImplementation platform("org.spockframework:spock-bom:2.3-groovy-4.0")
     testImplementation "org.spockframework:spock-core"
 
+    testImplementation platform("org.testcontainers:testcontainers-bom:${testcontainersVersion}")
     testImplementation 'org.testcontainers:junit-jupiter'
     testImplementation 'org.testcontainers:postgresql'
     testImplementation 'org.awaitility:awaitility:4.3.0'
@@ -105,7 +106,6 @@ dependencies {
 
 dependencyManagement {
     imports {
-        mavenBom "org.testcontainers:testcontainers-bom:${testcontainersVersion}"
         mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
     }
 }
