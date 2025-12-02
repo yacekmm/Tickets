@@ -3,7 +3,7 @@ buildscript {
         springBootVersion = '4.0.0'
         springCloudVersion = '2025.0.0'
         cloudContractVersion = '4.3.0'
-        testcontainersVersion = '2.0.1'
+        testcontainersVersion = '1.19.7'
     }
     repositories {
         mavenCentral()
@@ -93,7 +93,7 @@ dependencies {
     //spock
     testImplementation platform('org.apache.groovy:groovy-bom:5.0.2')
     testImplementation 'org.apache.groovy:groovy'
-    testImplementation platform("org.spockframework:spock-bom:2.3-groovy-4.0")
+    testImplementation platform("org.spockframework:spock-bom:2.4-M7-groovy-5.0")
     testImplementation "org.spockframework:spock-core"
 
     testImplementation platform("org.testcontainers:testcontainers-bom:${testcontainersVersion}")
