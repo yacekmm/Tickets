@@ -86,7 +86,7 @@ dependencies {
     testImplementation 'org.assertj:assertj-vavr:0.4.3'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'io.rest-assured:rest-assured:6.0.0'
+    testImplementation 'io.rest-assured:rest-assured:5.5.0'
 
     //spock
     testImplementation platform('org.apache.groovy:groovy-bom:4.0.21')
