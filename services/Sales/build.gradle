@@ -1,8 +1,8 @@
 buildscript {
     ext {
-        springBootVersion = '4.0.0'
+        springBootVersion = '3.5.7'
         springCloudVersion = '2025.0.0'
-        cloudContractVersion = '5.0.0'
+        cloudContractVersion = '4.3.0'
         testcontainersVersion = '1.21.3'
     }
     repositories {
@@ -89,8 +89,8 @@ dependencies {
     testImplementation 'io.rest-assured:rest-assured:6.0.0'
 
     //spock
-    testImplementation platform('org.apache.groovy:groovy-bom:5.0.3')
-    testImplementation 'org.apache.groovy:groovy:5.0.3'
+    testImplementation platform('org.apache.groovy:groovy-bom:4.0.21')
+    testImplementation 'org.apache.groovy:groovy'
     testImplementation platform("org.spockframework:spock-bom:2.4-M7-groovy-4.0")
     testImplementation "org.spockframework:spock-core"
 
